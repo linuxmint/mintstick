@@ -1,0 +1,52 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+#  debian rules file for usb-imagewriter
+
+#export DH_VERBOSE=1
+
+MO_DIR = $(CURDIR)/debian/mo
+
+build: build-stamp
+	for file in $(CURDIR)/debian/po/*.po; do \
+		mkdir -p $(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/; \
+		msgfmt $$file -o \
+			$(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/usb-imagewriter.mo; \
+	done
+
+build-stamp:
+	dh_testdir
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	rm -rf $(CURDIR)/debian/mo
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	dh_installchangelogs
+	dh_installman debian/imagewriter.1
+	dh_installdocs
+	dh_install
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+
+# Build architecture-independent files here.
+binary-indep: build install
+# We have nothing to do by default.
+
+binary-arch:
+
+binary: binary-indep
+.PHONY: build clean binary-indep binary install

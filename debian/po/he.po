@@ -1,0 +1,197 @@
+# Hebrew translation for usb-imagewriter
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the usb-imagewriter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: usb-imagewriter\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-07-06 20:42+0200\n"
+"PO-Revision-Date: 2008-08-06 04:57+0000\n"
+"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <he@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../lib/imagewriter.py:93
+msgid "Image: "
+msgstr "דמות: "
+
+#: ../lib/imagewriter.py:94
+msgid "Target Device: "
+msgstr "התקן יעד: "
+
+#: ../lib/imagewriter.py:109
+msgid "Unmounting all partitions of "
+msgstr "מבטל את עגינת כל המחיצות של "
+
+#: ../lib/imagewriter.py:111
+msgid "Trying to unmount "
+msgstr "מנסה לבטל עגינה "
+
+#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+msgid "Error, umount "
+msgstr "שגיאה, ביטול עגינת "
+
+#: ../lib/imagewriter.py:117
+msgid " was terminated by signal "
+msgstr " חוסלה על ידי אות "
+
+#: ../lib/imagewriter.py:121
+msgid " successfully unmounted"
+msgstr " ביטול העגינה הושלם בהצלחה"
+
+#: ../lib/imagewriter.py:123
+msgid " returned "
+msgstr " החזיר "
+
+#: ../lib/imagewriter.py:126
+msgid "Execution failed: "
+msgstr "ההפעלה נכשלה: "
+
+#: ../lib/imagewriter.py:134
+msgid "Could not read mtab !"
+msgstr "לא ניתן לקרוא את mtab !"
+
+#: ../lib/imagewriter.py:142
+msgid "Writing "
+msgstr "כותב "
+
+#: ../lib/imagewriter.py:142
+msgid " to "
+msgstr " אל "
+
+#: ../lib/imagewriter.py:143
+msgid "Executing: dd if="
+msgstr "מפעיל: dd if="
+
+#: ../lib/imagewriter.py:153
+msgid "Wrote: "
+msgstr "נכתב: "
+
+#: ../lib/imagewriter.py:160
+msgid "The dd process ended with an error !"
+msgstr "תהליך ה-dd הסתיים בשגיאה !"
+
+#: ../lib/imagewriter.py:164
+msgid "Image "
+msgstr "דמות "
+
+#: ../lib/imagewriter.py:164
+msgid " successfully written to"
+msgstr " נכתב בהצלחה אל"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:2
+msgid ""
+"<b>Error</b>\n"
+" No target devices were found. \n"
+"\n"
+" You need to plug in a USB Key\n"
+" to which the image can be written."
+msgstr ""
+"<b>שגיאה</b>\n"
+" לא נמצאו התקני יעד. \n"
+"\n"
+" עליך לחבר מפתח USB\n"
+" אליו יהיה ניתן לכתוב את הדמות."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:7
+msgid ""
+"<b>Error</b>\n"
+" Something went wrong, please see the details\n"
+" window for the exact error.\n"
+" \n"
+" A logfile with the content will be saved in your\n"
+" homedir if the application is closed."
+msgstr ""
+"<b>שגיאה</b>\n"
+" משהו השתבש, נא עיינו בחלון\n"
+" הפרטים לצפיה בשגיאה המדוייקת.\n"
+" \n"
+" קובץ דיווח המכיל את התוכן יישמר אל תיקיית\n"
+" הבית שלך אם היישום סגור."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:13
+msgid ""
+"<b>Success</b>\n"
+" The image was successfully written to the\n"
+" target device.\n"
+" \n"
+" You are free to unplug it now, a log of the\n"
+" operation will be saved in your homedir if\n"
+" you close the application."
+msgstr ""
+"<b>הצלחה</b>\n"
+" הדמות נכתבה בהצלחה אל התקן היעד.\n"
+" \n"
+" הרגש חופשי לנתק אותו כעת, דיווח על הפעולה\n"
+" יישמר אל תיקיית הבית שלך אם תסגור את\n"
+" היישום."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:20
+msgid ""
+"<b>Warning</b>\n"
+" This will <b>destroy all data</b> on the target\n"
+" device, are you sure you want to proceed ?\n"
+"\n"
+" If you say ok here, please <b>do not unplug</b>\n"
+" the device during the following operation."
+msgstr ""
+"<b>אזהרה</b>\n"
+" פעולה זו <b>תשמיד את כל הנתונים</b> שעל התקן היעד,\n"
+" האם אתה בטוח שברצונך להמשיך?\n"
+"\n"
+" במידה ותאשר, אנא <b>אל תנתק</b>\n"
+" את ההתקן במהלך הפעולה שתתבצע."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:26
+msgid "Details"
+msgstr "פרטים"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:27
+msgid "ImageWriter"
+msgstr "ImageWriter"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:28
+msgid "Select Image"
+msgstr "בחר דמות"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:29
+msgid "Select an image file to be written to the device"
+msgstr "בחר קובץ דמות שיכתב אל ההתקן"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:30
+msgid "Select target device to write the image to"
+msgstr "בחר התקן יעד אליו תיכתב הדמות"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:31
+msgid "Write Image:"
+msgstr "דמות לכתיבה:"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:32
+msgid "Write to device"
+msgstr "כתוב אל ההתקן"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:33
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:34
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:35
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:36
+msgid "to"
+msgstr "אל"

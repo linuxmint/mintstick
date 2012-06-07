@@ -1,0 +1,9 @@
+- drop dd call from code and reimplement a proper python handler
+  with progress reporting for this
+- actually write to target, currently we only write /tmp/test.img
+  until everything works right
+- make the shell wrapper script go away (should be gone with
+  dropping dd)
+- show the partition unmounting in the progress bar
+- add automatic dowload option to image selection for the UME
+  images from cdimage.ubuntu.com

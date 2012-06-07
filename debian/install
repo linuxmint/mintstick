@@ -1,0 +1,5 @@
+lib/* usr/lib/imagewriter
+share/usb-imagewriter/* usr/share/imagewriter
+share/applications/* usr/share/applications
+imagewriter usr/bin
+debian/mo/* usr/share/locale

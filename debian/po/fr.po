@@ -1,0 +1,198 @@
+# French translation for usb-imagewriter
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the usb-imagewriter package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: usb-imagewriter\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-07-06 20:42+0200\n"
+"PO-Revision-Date: 2009-05-26 01:40+0000\n"
+"Last-Translator: Loïc Bondy <Unknown>\n"
+"Language-Team: French <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../lib/imagewriter.py:93
+msgid "Image: "
+msgstr "Image : "
+
+#: ../lib/imagewriter.py:94
+msgid "Target Device: "
+msgstr "Périphérique cible : "
+
+#: ../lib/imagewriter.py:109
+msgid "Unmounting all partitions of "
+msgstr "Démonte toutes les partitions de "
+
+#: ../lib/imagewriter.py:111
+msgid "Trying to unmount "
+msgstr "Essaye de démonter "
+
+#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+msgid "Error, umount "
+msgstr "Erreur, umount "
+
+#: ../lib/imagewriter.py:117
+msgid " was terminated by signal "
+msgstr " a été terminé par le signal "
+
+#: ../lib/imagewriter.py:121
+msgid " successfully unmounted"
+msgstr " correctement démonté"
+
+#: ../lib/imagewriter.py:123
+msgid " returned "
+msgstr " a renvoyé "
+
+#: ../lib/imagewriter.py:126
+msgid "Execution failed: "
+msgstr "L'exécution a échoué : "
+
+#: ../lib/imagewriter.py:134
+msgid "Could not read mtab !"
+msgstr "Impossible de lire mtab !"
+
+#: ../lib/imagewriter.py:142
+msgid "Writing "
+msgstr "Écrit "
+
+#: ../lib/imagewriter.py:142
+msgid " to "
+msgstr " sur "
+
+#: ../lib/imagewriter.py:143
+msgid "Executing: dd if="
+msgstr "Exécute : dd if="
+
+#: ../lib/imagewriter.py:153
+msgid "Wrote: "
+msgstr "Écrit : "
+
+#: ../lib/imagewriter.py:160
+msgid "The dd process ended with an error !"
+msgstr "Le processus dd s'est arrêté avec une erreur !"
+
+#: ../lib/imagewriter.py:164
+msgid "Image "
+msgstr "Image "
+
+#: ../lib/imagewriter.py:164
+msgid " successfully written to"
+msgstr " écrite avec succès sur"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:1
+msgid " "
+msgstr " "
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:2
+msgid ""
+"<b>Error</b>\n"
+" No target devices were found. \n"
+"\n"
+" You need to plug in a USB Key\n"
+" to which the image can be written."
+msgstr ""
+"<b>Erreur</b>\n"
+" Aucun périphérique cible trouvé. \n"
+"\n"
+" Vous devez brancher une clé USB\n"
+" sur laquelle l'image pourra être écrite."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:7
+msgid ""
+"<b>Error</b>\n"
+" Something went wrong, please see the details\n"
+" window for the exact error.\n"
+" \n"
+" A logfile with the content will be saved in your\n"
+" homedir if the application is closed."
+msgstr ""
+"<b>Erreur</b>\n"
+" Quelque chose s'est mal passé, veuillez consulter la fenêtre\n"
+" de détails pour connaître l'erreur exacte.\n"
+" \n"
+" Un fichier journal avec son contenu sera enregistré dans votre\n"
+" répertoire utilisateur si l'application est fermée."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:13
+msgid ""
+"<b>Success</b>\n"
+" The image was successfully written to the\n"
+" target device.\n"
+" \n"
+" You are free to unplug it now, a log of the\n"
+" operation will be saved in your homedir if\n"
+" you close the application."
+msgstr ""
+"<b>Succès</b>\n"
+" L'image a été correctement écrite sur le\n"
+" périphérique cible.\n"
+" \n"
+" Vous pouvez maintenant le débrancher, un journal\n"
+" de l'opération sera enregistré dans votre répertoire\n"
+" personnel si vous fermez l'application."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:20
+msgid ""
+"<b>Warning</b>\n"
+" This will <b>destroy all data</b> on the target\n"
+" device, are you sure you want to proceed ?\n"
+"\n"
+" If you say ok here, please <b>do not unplug</b>\n"
+" the device during the following operation."
+msgstr ""
+"<b>Attention</b>\n"
+" Cette opération <b>détruira toutes les données</b> sur le périphérique\n"
+" cible, êtes vous sur de vouloir continuer ?\n"
+"\n"
+" Si vous cliquez sur ok, <b>ne débranchez pas</b>\n"
+" le lecteur pendant l'opération."
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:26
+msgid "Details"
+msgstr "Détails"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:27
+msgid "ImageWriter"
+msgstr "ImageWriter"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:28
+msgid "Select Image"
+msgstr "Sélectionner l'image"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:29
+msgid "Select an image file to be written to the device"
+msgstr "Sélectionnez un fichier image à écrire sur le périphérique"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:30
+msgid "Select target device to write the image to"
+msgstr "Sélectionnez le périphérique cible sur lequel écrire l'image"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:31
+msgid "Write Image:"
+msgstr "Ecrire l'image :"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:32
+msgid "Write to device"
+msgstr "Écrire sur le périphérique"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:33
+msgid "gtk-cancel"
+msgstr "gtk-cancel"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:34
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:35
+msgid "gtk-ok"
+msgstr "gtk-ok"
+
+#: ../share/usb-imagewriter/imagewriter.glade.h:36
+msgid "to"
+msgstr "sur"

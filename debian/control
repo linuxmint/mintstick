@@ -1,0 +1,18 @@
+Source: usb-imagewriter
+Section: misc
+Priority: optional
+XS-Python-Version: all
+Maintainer: Oliver Grawert <ogra@ubuntu.com>
+Build-Depends: debhelper (>= 5.0.37)
+Build-Depends-Indep: gettext
+Standards-Version: 3.8.1
+Homepage: https://launchpad.net/usb-imagewriter
+
+Package: usb-imagewriter
+Architecture: all
+Depends: coreutils (>= 6.10-3), procps, python-gnome2, gksu, python,
+ hal, python-glade2
+Description: tool to write .img files to USB Keys
+ A GUI to write .img files like the ones created by the
+ ubuntu-mobile team for UME to a USB Key for installing
+ the image to mobile devices and netbooks.

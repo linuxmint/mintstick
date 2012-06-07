@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=gtk-execute
+Exec=gksu imagewriter
+Name=ImageWriter
+Comment=Make a bootable USB stick
+Categories=GNOME;GTK;Utility

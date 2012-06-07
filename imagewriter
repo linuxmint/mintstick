@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Yes that script is horribly ugly and it would be nice if someone
+# would implement the pkill pinging in the pythn script or even write
+# a safe replacement for dd at all with proper progress reporting
+# directly in the python script instead of that hack.
+
+set -e
+
+TERM=xterm
+
+DIR=/usr/lib/imagewriter
+
+watch -n1 -- pkill -USR1 ^dd$ >/dev/null 2>&1 &
+MYPID=$!
+$DIR/imagewriter.py && kill -9 $MYPID

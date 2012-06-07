@@ -1,0 +1,3 @@
+version=3
+https://code.launchpad.net/usb-imagewriter/trunk/0.1 \
+ http://code\.launchpad\.net/usb\-imagewriter/trunk/0\.1/\+download/usb-imagewriter-(.+)\.tar\.gz
