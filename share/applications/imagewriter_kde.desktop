@@ -2,9 +2,9 @@
 Version=1.0
 Type=Application
 Terminal=false
-Icon=gtk-execute
-Exec=gksu imagewriter
+Icon=system-run
+Exec=kdesudo imagewriter
 Name=ImageWriter
 Comment=Make a bootable USB stick
-Categories=GNOME;GTK;Utility
-NotShowIn=KDE;
+Categories=System
+OnlyShowIn=KDE;
