@@ -3,6 +3,7 @@
 import gtk
 import gtk.glade
 import gobject
+import commands
 from subprocess import Popen,PIPE,call,STDOUT
 import os
 import signal
@@ -133,8 +134,17 @@ class ImageWriter:
         progress.set_text(_('Writing ')+source.split('/')[-1]+_(' to ')+self.dev)
         self.logger(_('Executing: dd if=')+source+' of='+target)
         while gtk.events_pending():
-           gtk.main_iteration(True)
-        output = Popen(['dd if='+source+' of='+target+' bs=1M'], stdout=PIPE, stderr=STDOUT, shell=True)
+           gtk.main_iteration(True) 
+           
+        # Add launcher string, only when not root
+        launcher = ''
+	if os.geteuid() > 0:
+	      launcher =  'gksu --message "<b>Please enter your password</b>"'
+	      desktop_environnment = commands.getoutput("/usr/lib/linuxmint/common/env_check.sh")                            
+	      if (desktop_environnment == "KDE"):
+		  launcher = 'kdesudo -i /usr/share/linuxmint/logo.png -d --comment "<b>Please enter your password</b>"'
+        output = Popen([launcher+' dd if='+source+' of='+target+' bs=1M'], stdout=PIPE, stderr=STDOUT, shell=True)
+        
         self.ddpid = output.pid
         while output.stdout.readline():
             line = output.stdout.readline().strip()
