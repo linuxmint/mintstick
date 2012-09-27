@@ -7,7 +7,7 @@ Build-Depends-Indep: gettext
 
 Package: usb-imagewriter
 Architecture: all
-Depends: coreutils (>= 6.10-3), procps, gksu | kdesudo, python, python-glade2
+Depends: coreutils (>= 6.10-3), procps, python, python-glade2, policykit-1
 Description: Tool to write .img and .iso files to USB sticks
  A GUI to write .img files like the ones created by the
  ubuntu-mobile team for UME to a USB Key for installing

@@ -18,9 +18,9 @@
 
 LANGS="de_DE"
 
-intltool-extract --type=gettext/glade ../share/usb-imagewriter/imagewriter.glade
-xgettext --language=Python --keyword=_ --keyword=N_ --output=imagewriter.pot ../lib/imagewriter.py ../share/usb-imagewriter/imagewriter.glade.h
-rm -f ../share/usb-imagewriter/imagewriter.glade.h
+intltool-extract --type=gettext/glade ../share/usb-imagewriter/imagewriter.xml
+xgettext --language=Python --keyword=_ --keyword=N_ --output=imagewriter.pot ../lib/imagewriter.py ../share/usb-imagewriter/imagewriter.xml.h
+rm -f ../share/usb-imagewriter/imagewriter.xml.h
 
 # to create a lang specific .po file, run (replace de_DE and de.po with your data):
 #msginit --input=imagewriter.pot --locale=de_DE -o de.po

@@ -16,8 +16,8 @@
 #  along with this program; if not, write to the Free Software Foundation,
 #  Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 
-LIBFILES="imagewriter.py find_devices.sh"
-DATAFILES="imagewriter.glade header.png"
+LIBFILES="imagewriter.py find_devices.py raw_write.py"
+DATAFILES="imagewriter.xml"
 
 
 if [ "$1" = "uninstall" ]; then
@@ -25,8 +25,11 @@ if [ "$1" = "uninstall" ]; then
     rm -rf /usr/share/imagewriter
     rm -r /usr/share/applications/imagewriter.desktop
     rm -f /usr/bin/imagewriter
+    rm -rf /usr/share/polkit-1/actions/org.linuxmint.im.policy
 else
     cp share/applications/imagewriter.desktop /usr/share/applications/
+    cp share/applications/imagewriter-kde.desktop /usr/share/applications/
+    cp share/polkit/org.linuxmint.im.policy /usr/share/plokit-1/actions
     cp imagewriter /usr/bin/
     mkdir -p /usr/lib/imagewriter
     mkdir -p /usr/share/imagewriter

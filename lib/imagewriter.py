@@ -1,16 +1,14 @@
 #!/usr/bin/python
 
-import gtk
-import gtk.glade
-import gobject
+
 import commands
 from subprocess import Popen,PIPE,call,STDOUT
 import os
 import signal
-
+import re
 import gettext
 from gettext import gettext as _
-
+from gi.repository import GObject, Gio, Polkit, Gtk
 
 class ImageWriter:
     def __init__(self):
@@ -19,26 +17,27 @@ class ImageWriter:
 
         gettext.bindtextdomain(APP, DIR)
         gettext.textdomain(APP)
-        gtk.glade.bindtextdomain(APP, DIR)
-        gtk.glade.textdomain(APP)
+        #Gtk.glade.bindtextdomain(APP, DIR)
+        #Gtk.glade.textdomain(APP)
 
         # get glade tree
-        self.gladefile = "/usr/share/imagewriter/imagewriter.glade"
-        self.wTree = gtk.glade.XML(self.gladefile)
+        self.gladefile = "/usr/share/imagewriter/imagewriter.xml"
+        self.wTree = Gtk.Builder()
+        self.wTree.add_from_file(self.gladefile)
 
         # make sure we have a target device
         self.get_devices()
 
         # get globally needed widgets
-        self.window = self.wTree.get_widget("main_dialog")
-        self.devicelist = self.wTree.get_widget("device_combobox")
-        self.logview = self.wTree.get_widget("detail_text")        
+        self.window = self.wTree.get_object("main_dialog")
+        self.devicelist = self.wTree.get_object("device_combobox")
+        self.logview = self.wTree.get_object("detail_text")        
         self.log = self.logview.get_buffer()
         self.ddpid = 0
 
         # set default file filter to *.img
-        self.chooser = self.wTree.get_widget("filechooserbutton")
-        filt = gtk.FileFilter()
+        self.chooser = self.wTree.get_object("filechooserbutton")
+        filt = Gtk.FileFilter()
         filt.add_pattern("*.img")
         filt.add_pattern("*.iso")
         self.chooser.set_filter(filt)
@@ -47,52 +46,57 @@ class ImageWriter:
         dict = { "on_main_dialog_destroy" : self.close,
                  "on_cancel_button_clicked" : self.close,
                  "on_emergency_button_clicked" : self.close,
+                 "on_failauth_button_clicked" : self.close,
                  "on_success_button_clicked" : self.close,
                  "on_filechooserbutton_file_set" : self.activate_devicelist,
                  "on_detail_expander_activate" : self.expander_control,
                  "on_device_combobox_changed" : self.device_selected,
                  "on_write_button_clicked" : self.do_write}
-        self.wTree.signal_autoconnect(dict)
+        self.wTree.connect_signals(dict)
 
         self.window.show_all()
 
     def get_devices(self):
         list = Popen(["/usr/lib/imagewriter/find_devices.py"], stdout=PIPE).communicate()[0]
         if not len(list):
-            dialog = self.wTree.get_widget("nodev_dialog")
+            dialog = self.wTree.get_object("nodev_dialog")
             dialog.run()
             exit(0)
-        self.combo = self.wTree.get_widget("device_combobox")
+        self.combo = self.wTree.get_object("device_combobox")
         list = list.strip().split('\n')
         for item in list:
             name,path = item.split(',')
             self.combo.append_text(name+' ('+path.lstrip()+')')
 
     def device_selected(self, widget):
-        write_button = self.wTree.get_widget("write_button")
+        write_button = self.wTree.get_object("write_button")
         write_button.set_sensitive(True)
         self.dev = self.combo.get_active_text()
 
     def do_write(self, widget):
-        write_button = self.wTree.get_widget("write_button")
+        write_button = self.wTree.get_object("write_button")
         write_button.set_sensitive(False)
-        combo = self.wTree.get_widget("device_combobox")
+        combo = self.wTree.get_object("device_combobox")
         combo.set_sensitive(False)
         self.chooser.set_sensitive(False)
         source = self.chooser.get_filename()
         target = self.dev.split('(')[1].rstrip(')')
-        dialog = self.wTree.get_widget("confirm_dialog")
+        dialog = self.wTree.get_object("confirm_dialog")
         self.logger(_('Image: ')+source)
         self.logger(_('Target Device: ')+self.dev)
-        resp = dialog.run()
-        if resp:
-            self.do_umount(target)
-            dialog.hide()
-            while gtk.events_pending():
-                gtk.main_iteration(True)
-            self.raw_write(source, target)
-        else:
-            self.close('dummy')
+        if os.geteuid() > 0:
+	      self.raw_write(source, target)
+	else:
+	      # We are root, display confirmation dialog
+	      resp = dialog.run()
+	      if resp:
+		  self.do_umount(target)
+		  dialog.hide()
+		  while Gtk.events_pending():
+		      Gtk.main_iteration()
+		  self.raw_write(source, target)
+	      else:
+		  self.close('dummy')
 
     def do_umount(self, target):
         mounts = self.get_mounted(target)
@@ -101,8 +105,8 @@ class ImageWriter:
             self.logger(_('Unmounting all partitions of ')+target+':')
         for mount in mounts:
             self.logger(_('Trying to unmount ')+mount[0]+'...')
-            while gtk.events_pending():
-                gtk.main_iteration(True)
+            while Gtk.events_pending():
+                Gtk.main_iteration()
             try:
                 retcode = call('umount '+mount[0], shell=True)
                 if retcode < 0:
@@ -127,47 +131,42 @@ class ImageWriter:
              self.emergency()
 
     def raw_write(self, source, target):
-        data = Popen(['ls -l '+source], shell=True, stdout=PIPE, stderr=PIPE)
-        src_size = float(data.stdout.readline().split()[4])*1.0
-        progress = self.wTree.get_widget("progressbar")
+        progress = self.wTree.get_object("progressbar")
         progress.set_sensitive(True)
         progress.set_text(_('Writing ')+source.split('/')[-1]+_(' to ')+self.dev)
-        self.logger(_('Executing: dd if=')+source+' of='+target)
-        while gtk.events_pending():
-           gtk.main_iteration(True) 
-           
+        self.logger(_('Starting copy from ')+source+' to '+target)
+        while Gtk.events_pending():
+           Gtk.main_iteration() 
+        total_size = float(os.path.getsize(source))   
         # Add launcher string, only when not root
         launcher = ''
+        size=''
 	if os.geteuid() > 0:
-	      launcher =  'gksu --message "<b>Please enter your password</b>"'
-	      desktop_environnment = commands.getoutput("/usr/lib/linuxmint/common/env_check.sh")                            
-	      if (desktop_environnment == "KDE"):
-		  launcher = 'kdesudo -i /usr/share/linuxmint/logo.png -d --comment "<b>Please enter your password</b>"'
-        output = Popen([launcher+' dd if='+source+' of='+target+' bs=1M'], stdout=PIPE, stderr=STDOUT, shell=True)
-        
-        self.ddpid = output.pid
-        while output.stdout.readline():
-            line = output.stdout.readline().strip()
-            while gtk.events_pending():
-                gtk.main_iteration(True)
-            if line.endswith('MB/s'):
-                target_size = line.split()[0]
-                self.logger(_('Wrote: ')+target_size+' bytes')
-                size = float(target_size)*100/float(src_size)
-                while gtk.events_pending():
-                    gtk.main_iteration(True)
-                progress.set_fraction(float(size/100))
-        pid, sts = os.waitpid(output.pid, 0)
-        if sts != 0:
-            self.logger(_('The dd process ended with an error !'))
-            self.emergency()
-            return False
-        progress.set_fraction(1.0)
-        self.logger(_('Image ')+source.split('/')[-1]+_(' successfully written to')+target)
-        self.success()
+	      launcher='pkexec'
+	      output = Popen([launcher,'/usr/bin/python', '/usr/lib/linuxmint/imagewriter/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
+	else:
+	      output = Popen(['/usr/bin/python', '/usr/lib/linuxmint/imagewriter/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
+	while output.stdout.readline():
+	  size = output.stdout.readline().strip()
+	  try:
+	    size = float(size)
+	    flag = True
+	  except ValueError:
+	    flag = False
+	  while Gtk.events_pending():
+		Gtk.main_iteration()
+	  if flag:
+	    progress.set_fraction(size)
+	if size == 1.0:
+	  self.logger(_('Image ')+source.split('/')[-1]+_(' successfully written to')+target)
+	  self.success()
+	else:
+	  self.logger(_('The process ended with an error !'))
+	  self.emergency()
+          return False
 
     def success(self):
-        dialog = self.wTree.get_widget("success_dialog")
+        dialog = self.wTree.get_object("success_dialog")
         self.final_unsensitive()
         resp = dialog.run()
         if resp:
@@ -176,8 +175,8 @@ class ImageWriter:
 
     def emergency(self):
         self.final_unsensitive()
-        dialog = self.wTree.get_widget("emergency_dialog")
-        expander = self.wTree.get_widget("detail_expander")
+        dialog = self.wTree.get_object("emergency_dialog")
+        expander = self.wTree.get_object("detail_expander")
         expander.set_expanded(True)
         mark = self.log.create_mark("end", self.log.get_end_iter(), False)
         self.logview.scroll_to_mark(mark, 0.05, True, 0.0, 1.0)
@@ -188,9 +187,9 @@ class ImageWriter:
     def final_unsensitive(self):
         self.chooser.set_sensitive(False)
         self.devicelist.set_sensitive(False)
-        write_button = self.wTree.get_widget("write_button")
+        write_button = self.wTree.get_object("write_button")
         write_button.set_sensitive(False)
-        progress = self.wTree.get_widget("progressbar")
+        progress = self.wTree.get_object("progressbar")
         progress.set_sensitive(False)
 
     def close(self, widget):
@@ -199,9 +198,9 @@ class ImageWriter:
             try:
                 os.killpg(os.getpgid(self.ddpid), signal.SIGKILL)
             except:
-                gtk.main_quit()
+                Gtk.main_quit()
         else:
-            gtk.main_quit()
+            Gtk.main_quit()
 
     def write_logfile(self):
         start = self.log.get_start_iter()
@@ -212,8 +211,8 @@ class ImageWriter:
         self.log.insert_at_cursor(text+"\n")
 
     def activate_devicelist(self, widget):
-        label = self.wTree.get_widget("to_label")
-        expander = self.wTree.get_widget("detail_expander")
+        label = self.wTree.get_object("to_label")
+        expander = self.wTree.get_object("detail_expander")
         self.devicelist.set_sensitive(True)
         expander.set_sensitive(True)
         label.set_sensitive(True)
@@ -223,8 +222,8 @@ class ImageWriter:
         # this is darn ugly but still better than the UI behavior of
         # the unexpanded expander which doesnt reset the window size
         if widget.get_expanded():
-            gobject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
+            GObject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
 
 if __name__ == "__main__":
     app = ImageWriter()
-    gtk.main()
+    Gtk.main()
