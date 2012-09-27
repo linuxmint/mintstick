@@ -97,6 +97,8 @@ class ImageWriter:
 		  self.raw_write(source, target)
 	      else:
 		  self.close('dummy')
+		  #dialog.hide()
+		  #self.activate_devicelist(self, widget)
 
     def do_umount(self, target):
         mounts = self.get_mounted(target)

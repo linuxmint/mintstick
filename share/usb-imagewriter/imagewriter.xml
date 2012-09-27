@@ -105,6 +105,7 @@
     </child>
     <action-widgets>
       <action-widget response="1">confirm_ok_button</action-widget>
+      <action-widget response="0">confirm_cancel_button</action-widget>
     </action-widgets>
   </object>
   <object class="GtkDialog" id="emergency_dialog">
