@@ -13,7 +13,7 @@ def raw_write(source, target):
     print total_size
     output = open(target, 'wb')
     while True:
-	buffer = input.read(1024)
+	buffer = input.read(bs)
 	if len(buffer) == 0:
 	  break
 	output.write(buffer)

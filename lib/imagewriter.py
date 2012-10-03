@@ -145,9 +145,9 @@ class ImageWriter:
         size=''
 	if os.geteuid() > 0:
 	      launcher='pkexec'
-	      output = Popen([launcher,'/usr/bin/python', '/usr/lib/linuxmint/imagewriter/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
+	      output = Popen([launcher,'/usr/bin/python', '/usr/lib/imagewriter/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
 	else:
-	      output = Popen(['/usr/bin/python', '/usr/lib/linuxmint/imagewriter/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
+	      output = Popen(['/usr/bin/python', '/usr/lib/imagewriter/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
 	while output.stdout.readline():
 	  size = output.stdout.readline().strip()
 	  try:
