@@ -24,6 +24,10 @@ def raw_write(source, target):
     #os.fsync(output.fileno())
     input.close()
     output.close()
+    if size == total_size:
+      print "1.0"
+    else:
+      print "failed"
 
 def main():
     # parse command line options

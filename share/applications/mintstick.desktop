@@ -6,5 +6,5 @@ Icon=gtk-execute
 Exec=mintstick
 Name=MintStick
 Comment=Make a bootable USB stick
-Categories=GNOME;GTK;Utility
+Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
