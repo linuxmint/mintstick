@@ -16,29 +16,29 @@
 #  along with this program; if not, write to the Free Software Foundation,
 #  Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 
-LIBFILES="imagewriter.py find_devices.py raw_write.py"
-DATAFILES="imagewriter.xml"
+LIBFILES="mintstick.py find_devices.py raw_write.py"
+DATAFILES="mintstick.xml"
 
 
 if [ "$1" = "uninstall" ]; then
-    rm -rf /usr/lib/imagewriter
-    rm -rf /usr/share/imagewriter
-    rm -r /usr/share/applications/imagewriter.desktop
-    rm -f /usr/bin/imagewriter
+    rm -rf /usr/lib/mintstick
+    rm -rf /usr/share/mintstick
+    rm -r /usr/share/applications/mintstick.desktop
+    rm -f /usr/bin/mintstick
     rm -rf /usr/share/polkit-1/actions/org.linuxmint.im.policy
 else
-    cp share/applications/imagewriter.desktop /usr/share/applications/
-    cp share/applications/imagewriter-kde.desktop /usr/share/applications/
+    cp share/applications/mintstick.desktop /usr/share/applications/
+    cp share/applications/mintstick-kde.desktop /usr/share/applications/
     cp share/polkit/org.linuxmint.im.policy /usr/share/plokit-1/actions
-    cp imagewriter /usr/bin/
-    mkdir -p /usr/lib/imagewriter
-    mkdir -p /usr/share/imagewriter
+    cp mintstick /usr/bin/
+    mkdir -p /usr/lib/mintstick
+    mkdir -p /usr/share/mintstick
 
     for item in $LIBFILES; do
-        cp lib/$item /usr/lib/imagewriter/
+        cp lib/$item /usr/lib/mintstick/
     done
 
     for item in $DATAFILES; do
-        cp share/usb-imagewriter/$item /usr/share/imagewriter/
+        cp share/mintstick/$item /usr/share/mintstick/
     done
 fi

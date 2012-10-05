@@ -1,11 +1,11 @@
-# Czech translation for usb-imagewriter
+# Czech translation for mintstick
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the usb-imagewriter package.
+# This file is distributed under the same license as the mintstick package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: usb-imagewriter\n"
+"Project-Id-Version: mintstick\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-07-06 20:42+0200\n"
 "PO-Revision-Date: 2008-07-10 14:11+0000\n"
@@ -17,79 +17,79 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/imagewriter.py:93
+#: ../lib/mintstick.py:93
 msgid "Image: "
 msgstr "Obraz: "
 
-#: ../lib/imagewriter.py:94
+#: ../lib/mintstick.py:94
 msgid "Target Device: "
 msgstr "Cílové zařízení: "
 
-#: ../lib/imagewriter.py:109
+#: ../lib/mintstick.py:109
 msgid "Unmounting all partitions of "
 msgstr "Odpojuji všechny oddíly "
 
-#: ../lib/imagewriter.py:111
+#: ../lib/mintstick.py:111
 msgid "Trying to unmount "
 msgstr "Pokouším se odpojit "
 
-#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:117 ../lib/mintstick.py:123
 msgid "Error, umount "
 msgstr "Chyba, odpojení "
 
-#: ../lib/imagewriter.py:117
+#: ../lib/mintstick.py:117
 msgid " was terminated by signal "
 msgstr " bylo přerušeno signálem "
 
-#: ../lib/imagewriter.py:121
+#: ../lib/mintstick.py:121
 msgid " successfully unmounted"
 msgstr " úspěšně odpojen"
 
-#: ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:123
 msgid " returned "
 msgstr " vrátilo "
 
-#: ../lib/imagewriter.py:126
+#: ../lib/mintstick.py:126
 msgid "Execution failed: "
 msgstr "Spuštění selhalo: "
 
-#: ../lib/imagewriter.py:134
+#: ../lib/mintstick.py:134
 msgid "Could not read mtab !"
 msgstr "Nemohu přečíst mtab!"
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid "Writing "
 msgstr "Zapisuji "
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid " to "
 msgstr " do "
 
-#: ../lib/imagewriter.py:143
+#: ../lib/mintstick.py:143
 msgid "Executing: dd if="
 msgstr "Spoštím: dd if="
 
-#: ../lib/imagewriter.py:153
+#: ../lib/mintstick.py:153
 msgid "Wrote: "
 msgstr "Zapsáno: "
 
-#: ../lib/imagewriter.py:160
+#: ../lib/mintstick.py:160
 msgid "The dd process ended with an error !"
 msgstr "Proces dd skončil chybou!"
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid "Image "
 msgstr "Obraz "
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid " successfully written to"
 msgstr " byl úspěšně zapsán do"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:1
+#: ../share/mintstick/mintstick.glade.h:1
 msgid " "
 msgstr " "
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:2
+#: ../share/mintstick/mintstick.glade.h:2
 msgid ""
 "<b>Error</b>\n"
 " No target devices were found. \n"
@@ -103,7 +103,7 @@ msgstr ""
 " Musíte vložit USB klíč, na který\n"
 " má být obraz zapsán."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:7
+#: ../share/mintstick/mintstick.glade.h:7
 msgid ""
 "<b>Error</b>\n"
 " Something went wrong, please see the details\n"
@@ -119,7 +119,7 @@ msgstr ""
 " Záznam aplikace bude uložen v domovské složce,\n"
 " pokud bude aplikace zavřena."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:13
+#: ../share/mintstick/mintstick.glade.h:13
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"
@@ -137,7 +137,7 @@ msgstr ""
 " operace bude uložen v domovské složce,\n"
 " pokud bude aplikace zavřena."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:20
+#: ../share/mintstick/mintstick.glade.h:20
 msgid ""
 "<b>Warning</b>\n"
 " This will <b>destroy all data</b> on the target\n"
@@ -153,46 +153,46 @@ msgstr ""
 " Pokud budete pokračovat, prosím <b>neodpojujte</b>\n"
 " zařízení během příštích operací."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:26
+#: ../share/mintstick/mintstick.glade.h:26
 msgid "Details"
 msgstr "Podrobnosti"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:27
-msgid "ImageWriter"
-msgstr "ImageWriter"
+#: ../share/mintstick/mintstick.glade.h:27
+msgid "MintStick"
+msgstr "MintStick"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:28
+#: ../share/mintstick/mintstick.glade.h:28
 msgid "Select Image"
 msgstr "Zvolte obraz"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:29
+#: ../share/mintstick/mintstick.glade.h:29
 msgid "Select an image file to be written to the device"
 msgstr "Zvolte soubor obrazu, který chcete zapsat na zařízení"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:30
+#: ../share/mintstick/mintstick.glade.h:30
 msgid "Select target device to write the image to"
 msgstr "Zvolte cílové zařízení, na které chcete obraz zapsat"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:31
+#: ../share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"
 msgstr "Zapsat obraz:"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:32
+#: ../share/mintstick/mintstick.glade.h:32
 msgid "Write to device"
 msgstr "Zapsat na zařízení"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:33
+#: ../share/mintstick/mintstick.glade.h:33
 msgid "gtk-cancel"
 msgstr "gtk-cancel"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:34
+#: ../share/mintstick/mintstick.glade.h:34
 msgid "gtk-close"
 msgstr "gtk-close"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:35
+#: ../share/mintstick/mintstick.glade.h:35
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:36
+#: ../share/mintstick/mintstick.glade.h:36
 msgid "to"
 msgstr "do"

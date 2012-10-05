@@ -1,6 +1,6 @@
-lib/* usr/lib/imagewriter
-share/usb-imagewriter/* usr/share/imagewriter
+lib/* usr/lib/mintstick
+share/mintstick/* usr/share/mintstick
 share/applications/* usr/share/applications
 share/polkit/* usr/share/polkit-1/actions
-imagewriter usr/bin
+mintstick usr/bin
 debian/mo/* usr/share/locale

@@ -1,11 +1,11 @@
-# Danish translation for usb-imagewriter
+# Danish translation for mintstick
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the usb-imagewriter package.
+# This file is distributed under the same license as the mintstick package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: usb-imagewriter\n"
+"Project-Id-Version: mintstick\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-07-06 20:42+0200\n"
 "PO-Revision-Date: 2009-06-01 10:39+0000\n"
@@ -17,51 +17,51 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/imagewriter.py:93
+#: ../lib/mintstick.py:93
 msgid "Image: "
 msgstr "Billed: "
 
-#: ../lib/imagewriter.py:94
+#: ../lib/mintstick.py:94
 msgid "Target Device: "
 msgstr "Mål udstyr: "
 
-#: ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:123
 msgid " returned "
 msgstr " returneret "
 
-#: ../lib/imagewriter.py:126
+#: ../lib/mintstick.py:126
 msgid "Execution failed: "
 msgstr "Udførelse mislykkedes: "
 
-#: ../lib/imagewriter.py:134
+#: ../lib/mintstick.py:134
 msgid "Could not read mtab !"
 msgstr "Kunne ikke læse mtab !"
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid "Writing "
 msgstr "Skriver: "
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid " to "
 msgstr " til "
 
-#: ../lib/imagewriter.py:153
+#: ../lib/mintstick.py:153
 msgid "Wrote: "
 msgstr "Skrev: "
 
-#: ../lib/imagewriter.py:160
+#: ../lib/mintstick.py:160
 msgid "The dd process ended with an error !"
 msgstr "Dd processen sluttede med en fejl !"
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid "Image "
 msgstr "Billed "
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:1
+#: ../share/mintstick/mintstick.glade.h:1
 msgid " "
 msgstr " "
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:2
+#: ../share/mintstick/mintstick.glade.h:2
 msgid ""
 "<b>Error</b>\n"
 " No target devices were found. \n"
@@ -75,71 +75,71 @@ msgstr ""
 " Du skal sætte en USB i\n"
 " som billedet kan gemmes på."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:26
+#: ../share/mintstick/mintstick.glade.h:26
 msgid "Details"
 msgstr "Detaljer"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:28
+#: ../share/mintstick/mintstick.glade.h:28
 msgid "Select Image"
 msgstr "Vælg billede"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:29
+#: ../share/mintstick/mintstick.glade.h:29
 msgid "Select an image file to be written to the device"
 msgstr "Vælg et billed som kan gemmes på udstyret"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:30
+#: ../share/mintstick/mintstick.glade.h:30
 msgid "Select target device to write the image to"
 msgstr "Vælg det udstyr som billedet skal gemmes på"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:32
+#: ../share/mintstick/mintstick.glade.h:32
 msgid "Write to device"
 msgstr "Gemmer på udstyr"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:33
+#: ../share/mintstick/mintstick.glade.h:33
 msgid "gtk-cancel"
 msgstr "gtk-annullér"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:34
+#: ../share/mintstick/mintstick.glade.h:34
 msgid "gtk-close"
 msgstr "gtk-luk"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:35
+#: ../share/mintstick/mintstick.glade.h:35
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:36
+#: ../share/mintstick/mintstick.glade.h:36
 msgid "to"
 msgstr "til"
 
-#: ../lib/imagewriter.py:109
+#: ../lib/mintstick.py:109
 msgid "Unmounting all partitions of "
 msgstr "Monter alle partitioner på "
 
-#: ../lib/imagewriter.py:111
+#: ../lib/mintstick.py:111
 msgid "Trying to unmount "
 msgstr "Prøv at afmonter "
 
-#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:117 ../lib/mintstick.py:123
 msgid "Error, umount "
 msgstr "Fejl, afmonter "
 
-#: ../lib/imagewriter.py:117
+#: ../lib/mintstick.py:117
 msgid " was terminated by signal "
 msgstr " blev stoppet af signal "
 
-#: ../lib/imagewriter.py:121
+#: ../lib/mintstick.py:121
 msgid " successfully unmounted"
 msgstr " Blev afmonterer problemfrit"
 
-#: ../lib/imagewriter.py:143
+#: ../lib/mintstick.py:143
 msgid "Executing: dd if="
 msgstr "Udføre: dd if="
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid " successfully written to"
 msgstr " Succesfuld skrevet til"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:7
+#: ../share/mintstick/mintstick.glade.h:7
 msgid ""
 "<b>Error</b>\n"
 " Something went wrong, please see the details\n"
@@ -155,7 +155,7 @@ msgstr ""
 " En logfile med indholdet vil blive gemt i din\n"
 " hjemmemappe hvis applikationen er lukket."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:13
+#: ../share/mintstick/mintstick.glade.h:13
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"
@@ -173,7 +173,7 @@ msgstr ""
 " handlingen vil blive gemt i hjemmemappen hvis\n"
 " du lukker programmet."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:20
+#: ../share/mintstick/mintstick.glade.h:20
 msgid ""
 "<b>Warning</b>\n"
 " This will <b>destroy all data</b> on the target\n"
@@ -189,10 +189,10 @@ msgstr ""
 " Hvis du siger ok her, så <b>afmonterer ikke</b>\n"
 " enheden i løbet af den følgende operation."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:27
-msgid "ImageWriter"
-msgstr "ImageWriter"
+#: ../share/mintstick/mintstick.glade.h:27
+msgid "MintStick"
+msgstr "MintStick"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:31
+#: ../share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"
 msgstr "Skriv billede:"

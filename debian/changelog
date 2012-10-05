@@ -1,18 +1,18 @@
-usb-imagewriter (0.1.3-1linuxmint3) nadia; urgency=low
+mintstick (0.1.3-1linuxmint3) nadia; urgency=low
 
   * Initial nadia release
   * Change authentication to policykit
   
  -- Frédéric Gaudet <fred@linuxmint.com>  Tue, 25 Sep 2012 22:44:39 +0200
 
-usb-imagewriter (0.1.3-1linuxmint2) maya; urgency=low
+mintstick (0.1.3-1linuxmint2) maya; urgency=low
 
   * Added KDE launcher
   * Removed depdencies on Gnome Keyring and HAL
 
  -- Clement Lefebvre <root@linuxmint.com>  Thu, 7 Jun 2012 11:37:00 +0000
 
-usb-imagewriter (0.1.3-1linuxmint1) lisa; urgency=low
+mintstick (0.1.3-1linuxmint1) lisa; urgency=low
 
   * Removed branding
   * Added .iso to list of accepted extensions
@@ -20,25 +20,25 @@ usb-imagewriter (0.1.3-1linuxmint1) lisa; urgency=low
 
  -- Clement Lefebvre <root@linuxmint.com>  Mon, 23 Jan 2012 11:24:00 +0000
 
-usb-imagewriter (0.1.3-0ubuntu5) oneiric; urgency=low
+mintstick (0.1.3-0ubuntu5) oneiric; urgency=low
 
   * switch from 1K to 1M blocksize to speed up the data transfer, thanks to 
     Neil Mayhew <neil_mayhew@users.sourceforge.net> for the fix (LP: #790981) 
 
  -- Oliver Grawert <ogra@ubuntu.com>  Tue, 04 Oct 2011 12:11:27 +0200
 
-usb-imagewriter (0.1.3-0ubuntu4) karmic; urgency=low
+mintstick (0.1.3-0ubuntu4) karmic; urgency=low
 
   * revert the changes to the pipe commands, they completely break interaction
-    with the shell wrapper and make imagewriter completely non-functional. the
+    with the shell wrapper and make mintstick completely non-functional. the
     shell in the pipes is needed for the wrapper script that uses watch to
     generate input for the progress bar.
 
  -- Oliver Grawert <ogra@ubuntu.com>  Tue, 27 Oct 2009 12:09:25 +0100
 
-usb-imagewriter (0.1.3-0ubuntu3) karmic; urgency=critical
+mintstick (0.1.3-0ubuntu3) karmic; urgency=critical
 
-  * lib/imagewriter.py: New patch to handle spaces in image path (LP: #366607)
+  * lib/mintstick.py: New patch to handle spaces in image path (LP: #366607)
      - This patch fixes a possible command-injection security error, which is
        the reason for the urgency=critical.
      - Removed encapsulation in quotes from line 101, as described in the lower
@@ -48,28 +48,28 @@ usb-imagewriter (0.1.3-0ubuntu3) karmic; urgency=critical
 
  -- Christopher Pavlina <pavlina.chris@gmail.com>  Sat, 17 Oct 2009 22:55:27 -0400
 
-usb-imagewriter (0.1.3-0ubuntu2) karmic; urgency=low
+mintstick (0.1.3-0ubuntu2) karmic; urgency=low
 
   [ Siegfried-Angel Gevattder Pujals ]
   * debian/control:
      - Move website to Homepage field.
      - Add a Dependency on python-glade2 (LP: #370297).
      - Bump Standards-Version to 3.8.1.
-  * share/applications/imagewriter.desktop:
+  * share/applications/mintstick.desktop:
      - Use "gksu" instead of "gksudo" (LP: #376427).
   * debian/po, debian/rules, debian/install, debian/control:
      - Install all translations available on Launchpad.
-  * Fix debian/watch, and little changes to debian/imagewriter.1.
+  * Fix debian/watch, and little changes to debian/mintstick.1.
   
   [ Mike Szczys ]
   * Applied patch to handle spaces in image path (LP: #366607)
-     - lib/imagewriter.py: line 101: encapsulated source in double
+     - lib/mintstick.py: line 101: encapsulated source in double
        quotes so that it can be used with "ls -l" and "dd" commands
        even if the path includes spaces.
 
  -- Siegfried-Angel Gevatter Pujals <rainct@ubuntu.com>  Fri, 12 Jun 2009 13:50:59 +0200
 
-usb-imagewriter (0.1.3-0ubuntu1) jaunty; urgency=low
+mintstick (0.1.3-0ubuntu1) jaunty; urgency=low
 
   * New upstream, fixes for (LP: #363992):
      - make all dialogs modal and transient for the main dialog
@@ -79,7 +79,7 @@ usb-imagewriter (0.1.3-0ubuntu1) jaunty; urgency=low
 
  -- Oliver Grawert <ogra@ubuntu.com>  Mon, 20 Apr 2009 13:34:08 +0200
 
-usb-imagewriter (0.1.2-0ubuntu1) jaunty; urgency=low
+mintstick (0.1.2-0ubuntu1) jaunty; urgency=low
 
   * new upstream bugfix release (approved by mobile RM for universe)
     - disable buttons that can cause confusion during write
@@ -89,7 +89,7 @@ usb-imagewriter (0.1.2-0ubuntu1) jaunty; urgency=low
 
  -- Oliver Grawert <ogra@ubuntu.com>  Fri, 17 Apr 2009 18:22:34 +0200
 
-usb-imagewriter (0.1.1-0ubuntu1) jaunty; urgency=low
+mintstick (0.1.1-0ubuntu1) jaunty; urgency=low
 
   * Initial release.
 

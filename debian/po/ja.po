@@ -1,11 +1,11 @@
-# Japanese translation for usb-imagewriter
+# Japanese translation for mintstick
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the usb-imagewriter package.
+# This file is distributed under the same license as the mintstick package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: usb-imagewriter\n"
+"Project-Id-Version: mintstick\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-07-06 20:42+0200\n"
 "PO-Revision-Date: 2009-03-09 13:20+0000\n"
@@ -17,79 +17,79 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/imagewriter.py:93
+#: ../lib/mintstick.py:93
 msgid "Image: "
 msgstr "イメージ: "
 
-#: ../lib/imagewriter.py:94
+#: ../lib/mintstick.py:94
 msgid "Target Device: "
 msgstr "ターゲットデバイス: "
 
-#: ../lib/imagewriter.py:109
+#: ../lib/mintstick.py:109
 msgid "Unmounting all partitions of "
 msgstr "すべてのパーティションをアンマウント： "
 
-#: ../lib/imagewriter.py:111
+#: ../lib/mintstick.py:111
 msgid "Trying to unmount "
 msgstr "アンマウントを試みています "
 
-#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:117 ../lib/mintstick.py:123
 msgid "Error, umount "
 msgstr "アンマウント時にエラーが発生: "
 
-#: ../lib/imagewriter.py:117
+#: ../lib/mintstick.py:117
 msgid " was terminated by signal "
 msgstr " は次のシグナルを受け取り、終了しました: "
 
-#: ../lib/imagewriter.py:121
+#: ../lib/mintstick.py:121
 msgid " successfully unmounted"
 msgstr " のアンマウントを完了しました"
 
-#: ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:123
 msgid " returned "
 msgstr " は次を返しました: "
 
-#: ../lib/imagewriter.py:126
+#: ../lib/mintstick.py:126
 msgid "Execution failed: "
 msgstr "実行に失敗しました: "
 
-#: ../lib/imagewriter.py:134
+#: ../lib/mintstick.py:134
 msgid "Could not read mtab !"
 msgstr "mtabを読み込めませんでした!"
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid "Writing "
 msgstr "次のデバイスへ書き込み中 "
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid " to "
 msgstr " → "
 
-#: ../lib/imagewriter.py:143
+#: ../lib/mintstick.py:143
 msgid "Executing: dd if="
 msgstr "実行中: dd if="
 
-#: ../lib/imagewriter.py:153
+#: ../lib/mintstick.py:153
 msgid "Wrote: "
 msgstr "書き込み: "
 
-#: ../lib/imagewriter.py:160
+#: ../lib/mintstick.py:160
 msgid "The dd process ended with an error !"
 msgstr "ddプロセスがエラーで終了しました!"
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid "Image "
 msgstr "イメージ "
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid " successfully written to"
 msgstr " を次に書き込みました:"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:1
+#: ../share/mintstick/mintstick.glade.h:1
 msgid " "
 msgstr " "
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:2
+#: ../share/mintstick/mintstick.glade.h:2
 msgid ""
 "<b>Error</b>\n"
 " No target devices were found. \n"
@@ -103,7 +103,7 @@ msgstr ""
 " イメージを書き込めるUSBメモリを \n"
 " 接続する必要があります。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:7
+#: ../share/mintstick/mintstick.glade.h:7
 msgid ""
 "<b>Error</b>\n"
 " Something went wrong, please see the details\n"
@@ -119,7 +119,7 @@ msgstr ""
 " アプリケーションを終了させると、ログファイルを\n"
 " あなたのホーム ディレクトリに作成します。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:13
+#: ../share/mintstick/mintstick.glade.h:13
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"
@@ -137,7 +137,7 @@ msgstr ""
 " アプリケーションを終了すると、ログを \n"
 " ホームディレクトリに書き込みます。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:20
+#: ../share/mintstick/mintstick.glade.h:20
 msgid ""
 "<b>Warning</b>\n"
 " This will <b>destroy all data</b> on the target\n"
@@ -154,46 +154,46 @@ msgstr ""
 " OKを押して進める場合、作業が完了するまで \n"
 " <b>USBメモリを抜かないでください</b>。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:26
+#: ../share/mintstick/mintstick.glade.h:26
 msgid "Details"
 msgstr "詳細"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:27
-msgid "ImageWriter"
+#: ../share/mintstick/mintstick.glade.h:27
+msgid "MintStick"
 msgstr "イメージライター"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:28
+#: ../share/mintstick/mintstick.glade.h:28
 msgid "Select Image"
 msgstr "イメージの選択"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:29
+#: ../share/mintstick/mintstick.glade.h:29
 msgid "Select an image file to be written to the device"
 msgstr "デバイスに書き込むイメージファイルを選択"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:30
+#: ../share/mintstick/mintstick.glade.h:30
 msgid "Select target device to write the image to"
 msgstr "デバイスに書き込むイメージを選択"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:31
+#: ../share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"
 msgstr "書き込むイメージ:"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:32
+#: ../share/mintstick/mintstick.glade.h:32
 msgid "Write to device"
 msgstr "デバイスへ書き込む"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:33
+#: ../share/mintstick/mintstick.glade.h:33
 msgid "gtk-cancel"
 msgstr "gtk-cancel"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:34
+#: ../share/mintstick/mintstick.glade.h:34
 msgid "gtk-close"
 msgstr "gtk-close"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:35
+#: ../share/mintstick/mintstick.glade.h:35
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:36
+#: ../share/mintstick/mintstick.glade.h:36
 msgid "to"
 msgstr "to"

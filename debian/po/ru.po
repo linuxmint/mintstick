@@ -1,7 +1,7 @@
 # translation of _usb-image-writer-ru.po to
-# Russian translation for usb-imagewriter
+# Russian translation for mintstick
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the usb-imagewriter package.
+# This file is distributed under the same license as the mintstick package.
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Sergei Zivukov <ekonomvygoda@yandex.ru>, 2008.
@@ -19,79 +19,79 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/imagewriter.py:93
+#: ../lib/mintstick.py:93
 msgid "Image: "
 msgstr "Образ: "
 
-#: ../lib/imagewriter.py:94
+#: ../lib/mintstick.py:94
 msgid "Target Device: "
 msgstr "Целевое устройство: "
 
-#: ../lib/imagewriter.py:109
+#: ../lib/mintstick.py:109
 msgid "Unmounting all partitions of "
 msgstr "Размонтирование всех устройств "
 
-#: ../lib/imagewriter.py:111
+#: ../lib/mintstick.py:111
 msgid "Trying to unmount "
 msgstr "Попытка размонтирования "
 
-#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:117 ../lib/mintstick.py:123
 msgid "Error, umount "
 msgstr "Ошибка, размонтировано "
 
-#: ../lib/imagewriter.py:117
+#: ../lib/mintstick.py:117
 msgid " was terminated by signal "
 msgstr " был прерван с сигналом "
 
-#: ../lib/imagewriter.py:121
+#: ../lib/mintstick.py:121
 msgid " successfully unmounted"
 msgstr " успешно размонтировано"
 
-#: ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:123
 msgid " returned "
 msgstr " возвратил "
 
-#: ../lib/imagewriter.py:126
+#: ../lib/mintstick.py:126
 msgid "Execution failed: "
 msgstr "Выполнение не удалось: "
 
-#: ../lib/imagewriter.py:134
+#: ../lib/mintstick.py:134
 msgid "Could not read mtab !"
 msgstr "Не удалось прочитать mtab!"
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid "Writing "
 msgstr "Запись "
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid " to "
 msgstr " в "
 
-#: ../lib/imagewriter.py:143
+#: ../lib/mintstick.py:143
 msgid "Executing: dd if="
 msgstr "Исполнение: dd if="
 
-#: ../lib/imagewriter.py:153
+#: ../lib/mintstick.py:153
 msgid "Wrote: "
 msgstr "Записано: "
 
-#: ../lib/imagewriter.py:160
+#: ../lib/mintstick.py:160
 msgid "The dd process ended with an error !"
 msgstr "dd процесс был завершен с ошибкой!"
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid "Image "
 msgstr "Образ "
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid " successfully written to"
 msgstr " успешно записано в"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:1
+#: ../share/mintstick/mintstick.glade.h:1
 msgid " "
 msgstr " "
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:2
+#: ../share/mintstick/mintstick.glade.h:2
 msgid ""
 "<b>Error</b>\n"
 " No target devices were found. \n"
@@ -105,7 +105,7 @@ msgstr ""
 " Вам нужно подключить USB-устройство,\n"
 " на которое можно записать образ."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:7
+#: ../share/mintstick/mintstick.glade.h:7
 msgid ""
 "<b>Error</b>\n"
 " Something went wrong, please see the details\n"
@@ -121,7 +121,7 @@ msgstr ""
 " Лог-файл с содержанием будет сохранен в\n"
 " Вашем домашнем каталоге, если приложение закрыто."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:13
+#: ../share/mintstick/mintstick.glade.h:13
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"
@@ -139,7 +139,7 @@ msgstr ""
 " операции будет сохранен в Вашем домашнем каталоге, если\n"
 " закрыли приложение."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:20
+#: ../share/mintstick/mintstick.glade.h:20
 msgid ""
 "<b>Warning</b>\n"
 " This will <b>destroy all data</b> on the target\n"
@@ -154,46 +154,46 @@ msgstr ""
 "Если ответите \"Да\", пожалуйста, <b>не отключайте</b>\n"
 "устройство во время операции."
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:26
+#: ../share/mintstick/mintstick.glade.h:26
 msgid "Details"
 msgstr "Подробности"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:27
-msgid "ImageWriter"
-msgstr "ImageWriter"
+#: ../share/mintstick/mintstick.glade.h:27
+msgid "MintStick"
+msgstr "MintStick"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:28
+#: ../share/mintstick/mintstick.glade.h:28
 msgid "Select Image"
 msgstr "Выбрать образ"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:29
+#: ../share/mintstick/mintstick.glade.h:29
 msgid "Select an image file to be written to the device"
 msgstr "Выбранный файл образа буден записан на устройство"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:30
+#: ../share/mintstick/mintstick.glade.h:30
 msgid "Select target device to write the image to"
 msgstr "Выбрать целевое устройство для записи образа"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:31
+#: ../share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"
 msgstr "Записать образ:"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:32
+#: ../share/mintstick/mintstick.glade.h:32
 msgid "Write to device"
 msgstr "Записать в устройство"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:33
+#: ../share/mintstick/mintstick.glade.h:33
 msgid "gtk-cancel"
 msgstr "gtk-cancel"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:34
+#: ../share/mintstick/mintstick.glade.h:34
 msgid "gtk-close"
 msgstr "gtk-close"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:35
+#: ../share/mintstick/mintstick.glade.h:35
 msgid "gtk-ok"
 msgstr "gtk-ok"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:36
+#: ../share/mintstick/mintstick.glade.h:36
 msgid "to"
 msgstr "в"

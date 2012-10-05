@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-#  debian rules file for usb-imagewriter
+#  debian rules file for mintstick
 
 #export DH_VERBOSE=1
 
@@ -10,7 +10,7 @@ build: build-stamp
 	for file in $(CURDIR)/debian/po/*.po; do \
 		mkdir -p $(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/; \
 		msgfmt $$file -o \
-			$(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/usb-imagewriter.mo; \
+			$(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/mintstick.mo; \
 	done
 
 build-stamp:
@@ -30,7 +30,7 @@ install: build
 	dh_clean -k
 	dh_installdirs
 	dh_installchangelogs
-	dh_installman debian/imagewriter.1
+	dh_installman debian/mintstick.1
 	dh_installdocs
 	dh_install
 	dh_compress

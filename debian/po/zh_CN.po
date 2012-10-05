@@ -1,11 +1,11 @@
-# Simplified Chinese translation for usb-imagewriter
+# Simplified Chinese translation for mintstick
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the usb-imagewriter package.
+# This file is distributed under the same license as the mintstick package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: usb-imagewriter\n"
+"Project-Id-Version: mintstick\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2008-07-06 20:42+0200\n"
 "PO-Revision-Date: 2009-05-13 05:10+0000\n"
@@ -17,79 +17,79 @@ msgstr ""
 "X-Launchpad-Export-Date: 2009-06-12 12:08+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
-#: ../lib/imagewriter.py:93
+#: ../lib/mintstick.py:93
 msgid "Image: "
 msgstr "镜像： "
 
-#: ../lib/imagewriter.py:94
+#: ../lib/mintstick.py:94
 msgid "Target Device: "
 msgstr "目标设备： "
 
-#: ../lib/imagewriter.py:109
+#: ../lib/mintstick.py:109
 msgid "Unmounting all partitions of "
 msgstr "卸载以下设备的所有分区 "
 
-#: ../lib/imagewriter.py:111
+#: ../lib/mintstick.py:111
 msgid "Trying to unmount "
 msgstr "尝试卸载分区 "
 
-#: ../lib/imagewriter.py:117 ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:117 ../lib/mintstick.py:123
 msgid "Error, umount "
 msgstr "出错，卸载分区 "
 
-#: ../lib/imagewriter.py:117
+#: ../lib/mintstick.py:117
 msgid " was terminated by signal "
 msgstr " 被信号终止 "
 
-#: ../lib/imagewriter.py:121
+#: ../lib/mintstick.py:121
 msgid " successfully unmounted"
 msgstr " 成功卸载设备"
 
-#: ../lib/imagewriter.py:123
+#: ../lib/mintstick.py:123
 msgid " returned "
 msgstr " 已返回 "
 
-#: ../lib/imagewriter.py:126
+#: ../lib/mintstick.py:126
 msgid "Execution failed: "
 msgstr "执行失败： "
 
-#: ../lib/imagewriter.py:134
+#: ../lib/mintstick.py:134
 msgid "Could not read mtab !"
 msgstr "无法读取mtab文件！"
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid "Writing "
 msgstr "正在写入 "
 
-#: ../lib/imagewriter.py:142
+#: ../lib/mintstick.py:142
 msgid " to "
 msgstr " 到 "
 
-#: ../lib/imagewriter.py:143
+#: ../lib/mintstick.py:143
 msgid "Executing: dd if="
 msgstr "运行: dd if="
 
-#: ../lib/imagewriter.py:153
+#: ../lib/mintstick.py:153
 msgid "Wrote: "
 msgstr "已写入： "
 
-#: ../lib/imagewriter.py:160
+#: ../lib/mintstick.py:160
 msgid "The dd process ended with an error !"
 msgstr "dd处理过程带错误结束！"
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid "Image "
 msgstr "镜像 "
 
-#: ../lib/imagewriter.py:164
+#: ../lib/mintstick.py:164
 msgid " successfully written to"
 msgstr " 成功写入到"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:1
+#: ../share/mintstick/mintstick.glade.h:1
 msgid " "
 msgstr " "
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:2
+#: ../share/mintstick/mintstick.glade.h:2
 msgid ""
 "<b>Error</b>\n"
 " No target devices were found. \n"
@@ -103,7 +103,7 @@ msgstr ""
 " 你需要插入一个USB设备\n"
 " 以便将镜像写入。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:7
+#: ../share/mintstick/mintstick.glade.h:7
 msgid ""
 "<b>Error</b>\n"
 " Something went wrong, please see the details\n"
@@ -119,7 +119,7 @@ msgstr ""
 " 当程序关闭时\n"
 " 将会在您的用户主目录保存一个日志文件。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:13
+#: ../share/mintstick/mintstick.glade.h:13
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"
@@ -137,7 +137,7 @@ msgstr ""
 " 当您退出程序时\n"
 " 一份日志文件将会保存在您的用户主目录中。"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:20
+#: ../share/mintstick/mintstick.glade.h:20
 msgid ""
 "<b>Warning</b>\n"
 " This will <b>destroy all data</b> on the target\n"
@@ -153,46 +153,46 @@ msgstr ""
 " 如果您回答是，请在执行下述操作时\n"
 "<b>不要卸载设备</b>"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:26
+#: ../share/mintstick/mintstick.glade.h:26
 msgid "Details"
 msgstr "详细信息"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:27
-msgid "ImageWriter"
+#: ../share/mintstick/mintstick.glade.h:27
+msgid "MintStick"
 msgstr "镜像写入程序"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:28
+#: ../share/mintstick/mintstick.glade.h:28
 msgid "Select Image"
 msgstr "选择镜像"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:29
+#: ../share/mintstick/mintstick.glade.h:29
 msgid "Select an image file to be written to the device"
 msgstr "选择一个要写入到设备的镜像文件"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:30
+#: ../share/mintstick/mintstick.glade.h:30
 msgid "Select target device to write the image to"
 msgstr "选择要写入镜像的目标设备"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:31
+#: ../share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"
 msgstr "写入镜像："
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:32
+#: ../share/mintstick/mintstick.glade.h:32
 msgid "Write to device"
 msgstr "写入到设备"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:33
+#: ../share/mintstick/mintstick.glade.h:33
 msgid "gtk-cancel"
 msgstr "gtk-取消"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:34
+#: ../share/mintstick/mintstick.glade.h:34
 msgid "gtk-close"
 msgstr "gtk-关闭"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:35
+#: ../share/mintstick/mintstick.glade.h:35
 msgid "gtk-ok"
 msgstr "gtk-确定"
 
-#: ../share/usb-imagewriter/imagewriter.glade.h:36
+#: ../share/mintstick/mintstick.glade.h:36
 msgid "to"
 msgstr "到"

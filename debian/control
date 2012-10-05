@@ -1,11 +1,11 @@
-Source: usb-imagewriter
+Source: mintstick
 Section: misc
 Priority: optional
 Maintainer: Clement Lefebvre <root@linuxmint.com>
 Build-Depends: debhelper (>= 5.0.37)
 Build-Depends-Indep: gettext
 
-Package: usb-imagewriter
+Package: mintstick
 Architecture: all
 Depends: coreutils (>= 6.10-3), procps, python, python-glade2, policykit-1, gir1.2-polkit-1.0,  gir1.2-gtk-3.0
 Description: Tool to write .img and .iso files to USB sticks

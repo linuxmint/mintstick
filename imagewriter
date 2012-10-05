@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-set -e
-
-TERM=xterm
-
-DIR=/usr/lib/imagewriter
-
-$DIR/imagewriter.py 
