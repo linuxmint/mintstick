@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-09-27 12:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../lib/mintstick.py:85
+msgid "Image: "
+msgstr ""
+
+#: ../lib/mintstick.py:86
+msgid "Target Device: "
+msgstr ""
+
+#: ../lib/mintstick.py:105
+msgid "Unmounting all partitions of "
+msgstr ""
+
+#: ../lib/mintstick.py:107
+msgid "Trying to unmount "
+msgstr ""
+
+#: ../lib/mintstick.py:113 ../lib/mintstick.py:119
+msgid "Error, umount "
+msgstr ""
+
+#: ../lib/mintstick.py:113
+msgid " was terminated by signal "
+msgstr ""
+
+#: ../lib/mintstick.py:117
+msgid " successfully unmounted"
+msgstr ""
+
+#: ../lib/mintstick.py:119
+msgid " returned "
+msgstr ""
+
+#: ../lib/mintstick.py:122
+msgid "Execution failed: "
+msgstr ""
+
+#: ../lib/mintstick.py:130
+msgid "Could not read mtab !"
+msgstr ""
+
+#: ../lib/mintstick.py:136
+msgid "Writing "
+msgstr ""
+
+#: ../lib/mintstick.py:136
+msgid " to "
+msgstr ""
+
+#: ../lib/mintstick.py:137
+msgid "Starting copy from "
+msgstr ""
+
+#: ../lib/mintstick.py:161
+msgid "Image "
+msgstr ""
+
+#: ../lib/mintstick.py:161
+msgid " successfully written to"
+msgstr ""
+
+#: ../lib/mintstick.py:164
+msgid "The process ended with an error !"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:1
+msgid "MintStick"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:2
+msgid ""
+"<b>Warning</b>\n"
+" This will <b>destroy all data</b> on the target\n"
+" device, are you sure you want to proceed ?\n"
+"\n"
+" If you say ok here, please <b>do not unplug</b>\n"
+" the device during the following operation."
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:8
+msgid ""
+"<b>Error</b>\n"
+" Something went wrong, please see the details\n"
+" window for the exact error.\n"
+" \n"
+" A logfile with the content will be saved in your\n"
+" homedir if the application is closed."
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:14
+msgid "Write Image:"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:15
+msgid "Select an image file to be written to the device"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:16
+msgid "Select Image"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:17
+msgid "to"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:18
+msgid "Select target device to write the image to"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:19
+msgid " "
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:20
+msgid "Details"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:21
+msgid "Write to device"
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:22
+msgid ""
+"<b>Error</b>\n"
+" No target devices were found. \n"
+"\n"
+" You need to plug in a USB Key\n"
+" to which the image can be written."
+msgstr ""
+
+#: ../share/mintstick/mintstick.xml.h:27
+msgid ""
+"<b>Success</b>\n"
+" The image was successfully written to the\n"
+" target device.\n"
+" \n"
+" You are free to unplug it now, a log of the\n"
+" operation will be saved in your homedir if\n"
+" you close the application."
+msgstr ""
