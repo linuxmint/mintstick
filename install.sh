@@ -17,7 +17,7 @@
 #  Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 
 LIBFILES="mintstick.py find_devices.py raw_write.py"
-DATAFILES="mintstick.xml"
+DATAFILES="mintstick.glade"
 
 
 if [ "$1" = "uninstall" ]; then
