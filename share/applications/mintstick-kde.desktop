@@ -1,3 +1,4 @@
+
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -8,3 +9,4 @@ Name=MintStick
 Comment=Make a bootable USB stick
 Categories=System
 OnlyShowIn=KDE;
+Name[en_IE]=mintstick-kde.desktop
