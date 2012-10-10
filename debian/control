@@ -8,5 +8,7 @@ Build-Depends-Indep: gettext
 Package: mintstick
 Architecture: all
 Depends: coreutils (>= 6.10-3), procps, python, python-glade2, policykit-1, gir1.2-polkit-1.0,  gir1.2-gtk-3.0
+Conflicts: usb-imagewriter
+Replace: usb-imagewriter
 Description: Tool to write .img and .iso files to USB sticks
  A GUI to write .img or .iso files to a USB Key
