@@ -29,7 +29,7 @@ if [ "$1" = "uninstall" ]; then
 else
     cp share/applications/mintstick.desktop /usr/share/applications/
     cp share/applications/mintstick-kde.desktop /usr/share/applications/
-    cp share/polkit/org.linuxmint.im.policy /usr/share/plokit-1/actions
+    cp share/polkit/org.linuxmint.im.policy /usr/share/polkit-1/actions
     cp mintstick /usr/bin/
     mkdir -p /usr/lib/mintstick
     mkdir -p /usr/share/mintstick
