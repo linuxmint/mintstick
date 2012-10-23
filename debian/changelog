@@ -1,3 +1,9 @@
+mintstick (1.0.1) nadia; urgency=low
+
+  * Replaced ImageWriter window titles with mintStick
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 23 Oct 2012 16:22:06 +0100
+
 mintstick (1.0.0) nadia; urgency=low
 
   * Bumped version
