@@ -1,3 +1,9 @@
+mintstick (1.0.0) nadia; urgency=low
+
+  * Bumped version
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 23 Oct 2012 14:16:39 +0100
+
 mintstick (0.1.3-1linuxmint3) nadia; urgency=low
 
   * Initial nadia release
