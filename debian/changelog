@@ -1,3 +1,9 @@
+mintstick (1.0.2) nadia; urgency=low
+
+  * Fixed capitalization in glade file
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 24 Oct 2012 16:39:01 +0100
+
 mintstick (1.0.1) nadia; urgency=low
 
   * Replaced ImageWriter window titles with mintStick
