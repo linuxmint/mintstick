@@ -14,7 +14,7 @@ import gobject
 import sys
 
 class MintStick:
-    def __init__(self):
+    def __init__(self, image_name):
         APP="mintstick"
         DIR="/usr/share/locale"
 
@@ -44,10 +44,9 @@ class MintStick:
         filt.add_pattern("*.iso")
         self.chooser.set_filter(filt)
 
-        if len(sys.argv) == 3 and sys.argv[1] == "sent-from-nemo":  # sent-from nemo is sort of a password,
-            iso_name = sys.argv[2]                                  # for now only Nemo knows about this command line argument
-            self.chooser.set_filename(iso_name)
-            self.devicelist.set_sensitive(True)
+        if image_name is not None:
+            self.chooser.set_filename(image_name)
+            self.activate_devicelist(None)
 
         # set callbacks
         dict = { "on_main_dialog_destroy" : self.close,
@@ -219,7 +218,7 @@ class MintStick:
     def logger(self, text):
         self.log.insert_at_cursor(text+"\n")
 
-    def activate_devicelist(self, widget):
+    def activate_devicelist(self, widget = None):
         label = self.wTree.get_widget("to_label")
         expander = self.wTree.get_widget("detail_expander")
         self.devicelist.set_sensitive(True)
@@ -233,9 +232,25 @@ class MintStick:
         if widget.get_expanded():
             gobject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
 
+def is_valid_image(path):
+    exists = os.path.exists(path)
+    if exists:
+        valid_file = path.endswith(('.iso', '.img'))
+    if exists and valid_file:
+        return True
+    else:
+        return False
+
 if __name__ == "__main__":
 
-    
+    image_name = None
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "--help" or not is_valid_image(sys.argv[1]):
+            print _("   Usage: mintstick [--help] - Display this information.")
+            print _("   Usage: mintstick [<file-name>] - Open Mintstick with <file-name> selected.")
+            quit()
+        else:
+            image_name = sys.argv[1]
 
-    app = MintStick()
+    app = MintStick(image_name)
     gtk.main()
