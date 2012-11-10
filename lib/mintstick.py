@@ -11,6 +11,7 @@ from gettext import gettext as _
 import gtk
 import gtk.glade      
 import gobject
+import sys
 
 class MintStick:
     def __init__(self):
@@ -42,6 +43,11 @@ class MintStick:
         filt.add_pattern("*.img")
         filt.add_pattern("*.iso")
         self.chooser.set_filter(filt)
+
+        if len(sys.argv) == 3 and sys.argv[1] == "sent-from-nemo":  # sent-from nemo is sort of a password,
+            iso_name = sys.argv[2]                                  # for now only Nemo knows about this command line argument
+            self.chooser.set_filename(iso_name)
+            self.devicelist.set_sensitive(True)
 
         # set callbacks
         dict = { "on_main_dialog_destroy" : self.close,
@@ -228,5 +234,8 @@ class MintStick:
             gobject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
 
 if __name__ == "__main__":
+
+    
+
     app = MintStick()
     gtk.main()
