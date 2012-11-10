@@ -133,7 +133,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_emergency_button_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_emergency_button_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -224,7 +224,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_failauth_button_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_failauth_button_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -330,7 +330,7 @@
                         <property name="has_tooltip">True</property>
                         <property name="tooltip" translatable="yes">Select an image file to be written to the device</property>
                         <property name="title" translatable="yes">Select Image</property>
-                        <signal name="file_set" handler="on_filechooserbutton_file_set" swapped="no"/>
+                        <signal name="file_set" handler="on_filechooserbutton_file_set"/>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -360,7 +360,7 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip" translatable="yes">Select target device to write the image to</property>
                         <property name="items" translatable="yes"></property>
-                        <signal name="changed" handler="on_device_combobox_changed" swapped="no"/>
+                        <signal name="changed" handler="on_device_combobox_changed"/>
                       </widget>
                       <packing>
                         <property name="expand">True</property>
@@ -407,7 +407,7 @@
                     <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
-                    <signal name="activate" handler="on_detail_expander_activate" swapped="no"/>
+                    <signal name="activate" handler="on_detail_expander_activate"/>
                     <child>
                       <widget class="GtkScrolledWindow" id="scrolledwindow">
                         <property name="visible">True</property>
@@ -475,7 +475,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_cancel_button_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_cancel_button_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -490,7 +490,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
-                <signal name="clicked" handler="on_write_button_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_write_button_clicked" />
                 <child>
                   <widget class="GtkHBox" id="hbox2">
                     <property name="visible">True</property>
@@ -659,7 +659,7 @@
                 <property name="receives_default">True</property>
                 <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_success_button_clicked" swapped="no"/>
+                <signal name="clicked" handler="on_success_button_clicked"/>
               </widget>
               <packing>
                 <property name="expand">False</property>
