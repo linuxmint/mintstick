@@ -70,7 +70,7 @@ msgid "Details"
 msgstr "تفاصيل"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "كاتب ملف"
 
 #: ../share/mintstick/mintstick.glade.h:28

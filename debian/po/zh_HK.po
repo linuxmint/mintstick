@@ -154,8 +154,8 @@ msgid "Details"
 msgstr "詳細資料"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
-msgstr "鏡像寫入程序MintStick"
+msgid "USB Image Writer"
+msgstr "鏡像寫入程序USB Image Writer"
 
 #: ../share/mintstick/mintstick.glade.h:28
 msgid "Select Image"

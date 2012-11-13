@@ -8,7 +8,7 @@
   <vendor_url>http://hal.freedesktop.org/docs/PolicyKit/</vendor_url>
 
   <action id="org.freedesktop.policykit.pkexec.run-im">
-    <description>MintStick Authentication dialog</description>
+    <description>USB Image Writer Authentication dialog</description>
     <message>This will destroy all data on the target device, are you sure you want to proceed ?  If you type your password here, please do not unplug the device during the following operation.</message>
     <message xml:lang="fr">Toutes les données contenues sur ce périphérique vont être détruites. Ne débranchez pas votre périphérique avant que l'opération ne soit terminée.</message>
     <icon_name>system-run</icon_name>

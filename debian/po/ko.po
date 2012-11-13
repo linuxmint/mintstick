@@ -157,7 +157,7 @@ msgid "Details"
 msgstr "상세 정보"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "이미지제작가"
 
 #: ../share/mintstick/mintstick.glade.h:28

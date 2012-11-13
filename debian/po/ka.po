@@ -162,7 +162,7 @@ msgid ""
 msgstr ""
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr ""
 
 #: ../share/mintstick/mintstick.glade.h:29

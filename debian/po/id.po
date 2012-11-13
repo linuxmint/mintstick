@@ -186,7 +186,7 @@ msgstr ""
 " perangkat selama operasi berikut."
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "PenulisGambar"
 
 #: ../share/mintstick/mintstick.glade.h:31

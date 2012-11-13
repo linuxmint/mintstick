@@ -190,8 +190,8 @@ msgstr ""
 " enheden i løbet af den følgende operation."
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
-msgstr "MintStick"
+msgid "USB Image Writer"
+msgstr "USB Image Writer"
 
 #: ../share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"

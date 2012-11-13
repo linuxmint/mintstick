@@ -158,7 +158,7 @@ msgid "Details"
 msgstr "Szczegóły"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "ZapisywarkaObrazów"
 
 #: ../share/mintstick/mintstick.glade.h:28

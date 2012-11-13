@@ -82,7 +82,7 @@ msgid "The process ended with an error !"
 msgstr ""
 
 #: ../share/mintstick/mintstick.xml.h:1
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr ""
 
 #: ../share/mintstick/mintstick.xml.h:2

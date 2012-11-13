@@ -159,7 +159,7 @@ msgid "Details"
 msgstr "詳細"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "イメージライター"
 
 #: ../share/mintstick/mintstick.glade.h:28

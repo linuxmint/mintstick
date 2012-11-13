@@ -158,7 +158,7 @@ msgid "Details"
 msgstr "Detaljer"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "Avbildningsskrivare"
 
 #: ../share/mintstick/mintstick.glade.h:28

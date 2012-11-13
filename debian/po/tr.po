@@ -158,7 +158,7 @@ msgid "Details"
 msgstr "Detaylar"
 
 #: ../share/mintstick/mintstick.glade.h:27
-msgid "MintStick"
+msgid "USB Image Writer"
 msgstr "İmaj Yazıcı"
 
 #: ../share/mintstick/mintstick.glade.h:28
