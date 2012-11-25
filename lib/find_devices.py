@@ -19,6 +19,23 @@ import commands
 #    fi
 #done
 
+def getLabel (drive):
+    result = ""
+    matches = commands.getoutput("blkid").split("\n")
+    for line in matches:
+        if line.find(drive) is not -1:
+            if line.find("LABEL=") is not -1:
+                quote = line.index("\"")
+                line = line[quote+1:]
+                quote = line.index("\"")
+                line = line [:quote]
+                if len(result) > 0:
+                    result += ", "
+                result += "(" + line
+    if len(result) > 0:
+        result += ")"
+    return result
+
 # NEW CODE, relies on /sys/block
 for line in commands.getoutput("ls -db /sys/block/[hsv]d*").split():
     device=line.replace("/sys/block/", "")
@@ -31,4 +48,5 @@ for line in commands.getoutput("ls -db /sys/block/[hsv]d*").split():
             vendor = "Unknown"
         if name == "":
             name = "Unknown"
-        print "%s %s, %s" % (vendor.strip(), name.strip(), drive.strip())    
+        name += getLabel(drive.strip())
+        print "%s %s; %s" % (vendor.strip(), name.strip(), drive.strip())

@@ -66,7 +66,7 @@ class MintStick:
         self.combo = self.wTree.get_widget("device_combobox")
         list = list.strip().split('\n')
         for item in list:
-            name,path = item.split(',')
+            name,path = item.split(';')
             self.combo.append_text(name+' ('+path.lstrip()+')')
 
     def device_selected(self, widget):
