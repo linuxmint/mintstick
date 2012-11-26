@@ -30,8 +30,9 @@ def getLabel (drive):
                 quote = line.index("\"")
                 line = line [:quote]
                 if len(result) > 0:
-                    result += ", "
-                result += "(" + line
+                    result += ", " + line
+                else:
+                    result += "(" + line
     if len(result) > 0:
         result += ")"
     return result
