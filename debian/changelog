@@ -1,3 +1,15 @@
+mintstick (1.0.4) nadia; urgency=low
+
+  * Added Nemo integration
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 23 Jan 2013 12:16:10 +0000
+
+mintstick (1.0.3) nadia; urgency=low
+
+  * Debranded application name
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 13 Nov 2012 13:35:58 +0000
+
 mintstick (1.0.2) nadia; urgency=low
 
   * Fixed capitalization in glade file

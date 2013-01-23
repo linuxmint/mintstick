@@ -11,9 +11,10 @@ from gettext import gettext as _
 import gtk
 import gtk.glade      
 import gobject
+import sys
 
 class MintStick:
-    def __init__(self):
+    def __init__(self, iso_path=None):
         APP="mintstick"
         DIR="/usr/share/locale"
 
@@ -54,6 +55,10 @@ class MintStick:
                  "on_device_combobox_changed" : self.device_selected,
                  "on_write_button_clicked" : self.do_write}
         self.wTree.signal_autoconnect(dict)
+        
+        if iso_path is not None:
+            self.chooser.set_filename(iso_path)
+            self.activate_devicelist(self.chooser)
 
         self.window.show_all()
 
@@ -228,5 +233,8 @@ class MintStick:
             gobject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
 
 if __name__ == "__main__":
-    app = MintStick()
+    if len(sys.argv) > 1:
+        app = MintStick(sys.argv[1])
+    else:
+        app = MintStick()
     gtk.main()
