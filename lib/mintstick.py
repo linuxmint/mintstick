@@ -146,6 +146,7 @@ class MintStick:
       while gtk.events_pending():
         gtk.main_iteration(True) 
       total_size = float(os.path.getsize(source))   
+      old_size = 0.0
       # Add launcher string, only when not root
       launcher = ''
       size=''
@@ -155,7 +156,11 @@ class MintStick:
       else:
 	      output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
       while output.stdout.readline():
-        size = output.stdout.readline().strip()
+        size_and_rate = output.stdout.readline().strip()
+        size_and_rate = size_and_rate.split()
+        size = size_and_rate[0]
+        if len(size_and_rate) > 1:
+			rate = float(size_and_rate[1]) 
         try:
           size = float(size)
           flag = True
@@ -164,7 +169,11 @@ class MintStick:
         while gtk.events_pending():
             gtk.main_iteration(True)
         if flag:
-          progress.set_fraction(size)
+			if round(size*1000) > old_size:
+			  progress.set_fraction(size)
+			  progress.set_text(_("%3.1f%% %s " % (float(size)*100,self.rate_fmt(rate))))
+			  old_size = round(size*1000)
+
       if size == 1.0:
         self.logger(_('Image ')+source.split('/')[-1]+_(' successfully written to')+target)
         self.success()
@@ -172,6 +181,13 @@ class MintStick:
         self.logger(_('The process ended with an error !'))
         self.emergency()
         return False
+
+    def rate_fmt(self,num):
+        for x in ['bytes','KB','MB','GB']:
+            if num < 1024.0:
+                return "%3.1f%s/s" % (num, x)
+            num /= 1024.0
+        return "%3.1f%s/s" % (num, 'TB')
 
     def success(self):
         dialog = self.wTree.get_widget("success_dialog")

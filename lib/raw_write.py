@@ -4,6 +4,7 @@ import commands
 from subprocess import Popen,PIPE,call,STDOUT
 import os, sys
 import getopt
+import time
 
 def raw_write(source, target):
     bs = 1024
@@ -12,13 +13,15 @@ def raw_write(source, target):
     total_size = float(os.path.getsize(source))
     print total_size
     output = open(target, 'wb')
+    start_time = time.time()
     while True:
 	buffer = input.read(bs)
 	if len(buffer) == 0:
 	  break
 	output.write(buffer)
 	size = size + bs
-	print size/total_size
+	elapsed_time = time.time() - start_time
+	print "%f %f" % (size/total_size,size/elapsed_time)
 
     output.flush()    
     #os.fsync(output.fileno())
