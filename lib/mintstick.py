@@ -146,7 +146,7 @@ class MintStick:
 		while gtk.events_pending():
 			gtk.main_iteration(True) 
 
-		total_size = float(os.path.getsize(source))   
+		total_size = float(os.path.getsize(source))   		
 		# Add launcher string, only when not root
 		launcher = ''
 		size=''
@@ -166,8 +166,9 @@ class MintStick:
 				flag = False
 			while gtk.events_pending():
 				gtk.main_iteration(True)
-			if flag:
-				progress.set_fraction(size)			  
+			if flag:				
+				progress.set_fraction(size)
+				progress.set_text("%3.0f%%" % (float(size)*100))							
 		  
 		if size == 1.0:
 			self.logger(_('Image ')+source.split('/')[-1]+_(' successfully written to')+target)
