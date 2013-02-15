@@ -139,39 +139,43 @@ class MintStick:
              self.emergency()
 
     def raw_write(self, source, target):
-      progress = self.wTree.get_widget("progressbar")
-      progress.set_sensitive(True)
-      progress.set_text(_('Writing ')+source.split('/')[-1]+_(' to ')+self.dev)
-      self.logger(_('Starting copy from ')+source+' to '+target)
-      while gtk.events_pending():
-        gtk.main_iteration(True) 
-      total_size = float(os.path.getsize(source))   
-      # Add launcher string, only when not root
-      launcher = ''
-      size=''
-      if os.geteuid() > 0:
-	      launcher='pkexec'
-	      output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
-      else:
-	      output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
-      while output.stdout.readline():
-        size = output.stdout.readline().strip()
-        try:
-          size = float(size)
-          flag = True
-        except ValueError:
-          flag = False
-        while gtk.events_pending():
-            gtk.main_iteration(True)
-        if flag:
-          progress.set_fraction(size)
-      if size == 1.0:
-        self.logger(_('Image ')+source.split('/')[-1]+_(' successfully written to')+target)
-        self.success()
-      else:
-        self.logger(_('The process ended with an error !'))
-        self.emergency()
-        return False
+		progress = self.wTree.get_widget("progressbar")
+		progress.set_sensitive(True)
+		progress.set_text(_('Writing ')+source.split('/')[-1]+_(' to ')+self.dev)
+		self.logger(_('Starting copy from ')+source+' to '+target)
+		while gtk.events_pending():
+			gtk.main_iteration(True) 
+
+		total_size = float(os.path.getsize(source))   
+		# Add launcher string, only when not root
+		launcher = ''
+		size=''
+	  
+		if os.geteuid() > 0:
+			launcher='pkexec'
+			output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
+		else:
+			output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
+	  
+		while output.stdout.readline():
+			size = output.stdout.readline().strip()
+			try:
+				size = float(size)
+				flag = True
+			except ValueError:
+				flag = False
+			while gtk.events_pending():
+				gtk.main_iteration(True)
+			if flag:
+				progress.set_fraction(size)			  
+		  
+		if size == 1.0:
+			self.logger(_('Image ')+source.split('/')[-1]+_(' successfully written to')+target)
+			self.success()		
+		else:
+			self.logger(_('The process ended with an error !'))
+			self.emergency()
+			return False
 
     def success(self):
         dialog = self.wTree.get_widget("success_dialog")
