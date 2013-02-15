@@ -1,3 +1,9 @@
+mintstick (1.0.5) olivia; urgency=low
+
+  * Percentage of completion written in progressbar
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 15 Feb 2013 13:08:04 +0000
+
 mintstick (1.0.4) nadia; urgency=low
 
   * Added Nemo integration
