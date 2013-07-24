@@ -6,18 +6,18 @@ import os, sys
 import getopt
 
 def raw_write(source, target):
-    bs = 1024
+    bs = 32768
     size=0
     input = open(source, 'rb')
     total_size = float(os.path.getsize(source))
-    print total_size
+    #print total_size
     output = open(target, 'wb')
     while True:
 	buffer = input.read(bs)
 	if len(buffer) == 0:
 	  break
 	output.write(buffer)
-	size = size + bs
+	size = size + len(buffer)
 	print size/total_size
 
     output.flush()    
