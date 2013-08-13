@@ -150,6 +150,7 @@ class MintStick:
 		# Add launcher string, only when not root
 		launcher = ''
 		size=''
+		flag = True
 	  
 		if os.geteuid() > 0:
 			launcher='pkexec'
@@ -157,10 +158,9 @@ class MintStick:
 		else:
 			output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)	
 	  
-		while output.stdout.readline():
-			size = output.stdout.readline().strip()
+		while flag == True:
 			try:
-				size = float(size)
+				size = float(output.stdout.readline().strip())
 				flag = True
 			except ValueError:
 				flag = False
