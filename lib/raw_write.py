@@ -6,7 +6,7 @@ import os, sys
 import getopt
 
 def raw_write(source, target):
-    bs = 32768
+    bs = 4096
     size=0
     input = open(source, 'rb')
     total_size = float(os.path.getsize(source))
