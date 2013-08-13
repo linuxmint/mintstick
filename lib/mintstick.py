@@ -162,7 +162,7 @@ class MintStick:
 			try:
 				size = float(output.stdout.readline().strip())
 				flag = True
-			except ValueError:
+			except:
 				flag = False
 			while gtk.events_pending():
 				gtk.main_iteration(True)
