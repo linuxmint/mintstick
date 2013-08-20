@@ -1,3 +1,17 @@
+mintstick (1.0.7) olivia; urgency=low
+
+  * Add format capability
+  * Add dynamic USB device list
+  * Application doesn't quit if there's no USB key plugged
+  * Full command line support
+  * KDE integration
+  * Check ISO size before trying to write
+  * Add some debugging message
+  * Application doesn't quit after dialogs
+  * Updated man page
+
+ -- Frédéric Gaudet <fred@linuxmint.com>  Tue, 20 Aug 2013 15:44:29 +0200
+
 mintstick (1.0.6) olivia; urgency=low
 
   * 1.0.6

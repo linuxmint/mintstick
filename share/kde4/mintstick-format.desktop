@@ -1,0 +1,9 @@
+[Desktop Entry]
+X-KDE-Solid-Predicate=IS StorageAccess
+Type=Service
+Actions=open;
+
+[Desktop Action open]
+Exec=/usr/lib/mintstick/mintstick.py -u %d
+Icon=drive-removable-media-usb-pendrive
+Name=Format USB stick

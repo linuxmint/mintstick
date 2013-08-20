@@ -4,13 +4,26 @@ import commands
 from subprocess import Popen,PIPE,call,STDOUT
 import os, sys
 import getopt
+sys.path.append('/usr/lib/mintstick')
+from mountutils import *
+import parted
 
-def raw_write(source, target):
+def raw_write(source, target):     
+    do_umount(target)       
     bs = 4096
     size=0
     input = open(source, 'rb')
     total_size = float(os.path.getsize(source))
     #print total_size
+    
+    # Check if the ISO can fit ... :)
+    device = parted.getDevice(target)
+    device_size = device.getLength() * device.sectorSize
+    if (device.getLength() * device.sectorSize) < float(os.path.getsize(source)):
+        input.close()
+        print "nospace"
+        exit(3)
+   
     output = open(target, 'wb')
     while True:
 	buffer = input.read(bs)
@@ -26,8 +39,11 @@ def raw_write(source, target):
     output.close()
     if size == total_size:
       print "1.0"
+      exit (0)
     else:
       print "failed"
+      exit (4)
+
 
 def main():
     # parse command line options
@@ -40,7 +56,10 @@ def main():
 
     for o, a in opts:
         if o in ("-h", "--help"):
-            print "Usage: "
+            print "Usage: %s -s source -t target\n" % sys.argv[0]
+            print "-s|--source          : source iso path"
+            print "-t|--target          : target device path\n"
+            print "Example : %s -s /foo/image.iso -t /dev/sdj" % sys.argv[0]
             sys.exit(0)
         elif o in ("-s"):
 	    source = a

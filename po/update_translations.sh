@@ -18,9 +18,9 @@
 
 LANGS="de_DE"
 
-intltool-extract --type=gettext/glade ../share/mintstick/mintstick.xml
-xgettext --language=Python --keyword=_ --keyword=N_ --output=mintstick.pot ../lib/mintstick.py ../share/mintstick/mintstick.xml.h
-rm -f ../share/mintstick/mintstick.xml.h
+intltool-extract --type=gettext/glade ../share/mintstick/mintstick.glade
+xgettext --language=Python --keyword=_ --keyword=N_ --output=mintstick.pot ../lib/mintstick.py ../share/mintstick/mintstick.glade.h
+rm -f ../share/mintstick/mintstick.glade.h
 
 # to create a lang specific .po file, run (replace de_DE and de.po with your data):
 #msginit --input=mintstick.pot --locale=de_DE -o de.po

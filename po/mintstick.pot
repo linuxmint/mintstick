@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-27 12:31+0200\n"
+"POT-Creation-Date: 2013-08-20 15:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,75 +17,86 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../lib/mintstick.py:85
+#: ../lib/mintstick.py:28
+msgid ""
+"Success\n"
+"\n"
+"The image was successfully written to the\n"
+" target device.\n"
+"\n"
+"You are free to unplug it now."
+msgstr ""
+
+#: ../lib/mintstick.py:29
+msgid "Not enough space on device. Use a bigger USB stick"
+msgstr ""
+
+#: ../lib/mintstick.py:30
+msgid "Something went wrong during the copy"
+msgstr ""
+
+#: ../lib/mintstick.py:31
+msgid "Authentication Error"
+msgstr ""
+
+#: ../lib/mintstick.py:32
+msgid "The process ended with an error"
+msgstr ""
+
+#: ../lib/mintstick.py:33
+msgid "Can 't create partition on "
+msgstr ""
+
+#: ../lib/mintstick.py:34
+msgid ""
+"Success\n"
+"\n"
+"The USB stick has been successfully formated.\n"
+"\n"
+"You are free to unplug it now."
+msgstr ""
+
+#: ../lib/mintstick.py:255
+msgid "USB stick "
+msgstr ""
+
+#: ../lib/mintstick.py:255
+msgid " successfully formated"
+msgstr ""
+
+#: ../lib/mintstick.py:277
 msgid "Image: "
 msgstr ""
 
-#: ../lib/mintstick.py:86
+#: ../lib/mintstick.py:278
 msgid "Target Device: "
 msgstr ""
 
-#: ../lib/mintstick.py:105
-msgid "Unmounting all partitions of "
-msgstr ""
-
-#: ../lib/mintstick.py:107
-msgid "Trying to unmount "
-msgstr ""
-
-#: ../lib/mintstick.py:113 ../lib/mintstick.py:119
-msgid "Error, umount "
-msgstr ""
-
-#: ../lib/mintstick.py:113
-msgid " was terminated by signal "
-msgstr ""
-
-#: ../lib/mintstick.py:117
-msgid " successfully unmounted"
-msgstr ""
-
-#: ../lib/mintstick.py:119
-msgid " returned "
-msgstr ""
-
-#: ../lib/mintstick.py:122
-msgid "Execution failed: "
-msgstr ""
-
-#: ../lib/mintstick.py:130
-msgid "Could not read mtab !"
-msgstr ""
-
-#: ../lib/mintstick.py:136
+#: ../lib/mintstick.py:297
 msgid "Writing "
 msgstr ""
 
-#: ../lib/mintstick.py:136
+#: ../lib/mintstick.py:297
 msgid " to "
 msgstr ""
 
-#: ../lib/mintstick.py:137
+#: ../lib/mintstick.py:298
 msgid "Starting copy from "
 msgstr ""
 
-#: ../lib/mintstick.py:161
+#: ../lib/mintstick.py:330
 msgid "Image "
 msgstr ""
 
-#: ../lib/mintstick.py:161
+#: ../lib/mintstick.py:330
 msgid " successfully written to"
 msgstr ""
 
-#: ../lib/mintstick.py:164
-msgid "The process ended with an error !"
-msgstr ""
-
-#: ../share/mintstick/mintstick.xml.h:1
+#: ../share/mintstick/mintstick.glade.h:1
 msgid "USB Image Writer"
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:2
+#: ../share/mintstick/mintstick.glade.h:2
 msgid ""
 "<b>Warning</b>\n"
 " This will <b>destroy all data</b> on the target\n"
@@ -95,49 +106,58 @@ msgid ""
 " the device during the following operation."
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:8
+#: ../share/mintstick/mintstick.glade.h:8
 msgid ""
 "<b>Error</b>\n"
 " Something went wrong, please see the details\n"
-" window for the exact error.\n"
-" \n"
-" A logfile with the content will be saved in your\n"
-" homedir if the application is closed."
+" window for the exact error."
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:14
-msgid "Write Image:"
+#: ../share/mintstick/mintstick.glade.h:11
+msgid "Filesystem:"
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:15
-msgid "Select an image file to be written to the device"
+#: ../share/mintstick/mintstick.glade.h:12
+msgid "device:"
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:16
-msgid "Select Image"
-msgstr ""
-
-#: ../share/mintstick/mintstick.xml.h:17
-msgid "to"
-msgstr ""
-
-#: ../share/mintstick/mintstick.xml.h:18
+#: ../share/mintstick/mintstick.glade.h:13
 msgid "Select target device to write the image to"
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:19
-msgid " "
-msgstr ""
-
-#: ../share/mintstick/mintstick.xml.h:20
+#: ../share/mintstick/mintstick.glade.h:14
 msgid "Details"
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:21
+#: ../share/mintstick/mintstick.glade.h:15
+msgid "Format"
+msgstr ""
+
+#: ../share/mintstick/mintstick.glade.h:16
+msgid "Write Image:"
+msgstr ""
+
+#: ../share/mintstick/mintstick.glade.h:17
+msgid "Select an image file to be written to the device"
+msgstr ""
+
+#: ../share/mintstick/mintstick.glade.h:18
+msgid "Select Image"
+msgstr ""
+
+#: ../share/mintstick/mintstick.glade.h:19
+msgid "to"
+msgstr ""
+
+#: ../share/mintstick/mintstick.glade.h:20
+msgid " "
+msgstr ""
+
+#: ../share/mintstick/mintstick.glade.h:21
 msgid "Write to device"
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:22
+#: ../share/mintstick/mintstick.glade.h:22
 msgid ""
 "<b>Error</b>\n"
 " No target devices were found. \n"
@@ -146,13 +166,11 @@ msgid ""
 " to which the image can be written."
 msgstr ""
 
-#: ../share/mintstick/mintstick.xml.h:27
+#: ../share/mintstick/mintstick.glade.h:27
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"
 " target device.\n"
 " \n"
-" You are free to unplug it now, a log of the\n"
-" operation will be saved in your homedir if\n"
-" you close the application."
+" You are free to unplug it now."
 msgstr ""

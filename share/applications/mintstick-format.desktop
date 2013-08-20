@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=gtk-execute
+Exec=mintstick -m format
+Name=Format USB Stick
+Comment=Format USB Stick
+Name[fr]=Formater une clé USB
+Comment[fr]=Formater une clé USB
+Categories=GNOME;GTK;Utility;
+NotShowIn=KDE;
