@@ -411,7 +411,9 @@ class MintStick:
     def emergency_ok(self,widget):
         self.emergency_dialog.hide()
         if self.mode == "normal": self.set_iso_sensitive()
-        if self.mode == "format": self.set_format_sensitive()
+        if self.mode == "format":                    
+            self.set_format_sensitive()
+            self.go_button.set_sensitive(False)
         
     def success_ok(self,widget):
         self.success_dialog.hide()
