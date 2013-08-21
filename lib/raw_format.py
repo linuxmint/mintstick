@@ -20,20 +20,21 @@ def raw_format(device_path, fstype, volume_label):
     # Create a default partition set up                        
     disk = parted.freshDisk(device, 'msdos')
     disk.commit()
-    regions = disk.getFreeSpaceRegions()
-    
+    regions = disk.getFreeSpaceRegions()    
+
     if len(regions) > 0:
         #print "Build partition"
         # Define size
-        region = regions[-1]      
+        region = regions[-1]              
         start = parted.sizeToSectors(1, "MiB", device.sectorSize)
         #print "start %s" % start
         end = device.getLength() - start - 1024
         #print end
         
         # Alignment
-        cylinder = device.endSectorToCylinder(end)
-        end = device.endCylinderToSector(cylinder)
+        #cylinder = device.endSectorToCylinder(end)
+        #end = device.endCylinderToSector(cylinder)
+        #print end
         try:
             geometry = parted.Geometry(device=device, start=start, end=end)
         except:
@@ -53,7 +54,7 @@ def raw_format(device_path, fstype, volume_label):
         if fstype == "fat32":
             os.system("mkdosfs -F 32 -n \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
         if fstype == "ntfs":
-            os.system("mkntfs -L \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
+            os.system("mkntfs -f -L \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
         elif fstype == "ext4":
             os.system("mkfs.ext4 -L \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
     sys.exit(0)
