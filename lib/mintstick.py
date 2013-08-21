@@ -207,9 +207,12 @@ class MintStick:
 
         self.devicelist.set_sensitive(False)
         self.filesystemlist.set_sensitive(False)
-        self.go_button.set_sensitive(False)                          
+        self.go_button.set_sensitive(False)          
+
+        label = self.wTree.get_widget("volume_label_entry").get_text()
+
         if os.geteuid() > 0:
-            self.raw_format(self.dev, self.filesystem)
+            self.raw_format(self.dev, self.filesystem, label)
         else:
                 # We are root, display confirmation dialog
                 resp = self.confirm_dialog.run()
@@ -217,12 +220,12 @@ class MintStick:
                     self.confirm_dialog.hide()
                     while gtk.events_pending():
                         gtk.main_iteration(True)
-                    self.raw_format(self.dev, self.filesystem)
+                    self.raw_format(self.dev, self.filesystem, label)
                 else:
                     self.confirm_dialog.hide()
                     self.set_format_sensitive()
                     
-    def raw_format(self, usb_path, fstype):
+    def raw_format(self, usb_path, fstype, label):
         #self.logger(_('Going to format ') + usb_path+ _(' with ')+ fstype + _(' filesystem') )
         def thread_run():
                         
@@ -231,9 +234,9 @@ class MintStick:
         
             if os.geteuid() > 0:
                 launcher='pkexec'
-                output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype], shell=False, stdout=PIPE)   
+                output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)   
             else:
-                output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype], shell=False, stdout=PIPE)                
+                output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)                
             output.communicate()[0]
             self.rc = output.returncode              
         t = threading.Thread(group=None,target=thread_run)

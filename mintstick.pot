@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 11:19+0100\n"
+"POT-Creation-Date: 2013-08-21 12:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,68 +17,68 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:242
+#: lib/mintstick.py:250
 #, python-format
 msgid "USB stick %s successfully formated"
 msgstr ""
 
-#: lib/mintstick.py:244 lib/mintstick.py:320
+#: lib/mintstick.py:252 lib/mintstick.py:332
 msgid "Success"
 msgstr ""
 
-#: lib/mintstick.py:244
+#: lib/mintstick.py:252
 msgid "The USB stick was successfully formated."
 msgstr ""
 
-#: lib/mintstick.py:244 lib/mintstick.py:320
+#: lib/mintstick.py:252 lib/mintstick.py:332
 msgid "You are free to unplug it now."
 msgstr ""
 
-#: lib/mintstick.py:247
+#: lib/mintstick.py:255
 #, python-format
 msgid "Can't create partition on %s"
 msgstr ""
 
-#: lib/mintstick.py:249 lib/mintstick.py:327
+#: lib/mintstick.py:257 lib/mintstick.py:339
 msgid "Authentication Error"
 msgstr ""
 
-#: lib/mintstick.py:251 lib/mintstick.py:329
+#: lib/mintstick.py:259 lib/mintstick.py:341
 msgid "The process ended with an error"
 msgstr ""
 
-#: lib/mintstick.py:264
+#: lib/mintstick.py:276
 msgid "Image:"
 msgstr ""
 
-#: lib/mintstick.py:265
+#: lib/mintstick.py:277
 msgid "Target Device:"
 msgstr ""
 
-#: lib/mintstick.py:285
+#: lib/mintstick.py:297
 #, python-format
 msgid "Writing %(file)s to %(dev)s"
 msgstr ""
 
-#: lib/mintstick.py:286
+#: lib/mintstick.py:298
 #, python-format
 msgid "Starting copy from %(source)s to %(target)s"
 msgstr ""
 
-#: lib/mintstick.py:318
+#: lib/mintstick.py:330
 #, python-format
 msgid "Image %(image)s successfully written to %(target)s"
 msgstr ""
 
-#: lib/mintstick.py:320
+#: lib/mintstick.py:332
 msgid "The image was successfully written to the USB device."
 msgstr ""
 
-#: lib/mintstick.py:323
+#: lib/mintstick.py:335
 msgid "Not enough space on device. Use a bigger USB stick"
 msgstr ""
 
-#: lib/mintstick.py:325
+#: lib/mintstick.py:337
 msgid "Something went wrong during the copy"
 msgstr ""
 
@@ -120,38 +120,46 @@ msgid "as"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:15
-msgid "Details"
+msgid "Volume label:"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:16
-msgid "Format"
+msgid "USB Stick"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:17
-msgid "Write Image:"
+msgid "Details"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:18
-msgid "Select an image file to be written to the device"
+msgid "Format"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:19
-msgid "Select Image"
+msgid "Write Image:"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:20
-msgid "to"
+msgid "Select an image file to be written to the device"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:21
-msgid " "
+msgid "Select Image"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:22
-msgid "Write to device"
+msgid "to"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:23
+msgid " "
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:24
+msgid "Write to device"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:25
 msgid ""
 "<b>Success</b>\n"
 " The image was successfully written to the\n"

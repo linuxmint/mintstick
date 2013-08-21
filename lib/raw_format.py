@@ -8,7 +8,7 @@ import parted
 sys.path.append('/usr/lib/mintstick')
 from mountutils import *
 
-def raw_format(device_path, fstype):
+def raw_format(device_path, fstype, volume_label):
   
     do_umount(device_path)
     
@@ -51,11 +51,11 @@ def raw_format(device_path, fstype):
         
         # Format partition according to the fstype specified
         if fstype == "fat32":
-            os.system("mkdosfs -F 32 %s >/dev/null 2>&1" % partition.path)
+            os.system("mkdosfs -F 32 -n \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
         if fstype == "ntfs":
-            os.system("mkntfs %s >/dev/null 2>&1" % partition.path)
+            os.system("mkntfs -L \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
         elif fstype == "ext4":
-            os.system("mkfs.ext4 %s >/dev/null 2>&1" % partition.path) 
+            os.system("mkfs.ext4 -L \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
     sys.exit(0)
 
 
@@ -65,7 +65,7 @@ def raw_format(device_path, fstype):
 def main():
     # parse command line options
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hd:f:", ["help", "device=","filesystem="])
+        opts, args = getopt.getopt(sys.argv[1:], "hd:f:l:", ["help", "device=","filesystem=","label="])
     except getopt.error, msg:
         print msg
         print "for help use --help"
@@ -73,26 +73,29 @@ def main():
 
     for o, a in opts:
         if o in ("-h", "--help"):
-            print "Usage: %s -d device -f filesystem\n"  % sys.argv[0]
+            print "Usage: %s -d device -f filesystem -l volume_label\n"  % sys.argv[0]
             print "-d|--device          : device path"
             print "-f|--filesystem      : filesystem\n"
-            print "Example : %s -d /dev/sdj -f fat32" % sys.argv[0]
+            print "-l|--label           : volume label\n"
+            print "Example : %s -d /dev/sdj -f fat32 -l \"USB Stick\"" % sys.argv[0]
             sys.exit(0)
         elif o in ("-d"):
             device = a
         elif o in ("-f"):
-            if a not in [ "fat32", "ext4" ]:
-                print "Specify either fat32 or ext4"
+            if a not in [ "fat32", "ntfs", "ext4" ]:
+                print "Specify fat32, ntfs or ext4"
                 sys.exit(3)
             fstype = a
+        elif o in ("-l"):
+            label = a
     
     argc = len(sys.argv)
-    if argc < 5:
+    if argc < 7:
       print "Too few arguments"
       print "for help use --help"
       exit(2)
     
-    raw_format(device, fstype)
+    raw_format(device, fstype, label)
     
 if __name__ == "__main__":
     main()
