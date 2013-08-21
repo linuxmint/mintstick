@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 15:21+0100\n"
+"POT-Creation-Date: 2013-08-21 15:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,16 +22,8 @@ msgstr ""
 msgid "USB stick %s successfully formated"
 msgstr ""
 
-#: lib/mintstick.py:260 lib/mintstick.py:340
-msgid "Success"
-msgstr ""
-
 #: lib/mintstick.py:260
 msgid "The USB stick was successfully formated."
-msgstr ""
-
-#: lib/mintstick.py:260 lib/mintstick.py:340
-msgid "You are free to unplug it now."
 msgstr ""
 
 #: lib/mintstick.py:263
@@ -83,39 +75,38 @@ msgid "Something went wrong during the copy"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:1
-msgid ""
-"<b>Warning</b>\n"
-" This will <b>destroy all data</b> on the target\n"
-" device, are you sure you want to proceed ?\n"
-"\n"
-" If you say ok here, please <b>do not unplug</b>\n"
-" the device during the following operation."
+msgid " "
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:7
+#: share/mintstick/mintstick.glade.h:2
 msgid ""
-"<b>Error</b>\n"
-" Something went wrong, please see the details\n"
+"This will <b>destroy all data</b> on the target\n"
+" device, are you sure you want to proceed?"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:4
+msgid ""
+"Something went wrong, please see the details\n"
 " window for the exact error."
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:10
+#: share/mintstick/mintstick.glade.h:6
 msgid "USB Stick Formatter"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:11
+#: share/mintstick/mintstick.glade.h:7
 msgid "Format:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:12
+#: share/mintstick/mintstick.glade.h:8
 msgid "Select target device to format"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:13
+#: share/mintstick/mintstick.glade.h:9
 msgid "as"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:14
+#: share/mintstick/mintstick.glade.h:10
 msgid ""
 "FAT32 \n"
 "   + Compatible everywhere.\n"
@@ -134,63 +125,56 @@ msgid ""
 "   - Not compatible with Windows, Mac and most devices.\n"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:29
-msgid "Stick name:"
+#: share/mintstick/mintstick.glade.h:25
+msgid "Volume label:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:30
+#: share/mintstick/mintstick.glade.h:26
 msgid "Choose a name for your USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:31
+#: share/mintstick/mintstick.glade.h:27
 msgid "USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:32
+#: share/mintstick/mintstick.glade.h:28
 msgid "Details"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:33
+#: share/mintstick/mintstick.glade.h:29
 msgid "Format"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:34
+#: share/mintstick/mintstick.glade.h:30
 msgid "USB Image Writer"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:35
+#: share/mintstick/mintstick.glade.h:31
 msgid "Write Image:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:36
+#: share/mintstick/mintstick.glade.h:32
 msgid "Select an image file to be written to the device"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:37
+#: share/mintstick/mintstick.glade.h:33
 msgid "Select Image"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:38
+#: share/mintstick/mintstick.glade.h:34
 msgid "to"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:39
+#: share/mintstick/mintstick.glade.h:35
 msgid "Select target device to write the image to"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:40
-msgid " "
-msgstr ""
-
-#: share/mintstick/mintstick.glade.h:41
+#: share/mintstick/mintstick.glade.h:36
 msgid "Write to device"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:42
+#: share/mintstick/mintstick.glade.h:37
 msgid ""
-"<b>Success</b>\n"
 " The image was successfully written to the\n"
-" target device.\n"
-" \n"
-" You are free to unplug it now."
+" target device."
 msgstr ""

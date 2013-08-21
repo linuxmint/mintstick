@@ -257,7 +257,7 @@ class MintStick:
         if self.rc == 0:
             message = _('USB stick %s successfully formated') % usb_path
             self.logger(message)
-            self.success("%s\n\n%s\n\n%s" % (_('Success'), _('The USB stick was successfully formated.'), _('You are free to unplug it now.')))
+            self.success(_('The USB stick was successfully formated.'))
             return True
         elif self.rc == 5:
             message = _("Can't create partition on %s") % usb_path
@@ -337,7 +337,7 @@ class MintStick:
         if  self.rc == 0:
             message = _('Image %(image)s successfully written to %(target)s') % {'image':source.split('/')[-1], 'target':target}
             self.logger(message)            
-            self.success("%s\n\n%s\n\n%s" % (_('Success'), _('The image was successfully written to the USB device.'), _('You are free to unplug it now.')))
+            self.success(_('The image was successfully written to the USB device.'))
             return True
         elif self.rc == 3:
             message = _('Not enough space on device. Use a bigger USB stick')
