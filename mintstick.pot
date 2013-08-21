@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 15:55+0100\n"
+"POT-Creation-Date: 2013-08-21 16:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,27 +86,26 @@ msgstr ""
 
 #: share/mintstick/mintstick.glade.h:3
 msgid ""
-"Something went wrong, please see the details\n"
-" window for the exact error."
+"Something went wrong, please see the details window for the exact error."
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:5
+#: share/mintstick/mintstick.glade.h:4
 msgid "USB Stick Formatter"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:6
+#: share/mintstick/mintstick.glade.h:5
 msgid "Format:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:7
+#: share/mintstick/mintstick.glade.h:6
 msgid "Select target device to format"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:8
+#: share/mintstick/mintstick.glade.h:7
 msgid "as"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:9
+#: share/mintstick/mintstick.glade.h:8
 msgid ""
 "FAT32 \n"
 "   + Compatible everywhere.\n"
@@ -125,56 +124,54 @@ msgid ""
 "   - Not compatible with Windows, Mac and most devices.\n"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:24
+#: share/mintstick/mintstick.glade.h:23
 msgid "Volume label:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:25
+#: share/mintstick/mintstick.glade.h:24
 msgid "Choose a name for your USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:26
+#: share/mintstick/mintstick.glade.h:25
 msgid "USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:27
+#: share/mintstick/mintstick.glade.h:26
 msgid "Details"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:28
+#: share/mintstick/mintstick.glade.h:27
 msgid "Format"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:29
+#: share/mintstick/mintstick.glade.h:28
 msgid "USB Image Writer"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:30
+#: share/mintstick/mintstick.glade.h:29
 msgid "Write Image:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:31
+#: share/mintstick/mintstick.glade.h:30
 msgid "Select an image file to be written to the device"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:32
+#: share/mintstick/mintstick.glade.h:31
 msgid "Select Image"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:33
+#: share/mintstick/mintstick.glade.h:32
 msgid "to"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:34
+#: share/mintstick/mintstick.glade.h:33
 msgid "Select target device to write the image to"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:35
+#: share/mintstick/mintstick.glade.h:34
 msgid "Write to device"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:36
-msgid ""
-" The image was successfully written to the\n"
-" target device."
+#: share/mintstick/mintstick.glade.h:35
+msgid "The image was successfully written to the target device."
 msgstr ""

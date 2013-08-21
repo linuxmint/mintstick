@@ -256,9 +256,9 @@ class MintStick:
         self.spinner.stop()
         self.spinner.hide()        
         if self.rc == 0:
-            message = _('USB stick %s successfully formated') % usb_path
+            message = _('The USB stick was formated successfully.')
             self.logger(message)
-            self.success(_('The USB stick was successfully formated.'))
+            self.success(_('The USB stick was formated successfully.'))
             return True
         elif self.rc == 5:
             message = _("Can't create partition on %s") % usb_path
@@ -336,7 +336,7 @@ class MintStick:
         
         # Process return code
         if  self.rc == 0:
-            message = _('Image %(image)s successfully written to %(target)s') % {'image':source.split('/')[-1], 'target':target}
+            message = _('The image was successfully written to the USB device.')
             self.logger(message)            
             self.success(_('The image was successfully written to the USB device.'))
             return True
