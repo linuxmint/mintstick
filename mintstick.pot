@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 16:27+0100\n"
+"POT-Creation-Date: 2013-08-21 16:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:259
-#, python-format
-msgid "USB stick %s successfully formated"
-msgstr ""
-
-#: lib/mintstick.py:261
-msgid "The USB stick was successfully formated."
+#: lib/mintstick.py:259 lib/mintstick.py:261
+msgid "The USB stick was formated successfully."
 msgstr ""
 
 #: lib/mintstick.py:264
@@ -57,12 +52,7 @@ msgstr ""
 msgid "Starting copy from %(source)s to %(target)s"
 msgstr ""
 
-#: lib/mintstick.py:339
-#, python-format
-msgid "Image %(image)s successfully written to %(target)s"
-msgstr ""
-
-#: lib/mintstick.py:341
+#: lib/mintstick.py:339 lib/mintstick.py:341
 msgid "The image was successfully written to the USB device."
 msgstr ""
 

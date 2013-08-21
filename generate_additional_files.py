@@ -70,7 +70,7 @@ Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
 """
 
-generate("share/applications/mintstick-format.desktop", prefix, _("USB Image Formatter"), _("Format a USB stick"), "")
+generate("share/applications/mintstick-format.desktop", prefix, _("USB Stick Formatter"), _("Format a USB stick"), "")
 
 prefix = """[Desktop Entry]
 Version=1.0
@@ -82,7 +82,7 @@ Categories=System;
 OnlyShowIn=KDE;
 """
 
-generate("share/applications/mintstick-format-kde.desktop", prefix, _("USB Image Formatter"), _("Format a USB stick"), "")
+generate("share/applications/mintstick-format-kde.desktop", prefix, _("USB Stick Formatter"), _("Format a USB stick"), "")
 
 prefix="""[Nemo Action]
 Active=true
