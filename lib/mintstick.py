@@ -217,15 +217,14 @@ class MintStick:
         else:
                 # We are root, display confirmation dialog
                 resp = self.confirm_dialog.run()
-                if resp:                    
+                if resp == gtk.RESPONSE_OK:                    
                     self.confirm_dialog.hide()
                     while gtk.events_pending():
                         gtk.main_iteration(True)
                     self.raw_format(self.dev, self.filesystem)
                 else:
-                    self.devicelist.set_sensitive(True)
-                    self.filesystemlist.set_sensitive(True)
-                    self.go_button.set_sensitive(True)
+                    self.confirm_dialog.hide()
+                    self.set_format_sensitive()
                     
     def raw_format(self, usb_path, fstype):
         #self.logger(_('Going to format ') + usb_path+ _(' with ')+ fstype + _(' filesystem') )
@@ -279,12 +278,13 @@ class MintStick:
         else:
             # We are root, display confirmation dialog
             resp = self.confirm_dialog.run()
-            if resp:
+            if resp == gtk.RESPONSE_OK:
                 self.confirm_dialog.hide()
                 while gtk.events_pending():
                     gtk.main_iteration(True)
                 self.raw_write(source, target)
             else:
+                self.confirm_dialog.hide()
                 self.set_iso_sensitive()
  
 
@@ -347,7 +347,7 @@ class MintStick:
         if self.mode == "normal":
             self.final_unsensitive()
         resp = self.success_dialog.run()
-        if resp:
+        if resp == gtk.RESPONSE_OK:
             self.success_dialog.hide()
 
     def emergency(self, message):
@@ -359,7 +359,7 @@ class MintStick:
         mark = self.log.create_mark("end", self.log.get_end_iter(), False)
         self.logview.scroll_to_mark(mark, 0.05, True, 0.0, 1.0)
         resp = self.emergency_dialog.run()
-        if resp:
+        if resp == gtk.RESPONSE_OK:
             self.emergency_dialog.hide()
 
     def final_unsensitive(self):

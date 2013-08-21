@@ -25,6 +25,7 @@
             <child>
               <widget class="GtkButton" id="confirm_cancel_button">
                 <property name="label">gtk-cancel</property>
+                <property name="response_id">-6</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -41,7 +42,7 @@
             <child>
               <widget class="GtkButton" id="confirm_ok_button">
                 <property name="label">gtk-ok</property>
-                <property name="response_id">1</property>
+                <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -129,7 +130,7 @@
             <child>
               <widget class="GtkButton" id="emergency_button">
                 <property name="label">gtk-ok</property>
-                <property name="response_id">1</property>
+                <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -816,7 +817,7 @@
             <child>
               <widget class="GtkButton" id="success_button">
                 <property name="label">gtk-ok</property>
-                <property name="response_id">1</property>
+                <property name="response_id">-5</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
