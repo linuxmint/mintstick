@@ -239,7 +239,7 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="has_tooltip">True</property>
-                        <property name="tooltip" translatable="yes">Select target device to write the image to</property>
+                        <property name="tooltip" translatable="yes">Select target device to format</property>
                         <property name="items" translatable="yes"/>
                         <signal name="changed" handler="on_formatdevice_combobox_changed" swapped="no"/>
                       </widget>
@@ -307,6 +307,7 @@
                       <widget class="GtkEntry" id="volume_label_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="tooltip" translatable="yes">Choose a name for your USB Stick</property>
                         <property name="max_length">11</property>
                         <property name="invisible_char">●</property>
                         <property name="width_chars">11</property>

@@ -294,8 +294,8 @@ class MintStick:
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
-        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {file: source.split('/')[-1], dev: self.dev})
-        self.logger(_('Starting copy from %(source)s to %(target)s') % {source:source, target:target})
+        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {'file': source.split('/')[-1], 'dev': self.dev})
+        self.logger(_('Starting copy from %(source)s to %(target)s') % {'source':source, 'target':target})
         def thread_run():           
             # Add launcher string, only when not root
             launcher = ''
@@ -327,7 +327,7 @@ class MintStick:
         
         # Process return code
         if  self.rc == 0:
-            message = _('Image %(image)s successfully written to %(target)s') % {image:source.split('/')[-1], target:target}
+            message = _('Image %(image)s successfully written to %(target)s') % {'image':source.split('/')[-1], 'target':target}
             self.logger(message)            
             self.success("%s\n\n%s\n\n%s" % (_('Success'), _('The image was successfully written to the USB device.'), _('You are free to unplug it now.')))
             return True
