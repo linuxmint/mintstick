@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 15:33+0100\n"
+"POT-Creation-Date: 2013-08-21 15:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,60 +17,60 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:258
+#: lib/mintstick.py:259
 #, python-format
 msgid "USB stick %s successfully formated"
 msgstr ""
 
-#: lib/mintstick.py:260
+#: lib/mintstick.py:261
 msgid "The USB stick was successfully formated."
 msgstr ""
 
-#: lib/mintstick.py:263
+#: lib/mintstick.py:264
 #, python-format
 msgid "Can't create partition on %s"
 msgstr ""
 
-#: lib/mintstick.py:265 lib/mintstick.py:347
+#: lib/mintstick.py:266 lib/mintstick.py:348
 msgid "Authentication Error"
 msgstr ""
 
-#: lib/mintstick.py:267 lib/mintstick.py:349
+#: lib/mintstick.py:268 lib/mintstick.py:350
 msgid "The process ended with an error"
 msgstr ""
 
-#: lib/mintstick.py:284
+#: lib/mintstick.py:285
 msgid "Image:"
 msgstr ""
 
-#: lib/mintstick.py:285
+#: lib/mintstick.py:286
 msgid "Target Device:"
-msgstr ""
-
-#: lib/mintstick.py:305
-#, python-format
-msgid "Writing %(file)s to %(dev)s"
 msgstr ""
 
 #: lib/mintstick.py:306
 #, python-format
+msgid "Writing %(file)s to %(dev)s"
+msgstr ""
+
+#: lib/mintstick.py:307
+#, python-format
 msgid "Starting copy from %(source)s to %(target)s"
 msgstr ""
 
-#: lib/mintstick.py:338
+#: lib/mintstick.py:339
 #, python-format
 msgid "Image %(image)s successfully written to %(target)s"
 msgstr ""
 
-#: lib/mintstick.py:340
+#: lib/mintstick.py:341
 msgid "The image was successfully written to the USB device."
 msgstr ""
 
-#: lib/mintstick.py:343
+#: lib/mintstick.py:344
 msgid "Not enough space on device. Use a bigger USB stick"
 msgstr ""
 
-#: lib/mintstick.py:345
+#: lib/mintstick.py:346
 msgid "Something went wrong during the copy"
 msgstr ""
 
@@ -80,33 +80,33 @@ msgstr ""
 
 #: share/mintstick/mintstick.glade.h:2
 msgid ""
-"This will <b>destroy all data</b> on the target\n"
-" device, are you sure you want to proceed?"
+"This will destroy all data on the target device, are you sure you want to "
+"proceed?"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:4
+#: share/mintstick/mintstick.glade.h:3
 msgid ""
 "Something went wrong, please see the details\n"
 " window for the exact error."
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:6
+#: share/mintstick/mintstick.glade.h:5
 msgid "USB Stick Formatter"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:7
+#: share/mintstick/mintstick.glade.h:6
 msgid "Format:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:8
+#: share/mintstick/mintstick.glade.h:7
 msgid "Select target device to format"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:9
+#: share/mintstick/mintstick.glade.h:8
 msgid "as"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:10
+#: share/mintstick/mintstick.glade.h:9
 msgid ""
 "FAT32 \n"
 "   + Compatible everywhere.\n"
@@ -125,55 +125,55 @@ msgid ""
 "   - Not compatible with Windows, Mac and most devices.\n"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:25
+#: share/mintstick/mintstick.glade.h:24
 msgid "Volume label:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:26
+#: share/mintstick/mintstick.glade.h:25
 msgid "Choose a name for your USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:27
+#: share/mintstick/mintstick.glade.h:26
 msgid "USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:28
+#: share/mintstick/mintstick.glade.h:27
 msgid "Details"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:29
+#: share/mintstick/mintstick.glade.h:28
 msgid "Format"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:30
+#: share/mintstick/mintstick.glade.h:29
 msgid "USB Image Writer"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:31
+#: share/mintstick/mintstick.glade.h:30
 msgid "Write Image:"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:32
+#: share/mintstick/mintstick.glade.h:31
 msgid "Select an image file to be written to the device"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:33
+#: share/mintstick/mintstick.glade.h:32
 msgid "Select Image"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:34
+#: share/mintstick/mintstick.glade.h:33
 msgid "to"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:35
+#: share/mintstick/mintstick.glade.h:34
 msgid "Select target device to write the image to"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:36
+#: share/mintstick/mintstick.glade.h:35
 msgid "Write to device"
 msgstr ""
 
-#: share/mintstick/mintstick.glade.h:37
+#: share/mintstick/mintstick.glade.h:36
 msgid ""
 " The image was successfully written to the\n"
 " target device."
