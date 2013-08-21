@@ -227,7 +227,7 @@
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="xpad">5</property>
-                        <property name="label" translatable="yes">Filesystem:</property>
+                        <property name="label" translatable="yes">Format:</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -236,11 +236,14 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="filesystem_combobox">
+                      <widget class="GtkComboBox" id="formatdevice_combobox">
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="has_tooltip">True</property>
+                        <property name="tooltip" translatable="yes">Select target device to write the image to</property>
+                        <property name="items" translatable="yes"/>
+                        <signal name="changed" handler="on_formatdevice_combobox_changed" swapped="no"/>
                       </widget>
                       <packing>
                         <property name="expand">True</property>
@@ -255,7 +258,7 @@
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="xpad">5</property>
-                        <property name="label" translatable="yes">device:</property>
+                        <property name="label" translatable="yes">as</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -264,13 +267,10 @@
                       </packing>
                     </child>
                     <child>
-                      <widget class="GtkComboBox" id="formatdevice_combobox">
+                      <widget class="GtkComboBox" id="filesystem_combobox">
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip" translatable="yes">Select target device to write the image to</property>
-                        <property name="items" translatable="yes"/>
-                        <signal name="changed" handler="on_formatdevice_combobox_changed" swapped="no"/>
                       </widget>
                       <packing>
                         <property name="expand">True</property>
