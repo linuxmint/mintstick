@@ -1,14 +1,8 @@
 [Nemo Action]
 Active=true
-Name=Make bootable USB stick
-Comment=Make a bootable USB stick
-Name[fr]=Créer une clef USB bootable
-Comment[fr]=Créer une clef USB bootable
-Name[nl]=Maak uw eigen opstart-USB stick
-Comment[nl]=Maak uw eigen opstart-USB stick
-Name[de]="Einen bootfähigen USB-Stick erstellen"
-Comment[de]="Einen bootfähigen USB-Stick erstellen"
-Exec=mintstick -i %F
+Exec=mintstick -m iso -i %F
 Icon-Name=gtk-execute
 Selection=S
 Extensions=iso;img;
+Name=Make bootable USB stick
+Comment=Make a bootable USB stick
