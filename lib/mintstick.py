@@ -193,7 +193,7 @@ class MintStick:
                     if item not in dct:
                        dct.append(item)
                        self.devicemodel.append([name, item])
-        self.devicelist.set_model(self.devicemodel)             
+        self.devicelist.set_model(self.devicemodel)                     
                 
     def device_selected(self, widget):        
         if self.devicelist.get_active_text() is not None:
@@ -416,7 +416,9 @@ class MintStick:
     def success_ok(self,widget):
         self.success_dialog.hide()
         if self.mode == "normal": self.set_iso_sensitive()
-        if self.mode == "format": self.set_format_sensitive()
+        if self.mode == "format": 
+            self.set_format_sensitive()
+            self.go_button.set_sensitive(False)
         
     def set_iso_sensitive(self):
         self.chooser.set_sensitive(True)
