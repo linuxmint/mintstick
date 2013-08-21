@@ -271,6 +271,7 @@
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
+                        <signal name="changed" handler="on_filesystem_combobox_changed" swapped="no"/>
                       </widget>
                       <packing>
                         <property name="expand">True</property>
