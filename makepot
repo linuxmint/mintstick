@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xgettext --language=Python --keyword=_ --output=mintstick.pot lib/mintstick.py
+
