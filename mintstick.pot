@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 10:54+0100\n"
+"POT-Creation-Date: 2013-08-21 11:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,4 +80,82 @@ msgstr ""
 
 #: lib/mintstick.py:325
 msgid "Something went wrong during the copy"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:1
+msgid "USB Image Writer"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:2
+msgid ""
+"<b>Warning</b>\n"
+" This will <b>destroy all data</b> on the target\n"
+" device, are you sure you want to proceed ?\n"
+"\n"
+" If you say ok here, please <b>do not unplug</b>\n"
+" the device during the following operation."
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:8
+msgid ""
+"<b>Error</b>\n"
+" Something went wrong, please see the details\n"
+" window for the exact error."
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:11
+msgid "USB Image Formatter"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:12
+msgid "Filesystem:"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:13
+msgid "device:"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:14
+msgid "Select target device to write the image to"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:15
+msgid "Details"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:16
+msgid "Format"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:17
+msgid "Write Image:"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:18
+msgid "Select an image file to be written to the device"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:19
+msgid "Select Image"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:20
+msgid "to"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:21
+msgid " "
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:22
+msgid "Write to device"
+msgstr ""
+
+#: share/mintstick/mintstick.glade.h:23
+msgid ""
+"<b>Success</b>\n"
+" The image was successfully written to the\n"
+" target device.\n"
+" \n"
+" You are free to unplug it now."
 msgstr ""
