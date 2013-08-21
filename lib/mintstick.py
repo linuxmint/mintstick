@@ -30,9 +30,7 @@ class MintStick:
         def device_removed_callback(device):
             #self.logger(_('Device %s has been removed' % (device))  
             self.get_devices()
-        
-        APP="mintstick"
-        DIR="/usr/share/locale"
+                
         proxy = bus.get_object("org.freedesktop.UDisks", 
                        "/org/freedesktop/UDisks")
         self.iface = dbus.Interface(proxy, "org.freedesktop.UDisks")
@@ -40,6 +38,8 @@ class MintStick:
         self.iface.connect_to_signal('DeviceAdded', device_added_callback)
         self.iface.connect_to_signal('DeviceRemoved', device_removed_callback)
         
+        APP="mintstick"
+        DIR="/usr/share/linuxmint/locale"
         gettext.bindtextdomain(APP, DIR)
         gettext.textdomain(APP)
         gtk.glade.bindtextdomain(APP, DIR)
