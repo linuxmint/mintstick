@@ -3,6 +3,5 @@ share/mintstick/* usr/share/mintstick
 share/applications/* usr/share/applications
 share/polkit/* usr/share/polkit-1/actions
 mintstick usr/bin
-debian/mo/* usr/share/locale
 share/nemo/actions/* usr/share/nemo/actions
 

@@ -4,14 +4,7 @@
 
 #export DH_VERBOSE=1
 
-MO_DIR = $(CURDIR)/debian/mo
-
 build: build-stamp
-	for file in $(CURDIR)/debian/po/*.po; do \
-		mkdir -p $(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/; \
-		msgfmt $$file -o \
-			$(MO_DIR)/$$(basename $$file .po)/LC_MESSAGES/mintstick.mo; \
-	done
 
 build-stamp:
 	dh_testdir
@@ -21,7 +14,6 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp
-	rm -rf $(CURDIR)/debian/mo
 	dh_clean
 
 install: build
