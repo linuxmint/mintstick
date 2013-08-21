@@ -54,8 +54,7 @@ class MintStick:
         self.emergency_dialog = self.wTree.get_widget("emergency_dialog")  
         self.confirm_dialog =  self.wTree.get_widget("confirm_dialog")
         self.success_dialog = self.wTree.get_widget("success_dialog")
-        
-        
+                        
         if mode == "iso":
             self.mode = "normal"
             self.devicelist = self.wTree.get_widget("device_combobox")
@@ -65,6 +64,14 @@ class MintStick:
             self.logview = self.wTree.get_widget("detail_text") 
             self.progress = self.wTree.get_widget("progressbar")
             self.chooser = self.wTree.get_widget("filechooserbutton")
+
+            # Devicelist model
+            self.devicemodel = gtk.ListStore(str, str)
+
+            # Renderer
+            renderer_text = gtk.CellRendererText()
+            self.devicelist.pack_start(renderer_text, True)           
+            self.devicelist.add_attribute(renderer_text, "text", 1)
             
             self.get_devices()
             # get globally needed widgets
@@ -115,15 +122,7 @@ class MintStick:
                     "on_formatdevice_combobox_changed" : self.device_selected,                    
                     "on_confirm_cancel_button_clicked" : self.confirm_cancel,
                     "on_format_formatbutton_clicked" : self.do_format}
-            self.wTree.signal_autoconnect(dict)
-
-            # Devicelist model
-            self.devicemodel = gtk.ListStore(str, str)
-
-            # Renderer
-            renderer_text = gtk.CellRendererText()
-            self.devicelist.pack_start(renderer_text, True)           
-            self.devicelist.add_attribute(renderer_text, "text", 1)                 
+            self.wTree.signal_autoconnect(dict)                        
             
             # Filesystemlist
             model = gtk.ListStore(str, str)            
@@ -136,6 +135,14 @@ class MintStick:
             renderer_text = gtk.CellRendererText()
             self.filesystemlist.pack_start(renderer_text, True)           
             self.filesystemlist.add_attribute(renderer_text, "text", 1)
+
+            # Devicelist model
+            self.devicemodel = gtk.ListStore(str, str)
+
+            # Renderer
+            renderer_text = gtk.CellRendererText()
+            self.devicelist.pack_start(renderer_text, True)           
+            self.devicelist.add_attribute(renderer_text, "text", 1)
             
             self.filesystemlist.set_sensitive(True)
             # Default's to fat32
