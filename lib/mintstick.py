@@ -20,9 +20,10 @@ from dbus.mainloop.glib import DBusGMainLoop
 
 
 class MintStick:
-    def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None):
+    def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None, debug=False):
                
-        
+        self.debug = debug
+
         def device_added_callback(device):
             #self.logger(_('Device %s was added' % (device))
             self.get_devices()
@@ -199,6 +200,10 @@ class MintStick:
         self.activate_devicelist()        
     
     def do_format(self, widget):
+        if self.debug:
+            print "DEBUG: Format %s as %s" % (self.dev, self.filesystem)
+            return
+
         self.devicelist.set_sensitive(False)
         self.filesystemlist.set_sensitive(False)
         self.go_button.set_sensitive(False)                          
@@ -255,6 +260,10 @@ class MintStick:
         return False
     
     def do_write(self, widget):
+        if self.debug:
+            print "DEBUG: Write %s to %s" % (source, self.dev)
+            return
+
         self.go_button.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.chooser.set_sensitive(False)
@@ -423,20 +432,21 @@ if __name__ == "__main__":
     mode=None
     
     def usage():
-        print "Usage: mintstick -m [format|iso]              : mode (format usb stick or burn iso image)"
-        print "       mintstick -m iso [-i|--iso] iso_path"
-        print "       mintstick -m format [-u|--usb] usb_device "
+        print "Usage: mintstick [--debug] -m [format|iso]              : mode (format usb stick or burn iso image)"
+        print "       mintstick [--debug] -m iso [-i|--iso] iso_path"
+        print "       mintstick [--debug] -m format [-u|--usb] usb_device "
         print "                           [-f|--filesystem] filesystem" 
         exit (0)
            
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["help", "mode=", "iso=","usb=","filesystem="])
+        opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=","usb=","filesystem="])
     except getopt.error, msg:
         print msg
         print "for help use --help"
         sys.exit(2)
 
-    for o, a in opts:
+    debug = False
+    for o, a in opts:        
         if o in ("-h", "--help"):
             usage()       
         elif o in ("-i", "--iso"):
@@ -449,10 +459,12 @@ if __name__ == "__main__":
             filesystem = a
         elif o in ("-m", "--mode"):
             mode=a   
+        elif o in ("--debug"):
+            debug = True
     
     argc = len(sys.argv)
-    if argc > 7:
-      print "Too much arguments"
+    if argc > 8:
+      print "Too many arguments"
       print "for help use --help"
       exit(2)
     
@@ -463,7 +475,7 @@ if __name__ == "__main__":
     DBusGMainLoop(set_as_default=True)
     bus = dbus.SystemBus()
 
-    MintStick(iso_path, usb_path, filesystem, mode)
+    MintStick(iso_path, usb_path, filesystem, mode, debug)
 
     #start the main loop
     mainloop = gobject.MainLoop()
