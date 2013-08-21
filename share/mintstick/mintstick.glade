@@ -357,20 +357,7 @@ EXT4
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkHSeparator" id="hseparator2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </widget>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="padding">5</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="GtkExpander" id="formatdetail_expander">
-                    <property name="visible">True</property>
                     <property name="sensitive">False</property>
                     <property name="can_focus">True</property>
                     <child>
@@ -408,7 +395,7 @@ EXT4
                     <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="padding">5</property>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </widget>

@@ -162,6 +162,7 @@ class MintStick:
         self.window.show_all()  
         if self.mode=="format":
             self.spinner.hide()
+            self.expander.hide()           
         self.log = self.logview.get_buffer()              
           
                 
