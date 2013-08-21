@@ -282,8 +282,8 @@ class MintStick:
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
-        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {file: source.split('/')[-1], dev: self.dev}
-        self.logger(_('Starting copy from %(source)s to %(target)s') % {source:source, target:target}
+        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {file: source.split('/')[-1], dev: self.dev})
+        self.logger(_('Starting copy from %(source)s to %(target)s') % {source:source, target:target})
         def thread_run():           
             # Add launcher string, only when not root
             launcher = ''

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 11:11+0100\n"
+"POT-Creation-Date: 2013-08-21 11:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,15 +108,15 @@ msgid "USB Image Formatter"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:12
-msgid "Filesystem:"
+msgid "Format:"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:13
-msgid "device:"
+msgid "Select target device to write the image to"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:14
-msgid "Select target device to write the image to"
+msgid "as"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:15
