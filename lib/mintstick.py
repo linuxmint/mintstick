@@ -115,7 +115,15 @@ class MintStick:
                     "on_formatdevice_combobox_changed" : self.device_selected,                    
                     "on_confirm_cancel_button_clicked" : self.confirm_cancel,
                     "on_format_formatbutton_clicked" : self.do_format}
-            self.wTree.signal_autoconnect(dict)             
+            self.wTree.signal_autoconnect(dict)
+
+            # Devicelist model
+            self.devicemodel = gtk.ListStore(str, str)
+
+            # Renderer
+            renderer_text = gtk.CellRendererText()
+            self.devicelist.pack_start(renderer_text, True)           
+            self.devicelist.add_attribute(renderer_text, "text", 1)                 
             
             # Filesystemlist
             model = gtk.ListStore(str, str)            
@@ -161,10 +169,7 @@ class MintStick:
     def get_devices(self):
         devices = self.iface.get_dbus_method('EnumerateDevices')()        
         self.go_button.set_sensitive(False)
-        self.devicelist.get_model().clear() 
-        
-        # Devicelist model
-        self.devicemodel = gtk.ListStore(str)        
+        self.devicemodel.clear()
         dct = []
         self.dev = None
         # Building device list from UDisk
@@ -178,20 +183,21 @@ class MintStick:
                     name = str(dev.Get('', 'DeviceFile'))
                     drivemodel = str(dev.Get('', 'DriveModel'))
                     name = ''.join([i for i in name if not i.isdigit()])                        
-                    item = drivemodel+' ('+name+')'                                                
+                    size = float(dev.Get('', 'DeviceSize')) / 1000000000
+                    if size >= 1:                        
+                        size = "%.0fGB" % round(size)
+                    else:
+                        size = "%.0fMB" % round(size * 1000)
+
+                    item = "%s (%s) - %s" % (drivemodel, name, size)
                     if item not in dct:
-                       dct.append(item)                                
-                       self.devicemodel.append([item])             
-        self.devicelist.set_model(self.devicemodel) 
-        # Renderer
-        #renderer_text = gtk.CellRendererText()
-        #self.devicelist.pack_start(renderer_text, True)           
-        #self.devicelist.add_attribute(renderer_text, "text", 1)           
+                       dct.append(item)
+                       self.devicemodel.append([name, item])
+        self.devicelist.set_model(self.devicemodel)             
                 
     def device_selected(self, widget):        
         if self.devicelist.get_active_text() is not None:
-            self.dev = self.devicelist.get_active_text()            
-            self.dev = self.dev.split('(')[1].rstrip(')')            
+            self.dev = self.devicelist.get_active_text()
             self.go_button.set_sensitive(True)
             
     def filesystem_selected(self, widget):
