@@ -21,16 +21,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 
 class MintStick:
     def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None):
-        
-        
-        # Define messages
-        self.msg_iso_success = _('Success\n\nThe image was successfully written to the\n target device.\n\nYou are free to unplug it now.')        
-        self.msg_format_space_error = _('Not enough space on device. Use a bigger USB stick')        
-        self.msg_format_copy_error = _('Something went wrong during the copy')        
-        self.msg_auth_error = _('Authentication Error')        
-        self.msg_generic_error = _('The process ended with an error')        
-        self.msg_format_partition_error = _('Can \'t create partition on ') 
-        self.msg_format_success = _('Success\n\nThe USB stick has been successfully formated.\n\nYou are free to unplug it now.')
+               
         
         def device_added_callback(device):
             #self.logger(_('Device %s was added' % (device))
@@ -248,16 +239,16 @@ class MintStick:
         self.spinner.stop()
         self.spinner.hide()        
         if self.rc == 0:
-            message = _('USB stick ')+usb_path+_(' successfully formated')
+            message = _('USB stick %s successfully formated') % usb_path
             self.logger(message)
-            self.success(self.msg_format_success)
+            self.success("%s\n\n%s\n\n%s" % (_('Success'), _('The USB stick was successfully formated.'), _('You are free to unplug it now.')))
             return True
         elif self.rc == 5:
-            message = self.msg_format_partition_error+usb_path            
+            message = _("Can't create partition on %s") % usb_path
         elif self.rc == 127:
-            message = self.msg_auth_error
+            message = _('Authentication Error')      
         else:
-            message = self.msg_generic_error            
+            message = _('The process ended with an error') 
         self.logger(message)
         self.emergency(message)
         self.set_format_sensitive()
@@ -270,8 +261,8 @@ class MintStick:
         self.chooser.set_sensitive(False)
         source = self.img_name
         target = self.dev
-        self.logger(_('Image: ')+source)
-        self.logger(_('Target Device: ')+self.dev)
+        self.logger(_('Image:') + ' ' + source)
+        self.logger(_('Target Device:')+ ' ' + self.dev)
         
         if os.geteuid() > 0:
 	      self.raw_write(source, target)
@@ -291,8 +282,8 @@ class MintStick:
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
-        self.progress.set_text(_('Writing ')+source.split('/')[-1]+_(' to ')+self.dev)
-        self.logger(_('Starting copy from ')+source+' to '+target)
+        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {file: source.split('/')[-1], dev: self.dev}
+        self.logger(_('Starting copy from %(source)s to %(target)s') % {source:source, target:target}
         def thread_run():           
             # Add launcher string, only when not root
             launcher = ''
@@ -324,18 +315,18 @@ class MintStick:
         
         # Process return code
         if  self.rc == 0:
-            message = _('Image ')+source.split('/')[-1]+_(' successfully written to')+target
-            self.logger(message)
-            self.success(self.msg_iso_success)
+            message = _('Image %(image)s successfully written to %(target)s') % {image:source.split('/')[-1], target:target}
+            self.logger(message)            
+            self.success("%s\n\n%s\n\n%s" % (_('Success'), _('The image was successfully written to the USB device.'), _('You are free to unplug it now.')))
             return True
         elif self.rc == 3:
-            message = self.msg_format_space_error
+            message = _('Not enough space on device. Use a bigger USB stick')
         elif self.rc == 4:
-            message = self.msg_format_copy_error
+            message = _('Something went wrong during the copy')
         elif self.rc == 127:
-            message = self.msg_auth_error
+            message = _('Authentication Error')
         else:
-            message = self.msg_generic_error       
+            message = _('The process ended with an error') 
         self.logger(message)
         self.emergency(message)
         return False
