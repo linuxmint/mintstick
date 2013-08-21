@@ -6,5 +6,5 @@ Icon=gtk-execute
 Exec=mintstick -m format
 Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
-Name=USB Image Formatter
+Name=USB Stick Formatter
 Comment=Format a USB stick

@@ -6,5 +6,5 @@ Icon=system-run
 Exec=mintstick -m format
 Categories=System;
 OnlyShowIn=KDE;
-Name=USB Image Formatter
+Name=USB Stick Formatter
 Comment=Format a USB stick

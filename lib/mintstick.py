@@ -54,8 +54,7 @@ class MintStick:
         self.emergency_dialog = self.wTree.get_widget("emergency_dialog")  
         self.confirm_dialog =  self.wTree.get_widget("confirm_dialog")
         self.success_dialog = self.wTree.get_widget("success_dialog")
-        
-        
+                        
         if mode == "iso":
             self.mode = "normal"
             self.devicelist = self.wTree.get_widget("device_combobox")
@@ -65,6 +64,14 @@ class MintStick:
             self.logview = self.wTree.get_widget("detail_text") 
             self.progress = self.wTree.get_widget("progressbar")
             self.chooser = self.wTree.get_widget("filechooserbutton")
+
+            # Devicelist model
+            self.devicemodel = gtk.ListStore(str, str)
+
+            # Renderer
+            renderer_text = gtk.CellRendererText()
+            self.devicelist.pack_start(renderer_text, True)           
+            self.devicelist.add_attribute(renderer_text, "text", 1)
             
             self.get_devices()
             # get globally needed widgets
@@ -115,15 +122,7 @@ class MintStick:
                     "on_formatdevice_combobox_changed" : self.device_selected,                    
                     "on_confirm_cancel_button_clicked" : self.confirm_cancel,
                     "on_format_formatbutton_clicked" : self.do_format}
-            self.wTree.signal_autoconnect(dict)
-
-            # Devicelist model
-            self.devicemodel = gtk.ListStore(str, str)
-
-            # Renderer
-            renderer_text = gtk.CellRendererText()
-            self.devicelist.pack_start(renderer_text, True)           
-            self.devicelist.add_attribute(renderer_text, "text", 1)                 
+            self.wTree.signal_autoconnect(dict)                        
             
             # Filesystemlist
             model = gtk.ListStore(str, str)            
@@ -136,6 +135,14 @@ class MintStick:
             renderer_text = gtk.CellRendererText()
             self.filesystemlist.pack_start(renderer_text, True)           
             self.filesystemlist.add_attribute(renderer_text, "text", 1)
+
+            # Devicelist model
+            self.devicemodel = gtk.ListStore(str, str)
+
+            # Renderer
+            renderer_text = gtk.CellRendererText()
+            self.devicelist.pack_start(renderer_text, True)           
+            self.devicelist.add_attribute(renderer_text, "text", 1)
             
             self.filesystemlist.set_sensitive(True)
             # Default's to fat32
@@ -256,16 +263,16 @@ class MintStick:
         self.spinner.stop()
         self.spinner.hide()        
         if self.rc == 0:
-            message = _('USB stick %s successfully formated') % usb_path
+            message = _('The USB stick was formatted successfully.')
             self.logger(message)
-            self.success(_('The USB stick was successfully formated.'))
+            self.success(_('The USB stick was formatted successfully.'))
             return True
         elif self.rc == 5:
-            message = _("Can't create partition on %s") % usb_path
+            message = _("An error occured while creating a partition on %s.") % usb_path
         elif self.rc == 127:
-            message = _('Authentication Error')      
+            message = _('Authentication Error.')      
         else:
-            message = _('The process ended with an error') 
+            message = _('An error occurred.') 
         self.logger(message)
         self.emergency(message)
         self.set_format_sensitive()
@@ -283,7 +290,7 @@ class MintStick:
         source = self.img_name
         target = self.dev
         self.logger(_('Image:') + ' ' + source)
-        self.logger(_('Target Device:')+ ' ' + self.dev)
+        self.logger(_('USB stick:')+ ' ' + self.dev)
         
         if os.geteuid() > 0:
 	      self.raw_write(source, target)
@@ -303,8 +310,8 @@ class MintStick:
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
-        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {'file': source.split('/')[-1], 'dev': self.dev})
-        self.logger(_('Starting copy from %(source)s to %(target)s') % {'source':source, 'target':target})
+        self.progress.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
+        self.logger(_('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE':source, 'VAR_TARGET':target})
         def thread_run():           
             # Add launcher string, only when not root
             launcher = ''
@@ -336,18 +343,18 @@ class MintStick:
         
         # Process return code
         if  self.rc == 0:
-            message = _('Image %(image)s successfully written to %(target)s') % {'image':source.split('/')[-1], 'target':target}
+            message = _('The image was successfully written.')
             self.logger(message)            
-            self.success(_('The image was successfully written to the USB device.'))
+            self.success(_('The image was successfully written.'))
             return True
         elif self.rc == 3:
-            message = _('Not enough space on device. Use a bigger USB stick')
+            message = _('Not enough space on the USB stick.')
         elif self.rc == 4:
-            message = _('Something went wrong during the copy')
+            message = _('An error occured while copying the image.')
         elif self.rc == 127:
-            message = _('Authentication Error')
+            message = _('Authentication Error.')
         else:
-            message = _('The process ended with an error') 
+            message = _('An error occurred.') 
         self.logger(message)
         self.emergency(message)
         return False
