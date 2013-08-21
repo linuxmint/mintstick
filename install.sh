@@ -24,6 +24,9 @@ if [ "$1" = "uninstall" ]; then
     rm -rf /usr/lib/mintstick
     rm -rf /usr/share/mintstick
     rm -r /usr/share/applications/mintstick.desktop
+    rm -r /usr/share/applications/mintstick-kde.desktop
+    rm -r /usr/share/applications/mintstick-format.desktop
+    rm -r /usr/share/applications/mintstick-kde-format.desktop
     rm -f /usr/bin/mintstick
     rm -rf /usr/share/polkit-1/actions/org.linuxmint.im.policy
     rm -rf /usr/share/kde4/apps/solid/actions/mintstick-format.desktop
