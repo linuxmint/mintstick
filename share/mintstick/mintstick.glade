@@ -570,7 +570,6 @@ EXT4
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip" translatable="yes">Select target device to write the image to</property>
-                        <property name="items" translatable="yes"/>
                         <signal name="changed" handler="on_device_combobox_changed" swapped="no"/>
                       </widget>
                       <packing>
