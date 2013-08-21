@@ -172,7 +172,8 @@ class MintStick:
             dev_obj = bus.get_object("org.freedesktop.UDisks", dev)
             dev = dbus.Interface(dev_obj, "org.freedesktop.DBus.Properties")
             if (str(dev.Get('', 'DriveConnectionInterface')) == 'usb') \
-                and (str(dev.Get('', 'IdUsage')) == "filesystem"):
+                and (str(dev.Get('', 'DeviceIsRemovable')) == "1") \
+                and (str(dev.Get('', 'DeviceIsOpticalDisc')) == "0"):
                     name = str(dev.Get('', 'DeviceFile'))
                     drivemodel = str(dev.Get('', 'DriveModel'))
                     name = ''.join([i for i in name if not i.isdigit()])                        
