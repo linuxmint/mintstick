@@ -86,7 +86,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">This will destroy all data on the target device, are you sure you want to proceed?</property>
+                <property name="label" translatable="yes">This will destroy all data on the USB stick, are you sure you want to proceed?</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
               </widget>
@@ -238,7 +238,7 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="has_tooltip">True</property>
-                        <property name="tooltip" translatable="yes">Select target device to format</property>
+                        <property name="tooltip" translatable="yes">Select a USB stick</property>
                         <signal name="changed" handler="on_formatdevice_combobox_changed" swapped="no"/>
                       </widget>
                       <packing>
@@ -273,14 +273,14 @@
 
 NTFS 
   + Compatible with Windows.
-   - Not compatible with Mac and most devices.
+   - Not compatible with Mac and most hardware devices.
    - Occasional compatibility problems with Linux (NTFS is proprietary and reversed-engineer).
 
 EXT4 
 
   + Modern, stable, fast, journalized.
   + Supports Linux file permissions.
-   - Not compatible with Windows, Mac and most devices.
+   - Not compatible with Windows, Mac and most hardware devices.
 </property>
                         <signal name="changed" handler="on_filesystem_combobox_changed" swapped="no"/>
                       </widget>
@@ -525,7 +525,7 @@ EXT4
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="xpad">5</property>
-                        <property name="label" translatable="yes">Write Image:</property>
+                        <property name="label" translatable="yes">Write image:</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -539,7 +539,7 @@ EXT4
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="has_tooltip">True</property>
-                        <property name="tooltip" translatable="yes">Select an image file to be written to the device</property>
+                        <property name="tooltip" translatable="yes">Select an image</property>
                         <property name="title" translatable="yes">Select Image</property>
                         <signal name="file_set" handler="on_filechooserbutton_file_set" swapped="no"/>
                       </widget>
@@ -569,7 +569,7 @@ EXT4
                         <property name="visible">True</property>
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip" translatable="yes">Select target device to write the image to</property>
+                        <property name="tooltip" translatable="yes">Select a USB stick</property>
                         <signal name="changed" handler="on_device_combobox_changed" swapped="no"/>
                       </widget>
                       <packing>
@@ -724,7 +724,7 @@ EXT4
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Write to device</property>
+                        <property name="label" translatable="yes">Write</property>
                       </widget>
                       <packing>
                         <property name="expand">False</property>
@@ -819,7 +819,7 @@ EXT4
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
                 <property name="xpad">5</property>
-                <property name="label" translatable="yes">The image was successfully written to the target device.</property>
+                <property name="label" translatable="yes">The image was written successfully.</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
               </widget>

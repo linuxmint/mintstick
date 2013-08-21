@@ -268,7 +268,7 @@ class MintStick:
             self.success(_('The USB stick was formatted successfully.'))
             return True
         elif self.rc == 5:
-            message = _("Can't create partition on %s.") % usb_path
+            message = _("An error occured while creating a partition on %s.") % usb_path
         elif self.rc == 127:
             message = _('Authentication Error.')      
         else:
@@ -290,7 +290,7 @@ class MintStick:
         source = self.img_name
         target = self.dev
         self.logger(_('Image:') + ' ' + source)
-        self.logger(_('Target Device:')+ ' ' + self.dev)
+        self.logger(_('USB stick:')+ ' ' + self.dev)
         
         if os.geteuid() > 0:
 	      self.raw_write(source, target)
@@ -348,7 +348,7 @@ class MintStick:
             self.success(_('The image was successfully written.'))
             return True
         elif self.rc == 3:
-            message = _('Not enough space on the device.')
+            message = _('Not enough space on the USB stick.')
         elif self.rc == 4:
             message = _('An error occured while copying the image.')
         elif self.rc == 127:
