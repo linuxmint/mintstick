@@ -256,16 +256,16 @@ class MintStick:
         self.spinner.stop()
         self.spinner.hide()        
         if self.rc == 0:
-            message = _('The USB stick was formated successfully.')
+            message = _('The USB stick was formatted successfully.')
             self.logger(message)
-            self.success(_('The USB stick was formated successfully.'))
+            self.success(_('The USB stick was formatted successfully.'))
             return True
         elif self.rc == 5:
-            message = _("Can't create partition on %s") % usb_path
+            message = _("Can't create partition on %s.") % usb_path
         elif self.rc == 127:
-            message = _('Authentication Error')      
+            message = _('Authentication Error.')      
         else:
-            message = _('The process ended with an error') 
+            message = _('An error occurred.') 
         self.logger(message)
         self.emergency(message)
         self.set_format_sensitive()
@@ -303,8 +303,8 @@ class MintStick:
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
-        self.progress.set_text(_('Writing %(file)s to %(dev)s') % {'file': source.split('/')[-1], 'dev': self.dev})
-        self.logger(_('Starting copy from %(source)s to %(target)s') % {'source':source, 'target':target})
+        self.progress.set_text(_('Writing %(A)s to %(B)s') % {'A': source.split('/')[-1], 'B': self.dev})
+        self.logger(_('Starting copy from %(A)s to %(B)s') % {'A':source, 'B':target})
         def thread_run():           
             # Add launcher string, only when not root
             launcher = ''
@@ -336,18 +336,18 @@ class MintStick:
         
         # Process return code
         if  self.rc == 0:
-            message = _('The image was successfully written to the USB device.')
+            message = _('The image was successfully written.')
             self.logger(message)            
-            self.success(_('The image was successfully written to the USB device.'))
+            self.success(_('The image was successfully written.'))
             return True
         elif self.rc == 3:
-            message = _('Not enough space on device. Use a bigger USB stick')
+            message = _('Not enough space on the device.')
         elif self.rc == 4:
-            message = _('Something went wrong during the copy')
+            message = _('An error occured while copying the image.')
         elif self.rc == 127:
-            message = _('Authentication Error')
+            message = _('Authentication Error.')
         else:
-            message = _('The process ended with an error') 
+            message = _('An error occurred.') 
         self.logger(message)
         self.emergency(message)
         return False
