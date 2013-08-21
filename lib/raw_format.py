@@ -52,6 +52,8 @@ def raw_format(device_path, fstype):
         # Format partition according to the fstype specified
         if fstype == "fat32":
             os.system("mkdosfs -F 32 %s >/dev/null 2>&1" % partition.path)
+        if fstype == "ntfs":
+            os.system("mkntfs %s >/dev/null 2>&1" % partition.path)
         elif fstype == "ext4":
             os.system("mkfs.ext4 %s >/dev/null 2>&1" % partition.path) 
     sys.exit(0)

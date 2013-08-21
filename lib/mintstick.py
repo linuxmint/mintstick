@@ -118,9 +118,10 @@ class MintStick:
             self.wTree.signal_autoconnect(dict)             
             
             # Filesystemlist
-            model = gtk.ListStore(str, str)            
-            model.append(["fat32", "FAT32"])
-            model.append(["ext4", "EXT4"])            
+            model = gtk.ListStore(str, str, str)            
+            model.append(["fat32", "FAT32")
+            model.append(["ntfs", "NTFS")
+            model.append(["ext4", "EXT4")
             self.filesystemlist.set_model(model)
             
             # Renderer
