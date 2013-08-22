@@ -1,6 +1,6 @@
 [Nemo Action]
 Active=true
-Exec=mintstick -m iso -i %F
+Exec=mintstick -m iso -i "%F"
 Icon-Name=gtk-execute
 Selection=S
 Extensions=iso;img;

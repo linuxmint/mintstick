@@ -1,0 +1,9 @@
+[Nemo Action]
+Active=true
+Exec=mintstick -m format -u %D
+Icon-Name=gtk-execute
+Selection=S
+Extensions=any;
+Conditions=removable;
+Name=Format
+Comment=Format a USB stick
