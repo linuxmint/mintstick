@@ -86,7 +86,7 @@ generate("share/applications/mintstick-format-kde.desktop", prefix, _("USB Stick
 
 prefix="""[Nemo Action]
 Active=true
-Exec=mintstick -m iso -i %F
+Exec=mintstick -m iso -i "%F"
 Icon-Name=gtk-execute
 Selection=S
 Extensions=iso;img;
@@ -98,6 +98,7 @@ Active=true
 Exec=mintstick -m format -u %D
 Icon-Name=gtk-execute
 Selection=S
-Conditions=removable
+Extensions=any;
+Conditions=removable;
 """
 generate("share/nemo/actions/mintstick-format.nemo_action", prefix, _("Format"), _("Format a USB stick"), "")
