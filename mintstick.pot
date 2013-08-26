@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-21 19:44+0100\n"
+"POT-Creation-Date: 2013-08-26 10:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,6 +64,34 @@ msgstr ""
 msgid "An error occured while copying the image."
 msgstr ""
 
+#: generate_additional_files.py:49 generate_additional_files.py:61
+#: share/mintstick/mintstick.glade.h:28
+msgid "USB Image Writer"
+msgstr ""
+
+#: generate_additional_files.py:49 generate_additional_files.py:61
+#: generate_additional_files.py:94
+msgid "Make a bootable USB stick"
+msgstr ""
+
+#: generate_additional_files.py:73 generate_additional_files.py:85
+#: share/mintstick/mintstick.glade.h:4
+msgid "USB Stick Formatter"
+msgstr ""
+
+#: generate_additional_files.py:73 generate_additional_files.py:85
+#: generate_additional_files.py:104
+msgid "Format a USB stick"
+msgstr ""
+
+#: generate_additional_files.py:94
+msgid "Make bootable USB stick"
+msgstr ""
+
+#: generate_additional_files.py:104 share/mintstick/mintstick.glade.h:27
+msgid "Format"
+msgstr ""
+
 #: share/mintstick/mintstick.glade.h:1
 msgid " "
 msgstr ""
@@ -77,10 +105,6 @@ msgstr ""
 #: share/mintstick/mintstick.glade.h:3
 msgid ""
 "Something went wrong, please see the details window for the exact error."
-msgstr ""
-
-#: share/mintstick/mintstick.glade.h:4
-msgid "USB Stick Formatter"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:5
@@ -128,14 +152,6 @@ msgstr ""
 
 #: share/mintstick/mintstick.glade.h:26
 msgid "Details"
-msgstr ""
-
-#: share/mintstick/mintstick.glade.h:27
-msgid "Format"
-msgstr ""
-
-#: share/mintstick/mintstick.glade.h:28
-msgid "USB Image Writer"
 msgstr ""
 
 #: share/mintstick/mintstick.glade.h:29
