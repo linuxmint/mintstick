@@ -12,7 +12,7 @@ def generate(filename, prefix, name, comment, suffix):
     desktopFile.writelines(prefix)
 
     desktopFile.writelines("Name=%s\n" % name)
-    for directory in os.listdir(PATH):
+    for directory in sorted(os.listdir(PATH)):
         if os.path.isdir(os.path.join(PATH, directory)):
             try:
                 language = gettext.translation(DOMAIN, PATH, languages=[directory])
@@ -22,7 +22,7 @@ def generate(filename, prefix, name, comment, suffix):
                 pass
 
     desktopFile.writelines("Comment=%s\n" % comment)
-    for directory in os.listdir(PATH):
+    for directory in sorted(os.listdir(PATH)):
         if os.path.isdir(os.path.join(PATH, directory)):
             try:
                 language = gettext.translation(DOMAIN, PATH, languages=[directory])
@@ -33,7 +33,7 @@ def generate(filename, prefix, name, comment, suffix):
 
     desktopFile.writelines(suffix)
 
-
+os.environ['LANG'] = "en"
 gettext.install(DOMAIN, PATH)
 
 prefix = """[Desktop Entry]
