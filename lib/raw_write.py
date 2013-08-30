@@ -24,26 +24,31 @@ def raw_write(source, target):
         print "nospace"
         exit(3)
    
+    written = 0
     output = open(target, 'wb')
     while True:
-	buffer = input.read(bs)
-	if len(buffer) == 0:
-	  break
-	output.write(buffer)
-	size = size + len(buffer)
-	print size/total_size
+        buffer = input.read(bs)
+        if len(buffer) == 0:
+            break
+        output.write(buffer)
+        size = size + len(buffer)
+        written = written + size
+        print size/total_size        
+        if (written >= 104857600):
+            output.flush()
+            os.fsync(output.fileno())
+            written = 0
 
-    output.flush()    
-    #os.fsync(output.fileno())
+    output.flush()
+    os.fsync(output.fileno())
     input.close()
     output.close()
     if size == total_size:
-      print "1.0"
-      exit (0)
+        print "1.0"
+        exit (0)
     else:
-      print "failed"
-      exit (4)
-
+        print "failed"
+        exit (4)
 
 def main():
     # parse command line options
@@ -62,15 +67,15 @@ def main():
             print "Example : %s -s /foo/image.iso -t /dev/sdj" % sys.argv[0]
             sys.exit(0)
         elif o in ("-s"):
-	    source = a
-	elif o in ("-t"):
-	    target = a
+            source = a
+        elif o in ("-t"):
+            target = a
     
     argc = len(sys.argv)
     if argc < 5:
-      print "Too few arguments"
-      print "for help use --help"
-      exit(2)
+        print "Too few arguments"
+        print "for help use --help"
+        exit(2)
     
     raw_write(source, target)
     

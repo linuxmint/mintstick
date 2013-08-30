@@ -15,9 +15,9 @@ import sys
 import getopt
 import threading
 import dbus
-import gobject
 from dbus.mainloop.glib import DBusGMainLoop
 
+gtk.gdk.threads_init()
 
 class MintStick:
     def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None, debug=False):
@@ -307,6 +307,10 @@ class MintStick:
                 self.set_iso_sensitive()
  
 
+    def set_progress_bar_fraction(self, size):
+        self.progress.set_fraction(size)
+        self.progress.set_text("%3.0f%%" % (float(size)*100))
+
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
@@ -330,8 +334,8 @@ class MintStick:
                 except:
                     flag = False
                 if flag:
-                    self.progress.set_fraction(size)
-                    self.progress.set_text("%3.0f%%" % (float(size)*100))            
+                    gobject.idle_add(self.set_progress_bar_fraction, size)
+                       
             output.communicate()[0]
             self.rc = output.returncode            
             
@@ -394,9 +398,9 @@ class MintStick:
             try:
                 os.killpg(os.getpgid(self.ddpid), signal.SIGKILL)
             except:
-                mainloop.quit()
+                gtk.main_quit()
         else:
-            mainloop.quit()
+            gtk.main_quit()
 
     def write_logfile(self):
         start = self.log.get_start_iter()
@@ -502,5 +506,7 @@ if __name__ == "__main__":
     MintStick(iso_path, usb_path, filesystem, mode, debug)
 
     #start the main loop
-    mainloop = gobject.MainLoop()
-    mainloop.run()
+    #mainloop = gobject.MainLoop()
+    #mainloop.run()
+    gtk.main()
+
