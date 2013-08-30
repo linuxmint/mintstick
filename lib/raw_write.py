@@ -24,6 +24,8 @@ def raw_write(source, target):
         print "nospace"
         exit(3)
    
+    increment = total_size / 100;
+
     written = 0
     output = open(target, 'wb')
     while True:
@@ -32,9 +34,9 @@ def raw_write(source, target):
             break
         output.write(buffer)
         size = size + len(buffer)
-        written = written + size
-        print size/total_size        
-        if (written >= 104857600):
+        written = written + len(buffer)
+        print size/total_size
+        if (written >= increment):
             output.flush()
             os.fsync(output.fileno())
             written = 0

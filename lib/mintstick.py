@@ -16,8 +16,18 @@ import getopt
 import threading
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
+import time
 
 gtk.gdk.threads_init()
+
+def print_timing(func):
+    def wrapper(*arg):
+        t1 = time.time()
+        res = func(*arg)
+        t2 = time.time()
+        print '%s took %0.3f ms' % (func.func_name, (t2-t1)*1000.0)
+        return res
+    return wrapper
 
 class MintStick:
     def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None, debug=False):
@@ -311,6 +321,7 @@ class MintStick:
         self.progress.set_fraction(size)
         self.progress.set_text("%3.0f%%" % (float(size)*100))
 
+    @print_timing
     def raw_write(self, source, target):   
         
         self.progress.set_sensitive(True)
