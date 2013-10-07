@@ -8,7 +8,7 @@ sys.path.append('/usr/lib/mintstick')
 from mountutils import *
 import parted
 
-def raw_write(source, target):     
+def raw_write(source, target):    
     do_umount(target)       
     bs = 4096
     size=0

@@ -8,17 +8,16 @@ import signal
 import re
 import gettext
 from gettext import gettext as _
-import gtk
-import gtk.glade      
-import gobject
+from gi.repository import GObject, Gio, Polkit, Gtk
 import sys
 import getopt
 import threading
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 import time
+import locale
 
-gtk.gdk.threads_init()
+GObject.threads_init()
 
 def print_timing(func):
     def wrapper(*arg):
@@ -48,63 +47,70 @@ class MintStick:
                 
         self.iface.connect_to_signal('DeviceAdded', device_added_callback)
         self.iface.connect_to_signal('DeviceRemoved', device_removed_callback)
-        
+                
+        # get glade tree      
+        self.gladefile = "/usr/share/mintstick/mintstick.ui" 
+        self.wTree = Gtk.Builder()        
+
         APP="mintstick"
         DIR="/usr/share/linuxmint/locale"
+        locale.setlocale(locale.LC_ALL, '')
+        locale.bindtextdomain(APP, DIR)
         gettext.bindtextdomain(APP, DIR)
         gettext.textdomain(APP)
-        gtk.glade.bindtextdomain(APP, DIR)
-        gtk.glade.textdomain(APP)
+        self.wTree.set_translation_domain(APP)
 
-        # get glade tree      
-        self.gladefile = "/usr/share/mintstick/mintstick.glade"        
-        self.wTree = gtk.glade.XML(self.gladefile)                   
+        self.wTree.add_from_file(self.gladefile)  
+
         self.ddpid = 0    
         
-        self.emergency_dialog = self.wTree.get_widget("emergency_dialog")  
-        self.confirm_dialog =  self.wTree.get_widget("confirm_dialog")
-        self.success_dialog = self.wTree.get_widget("success_dialog")
+        self.emergency_dialog = self.wTree.get_object("emergency_dialog")  
+        self.confirm_dialog =  self.wTree.get_object("confirm_dialog")
+        self.success_dialog = self.wTree.get_object("success_dialog")
                         
         if mode == "iso":
             self.mode = "normal"
-            self.devicelist = self.wTree.get_widget("device_combobox")
-            self.label = self.wTree.get_widget("to_label")
-            self.expander = self.wTree.get_widget("detail_expander")
-            self.go_button = self.wTree.get_widget("write_button")
-            self.logview = self.wTree.get_widget("detail_text") 
-            self.progress = self.wTree.get_widget("progressbar")
-            self.chooser = self.wTree.get_widget("filechooserbutton")
+            self.devicelist = self.wTree.get_object("device_combobox")
+            self.label = self.wTree.get_object("to_label")
+            self.expander = self.wTree.get_object("detail_expander")
+            self.go_button = self.wTree.get_object("write_button")
+            self.logview = self.wTree.get_object("detail_text") 
+            self.progress = self.wTree.get_object("progressbar")
+            self.chooser = self.wTree.get_object("filechooserbutton")
 
             # Devicelist model
-            self.devicemodel = gtk.ListStore(str, str)
+            self.devicemodel = Gtk.ListStore(str, str)
 
             # Renderer
-            renderer_text = gtk.CellRendererText()
+            renderer_text = Gtk.CellRendererText()
             self.devicelist.pack_start(renderer_text, True)           
             self.devicelist.add_attribute(renderer_text, "text", 1)
             
             self.get_devices()
             # get globally needed widgets
-            self.window = self.wTree.get_widget("main_dialog")
+            self.window = self.wTree.get_object("main_dialog")
+            self.window.connect("destroy", self.close)
 
             # set default file filter to *.img
             
-            filt = gtk.FileFilter()
+            filt = Gtk.FileFilter()
             filt.add_pattern("*.img")
             filt.add_pattern("*.iso")
             self.chooser.set_filter(filt)
 
             # set callbacks
-            dict = { "on_main_dialog_destroy" : self.close,
+            
+            dict = { 
                     "on_cancel_button_clicked" : self.close,
                     "on_emergency_button_clicked" : self.emergency_ok,                    
                     "on_success_button_clicked" : self.success_ok,
-                    "on_filechooserbutton_file_set" : self.file_selected,
-                    "on_detail_expander_activate" : self.expander_control,
-                    "on_device_combobox_changed" : self.device_selected,
-                    "on_confirm_cancel_button_clicked" : self.confirm_cancel,
-                    "on_write_button_clicked" : self.do_write}
-            self.wTree.signal_autoconnect(dict)
+                    "on_confirm_cancel_button_clicked" : self.confirm_cancel}
+            self.wTree.connect_signals(dict)
+
+            self.expander.connect("activate", self.expander_control)
+            self.devicelist.connect("changed", self.device_selected)
+            self.go_button.connect("clicked", self.do_write)
+            self.chooser.connect("file-set", self.file_selected)
         
             if iso_path:
                 if os.path.exists(iso_path):                    
@@ -113,44 +119,48 @@ class MintStick:
                     
         if mode == "format":
             self.mode="format"
-            self.devicelist = self.wTree.get_widget("formatdevice_combobox")
-            self.label = self.wTree.get_widget("formatdevice_label")
-            self.expander = self.wTree.get_widget("formatdetail_expander")
-            self.go_button = self.wTree.get_widget("format_formatbutton")
-            self.logview = self.wTree.get_widget("format_detail_text")  
+            self.devicelist = self.wTree.get_object("formatdevice_combobox")
+            self.label = self.wTree.get_object("formatdevice_label")
+            self.expander = self.wTree.get_object("formatdetail_expander")
+            self.go_button = self.wTree.get_object("format_formatbutton")
+            self.logview = self.wTree.get_object("format_detail_text")  
             
-            self.window = self.wTree.get_widget("format_window")   
-            self.spinner = self.wTree.get_widget("format_spinner")
-            self.filesystemlist = self.wTree.get_widget("filesystem_combobox")
+            self.window = self.wTree.get_object("format_window")   
+            self.window.connect("destroy", self.close)
+
+            self.spinner = self.wTree.get_object("format_spinner")
+            self.filesystemlist = self.wTree.get_object("filesystem_combobox")
             # set callbacks
-            dict = { "on_format_window_destroy" : self.close,
+            dict = { 
                     "on_cancel_button_clicked" : self.close,
                     "on_emergency_button_clicked" : self.emergency_ok,                    
                     "on_success_button_clicked" : self.success_ok,
-                    "on_filesystem_combobox_changed" : self.filesystem_selected,
                     "on_formatdetail_expander_activate" : self.expander_control,
-                    "on_formatdevice_combobox_changed" : self.device_selected,                    
-                    "on_confirm_cancel_button_clicked" : self.confirm_cancel,
-                    "on_format_formatbutton_clicked" : self.do_format}
-            self.wTree.signal_autoconnect(dict)                        
+                                        
+                    "on_confirm_cancel_button_clicked" : self.confirm_cancel}
+            self.wTree.connect_signals(dict)            
             
+            self.go_button.connect("clicked", self.do_format)
+            self.filesystemlist.connect("changed", self.filesystem_selected)
+            self.devicelist.connect("changed", self.device_selected)
+
             # Filesystemlist
-            model = gtk.ListStore(str, str)            
-            model.append(["fat32", "FAT32"])
-            model.append(["ntfs", "NTFS"])
-            model.append(["ext4", "EXT4"])
-            self.filesystemlist.set_model(model)
+            self.fsmodel = Gtk.ListStore(str, str)            
+            self.fsmodel.append(["fat32", "FAT32"])
+            self.fsmodel.append(["ntfs", "NTFS"])
+            self.fsmodel.append(["ext4", "EXT4"])
+            self.filesystemlist.set_model(self.fsmodel)
             
             # Renderer
-            renderer_text = gtk.CellRendererText()
+            renderer_text = Gtk.CellRendererText()
             self.filesystemlist.pack_start(renderer_text, True)           
             self.filesystemlist.add_attribute(renderer_text, "text", 1)
 
             # Devicelist model
-            self.devicemodel = gtk.ListStore(str, str)
+            self.devicemodel = Gtk.ListStore(str, str)
 
             # Renderer
-            renderer_text = gtk.CellRendererText()
+            renderer_text = Gtk.CellRendererText()
             self.devicelist.pack_start(renderer_text, True)           
             self.devicelist.add_attribute(renderer_text, "text", 1)
             
@@ -213,17 +223,19 @@ class MintStick:
                        self.devicemodel.append([name, item])
         self.devicelist.set_model(self.devicemodel)                     
                 
-    def device_selected(self, widget):        
-        if self.devicelist.get_active_text() is not None:
-            self.dev = self.devicelist.get_active_text()
+    def device_selected(self, widget):   
+        iter = self.devicelist.get_active_iter()
+        if iter is not None:
+            self.dev = self.devicemodel.get_value(iter, 0)        
             self.go_button.set_sensitive(True)
             
     def filesystem_selected(self, widget):
-        self.filesystem = self.filesystemlist.get_active_text()              
-        self.activate_devicelist()       
+        iter = self.filesystemlist.get_active_iter()
+        if iter is not None:
+            self.filesystem = self.fsmodel.get_value(iter, 0)
+            self.activate_devicelist()     
         
     def file_selected(self, widget):
-        self.img_name = self.chooser.get_filename()
         self.activate_devicelist()        
     
     def do_format(self, widget):
@@ -235,28 +247,25 @@ class MintStick:
         self.filesystemlist.set_sensitive(False)
         self.go_button.set_sensitive(False)          
 
-        label = self.wTree.get_widget("volume_label_entry").get_text()
+        label = self.wTree.get_object("volume_label_entry").get_text()
 
         if os.geteuid() > 0:
             self.raw_format(self.dev, self.filesystem, label)
         else:
                 # We are root, display confirmation dialog
                 resp = self.confirm_dialog.run()
-                if resp == gtk.RESPONSE_OK:                    
+                if resp == Gtk.ResponseType.OK:                    
                     self.confirm_dialog.hide()
-                    while gtk.events_pending():
-                        gtk.main_iteration(True)
+                    while Gtk.events_pending():
+                        Gtk.main_iteration()
                     self.raw_format(self.dev, self.filesystem, label)
                 else:
                     self.confirm_dialog.hide()
                     self.set_format_sensitive()
                     
-    def raw_format(self, usb_path, fstype, label):
+    def raw_format(self, usb_path, fstype, label):        
         #self.logger(_('Going to format ') + usb_path+ _(' with ')+ fstype + _(' filesystem') )
-        def thread_run():
-                        
-            self.spinner.show()
-            self.spinner.start()
+        def thread_run():                            
         
             if os.geteuid() > 0:
                 launcher='pkexec'
@@ -264,12 +273,17 @@ class MintStick:
             else:
                 output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)                
             output.communicate()[0]
-            self.rc = output.returncode              
+            self.rc = output.returncode  
+
+        self.spinner.show()
+        self.spinner.start()
+
         t = threading.Thread(group=None,target=thread_run)
-        t.start()
+        t.start()        
         while t.isAlive():
-            while gtk.events_pending():
-                gtk.main_iteration(True)             
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+        
         self.spinner.stop()
         self.spinner.hide()        
         if self.rc == 0:
@@ -291,13 +305,13 @@ class MintStick:
     
     def do_write(self, widget):
         if self.debug:
-            print "DEBUG: Write %s to %s" % (source, self.dev)
+            print "DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev)
             return
 
         self.go_button.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.chooser.set_sensitive(False)
-        source = self.img_name
+        source = self.chooser.get_filename()
         target = self.dev
         self.logger(_('Image:') + ' ' + source)
         self.logger(_('USB stick:')+ ' ' + self.dev)
@@ -307,10 +321,10 @@ class MintStick:
         else:
             # We are root, display confirmation dialog
             resp = self.confirm_dialog.run()
-            if resp == gtk.RESPONSE_OK:
+            if resp == Gtk.ResponseType.OK:
                 self.confirm_dialog.hide()
-                while gtk.events_pending():
-                    gtk.main_iteration(True)
+                while Gtk.events_pending():
+                    Gtk.main_iteration()
                 self.raw_write(source, target)
             else:
                 self.confirm_dialog.hide()
@@ -322,39 +336,41 @@ class MintStick:
         self.progress.set_text("%3.0f%%" % (float(size)*100))
 
     @print_timing
-    def raw_write(self, source, target):   
-        
+    def raw_write(self, source, target):        
         self.progress.set_sensitive(True)
         self.progress.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
         self.logger(_('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE':source, 'VAR_TARGET':target})
-        def thread_run():           
-            # Add launcher string, only when not root
-            launcher = ''
-            size=''
-            flag = True
+        def thread_run(): 
+            try:          
+                # Add launcher string, only when not root
+                launcher = ''
+                size=''
+                flag = True
 
-            if os.geteuid() > 0:
-                launcher='pkexec'
-                output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)
-            else:
-                output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)                    
-            while flag == True:
-                try:                
-                    size = float(output.stdout.readline().strip())                    
-                    flag = True
-                except:
-                    flag = False
-                if flag:
-                    gobject.idle_add(self.set_progress_bar_fraction, size)
-                       
-            output.communicate()[0]
-            self.rc = output.returncode            
+                if os.geteuid() > 0:
+                    launcher='pkexec'
+                    output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)
+                else:
+                    output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)                    
+                while flag == True:
+                    try:                
+                        size = float(output.stdout.readline().strip())                    
+                        flag = True
+                    except:
+                        flag = False
+                    if flag:
+                        GObject.idle_add(self.set_progress_bar_fraction, size)
+                           
+                output.communicate()[0]
+                self.rc = output.returncode            
+            except:
+                print "EXCEPT!!"
             
         t = threading.Thread(group=None,target=thread_run)
         t.start()
         while t.isAlive():           
-            while gtk.events_pending():
-                gtk.main_iteration(True)     
+            while Gtk.events_pending():
+                Gtk.main_iteration()     
         
         # Process return code
         if  self.rc == 0:
@@ -376,31 +392,31 @@ class MintStick:
 
            
     def success(self,message):
-        label = self.wTree.get_widget("label5")
+        label = self.wTree.get_object("label5")
         label.set_text(message)
         if self.mode == "normal":
             self.final_unsensitive()
         resp = self.success_dialog.run()
-        if resp == gtk.RESPONSE_OK:
+        if resp == Gtk.ResponseType.OK:
             self.success_dialog.hide()
 
     def emergency(self, message):
         if self.mode == "normal":
             self.final_unsensitive()    
-        label = self.wTree.get_widget("label6")        
+        label = self.wTree.get_object("label6")        
         label.set_text(message)
         #self.expander.set_expanded(True)
         mark = self.log.create_mark("end", self.log.get_end_iter(), False)
         self.logview.scroll_to_mark(mark, 0.05, True, 0.0, 1.0)
         resp = self.emergency_dialog.run()
-        if resp == gtk.RESPONSE_OK:
+        if resp == Gtk.ResponseType.OK:
             self.emergency_dialog.hide()
 
     def final_unsensitive(self):
         self.chooser.set_sensitive(False)
         self.devicelist.set_sensitive(False)        
         self.go_button.set_sensitive(False)
-        self.progress = self.wTree.get_widget("progressbar")
+        self.progress = self.wTree.get_object("progressbar")
         self.progress.set_sensitive(False)
 
     def close(self, widget):
@@ -409,9 +425,9 @@ class MintStick:
             try:
                 os.killpg(os.getpgid(self.ddpid), signal.SIGKILL)
             except:
-                gtk.main_quit()
+                Gtk.main_quit()
         else:
-            gtk.main_quit()
+            Gtk.main_quit()
 
     def write_logfile(self):
         start = self.log.get_start_iter()
@@ -461,7 +477,7 @@ class MintStick:
         # this is darn ugly but still better than the UI behavior of
         # the unexpanded expander which doesnt reset the window size
         if widget.get_expanded():
-            gobject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
+            GObject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
 
 if __name__ == "__main__":
    
@@ -517,7 +533,7 @@ if __name__ == "__main__":
     MintStick(iso_path, usb_path, filesystem, mode, debug)
 
     #start the main loop
-    #mainloop = gobject.MainLoop()
+    #mainloop = GObject.MainLoop()
     #mainloop.run()
-    gtk.main()
+    Gtk.main()
 
