@@ -107,7 +107,6 @@ class MintStick:
                     "on_confirm_cancel_button_clicked" : self.confirm_cancel}
             self.wTree.connect_signals(dict)
 
-            self.expander.connect("activate", self.expander_control)
             self.devicelist.connect("changed", self.device_selected)
             self.go_button.connect("clicked", self.do_write)
             self.chooser.connect("file-set", self.file_selected)
@@ -134,9 +133,7 @@ class MintStick:
             dict = { 
                     "on_cancel_button_clicked" : self.close,
                     "on_emergency_button_clicked" : self.emergency_ok,                    
-                    "on_success_button_clicked" : self.success_ok,
-                    "on_formatdetail_expander_activate" : self.expander_control,
-                                        
+                    "on_success_button_clicked" : self.success_ok,                                        
                     "on_confirm_cancel_button_clicked" : self.confirm_cancel}
             self.wTree.connect_signals(dict)            
             
@@ -471,13 +468,7 @@ class MintStick:
     def set_format_sensitive(self):
         self.filesystemlist.set_sensitive(True)
         self.devicelist.set_sensitive(True)        
-        self.go_button.set_sensitive(True)        
-    
-    def expander_control(self, widget):
-        # this is darn ugly but still better than the UI behavior of
-        # the unexpanded expander which doesnt reset the window size
-        if widget.get_expanded():
-            GObject.timeout_add(130, lambda: self.window.reshow_with_initial_size())
+        self.go_button.set_sensitive(True)   
 
 if __name__ == "__main__":
    
