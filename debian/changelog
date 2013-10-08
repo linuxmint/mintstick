@@ -1,3 +1,10 @@
+mintstick (1.0.9) petra; urgency=low
+
+  * Switched to GTK3
+  * Fixed threading and progress bar not updating
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 08 Oct 2013 09:45:07 +0100
+
 mintstick (1.0.8) petra; urgency=low
 
   * Better progress handling, fixed threating
