@@ -266,9 +266,9 @@ class MintStick:
         
             if os.geteuid() > 0:
                 launcher='pkexec'
-                output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)   
+                output = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)   
             else:
-                output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)                
+                output = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)                
             output.communicate()[0]
             self.rc = output.returncode  
 
@@ -346,9 +346,9 @@ class MintStick:
 
                 if os.geteuid() > 0:
                     launcher='pkexec'
-                    output = Popen([launcher,'/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)
+                    output = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)
                 else:
-                    output = Popen(['/usr/bin/python', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)                    
+                    output = Popen(['/usr/bin/python',  '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)                    
                 while flag == True:
                     try:                
                         size = float(output.stdout.readline().strip())                    
