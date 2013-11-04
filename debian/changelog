@@ -1,3 +1,9 @@
+mintstick (1.1.2) petra; urgency=low
+
+  * Use python -u to fix progressbar not being updated..
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 04 Nov 2013 12:43:14 +0000
+
 mintstick (1.1.1) petra; urgency=low
 
   * Added udisk dep
