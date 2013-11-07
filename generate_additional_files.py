@@ -40,7 +40,7 @@ prefix = """[Desktop Entry]
 Version=1.0
 Type=Application
 Terminal=false
-Icon=gtk-execute
+Icon=usb-creator
 Exec=mintstick -m iso
 Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
@@ -64,7 +64,7 @@ prefix = """[Desktop Entry]
 Version=1.0
 Type=Application
 Terminal=false
-Icon=gtk-execute
+Icon=usb-creator
 Exec=mintstick -m format
 Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
@@ -87,7 +87,7 @@ generate("share/applications/mintstick-format-kde.desktop", prefix, _("USB Stick
 prefix="""[Nemo Action]
 Active=true
 Exec=mintstick -m iso -i "%F"
-Icon-Name=gtk-execute
+Icon-Name=usb-creator
 Selection=S
 Extensions=iso;img;
 """
@@ -96,7 +96,7 @@ generate("share/nemo/actions/mintstick.nemo_action", prefix, _("Make bootable US
 prefix="""[Nemo Action]
 Active=true
 Exec=mintstick -m format -u %D
-Icon-Name=gtk-execute
+Icon-Name=usb-creator
 Selection=S
 Extensions=any;
 Conditions=removable;

@@ -1,7 +1,7 @@
 [Nemo Action]
 Active=true
 Exec=mintstick -m format -u %D
-Icon-Name=gtk-execute
+Icon-Name=usb-creator
 Selection=S
 Extensions=any;
 Conditions=removable;
