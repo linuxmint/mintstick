@@ -1,3 +1,9 @@
+mintstick (1.1.5) petra; urgency=low
+
+  * Fixed filename not properly selected when space characters present in the path
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 08 Nov 2013 15:10:13 +0000
+
 mintstick (1.1.4) petra; urgency=low
 
   * Fix desktop file

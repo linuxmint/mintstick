@@ -6,4 +6,4 @@ TERM=xterm
 
 DIR=/usr/lib/mintstick
 
-$DIR/mintstick.py $@
+$DIR/mintstick.py "$@"
