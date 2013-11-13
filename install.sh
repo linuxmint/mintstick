@@ -36,7 +36,7 @@ else
     cp share/applications/mintstick-kde.desktop /usr/share/applications/
     cp share/applications/mintstick-format-kde.desktop /usr/share/applications/
     cp share/polkit/org.linuxmint.im.policy /usr/share/polkit-1/actions
-    cp share/kde4/mintstick-format.desktop /usr/share/kde4/apps/solid/actions
+    cp share/kde4/mintstick-format_action.desktop /usr/share/kde4/apps/solid/actions
     cp mintstick /usr/bin/
     mkdir -p /usr/lib/mintstick
     mkdir -p /usr/share/mintstick
