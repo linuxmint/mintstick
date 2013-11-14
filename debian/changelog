@@ -1,3 +1,9 @@
+mintstick (1.1.7) petra; urgency=low
+
+  * Improve KDE Solid action
+
+ -- Frédéric Gaudet <fred@linuxmint.com>  Thu, 14 Nov 2013 17:59:04 +0100
+
 mintstick (1.1.6) petra; urgency=low
 
   * Fix KDE regression
