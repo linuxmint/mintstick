@@ -356,8 +356,7 @@ class MintStick:
                     except:
                         flag = False
                     if flag:
-                        GObject.idle_add(self.set_progress_bar_fraction, size)
-                           
+                        self.set_progress_bar_fraction(size)
                 output.communicate()[0]
                 self.rc = output.returncode            
             except:
