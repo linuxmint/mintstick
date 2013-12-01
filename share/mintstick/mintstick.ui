@@ -699,7 +699,7 @@ EXT4
                       <object class="GtkImage" id="image12">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="stock">usb-creator</property>
+                        <property name="icon-name">usb-creator</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
