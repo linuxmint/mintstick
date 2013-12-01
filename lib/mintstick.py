@@ -8,14 +8,15 @@ import signal
 import re
 import gettext
 from gettext import gettext as _
-from gi.repository import GObject, Gio, Polkit, Gtk
+from gi.repository import GObject, Gio, Polkit, Gtk, GLib
 import sys
 import getopt
-import threading
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 import time
 import locale
+
+GObject.threads_init()
 
 def print_timing(func):
     def wrapper(*arg):
@@ -49,6 +50,8 @@ class MintStick:
         # get glade tree      
         self.gladefile = "/usr/share/mintstick/mintstick.ui" 
         self.wTree = Gtk.Builder()        
+
+        self.process = None
 
         APP="mintstick"
         DIR="/usr/share/linuxmint/locale"
@@ -255,46 +258,47 @@ class MintStick:
                 else:
                     self.confirm_dialog.hide()
                     self.set_format_sensitive()
-                    
+
+    def check_format_job(self):
+        self.process.poll()
+        if self.process.returncode is None:
+            return True
+        else:
+            GObject.idle_add(self.format_job_done, self.process.returncode)
+            self.process = None
+            return False
+
     def raw_format(self, usb_path, fstype, label):        
-        #self.logger(_('Going to format ') + usb_path+ _(' with ')+ fstype + _(' filesystem') )
-        def thread_run():                            
-        
-            if os.geteuid() > 0:
-                launcher='pkexec'
-                output = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)   
-            else:
-                output = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE)                
-            output.communicate()[0]
-            self.rc = output.returncode  
+        if os.geteuid() > 0:
+            launcher='pkexec'
+            self.process = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+        else:
+            self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
 
         self.spinner.show()
         self.spinner.start()
 
-        t = threading.Thread(group=None,target=thread_run)
-        t.start()        
-        while t.isAlive():
-            Gtk.main_iteration_do(False)
+        GObject.timeout_add(500, self.check_format_job)
 
+    def format_job_done(self, rc):
         self.spinner.stop()
-        self.spinner.hide()        
-        if self.rc == 0:
+        self.spinner.hide()
+        if rc == 0:
             message = _('The USB stick was formatted successfully.')
             self.logger(message)
             self.success(_('The USB stick was formatted successfully.'))
-            return True
-        elif self.rc == 5:
+            return False
+        elif rc == 5:
             message = _("An error occured while creating a partition on %s.") % usb_path
-        elif self.rc == 127:
+        elif rc == 127:
             message = _('Authentication Error.')      
         else:
             message = _('An error occurred.') 
         self.logger(message)
         self.emergency(message)
         self.set_format_sensitive()
-        
         return False
-    
+
     def do_write(self, widget):
         if self.debug:
             print "DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev)
@@ -319,58 +323,61 @@ class MintStick:
             else:
                 self.confirm_dialog.hide()
                 self.set_iso_sensitive()
- 
 
     def set_progress_bar_fraction(self, size):
         self.progress.set_fraction(size)
         self.progress.set_text("%3.0f%%" % (float(size)*100))
+
+    def update_progress(self, fd, condition):
+        if condition == GLib.IO_IN:
+            line = fd.readline()
+            try:
+                size = float(line.strip())
+                self.set_progress_bar_fraction(size)
+            except:
+                pass
+            return True
+        else:
+            return False
+
+    def check_write_job(self):
+        self.process.poll()
+        if self.process.returncode is None:
+            return True
+        else:
+            GObject.idle_add(self.write_job_done, self.process.returncode)
+            self.process = None
+            return False
 
     @print_timing
     def raw_write(self, source, target):        
         self.progress.set_sensitive(True)
         self.progress.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
         self.logger(_('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE':source, 'VAR_TARGET':target})
-        def thread_run(): 
-            try:          
-                # Add launcher string, only when not root
-                launcher = ''
-                size=''
-                flag = True
 
-                if os.geteuid() > 0:
-                    launcher='pkexec'
-                    output = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)
-                else:
-                    output = Popen(['/usr/bin/python',  '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE)                    
-                while flag == True:
-                    try:                
-                        size = float(output.stdout.readline().strip())                    
-                        flag = True
-                    except:
-                        flag = False
-                    if flag:
-                        self.set_progress_bar_fraction(size)
-                output.communicate()[0]
-                self.rc = output.returncode            
-            except:
-                print "EXCEPT!!"
-            
-        t = threading.Thread(group=None,target=thread_run)
-        t.start()
-        while t.isAlive():
-            Gtk.main_iteration_do(False)
+        if os.geteuid() > 0:
+            launcher='pkexec'
+            self.process = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+        else:
+            self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
-        # Process return code
-        if  self.rc == 0:
+        GLib.io_add_watch(self.process.stdout,
+                          GLib.IO_IN,
+                          self.update_progress)
+
+        GObject.timeout_add(500, self.check_write_job)
+
+    def write_job_done(self, rc):
+        if rc == 0:
             message = _('The image was successfully written.')
-            self.logger(message)            
+            self.logger(message)
             self.success(_('The image was successfully written.'))
-            return True
-        elif self.rc == 3:
+            return False
+        elif rc == 3:
             message = _('Not enough space on the USB stick.')
-        elif self.rc == 4:
+        elif rc == 4:
             message = _('An error occured while copying the image.')
-        elif self.rc == 127:
+        elif rc == 127:
             message = _('Authentication Error.')
         else:
             message = _('An error occurred.') 
@@ -378,7 +385,6 @@ class MintStick:
         self.emergency(message)
         return False
 
-           
     def success(self,message):
         label = self.wTree.get_object("label5")
         label.set_text(message)
@@ -409,10 +415,12 @@ class MintStick:
 
     def close(self, widget):
         self.write_logfile()
-        if self.ddpid > 0:
+        if self.process is not None:
             try:
-                os.killpg(os.getpgid(self.ddpid), signal.SIGKILL)
+                os.killpg(self.process.pid, signal.SIGTERM)
             except:
+                pass
+            finally:
                 Gtk.main_quit()
         else:
             Gtk.main_quit()
