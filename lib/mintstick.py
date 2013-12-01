@@ -17,8 +17,6 @@ from dbus.mainloop.glib import DBusGMainLoop
 import time
 import locale
 
-GObject.threads_init()
-
 def print_timing(func):
     def wrapper(*arg):
         t1 = time.time()
@@ -253,8 +251,6 @@ class MintStick:
                 resp = self.confirm_dialog.run()
                 if resp == Gtk.ResponseType.OK:                    
                     self.confirm_dialog.hide()
-                    while Gtk.events_pending():
-                        Gtk.main_iteration()
                     self.raw_format(self.dev, self.filesystem, label)
                 else:
                     self.confirm_dialog.hide()
@@ -278,9 +274,8 @@ class MintStick:
         t = threading.Thread(group=None,target=thread_run)
         t.start()        
         while t.isAlive():
-            while Gtk.events_pending():
-                Gtk.main_iteration()
-        
+            Gtk.main_iteration_do(False)
+
         self.spinner.stop()
         self.spinner.hide()        
         if self.rc == 0:
@@ -320,8 +315,6 @@ class MintStick:
             resp = self.confirm_dialog.run()
             if resp == Gtk.ResponseType.OK:
                 self.confirm_dialog.hide()
-                while Gtk.events_pending():
-                    Gtk.main_iteration()
                 self.raw_write(source, target)
             else:
                 self.confirm_dialog.hide()
