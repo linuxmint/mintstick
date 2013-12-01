@@ -128,7 +128,7 @@ class MintStick:
             self.window = self.wTree.get_object("format_window")   
             self.window.connect("destroy", self.close)
 
-            self.spinner = self.wTree.get_object("format_spinner")
+            self.format_progressbar = self.wTree.get_object("format_progressbar")
             self.filesystemlist = self.wTree.get_object("filesystem_combobox")
             # set callbacks
             dict = { 
@@ -186,7 +186,6 @@ class MintStick:
 
         self.window.show_all()  
         if self.mode=="format":
-            self.spinner.hide()
             self.expander.hide()           
         self.log = self.logview.get_buffer()              
           
@@ -262,6 +261,7 @@ class MintStick:
     def check_format_job(self):
         self.process.poll()
         if self.process.returncode is None:
+            self.format_progressbar.pulse()
             return True
         else:
             GObject.idle_add(self.format_job_done, self.process.returncode)
@@ -275,14 +275,13 @@ class MintStick:
         else:
             self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
 
-        self.spinner.show()
-        self.spinner.start()
+        self.format_progressbar.show()
+        self.format_progressbar.pulse()
 
         GObject.timeout_add(500, self.check_format_job)
 
     def format_job_done(self, rc):
-        self.spinner.stop()
-        self.spinner.hide()
+        self.format_progressbar.set_fraction(1.0)
         if rc == 0:
             message = _('The USB stick was formatted successfully.')
             self.logger(message)
