@@ -364,10 +364,9 @@ class MintStick:
             
         t = threading.Thread(group=None,target=thread_run)
         t.start()
-        while t.isAlive():           
-            while Gtk.events_pending():
-                Gtk.main_iteration()     
-        
+        while t.isAlive():
+            Gtk.main_iteration_do(False)
+
         # Process return code
         if  self.rc == 0:
             message = _('The image was successfully written.')
