@@ -451,7 +451,8 @@ class MintStick:
         
     def success_ok(self,widget):
         self.success_dialog.hide()
-        if self.mode == "normal": self.set_iso_sensitive()
+        if self.mode == "normal":
+            self.set_iso_sensitive()
         if self.mode == "format": 
             self.set_format_sensitive()
             self.go_button.set_sensitive(False)
@@ -460,9 +461,7 @@ class MintStick:
         self.chooser.set_sensitive(True)
         self.devicelist.set_sensitive(True)        
         self.go_button.set_sensitive(True)
-        self.progress.set_text("")
-        self.progress.set_fraction(0.0)
-        
+
     def set_format_sensitive(self):
         self.filesystemlist.set_sensitive(True)
         self.devicelist.set_sensitive(True)        
