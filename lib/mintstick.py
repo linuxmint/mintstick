@@ -75,6 +75,7 @@ class MintStick:
             self.label = self.wTree.get_object("to_label")
             self.expander = self.wTree.get_object("detail_expander")
             self.go_button = self.wTree.get_object("write_button")
+            self.go_button.set_label(_("Write"))
             self.logview = self.wTree.get_object("detail_text") 
             self.progress = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
@@ -123,6 +124,7 @@ class MintStick:
             self.label = self.wTree.get_object("formatdevice_label")
             self.expander = self.wTree.get_object("formatdetail_expander")
             self.go_button = self.wTree.get_object("format_formatbutton")
+            self.go_button.set_label(_("Format"))
             self.logview = self.wTree.get_object("format_detail_text")  
             
             self.window = self.wTree.get_object("format_window")   
