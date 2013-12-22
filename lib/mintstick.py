@@ -116,7 +116,12 @@ class MintStick:
             if iso_path:
                 if os.path.exists(iso_path):                    
                     self.chooser.set_filename(iso_path)  
-                    self.file_selected(self.chooser)                
+                    self.file_selected(self.chooser)    
+                
+            iter = self.devicemodel.get_iter_first()
+            if iter:
+                self.devicelist.set_active_iter(iter)
+        
                     
         if mode == "format":
             self.mode="format"
@@ -185,6 +190,10 @@ class MintStick:
                     if usb_path in value:
                        self.devicelist.set_active_iter(iter)
                     iter = self.devicemodel.iter_next(iter)
+            else:
+                iter = self.devicemodel.get_iter_first()
+                if iter:
+                    self.devicelist.set_active_iter(iter)
 
         self.window.show_all()  
         if self.mode=="format":
@@ -220,7 +229,7 @@ class MintStick:
                     if item not in dct:
                        dct.append(item)
                        self.devicemodel.append([name, item])
-        self.devicelist.set_model(self.devicemodel)                     
+        self.devicelist.set_model(self.devicemodel) 
                 
     def device_selected(self, widget):   
         iter = self.devicelist.get_active_iter()
