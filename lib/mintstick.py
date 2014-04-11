@@ -273,9 +273,9 @@ class MintStick:
     def raw_format(self, usb_path, fstype, label):        
         if os.geteuid() > 0:
             launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
 
         self.format_progressbar.show()
         self.format_progressbar.pulse()
