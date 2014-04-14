@@ -1,3 +1,9 @@
+mintstick (1.2.0) qiana; urgency=medium
+
+  * Set correct root uid and gid when formatting to ext4.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 14 Apr 2014 12:38:13 +0100
+
 mintstick (1.1.9) petra; urgency=low
 
   * Removed icons in format/write buttons, looked out of place in Petra
