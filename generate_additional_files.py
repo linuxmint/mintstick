@@ -1,39 +1,13 @@
 #!/usr/bin/python
 
-import os, gettext
-
 DOMAIN = "mintstick"
 PATH = "/usr/share/linuxmint/locale"
 
-def generate(filename, prefix, name, comment, suffix):
-    gettext.install(DOMAIN, PATH)
-    desktopFile = open(filename, "w")
+import os, gettext, sys
+sys.path.append('/usr/lib/linuxmint/common')
+import additionalfiles
 
-    desktopFile.writelines(prefix)
-
-    desktopFile.writelines("Name=%s\n" % name)
-    for directory in sorted(os.listdir(PATH)):
-        if os.path.isdir(os.path.join(PATH, directory)):
-            try:
-                language = gettext.translation(DOMAIN, PATH, languages=[directory])
-                language.install()          
-                desktopFile.writelines("Name[%s]=%s\n" % (directory, _(name)))
-            except:
-                pass
-
-    desktopFile.writelines("Comment=%s\n" % comment)
-    for directory in sorted(os.listdir(PATH)):
-        if os.path.isdir(os.path.join(PATH, directory)):
-            try:
-                language = gettext.translation(DOMAIN, PATH, languages=[directory])
-                language.install()                      
-                desktopFile.writelines("Comment[%s]=%s\n" % (directory, _(comment)))
-            except:
-                pass
-
-    desktopFile.writelines(suffix)
-
-os.environ['LANG'] = "en"
+os.environ['LANG'] = "en_US.UTF-8"
 gettext.install(DOMAIN, PATH)
 
 prefix = """[Desktop Entry]
@@ -46,7 +20,7 @@ Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
 """
 
-generate("share/applications/mintstick.desktop", prefix, _("USB Image Writer"), _("Make a bootable USB stick"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/applications/mintstick.desktop", prefix, _("USB Image Writer"), _("Make a bootable USB stick"), "")
 
 prefix = """[Desktop Entry]
 Version=1.0
@@ -58,7 +32,7 @@ Categories=System;
 OnlyShowIn=KDE;
 """
 
-generate("share/applications/mintstick-kde.desktop", prefix, _("USB Image Writer"), _("Make a bootable USB stick"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/applications/mintstick-kde.desktop", prefix, _("USB Image Writer"), _("Make a bootable USB stick"), "", genericName=_("Make a bootable USB stick"))
 
 prefix = """[Desktop Entry]
 Version=1.0
@@ -70,7 +44,7 @@ Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
 """
 
-generate("share/applications/mintstick-format.desktop", prefix, _("USB Stick Formatter"), _("Format a USB stick"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/applications/mintstick-format.desktop", prefix, _("USB Stick Formatter"), _("Format a USB stick"), "")
 
 prefix = """[Desktop Entry]
 Version=1.0
@@ -82,7 +56,7 @@ Categories=System;
 OnlyShowIn=KDE;
 """
 
-generate("share/applications/mintstick-format-kde.desktop", prefix, _("USB Stick Formatter"), _("Format a USB stick"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/applications/mintstick-format-kde.desktop", prefix, _("USB Stick Formatter"), _("Format a USB stick"), "", genericName=_("Format a USB stick"))
 
 prefix="""[Nemo Action]
 Active=true
@@ -91,7 +65,7 @@ Icon-Name=usb-creator
 Selection=S
 Extensions=iso;img;
 """
-generate("share/nemo/actions/mintstick.nemo_action", prefix, _("Make bootable USB stick"), _("Make a bootable USB stick"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick.nemo_action", prefix, _("Make bootable USB stick"), _("Make a bootable USB stick"), "")
 
 prefix="""[Nemo Action]
 Active=true
@@ -101,4 +75,4 @@ Selection=S
 Extensions=any;
 Conditions=removable;
 """
-generate("share/nemo/actions/mintstick-format.nemo_action", prefix, _("Format"), _("Format a USB stick"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-format.nemo_action", prefix, _("Format"), _("Format a USB stick"), "")
