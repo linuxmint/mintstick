@@ -1,3 +1,9 @@
+mintstick (1.2.1) qiana; urgency=medium
+
+  * Updated additional files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 04 May 2014 15:01:07 +0100
+
 mintstick (1.2.0) qiana; urgency=medium
 
   * Set correct root uid and gid when formatting to ext4.
