@@ -18,8 +18,8 @@
       <allow_active>auth_self_keep</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/python</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_write.py</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_format.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/share/linuxmint/mintstick/raw_write.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/share/linuxmint/mintstick/raw_format.py</annotate>
   </action>
 
 </policyconfig>

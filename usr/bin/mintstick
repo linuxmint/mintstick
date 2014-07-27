@@ -1,9 +1,9 @@
 #!/bin/sh
-#
+
 set -e
 
 TERM=xterm
 
-DIR=/usr/lib/mintstick
+DIR=/usr/share/linuxmint/mintstick
 
 $DIR/mintstick.py "$@"

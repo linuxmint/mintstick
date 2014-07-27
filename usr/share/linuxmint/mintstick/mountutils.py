@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os, sys
 import commands
 from subprocess import Popen,PIPE,call,STDOUT

@@ -4,7 +4,7 @@ import commands
 from subprocess import Popen,PIPE,call,STDOUT
 import os, sys
 import getopt
-sys.path.append('/usr/lib/mintstick')
+sys.path.append('/usr/share/linuxmint/mintstick')
 from mountutils import *
 import parted
 
