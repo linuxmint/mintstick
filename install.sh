@@ -16,8 +16,8 @@
 #  along with this program; if not, write to the Free Software Foundation,
 #  Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 
-LIBFILES="mintstick.py raw_write.py raw_format.py mountutils.py mintstick.ui"
-DATAFILES="mintstick.glade"
+LIBFILES="mintstick.py raw_write.py raw_format.py mountutils.py"
+DATAFILES="mintstick.glade mintstick.ui"
 
 
 if [ "$1" = "uninstall" ]; then
