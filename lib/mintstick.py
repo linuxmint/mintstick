@@ -327,7 +327,9 @@ class MintStick:
 
     def set_progress_bar_fraction(self, size):
         self.progress.set_fraction(size)
-        self.progress.set_text("%3.0f%%" % (float(size)*100))
+        str_progress = "%3.0f%%" % (float(size)*100)
+        self.progress.set_text(str_progress)
+        self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
 
     def update_progress(self, fd, condition):
         if condition == GLib.IO_IN:
@@ -413,6 +415,7 @@ class MintStick:
         self.go_button.set_sensitive(False)
         self.progress = self.wTree.get_object("progressbar")
         self.progress.set_sensitive(False)
+        self.window.set_title(_("USB Image Writer"))
 
     def close(self, widget):
         self.write_logfile()
