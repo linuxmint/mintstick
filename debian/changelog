@@ -1,3 +1,10 @@
+mintstick (1.2.2) rebecca; urgency=medium
+
+  * Updated Debian files
+  * ISO Writer: Show percentage in the window title
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 03 Nov 2014 22:03:32 +0100
+
 mintstick (1.2.1) qiana; urgency=medium
 
   * Updated additional files
