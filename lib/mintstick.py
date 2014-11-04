@@ -29,7 +29,7 @@ def print_timing(func):
 
 class MintStick:
     def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None, debug=False):
-               
+
         self.debug = debug
 
         def device_added_callback(device):
@@ -39,14 +39,14 @@ class MintStick:
         def device_removed_callback(device):
             #self.logger(_('Device %s has been removed' % (device))  
             self.get_devices()
-                
+
         proxy = bus.get_object("org.freedesktop.UDisks", 
                        "/org/freedesktop/UDisks")
         self.iface = dbus.Interface(proxy, "org.freedesktop.UDisks")
                 
         self.iface.connect_to_signal('DeviceAdded', device_added_callback)
         self.iface.connect_to_signal('DeviceRemoved', device_removed_callback)
-                
+
         # get glade tree      
         self.gladefile = "/usr/share/mintstick/mintstick.ui" 
         self.wTree = Gtk.Builder()        
@@ -101,7 +101,6 @@ class MintStick:
             self.chooser.set_filter(filt)
 
             # set callbacks
-            
             dict = { 
                     "on_cancel_button_clicked" : self.close,
                     "on_emergency_button_clicked" : self.emergency_ok,                    
@@ -112,7 +111,7 @@ class MintStick:
             self.devicelist.connect("changed", self.device_selected)
             self.go_button.connect("clicked", self.do_write)
             self.chooser.connect("file-set", self.file_selected)
-        
+
             if iso_path:
                 if os.path.exists(iso_path):                    
                     self.chooser.set_filename(iso_path)  
@@ -168,31 +167,30 @@ class MintStick:
             # Default's to fat32
             self.filesystemlist.set_active(0)                                              
             if filesystem is not None:
-                 iter = model.get_iter_first()
-                 while iter is not None:
+                iter = model.get_iter_first()
+                while iter is not None:
                     value = model.get_value(iter, 0) 
                     if value == filesystem:
-                       self.filesystemlist.set_active_iter(iter)
+                        self.filesystemlist.set_active_iter(iter)
                     iter = model.iter_next(iter)
 
             self.filesystem_selected(self.filesystemlist)                       
             self.get_devices()
             
             if usb_path is not None:                 
-                 iter = self.devicemodel.get_iter_first()
-                 while iter is not None:
+                iter = self.devicemodel.get_iter_first()
+                while iter is not None:
                     value = self.devicemodel.get_value(iter, 0)                     
                     if usb_path in value:
-                       self.devicelist.set_active_iter(iter)
+                        self.devicelist.set_active_iter(iter)
                     iter = self.devicemodel.iter_next(iter)
 
         self.window.show_all()  
         if self.mode=="format":
             self.expander.hide()           
         self.log = self.logview.get_buffer()              
-          
-                
-            
+
+
     def get_devices(self):
         devices = self.iface.get_dbus_method('EnumerateDevices')()        
         self.go_button.set_sensitive(False)
@@ -218,8 +216,8 @@ class MintStick:
 
                     item = "%s (%s) - %s" % (drivemodel, name, size)
                     if item not in dct:
-                       dct.append(item)
-                       self.devicemodel.append([name, item])
+                        dct.append(item)
+                        self.devicemodel.append([name, item])
         self.devicelist.set_model(self.devicemodel)                     
                 
     def device_selected(self, widget):   
@@ -251,14 +249,14 @@ class MintStick:
         if os.geteuid() > 0:
             self.raw_format(self.dev, self.filesystem, label)
         else:
-                # We are root, display confirmation dialog
-                resp = self.confirm_dialog.run()
-                if resp == Gtk.ResponseType.OK:                    
-                    self.confirm_dialog.hide()
-                    self.raw_format(self.dev, self.filesystem, label)
-                else:
-                    self.confirm_dialog.hide()
-                    self.set_format_sensitive()
+            # We are root, display confirmation dialog
+            resp = self.confirm_dialog.run()
+            if resp == Gtk.ResponseType.OK:                    
+                self.confirm_dialog.hide()
+                self.raw_format(self.dev, self.filesystem, label)
+            else:
+                self.confirm_dialog.hide()
+                self.set_format_sensitive()
 
     def check_format_job(self):
         self.process.poll()
@@ -509,13 +507,13 @@ if __name__ == "__main__":
             mode=a   
         elif o in ("--debug"):
             debug = True
-    
+
     argc = len(sys.argv)
     if argc > 8:
-      print "Too many arguments"
-      print "for help use --help"
-      exit(2)
-    
+        print "Too many arguments"
+        print "for help use --help"
+        exit(2)
+
     # Mandatory argument
     if (mode is None) or ((mode != "format") and (mode != "iso")):
         usage()
