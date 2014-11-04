@@ -9,7 +9,6 @@ sys.path.append('/usr/lib/mintstick')
 from mountutils import *
 
 def raw_format(device_path, fstype, volume_label, uid, gid):
-  
     do_umount(device_path)
     
     # First erase MBR and partition table , if any
@@ -60,9 +59,6 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     sys.exit(0)
 
 
-
-
-
 def main():
     # parse command line options
     try:
@@ -98,9 +94,9 @@ def main():
     
     argc = len(sys.argv)
     if argc < 11:
-      print "Too few arguments"
-      print "for help use --help"
-      exit(2)
+        print "Too few arguments"
+        print "for help use --help"
+        exit(2)
     
     raw_format(device, fstype, label, uid, gid)
     
