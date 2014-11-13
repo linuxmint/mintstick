@@ -23,18 +23,22 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     regions = disk.getFreeSpaceRegions()    
 
     if len(regions) > 0:
-        #print "Build partition"
-        # Define size
-        region = regions[-1]              
-        start = parted.sizeToSectors(1, "MiB", device.sectorSize)
-        #print "start %s" % start
-        end = device.getLength() - start - 1024
-        #print end
+        # Start partition at sector 2048
+        offset = 2048
+        # 1Mib grain size
+        grain_size = kib_to_sectors(device, 1024)
+        # Get first region
+        region = regions[0]
+        start = region.start
+        end = region.end - start + 1
+
+        align = parted.Alignment(offset=offset, grainSize=grain_size)
+        if not align.isAligned(region, start):
+            start = align.alignNearest(region, start)
         
-        # Alignment
-        #cylinder = device.endSectorToCylinder(end)
-        #end = device.endCylinderToSector(cylinder)
-        #print end
+        align = parted.Alignment(offset=offset -1, grainSize=grain_size)
+        if not align.isAligned(region, end):
+            end = align.alignNearest(region, end)
         try:
             geometry = parted.Geometry(device=device, start=start, end=end)
         except:
@@ -61,7 +65,8 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     sys.exit(0)
 
 
-
+def kib_to_sectors(device, kib):
+    return parted.sizeToSectors(kib, 'KiB', device.sectorSize)
 
 
 def main():
