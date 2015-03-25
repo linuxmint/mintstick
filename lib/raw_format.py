@@ -51,8 +51,8 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
         # Create partition
         partition = parted.Partition(disk=disk, type=parted.PARTITION_NORMAL, geometry=geometry, fs=fs)
         constraint = parted.Constraint(exactGeom=geometry)
-        boot_partition = disk.addPartition(partition=partition, constraint=constraint)
-        boot_partition.setFlag(parted.PARTITION_BOOT)
+        disk.addPartition(partition=partition, constraint=constraint)
+        partition.setFlag(parted.PARTITION_BOOT)
         disk.commit()
         
         # Format partition according to the fstype specified
