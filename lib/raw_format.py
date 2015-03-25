@@ -9,18 +9,18 @@ sys.path.append('/usr/lib/mintstick')
 from mountutils import *
 
 def raw_format(device_path, fstype, volume_label, uid, gid):
-  
+
     do_umount(device_path)
-    
+
     # First erase MBR and partition table , if any
     os.system ("dd if=/dev/zero of=%s bs=512 count=1 >/dev/null 2>&1" % device_path)
-    
+
     device = parted.getDevice(device_path)
-    
-    # Create a default partition set up                        
+
+    # Create a default partition set up
     disk = parted.freshDisk(device, 'msdos')
     disk.commit()
-    regions = disk.getFreeSpaceRegions()    
+    regions = disk.getFreeSpaceRegions()
 
     if len(regions) > 0:
         # Start partition at sector 2048
@@ -35,7 +35,7 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
         align = parted.Alignment(offset=offset, grainSize=grain_size)
         if not align.isAligned(region, start):
             start = align.alignNearest(region, start)
-        
+
         align = parted.Alignment(offset=offset -1, grainSize=grain_size)
         if not align.isAligned(region, end):
             end = align.alignNearest(region, end)
@@ -44,17 +44,17 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
         except:
             print "Geometry error - Can't create partition"
             sys.exit(5)
-        
+
         # fstype
         fs = parted.FileSystem(type=fstype, geometry=geometry)
-        
+
         # Create partition
         partition = parted.Partition(disk=disk, type=parted.PARTITION_NORMAL, geometry=geometry, fs=fs)
         constraint = parted.Constraint(exactGeom=geometry)
         disk.addPartition(partition=partition, constraint=constraint)
         partition.setFlag(parted.PARTITION_BOOT)
         disk.commit()
-        
+
         # Format partition according to the fstype specified
         if fstype == "fat32":
             os.system("mkdosfs -F 32 -n \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
@@ -101,14 +101,14 @@ def main():
             uid = a
         elif o in ("-g"):
             gid = a
-    
+
     argc = len(sys.argv)
     if argc < 11:
       print "Too few arguments"
       print "for help use --help"
       exit(2)
-    
+
     raw_format(device, fstype, label, uid, gid)
-    
+
 if __name__ == "__main__":
     main()

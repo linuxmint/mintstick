@@ -8,14 +8,14 @@ sys.path.append('/usr/lib/mintstick')
 from mountutils import *
 import parted
 
-def raw_write(source, target):    
-    do_umount(target)       
+def raw_write(source, target):
+    do_umount(target)
     bs = 4096
     size=0
     input = open(source, 'rb')
     total_size = float(os.path.getsize(source))
     #print total_size
-    
+
     # Check if the ISO can fit ... :)
     device = parted.getDevice(target)
     device_size = device.getLength() * device.sectorSize
@@ -23,7 +23,7 @@ def raw_write(source, target):
         input.close()
         print "nospace"
         exit(3)
-   
+
     increment = total_size / 100;
 
     written = 0
@@ -72,14 +72,14 @@ def main():
             source = a
         elif o in ("-t"):
             target = a
-    
+
     argc = len(sys.argv)
     if argc < 5:
         print "Too few arguments"
         print "for help use --help"
         exit(2)
-    
+
     raw_write(source, target)
-    
+
 if __name__ == "__main__":
     main()
