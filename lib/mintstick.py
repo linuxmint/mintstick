@@ -208,15 +208,24 @@ class MintStick:
                 and (str(dev.Get('', 'DeviceSize')) != "0") \
                 and (str(dev.Get('', 'DeviceIsOpticalDisc')) == "0"):
                     name = str(dev.Get('', 'DeviceFile'))
-                    drivemodel = str(dev.Get('', 'DriveModel'))
+                    driveVendor = str(dev.Get('', 'DriveVendor'))
+                    driveModel = str(dev.Get('', 'DriveModel'))
+                    if driveVendor.strip() != "":
+                        driveModel = "%s %s" % (driveVendor, driveModel)
                     name = ''.join([i for i in name if not i.isdigit()])                        
-                    size = float(dev.Get('', 'DeviceSize')) / 1000000000
-                    if size >= 1:                        
-                        size = "%.0fGB" % round(size)
+                    size = float(dev.Get('', 'DeviceSize'))
+                    if size >= 1000000000000:
+                        size = "%.0fTB" % round(size / 1000000000000)
+                    elif size >= 1000000000:
+                        size = "%.0fGB" % round(size / 1000000000)
+                    elif size >= 1000000:
+                        size = "%.0fMB" % round(size / 1000000)
+                    elif size >= 1000:
+                        size = "%.0fkB" % round(size / 1000)
                     else:
-                        size = "%.0fMB" % round(size * 1000)
+                        size = "%.0fB" % round(size)
 
-                    item = "%s (%s) - %s" % (drivemodel, name, size)
+                    item = "%s (%s) - %s" % (driveModel, name, size)
                     if item not in dct:
                        dct.append(item)
                        self.devicemodel.append([name, item])
