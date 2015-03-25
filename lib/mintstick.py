@@ -50,6 +50,7 @@ class MintStick:
         self.wTree = Gtk.Builder()
 
         self.process = None
+        self.source_id = None
 
         APP="mintstick"
         DIR="/usr/share/linuxmint/locale"
@@ -337,7 +338,7 @@ class MintStick:
         self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
 
     def update_progress(self, fd, condition):
-        if condition == GLib.IO_IN:
+        if condition  is GLib.IO_IN:
             line = fd.readline()
             try:
                 size = float(line.strip())
@@ -346,6 +347,7 @@ class MintStick:
                 pass
             return True
         else:
+            GLib.source_remove(self.source_id)
             return False
 
     def check_write_job(self):
@@ -357,7 +359,6 @@ class MintStick:
             self.process = None
             return False
 
-    @print_timing
     def raw_write(self, source, target):
         self.progress.set_sensitive(True)
         self.progress.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
@@ -369,12 +370,13 @@ class MintStick:
         else:
             self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
-        GLib.io_add_watch(self.process.stdout, GLib.IO_IN, self.update_progress)
+        self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN|GLib.IO_HUP, self.update_progress)
         GObject.timeout_add(500, self.check_write_job)
 
     def write_job_done(self, rc):
         if rc == 0:
             message = _('The image was successfully written.')
+            self.set_progress_bar_fraction(1.0)
             self.logger(message)
             self.success(_('The image was successfully written.'))
             return False
