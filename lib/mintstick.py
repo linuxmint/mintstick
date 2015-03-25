@@ -342,7 +342,10 @@ class MintStick:
             line = fd.readline()
             try:
                 size = float(line.strip())
-                self.set_progress_bar_fraction(size)
+                progress = round(size * 100)
+                if progress > self.write_progress:
+                    self.write_progress = progress
+                    GObject.idle_add(self.set_progress_bar_fraction, size)
             except:
                 pass
             return True
@@ -370,6 +373,7 @@ class MintStick:
         else:
             self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
+        self.write_progress = 0
         self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN|GLib.IO_HUP, self.update_progress)
         GObject.timeout_add(500, self.check_write_job)
 
