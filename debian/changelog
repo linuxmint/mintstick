@@ -1,3 +1,19 @@
+mintstick (1.2.3) betsy; urgency=medium
+
+  [ Frédéric Gaudet ]
+  * Add boot flag
+  * Align end partition
+
+  [ Clement Lefebvre ]
+  * Filter devices using DeviceIsDrive rather than IsRemovable.. less strict and exposes external HDDs, but some vendors of USB sticks don't properly set their flags so we don't have much choice here
+  * Improved device names (vendor info added, recognize size all the way to TB)
+  * Fixed mistake in Fred's last commit
+  * Fixed indentation and end-line space characters
+  * Fix 100% CPU issues
+  * Remove all lag (Update the progressbar on idle and only when required)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 30 Mar 2015 15:11:02 +0200
+
 mintstick (1.2.2) rebecca; urgency=medium
 
   * Updated Debian files
