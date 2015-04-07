@@ -6,14 +6,20 @@ import os
 import signal
 import re
 import gettext
-from gettext import gettext as _
+import locale
 from gi.repository import GObject, Gio, Polkit, Gtk, GLib
 import sys
 import getopt
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 import time
-import locale
+
+APP = 'mintstick'
+LOCALE_DIR = "/usr/share/linuxmint/locale"
+locale.bindtextdomain(APP, LOCALE_DIR)
+gettext.bindtextdomain(APP, LOCALE_DIR)
+gettext.textdomain(APP)
+_ = gettext.gettext
 
 GObject.threads_init()
 
@@ -52,12 +58,6 @@ class MintStick:
         self.process = None
         self.source_id = None
 
-        APP="mintstick"
-        DIR="/usr/share/linuxmint/locale"
-        locale.setlocale(locale.LC_ALL, '')
-        locale.bindtextdomain(APP, DIR)
-        gettext.bindtextdomain(APP, DIR)
-        gettext.textdomain(APP)
         self.wTree.set_translation_domain(APP)
 
         self.wTree.add_from_file(self.gladefile)
