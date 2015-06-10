@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
 DOMAIN = "mintstick"
 PATH = "/usr/share/linuxmint/locale"
