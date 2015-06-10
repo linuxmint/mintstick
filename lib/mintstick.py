@@ -279,9 +279,9 @@ class MintStick:
     def raw_format(self, usb_path, fstype, label):
         if os.geteuid() > 0:
             launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen([launcher,'/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen(['/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
 
         self.format_progressbar.show()
         self.format_progressbar.pulse()
@@ -369,9 +369,9 @@ class MintStick:
 
         if os.geteuid() > 0:
             launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+            self.process = Popen([launcher,'/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+            self.process = Popen(['/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
         self.write_progress = 0
         self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN|GLib.IO_HUP, self.update_progress)
