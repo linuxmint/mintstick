@@ -7,7 +7,7 @@ import signal
 import re
 import gettext
 import locale
-from gi.repository import Unity, GObject, Gio, Polkit, Gtk, GLib
+from gi.repository import GObject, Gio, Polkit, Gtk, GLib
 import sys
 import getopt
 import dbus
