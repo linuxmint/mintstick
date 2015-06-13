@@ -14,6 +14,15 @@ import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 import time
 
+try:
+    from gi.repository import Unity
+    Using_Unity = True
+except ImportError:
+    Using_Unity = False
+
+if Using_Unity:
+    launcher = Unity.LauncherEntry.get_for_desktop_id ("mintstick.desktop")
+
 APP = 'mintstick'
 LOCALE_DIR = "/usr/share/linuxmint/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
@@ -338,6 +347,8 @@ class MintStick:
         self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
 
     def update_progress(self, fd, condition):
+        if Using_Unity:
+            launcher.set_property("progress_visible", True)
         if condition  is GLib.IO_IN:
             line = fd.readline()
             try:
@@ -346,6 +357,8 @@ class MintStick:
                 if progress > self.write_progress:
                     self.write_progress = progress
                     GObject.idle_add(self.set_progress_bar_fraction, size)
+                    if Using_Unity:
+                        launcher.set_property("progress", size)
             except:
                 pass
             return True
@@ -379,6 +392,9 @@ class MintStick:
 
     def write_job_done(self, rc):
         if rc == 0:
+            if Using_Unity:
+                launcher.set_property("progress_visible", False)
+                launcher.set_property("urgent", True)
             message = _('The image was successfully written.')
             self.set_progress_bar_fraction(1.0)
             self.logger(message)
