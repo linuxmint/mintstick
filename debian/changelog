@@ -1,3 +1,14 @@
+mintstick (1.2.5) rafaela; urgency=medium
+
+  [ Clement Lefebvre ]
+  * Specify python version in shebangs
+  * Specified python version in a few remaining places
+
+  [ Silviu C ]
+  * add integration with Ubuntu Unity
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sun, 14 Jun 2015 12:47:20 +0200
+
 mintstick (1.2.4) betsy; urgency=medium
 
   * Fixed localization (setlocale can crash the app)
