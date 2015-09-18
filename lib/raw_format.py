@@ -13,7 +13,7 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     do_umount(device_path)
 
     # First erase MBR and partition table , if any
-    os.system ("dd if=/dev/zero of=%s bs=512 count=1 >/dev/null 2>&1" % device_path)
+    call(["dd", "if=/dev/zero", "of=%s" % device_path, "bs=512", "count=1"])
 
     device = parted.getDevice(device_path)
 
@@ -57,11 +57,11 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
 
         # Format partition according to the fstype specified
         if fstype == "fat32":
-            os.system("mkdosfs -F 32 -n \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
+            call(["mkdosfs", "-F", "32", "-n", volume_label, partition.path])
         if fstype == "ntfs":
-            os.system("mkntfs -f -L \"%s\" %s >/dev/null 2>&1" % (volume_label, partition.path))
+            call(["mkntfs", "-f", "-L", volume_label, partition.path])
         elif fstype == "ext4":
-            os.system("mkfs.ext4 -E root_owner=%s:%s -L \"%s\" %s >/dev/null 2>&1" % (uid, gid, volume_label, partition.path))
+            call(["mkfs.ext4", "-E", "root_owner=%s:%s" % (uid, gid), "-L", volume_label, partition.path])
     sys.exit(0)
 
 
