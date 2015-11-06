@@ -1,3 +1,14 @@
+mintstick (1.2.6) rosa; urgency=medium
+
+  [ James Lu ]
+  * raw_format: fix shell command injection (#42)
+
+  [ Clement Lefebvre ]
+  * Fixed makepot
+  * Updated desktop files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 06 Nov 2015 16:48:40 +0000
+
 mintstick (1.2.5) rafaela; urgency=medium
 
   [ Clement Lefebvre ]
