@@ -7,11 +7,9 @@ import signal
 import re
 import gettext
 import locale
-from gi.repository import GObject, Gio, Polkit, Gtk, GLib
+from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks
 import sys
 import getopt
-import dbus
-from dbus.mainloop.glib import DBusGMainLoop
 import time
 
 try:
@@ -46,19 +44,11 @@ class MintStick:
 
         self.debug = debug
 
-        def device_added_callback(device):
-            #self.logger(_('Device %s was added' % (device))
+        def devices_changed_callback(client):
             self.get_devices()
 
-        def device_removed_callback(device):
-            #self.logger(_('Device %s has been removed' % (device))
-            self.get_devices()
-
-        proxy = bus.get_object("org.freedesktop.UDisks", "/org/freedesktop/UDisks")
-        self.iface = dbus.Interface(proxy, "org.freedesktop.UDisks")
-
-        self.iface.connect_to_signal('DeviceAdded', device_added_callback)
-        self.iface.connect_to_signal('DeviceRemoved', device_removed_callback)
+        self.udisks_client = UDisks.Client.new_sync()
+        self.udisks_client.connect("changed", devices_changed_callback)
 
         # get glade tree
         self.gladefile = "/usr/share/mintstick/mintstick.ui"
@@ -200,41 +190,55 @@ class MintStick:
         self.log = self.logview.get_buffer()
 
     def get_devices(self):
-        devices = self.iface.get_dbus_method('EnumerateDevices')()
         self.go_button.set_sensitive(False)
         self.devicemodel.clear()
         dct = []
         self.dev = None
-        # Building device list from UDisk
-        for dev in devices:
-            dev_obj = bus.get_object("org.freedesktop.UDisks", dev)
-            dev = dbus.Interface(dev_obj, "org.freedesktop.DBus.Properties")
-            if (str(dev.Get('', 'DriveConnectionInterface')) == 'usb') \
-                and (str(dev.Get('', 'DeviceIsDrive')) == "1") \
-                and (str(dev.Get('', 'DeviceSize')) != "0") \
-                and (str(dev.Get('', 'DeviceIsOpticalDisc')) == "0"):
-                    name = str(dev.Get('', 'DeviceFile'))
-                    driveVendor = str(dev.Get('', 'DriveVendor'))
-                    driveModel = str(dev.Get('', 'DriveModel'))
-                    if driveVendor.strip() != "":
-                        driveModel = "%s %s" % (driveVendor, driveModel)
-                    name = ''.join([i for i in name if not i.isdigit()])
-                    size = float(dev.Get('', 'DeviceSize'))
-                    if size >= 1000000000000:
-                        size = "%.0fTB" % round(size / 1000000000000)
-                    elif size >= 1000000000:
-                        size = "%.0fGB" % round(size / 1000000000)
-                    elif size >= 1000000:
-                        size = "%.0fMB" % round(size / 1000000)
-                    elif size >= 1000:
-                        size = "%.0fkB" % round(size / 1000)
-                    else:
-                        size = "%.0fB" % round(size)
 
-                    item = "%s (%s) - %s" % (driveModel, name, size)
-                    if item not in dct:
-                       dct.append(item)
-                       self.devicemodel.append([name, item])
+        manager = self.udisks_client.get_object_manager()
+
+        for obj in manager.get_objects():
+            if obj is not None:
+                block = obj.get_block()
+                if block is not None:
+                    drive = self.udisks_client.get_drive_for_block(block)
+                    if drive is not None:
+                        is_usb = str(drive.get_property("connection-bus")) == 'usb'
+                        size = int(drive.get_property('size'))
+                        optical = bool(drive.get_property('optical'))
+                        removable = bool(drive.get_property('removable'))
+
+                        if is_usb and size > 0 and removable and not optical:
+                            name = _("unknown")
+
+                            block = obj.get_block()
+                            if block is not None:
+                                name = block.get_property('device')
+                                name = ''.join([i for i in name if not i.isdigit()])
+
+                            driveVendor = str(drive.get_property('vendor'))
+                            driveModel = str(drive.get_property('model'))
+
+                            if driveVendor.strip() != "":
+                                driveModel = "%s %s" % (driveVendor, driveModel)
+
+                            if size >= 1000000000000:
+                                size = "%.0fTB" % round(size / 1000000000000)
+                            elif size >= 1000000000:
+                                size = "%.0fGB" % round(size / 1000000000)
+                            elif size >= 1000000:
+                                size = "%.0fMB" % round(size / 1000000)
+                            elif size >= 1000:
+                                size = "%.0fkB" % round(size / 1000)
+                            else:
+                                size = "%.0fB" % round(size)
+
+                            item = "%s (%s) - %s" % (driveModel, name, size)
+
+                            if item not in dct:
+                                dct.append(item)
+                                self.devicemodel.append([name, item])
+
         self.devicelist.set_model(self.devicemodel)
 
     def device_selected(self, widget):
@@ -543,9 +547,6 @@ if __name__ == "__main__":
     # Mandatory argument
     if (mode is None) or ((mode != "format") and (mode != "iso")):
         usage()
-
-    DBusGMainLoop(set_as_default=True)
-    bus = dbus.SystemBus()
 
     MintStick(iso_path, usb_path, filesystem, mode, debug)
 
