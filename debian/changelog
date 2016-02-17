@@ -1,3 +1,10 @@
+mintstick (1.2.7) sarah; urgency=medium
+
+  [ Michael Webster ]
+  * Update to use udisks2
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 17 Feb 2016 10:54:30 +0000
+
 mintstick (1.2.6) rosa; urgency=medium
 
   [ James Lu ]
