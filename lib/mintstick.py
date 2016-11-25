@@ -7,10 +7,16 @@ import signal
 import re
 import gettext
 import locale
-from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks
 import sys
 import getopt
 import time
+import gi
+
+gi.require_version('Polkit', '1.0')
+gi.require_version('Gtk', '3.0')
+gi.require_version('UDisks', '2.0')
+
+from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks
 
 try:
     from gi.repository import Unity
