@@ -3,9 +3,30 @@
 .SH NAME
 mintstick \- gui only application to write .img and .iso files to USB keys
 
+.SH SYNOPSIS
+.B mintstick {[--debug] | [--help] | -m [format|iso]}
+
+
 .SH DESCRIPTION
 .B mintstick
-is a graphical application to write .img and .iso files to USB keys. It can also format USB Key from a contextual menu in Cinammon and KDE desktops.
+is a graphical application to write .img and .iso files to USB keys. It can also format USB keys from a contextual menu in Cinammon, MATE, and KDE desktops.
+
+.SH OPTIONS
+.B --debug
+        show status and debug messages.
+
+.B --help
+        print a message with basic usage information.
+
+.B -m iso [-i|--iso {iso_path}]
+        Write an .img or .iso file to a USB key.
+
+.B -m format [-u|--usb {usb_device}] [-f {filesystem}]
+        Format a USB key. Optionally, the file system can be specified here rather than through the gui.
+
+.SH LICENSING
+.B minstick
+is licensed under the GPLv2. See the COPYING file for details of GPL licensing.
 
 .SH "SEE ALSO"
 The full documentation for
@@ -13,4 +34,3 @@ The full documentation for
 is maintained at http://github.com/linuxmint/mintstick
 .PP
 Go to the project page to get access to the complete documentation.
-
