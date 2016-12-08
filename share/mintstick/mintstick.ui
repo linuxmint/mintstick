@@ -369,8 +369,8 @@ EXT4
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hscrollbar_policy">never</property>
-                        <property name="vscrollbar_policy">automatic</property>
                         <property name="shadow_type">in</property>
+                        <property name="min-content-height">100</property>
                         <child>
                           <object class="GtkTextView" id="format_detail_text">
                             <property name="height_request">100</property>
@@ -588,8 +588,8 @@ EXT4
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hscrollbar_policy">never</property>
-                        <property name="vscrollbar_policy">automatic</property>
                         <property name="shadow_type">in</property>
+                        <property name="min-content-height">100</property>
                         <child>
                           <object class="GtkTextView" id="detail_text">
                             <property name="height_request">100</property>
