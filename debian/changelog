@@ -1,3 +1,10 @@
+mintstick (1.3.1) serena; urgency=medium
+
+  [ Fred Barclay ]
+  * Added more usage details and available commands to the man page. Rather than only directing users to the GitHub repo, the man page now contains the basic command options for mintstick.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 10 Dec 2016 12:45:11 +0000
+
 mintstick (1.3.0) serena; urgency=medium
 
   * Fix min content height for scrolledwindow widgets
