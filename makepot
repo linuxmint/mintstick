@@ -1,5 +1,11 @@
 #!/bin/bash
 
 intltool-extract --type=gettext/glade share/mintstick/mintstick.ui
-xgettext --language=Python --keyword=_ --keyword=N_ --output=mintstick.pot lib/mintstick.py generate_additional_files.py share/mintstick/mintstick.ui.h
+
+xgettext --language=Python --keyword=_ --keyword=N_ --output=mintstick.pot \
+  lib/mintstick.py \
+  generate_additional_files.py \
+  share/mintstick/mintstick.ui.h
+xgettext --its=polkit.its -L PolkitPolicy --output=mintstick.pot --join-existing share/polkit/*.policy
+
 rm -f share/mintstick/mintstick.ui.h

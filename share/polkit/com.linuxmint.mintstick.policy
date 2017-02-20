@@ -4,18 +4,18 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
 
-  <vendor>linuxmint</vendor>
-  <vendor_url>http://hal.freedesktop.org/docs/PolicyKit/</vendor_url>
+  <vendor>Linux Mint</vendor>
+  <vendor_url>https://linuxmint.com/</vendor_url>
 
-  <action id="org.freedesktop.policykit.pkexec.run-im">
-    <description>USB Image Writer Authentication dialog</description>
+  <action id="com.linuxmint.mintstick">
+    <description>USB Image Writer/USB Stick Formatter authentication dialog</description>
     <message>This will destroy all data on the target device, are you sure you want to proceed?</message>
     <message xml:lang="fr">Toutes les données contenues sur ce périphérique vont être détruites. Souhaitez-vous continuer ?</message>
-    <icon_name>system-run</icon_name>
+    <icon_name>usb-creator</icon_name>
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_self_keep</allow_active>
+      <allow_active>auth_admin_keep</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/python2</annotate>
     <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_write.py</annotate>

@@ -23,19 +23,20 @@ DATAFILES="mintstick.glade mintstick.ui"
 if [ "$1" = "uninstall" ]; then
     rm -rf /usr/lib/mintstick
     rm -rf /usr/share/mintstick
-    rm -r /usr/share/applications/mintstick.desktop
-    rm -r /usr/share/applications/mintstick-kde.desktop
-    rm -r /usr/share/applications/mintstick-format.desktop
-    rm -r /usr/share/applications/mintstick-kde-format.desktop
+    rm -f /usr/share/applications/mintstick.desktop
+    rm -f /usr/share/applications/mintstick-kde.desktop
+    rm -f /usr/share/applications/mintstick-format.desktop
+    rm -f /usr/share/applications/mintstick-kde-format.desktop
     rm -f /usr/bin/mintstick
-    rm -rf /usr/share/polkit-1/actions/org.linuxmint.im.policy
-    rm -rf /usr/share/kde4/apps/solid/actions/mintstick-format.desktop
+    rm -f /usr/share/polkit-1/actions/org.linuxmint.im.policy  # old name 
+    rm -f /usr/share/polkit-1/actions/com.linuxmint.mintstick.policy
+    rm -f /usr/share/kde4/apps/solid/actions/mintstick-format.desktop
 else
     cp share/applications/mintstick.desktop /usr/share/applications/
     cp share/applications/mintstick-format.desktop /usr/share/applications/
     cp share/applications/mintstick-kde.desktop /usr/share/applications/
     cp share/applications/mintstick-format-kde.desktop /usr/share/applications/
-    cp share/polkit/org.linuxmint.im.policy /usr/share/polkit-1/actions
+    cp share/polkit/com.linuxmint.mintstick.policy /usr/share/polkit-1/actions/
     cp share/kde4/mintstick-format_action.desktop /usr/share/kde4/apps/solid/actions
     cp mintstick /usr/bin/
     mkdir -p /usr/lib/mintstick
