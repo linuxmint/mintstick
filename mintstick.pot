@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-06 16:47+0000\n"
+"POT-Creation-Date: 2017-05-07 12:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,63 +17,67 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:86
+#: lib/mintstick.py:82
 msgid "Write"
 msgstr ""
 
-#: lib/mintstick.py:135 generate_additional_files.py:78
+#: lib/mintstick.py:131 generate_additional_files.py:78
 msgid "Format"
 msgstr ""
 
-#: lib/mintstick.py:303 lib/mintstick.py:305
+#: lib/mintstick.py:218
+msgid "unknown"
+msgstr ""
+
+#: lib/mintstick.py:313 lib/mintstick.py:315
 msgid "The USB stick was formatted successfully."
 msgstr ""
 
-#: lib/mintstick.py:308
+#: lib/mintstick.py:318
 #, python-format
 msgid "An error occured while creating a partition on %s."
 msgstr ""
 
-#: lib/mintstick.py:310 lib/mintstick.py:408
+#: lib/mintstick.py:320 lib/mintstick.py:418
 msgid "Authentication Error."
 msgstr ""
 
-#: lib/mintstick.py:312 lib/mintstick.py:410
+#: lib/mintstick.py:322 lib/mintstick.py:420
 msgid "An error occurred."
 msgstr ""
 
-#: lib/mintstick.py:328
+#: lib/mintstick.py:338
 msgid "Image:"
 msgstr ""
 
-#: lib/mintstick.py:329
+#: lib/mintstick.py:339
 msgid "USB stick:"
 msgstr ""
 
-#: lib/mintstick.py:347 lib/mintstick.py:442 generate_additional_files.py:23
+#: lib/mintstick.py:357 lib/mintstick.py:452 generate_additional_files.py:23
 #: generate_additional_files.py:35 share/mintstick/mintstick.ui.h:27
 msgid "USB Image Writer"
 msgstr ""
 
-#: lib/mintstick.py:380
+#: lib/mintstick.py:390
 #, python-format
 msgid "Writing %(VAR_FILE)s to %(VAR_DEV)s"
 msgstr ""
 
-#: lib/mintstick.py:381
+#: lib/mintstick.py:391
 #, python-format
 msgid "Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s"
 msgstr ""
 
-#: lib/mintstick.py:398 lib/mintstick.py:401
+#: lib/mintstick.py:408 lib/mintstick.py:411
 msgid "The image was successfully written."
 msgstr ""
 
-#: lib/mintstick.py:404
+#: lib/mintstick.py:414
 msgid "Not enough space on the USB stick."
 msgstr ""
 
-#: lib/mintstick.py:406
+#: lib/mintstick.py:416
 msgid "An error occured while copying the image."
 msgstr ""
 
