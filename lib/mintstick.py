@@ -34,6 +34,9 @@ gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
 _ = gettext.gettext
 
+# https://technet.microsoft.com/en-us/library/bb490925.aspx
+FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
+
 GObject.threads_init()
 
 def print_timing(func):
@@ -54,7 +57,7 @@ class MintStick:
             self.get_devices()
 
         self.udisks_client = UDisks.Client.new_sync()
-        self.udisks_client.connect("changed", devices_changed_callback)
+        self.udisk_listener_id = self.udisks_client.connect("changed", devices_changed_callback)
 
         # get glade tree
         self.gladefile = "/usr/share/mintstick/mintstick.ui"
@@ -130,6 +133,8 @@ class MintStick:
             self.go_button = self.wTree.get_object("format_formatbutton")
             self.go_button.set_label(_("Format"))
             self.logview = self.wTree.get_object("format_detail_text")
+            self.label_entry = self.wTree.get_object("volume_label_entry")
+            self.label_entry_changed_id = self.label_entry.connect("changed", self.on_label_entry_text_changed)
 
             self.window = self.wTree.get_object("format_window")
             self.window.connect("destroy", self.close)
@@ -149,10 +154,11 @@ class MintStick:
             self.devicelist.connect("changed", self.device_selected)
 
             # Filesystemlist
-            self.fsmodel = Gtk.ListStore(str, str)
-            self.fsmodel.append(["fat32", "FAT32"])
-            self.fsmodel.append(["ntfs", "NTFS"])
-            self.fsmodel.append(["ext4", "EXT4"])
+            self.fsmodel = Gtk.ListStore(str, str, int, bool, bool)
+            #                     id       label    max-length force-upper-case   force-alpha-numeric
+            self.fsmodel.append(["fat32", "FAT32",      11,        True,                True])
+            self.fsmodel.append(["ntfs",  "NTFS",       32,        False,               False])
+            self.fsmodel.append(["ext4",  "EXT4",       16,        False,               False])
             self.filesystemlist.set_model(self.fsmodel)
 
             # Renderer
@@ -259,14 +265,43 @@ class MintStick:
             self.filesystem = self.fsmodel.get_value(iter, 0)
             self.activate_devicelist()
 
+            self.label_entry.set_max_length(self.fsmodel.get_value(iter, 2))
+            self.on_label_entry_text_changed(self, self.label_entry)
+
     def file_selected(self, widget):
         self.activate_devicelist()
+
+    def on_label_entry_text_changed(self, widget, data=None):
+        self.label_entry.handler_block(self.label_entry_changed_id)
+
+        active_iter = self.filesystemlist.get_active_iter()
+        value = self.fsmodel.get_value(active_iter, 0)
+
+        if self.fsmodel.get_value(active_iter, 3):
+            old_text = self.label_entry.get_text()
+            new_text = old_text.upper()
+            self.label_entry.set_text(new_text)
+
+        if self.fsmodel.get_value(active_iter, 4):
+            old_text = self.label_entry.get_text()
+
+            for char in FORBIDDEN_CHARS:
+                old_text = old_text.replace(char, "")
+
+            new_text = old_text
+            self.label_entry.set_text(new_text)
+
+        length = self.label_entry.get_buffer().get_length()
+        self.label_entry.select_region(length, -1)
+
+        self.label_entry.handler_unblock(self.label_entry_changed_id)
 
     def do_format(self, widget):
         if self.debug:
             print "DEBUG: Format %s as %s" % (self.dev, self.filesystem)
             return
 
+        self.udisks_client.handler_block(self.udisk_listener_id)
         self.devicelist.set_sensitive(False)
         self.filesystemlist.set_sensitive(False)
         self.go_button.set_sensitive(False)
@@ -323,6 +358,8 @@ class MintStick:
         self.logger(message)
         self.emergency(message)
         self.set_format_sensitive()
+        self.udisks_client.handler_unblock(self.udisk_listener_id)
+
         return False
 
     def do_write(self, widget):
@@ -502,6 +539,7 @@ class MintStick:
         self.go_button.set_sensitive(True)
 
     def set_format_sensitive(self):
+        self.get_devices()
         self.filesystemlist.set_sensitive(True)
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
