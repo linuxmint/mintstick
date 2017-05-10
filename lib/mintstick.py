@@ -558,8 +558,13 @@ if __name__ == "__main__":
         print "                           [-f|--filesystem] filesystem"
         exit (0)
 
+    def version():
+        print "mintstick 1.3.3"
+        print "for help use --help"
+        exit (0)
+
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=","usb=","filesystem="])
+        opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=","usb=","filesystem=","version"])
     except getopt.error, msg:
         print msg
         print "for help use --help"
@@ -581,6 +586,8 @@ if __name__ == "__main__":
             mode=a
         elif o in ("--debug"):
             debug = True
+        elif o in ("--version"):
+            version()
 
     argc = len(sys.argv)
     if argc > 8:
