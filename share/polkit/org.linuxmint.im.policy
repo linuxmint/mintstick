@@ -10,7 +10,28 @@
   <action id="org.freedesktop.policykit.pkexec.run-im">
     <description>USB Image Writer Authentication dialog</description>
     <message>This will destroy all data on the target device, are you sure you want to proceed?</message>
-    <message xml:lang="fr">Toutes les données contenues sur ce périphérique vont être détruites. Souhaitez-vous continuer ?</message>
+    <message xml:lang="bg">Това ще унищожи всички данни на целевото устройство. Ще продължите ли?</message>
+    <message xml:lang="ca">Això destruirà totes les vostres dades al dispositiu de destí, esteu segur que voleu procedir?</message>
+    <message xml:lang="cs">Toto zničí všechna data na cílovém zařízení, opravdu chcete pokračovat?</message>
+    <message xml:lang="da">Dette vil ødelægge alle data på mål enheden, er du sikker på at du vil fortsætte?</message>
+    <message xml:lang="de">Dieser Vorgang löscht alle Daten auf dem Zielgerät. Wollen Sie fortfahren?</message>
+    <message xml:lang="es">Esto borrará todos los datos en el dispositivo de destino, ¿está seguro que desea continuar?</message>
+    <message xml:lang="fr">Toutes les données contenues sur ce périphérique vont être détruites. Souhaitez-vous continuer?</message>
+    <message xml:lang="id">Akan menghapus semua data pada perangkat sasaran, apakah anda akan meneruskan?</message>
+    <message xml:lang="it">Questa operazione distrugger&agrave; tutti i dati sulla periferica selezionata, sei sicuro di voler continuare?</message>
+    <message xml:lang="nb">Dette vil ødelegge all data på valgt lagringsmedium, er du sikker på at du ønsker å fortsette?</message>
+    <message xml:lang="nl">Dit zal alle data vernietigen op het doelstation, weet u zeker dat u door wilt gaan?</message>
+    <message xml:lang="pl">Operacja usunie wszystkie dane na urządzeniu docelowym, Czy jesteś pewien że chcesz kontynuować?</message>
+    <message xml:lang="pt">Isto irá destruir todos os dados do dispositivo alvo, você tem certeza que deseja prosseguir?</message>
+    <message xml:lang="pt_BR">Isto irá destruir todos os dados do dispositivo alvo, você tem certeza que deseja prosseguir?</message>
+    <message xml:lang="ru">На целевом устройстве будет уничтожена вся информация. Вы действительно хотите продолжить?</message>
+    <message xml:lang="sk">Toto zničí všetky dáta na cieľovom zariadení, naozaj chcete pokračovať?</message>
+    <message xml:lang="sv">Detta kommer att förstöra all data på målenheten. Är du säker på att du vill fortsätta?</message>
+    <message xml:lang="tr">Bu işlem hedef aygıttaki tüm bilgileri yokedecek işlemi yapmak istediğnize emin misiniz?</message>
+    <message xml:lang="uk"> Це призведе до втрати всіх даних на цільовому пристрої, ви хочете продовжити?</message>
+    <message xml:lang="zh_CN">这样将会造成目标设备上的 数据损坏 确认继续么？</message>
+    <message xml:lang="zh_HK">這樣將會造成目標裝置上的 數據損壞 確認繼續麼？</message>
+    <message xml:lang="zh_TW">這樣將會造成目標裝置上的 數據損壞 確認繼續麼？</message>
     <icon_name>system-run</icon_name>
     <defaults>
       <allow_any>no</allow_any>
