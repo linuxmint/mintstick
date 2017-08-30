@@ -15,8 +15,9 @@ import gi
 gi.require_version('Polkit', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('UDisks', '2.0')
+gi.require_version('XApp', '1.0')
 
-from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks
+from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks, XApp
 
 try:
     from gi.repository import Unity
@@ -84,7 +85,7 @@ class MintStick:
             self.go_button = self.wTree.get_object("write_button")
             self.go_button.set_label(_("Write"))
             self.logview = self.wTree.get_object("detail_text")
-            self.progress = self.wTree.get_object("progressbar")
+            self.progressbar = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
 
             # Devicelist model
@@ -139,7 +140,7 @@ class MintStick:
             self.window = self.wTree.get_object("format_window")
             self.window.connect("destroy", self.close)
 
-            self.format_progressbar = self.wTree.get_object("format_progressbar")
+            self.progressbar = self.wTree.get_object("format_progressbar")
             self.filesystemlist = self.wTree.get_object("filesystem_combobox")
             # set callbacks
             dict = {
@@ -323,7 +324,7 @@ class MintStick:
     def check_format_job(self):
         self.process.poll()
         if self.process.returncode is None:
-            self.format_progressbar.pulse()
+            self.pulse_progress()
             return True
         else:
             GObject.idle_add(self.format_job_done, self.process.returncode)
@@ -337,13 +338,13 @@ class MintStick:
         else:
             self.process = Popen(['/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
 
-        self.format_progressbar.show()
-        self.format_progressbar.pulse()
+        self.progressbar.show()
+        self.pulse_progress()
 
         GObject.timeout_add(500, self.check_format_job)
 
     def format_job_done(self, rc):
-        self.format_progressbar.set_fraction(1.0)
+        self.set_progress(1.0)
         if rc == 0:
             message = _('The USB stick was formatted successfully.')
             self.logger(message)
@@ -387,11 +388,19 @@ class MintStick:
                 self.confirm_dialog.hide()
                 self.set_iso_sensitive()
 
-    def set_progress_bar_fraction(self, size):
-        self.progress.set_fraction(size)
+    def set_progress(self, size):
+        self.progressbar.set_fraction(size)
         str_progress = "%3.0f%%" % (float(size)*100)
-        self.progress.set_text(str_progress)
+        int_progress = int(float(size)*100)
+        self.progressbar.set_text(str_progress)
         self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
+        XApp.set_window_progress_pulse(self.window, False)
+        XApp.set_window_progress(self.window, int_progress)
+
+    def pulse_progress(self):
+        self.progressbar.pulse()
+        self.window.set_title(_("USB Image Writer"))
+        XApp.set_window_progress_pulse(self.window, True)
 
     def update_progress(self, fd, condition):
         if Using_Unity:
@@ -403,7 +412,7 @@ class MintStick:
                 progress = round(size * 100)
                 if progress > self.write_progress:
                     self.write_progress = progress
-                    GObject.idle_add(self.set_progress_bar_fraction, size)
+                    GObject.idle_add(self.set_progress, size)
                     if Using_Unity:
                         launcher.set_property("progress", size)
             except:
@@ -423,8 +432,8 @@ class MintStick:
             return False
 
     def raw_write(self, source, target):
-        self.progress.set_sensitive(True)
-        self.progress.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
+        self.progressbar.set_sensitive(True)
+        self.progressbar.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
         self.logger(_('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE':source, 'VAR_TARGET':target})
 
         if os.geteuid() > 0:
@@ -443,7 +452,7 @@ class MintStick:
                 launcher.set_property("progress_visible", False)
                 launcher.set_property("urgent", True)
             message = _('The image was successfully written.')
-            self.set_progress_bar_fraction(1.0)
+            self.set_progress(1.0)
             self.logger(message)
             self.success(_('The image was successfully written.'))
             return False
@@ -484,8 +493,7 @@ class MintStick:
         self.chooser.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.go_button.set_sensitive(False)
-        self.progress = self.wTree.get_object("progressbar")
-        self.progress.set_sensitive(False)
+        self.progressbar.set_sensitive(False)
         self.window.set_title(_("USB Image Writer"))
 
     def close(self, widget):
