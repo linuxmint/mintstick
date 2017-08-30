@@ -20,6 +20,7 @@ Depends:
  procps,
  python, python-parted,
  gir1.2-udisks-2.0,
+ gir1.2-xapp-1.0,
  util-linux
 Conflicts: usb-imagewriter
 Replaces: usb-imagewriter
