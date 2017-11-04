@@ -1,3 +1,19 @@
+mintstick (1.3.5) sylvia; urgency=medium
+
+  [ Paul Jähne ]
+  * Use Mimetypes instead of Extensions
+
+  [ monsta ]
+  * fix runtime dependencies
+  * drop obsolete translations from debian/ dir
+
+  [ Clement Lefebvre ]
+  * Implement support for window-progress
+  * Add missing dependency
+  * l10n: Update desktop files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Sat, 04 Nov 2017 11:43:59 +0000
+
 mintstick (1.3.4) sonya; urgency=medium
 
   [ NikoKrause ]
