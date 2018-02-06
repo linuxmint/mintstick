@@ -101,11 +101,10 @@ class MintStick:
             self.window = self.wTree.get_object("main_dialog")
             self.window.connect("destroy", self.close)
 
-            # set default file filter to *.img
-
+            # set default file filter to *.iso/*.img
             filt = Gtk.FileFilter()
-            filt.add_pattern("*.img")
-            filt.add_pattern("*.iso")
+            filt.add_pattern("*.[iI][mM][gG]")
+            filt.add_pattern("*.[iI][sS][oO]")
             self.chooser.set_filter(filt)
 
             # set callbacks
