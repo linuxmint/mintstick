@@ -22,7 +22,7 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     if fstype == "fat32":
         partition_type = "fat32"
     elif fstype == "exfat":
-        partition_type = "exfat"
+        partition_type = "ntfs"
     elif fstype == "ntfs":
         partition_type = "ntfs"
     elif fstype == "ext4":
