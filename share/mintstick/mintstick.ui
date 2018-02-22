@@ -272,16 +272,20 @@
    + Compatible everywhere.
    -  Cannot handle files larger than 4GB.
 
+exFAT
+  + Compatible almost everywhere.
+  + Can handle files larger than 4GB.
+  -  Not as compatible as FAT32.
+
 NTFS 
   + Compatible with Windows.
-   - Not compatible with Mac and most hardware devices.
-   - Occasional compatibility problems with Linux (NTFS is proprietary and reverse engineered).
+  -  Not compatible with Mac and most hardware devices.
+  -  Occasional compatibility problems with Linux (NTFS is proprietary and reverse engineered).
 
 EXT4 
-
   + Modern, stable, fast, journalized.
   + Supports Linux file permissions.
-   - Not compatible with Windows, Mac and most hardware devices.
+  -  Not compatible with Windows, Mac and most hardware devices.
 </property>
                       </object>
                       <packing>
