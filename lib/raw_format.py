@@ -21,7 +21,9 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     partition_path = "%s1" % device_path
     if fstype == "fat32":
         partition_type = "fat32"
-    if fstype == "ntfs":
+    elif fstype == "exfat":
+        partition_type = "exfat"
+    elif fstype == "ntfs":
         partition_type = "ntfs"
     elif fstype == "ext4":
         partition_type = "ext4"
@@ -42,7 +44,9 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     # Format the FS on the partition
     if fstype == "fat32":
         execute(["mkdosfs", "-F", "32", "-n", volume_label, partition_path])
-    if fstype == "ntfs":
+    elif fstype == "exfat":
+        execute(["mkfs.exfat", "-n", volume_label, partition_path])
+    elif fstype == "ntfs":
         execute(["mkntfs", "-f", "-L", volume_label, partition_path])
     elif fstype == "ext4":
         execute(["mkfs.ext4", "-E", "root_owner=%s:%s" % (uid, gid), "-L", volume_label, partition_path])
@@ -72,8 +76,8 @@ def main():
         elif o in ("-d"):
             device = a
         elif o in ("-f"):
-            if a not in [ "fat32", "ntfs", "ext4" ]:
-                print "Specify fat32, ntfs or ext4"
+            if a not in [ "fat32", "exfat", "ntfs", "ext4" ]:
+                print "Specify fat32, exfat, ntfs or ext4"
                 sys.exit(3)
             fstype = a
         elif o in ("-l"):
