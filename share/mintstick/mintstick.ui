@@ -269,8 +269,8 @@
                         <property name="sensitive">False</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">FAT32 
-   + Compatible everywhere.
-   -  Cannot handle files larger than 4GB.
+  + Compatible everywhere.
+  -  Cannot handle files larger than 4GB.
 
 exFAT
   + Compatible almost everywhere.
