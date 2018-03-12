@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE policyconfig PUBLIC 
- "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" 
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
 
-  <vendor>linuxmint</vendor>
-  <vendor_url>http://hal.freedesktop.org/docs/PolicyKit/</vendor_url>
+  <vendor>Linux Mint</vendor>
+  <vendor_url>https://linuxmint.com</vendor_url>
 
-  <action id="org.freedesktop.policykit.pkexec.run-im">
-    <description>USB Image Writer Authentication dialog</description>
+  <action id="com.linuxmint.mintstick">
+    <description>USB Image Writer / USB Stick Formatter</description>
     <message>This will destroy all data on the target device, are you sure you want to proceed?</message>
     <message xml:lang="bg">Това ще унищожи всички данни на целевото устройство. Ще продължите ли?</message>
     <message xml:lang="ca">Això destruirà totes les vostres dades al dispositiu de destí, esteu segur que voleu procedir?</message>
@@ -32,7 +32,7 @@
     <message xml:lang="zh_CN">这样将会造成目标设备上的 数据损坏 确认继续么？</message>
     <message xml:lang="zh_HK">這樣將會造成目標裝置上的 數據損壞 確認繼續麼？</message>
     <message xml:lang="zh_TW">這樣將會造成目標裝置上的 數據損壞 確認繼續麼？</message>
-    <icon_name>system-run</icon_name>
+    <icon_name>usb-creator</icon_name>
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
