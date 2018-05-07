@@ -1,7 +1,7 @@
 [Nemo Action]
 Active=true
 Exec=mintstick -m iso -i "%F"
-Icon-Name=edit-clear-all-symbolic
+Icon-Name=media-removable-symbolic
 Selection=S
 Extensions=iso;img;
 Name=Make bootable USB stick

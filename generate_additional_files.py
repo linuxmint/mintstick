@@ -61,7 +61,7 @@ additionalfiles.generate(DOMAIN, PATH, "share/applications/mintstick-format-kde.
 prefix="""[Nemo Action]
 Active=true
 Exec=mintstick -m iso -i "%F"
-Icon-Name=edit-clear-all-symbolic
+Icon-Name=media-removable-symbolic
 Selection=S
 Extensions=iso;img;
 """
@@ -70,7 +70,7 @@ additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick.nemo_action
 prefix="""[Nemo Action]
 Active=true
 Exec=mintstick -m format -u %D
-Icon-Name=media-removable-symbolic
+Icon-Name=edit-clear-all-symbolic
 Selection=S
 Extensions=any;
 Conditions=removable;
