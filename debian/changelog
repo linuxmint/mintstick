@@ -1,3 +1,13 @@
+mintstick (1.3.7) tara; urgency=medium
+
+  [ NikoKrause ]
+  * accidentally swapped nemo-action icons (#65)
+
+  [ Clement Lefebvre ]
+  * Generate polkit policy with mint-common
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 30 May 2018 18:43:59 +0100
+
 mintstick (1.3.6) tara; urgency=medium
 
   [ Clement Lefebvre ]
