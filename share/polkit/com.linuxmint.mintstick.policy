@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
@@ -9,29 +10,79 @@
 
   <action id="com.linuxmint.mintstick">
     <description>USB Image Writer / USB Stick Formatter</description>
-    <message>This will destroy all data on the target device, are you sure you want to proceed?</message>
-    <message xml:lang="bg">Това ще унищожи всички данни на целевото устройство. Ще продължите ли?</message>
-    <message xml:lang="ca">Això destruirà totes les vostres dades al dispositiu de destí, esteu segur que voleu procedir?</message>
-    <message xml:lang="cs">Toto zničí všechna data na cílovém zařízení, opravdu chcete pokračovat?</message>
-    <message xml:lang="da">Dette vil ødelægge alle data på mål enheden, er du sikker på at du vil fortsætte?</message>
-    <message xml:lang="de">Dieser Vorgang löscht alle Daten auf dem Zielgerät. Wollen Sie fortfahren?</message>
-    <message xml:lang="es">Esto borrará todos los datos en el dispositivo de destino, ¿está seguro que desea continuar?</message>
-    <message xml:lang="fr">Toutes les données contenues sur ce périphérique vont être détruites. Souhaitez-vous continuer?</message>
-    <message xml:lang="id">Akan menghapus semua data pada perangkat sasaran, apakah anda akan meneruskan?</message>
-    <message xml:lang="it">Questa operazione distrugger&agrave; tutti i dati sulla periferica selezionata, sei sicuro di voler continuare?</message>
-    <message xml:lang="nb">Dette vil ødelegge all data på valgt lagringsmedium, er du sikker på at du ønsker å fortsette?</message>
-    <message xml:lang="nl">Dit zal alle data vernietigen op het doelstation, weet u zeker dat u door wilt gaan?</message>
-    <message xml:lang="pl">Operacja usunie wszystkie dane na urządzeniu docelowym, Czy jesteś pewien że chcesz kontynuować?</message>
-    <message xml:lang="pt">Isto irá destruir todos os dados do dispositivo alvo, você tem certeza que deseja prosseguir?</message>
-    <message xml:lang="pt_BR">Isto irá destruir todos os dados do dispositivo alvo, você tem certeza que deseja prosseguir?</message>
-    <message xml:lang="ru">На целевом устройстве будет уничтожена вся информация. Вы действительно хотите продолжить?</message>
-    <message xml:lang="sk">Toto zničí všetky dáta na cieľovom zariadení, naozaj chcete pokračovať?</message>
-    <message xml:lang="sv">Detta kommer att förstöra all data på målenheten. Är du säker på att du vill fortsätta?</message>
-    <message xml:lang="tr">Bu işlem hedef aygıttaki tüm bilgileri yokedecek işlemi yapmak istediğnize emin misiniz?</message>
-    <message xml:lang="uk"> Це призведе до втрати всіх даних на цільовому пристрої, ви хочете продовжити?</message>
-    <message xml:lang="zh_CN">这样将会造成目标设备上的 数据损坏 确认继续么？</message>
-    <message xml:lang="zh_HK">這樣將會造成目標裝置上的 數據損壞 確認繼續麼？</message>
-    <message xml:lang="zh_TW">這樣將會造成目標裝置上的 數據損壞 確認繼續麼？</message>
+<message>This will destroy all data on the USB stick, are you sure you want to proceed?</message>
+<message xml:lang="am">በ USB stick ላይ ያለው ዳታ በሙሉ ይጠፋል፡ በእርግጥ መቀጠል ይፈልጋሉ?</message>
+<message xml:lang="ar">سيؤدي ذلك إلى تدمير جميع البيانات الموجودة على قرص USB، ل تريد بالتأكيد المتابعة؟</message>
+<message xml:lang="be">Гэта знішчыць усе даныя на UBS-прыладзе. Працягваць?</message>
+<message xml:lang="bg">Това ще изтрие всички данни от картата, наистина ли искате да продължите?</message>
+<message xml:lang="bs">Ova operacija će uništiti sve postojeće podatke na vašem USB memorijskom uređaju, da li ste sigurni da želite nastaviti?</message>
+<message xml:lang="ca">Això destruirà totes les dades en la memòria USB, esteu segur que voleu continuar?</message>
+<message xml:lang="ca@valencia">Això destruirà totes les dades en la memòria USB, esteu segur que voleu continuar?</message>
+<message xml:lang="cs">Tato operace smaže všechna data na USB klíčence! Přejete si pokračovat?</message>
+<message xml:lang="cy">Bydd hyn yn chwalu'r holl ddata sydd ar y cof bach USB, ydych chi'n siŵr eich bod am barhau?</message>
+<message xml:lang="da">Dette vil slette alle data på USB-nøglen. Er du sikker på, du ønsker at fortsætte?</message>
+<message xml:lang="de">Das wird alle Daten auf dem USB-Stick löschen. Sind Sie sicher, dass sie fortfahren möchten?</message>
+<message xml:lang="el">Αυτό θα καταστράψει όλα τα δεδομένα πάνω στη μνήμη USB, είστε σίγουροι ότι θέλετε να συνεχίσετε;</message>
+<message xml:lang="en_CA">This will destroy all data on the USB stick, are you sure you want to procede?</message>
+<message xml:lang="es">Esto destruirá todos los datos de la memoria USB, ¿está seguro de que desea continuar?</message>
+<message xml:lang="et">Seda tehes kustutatakse kõik USB-l olevad andmed. Kas oled kindel, et soovid jätkata?</message>
+<message xml:lang="eu">Honek USB memoriako datu guztiak suntsituko ditu, ziur zaude aurrera jarraitu nahi duzula?</message>
+<message xml:lang="fa">تمامی داده‌های موجود در فلش دیسک نابود خواهد شد، مطمئنید می‌خواهید ادامه دهید؟</message>
+<message xml:lang="fi">Tämä tuhoaa kaiken USB-muistille nyt tallennetun tiedon. Haluatko varmasti jatkaa?</message>
+<message xml:lang="fr">Toutes les données présentes sur la clé USB seront supprimées. Souhaîtez-vous continuer ?</message>
+<message xml:lang="fr_CA">Toutes les données présentes sur la clé USB seront supprimées. Souhaitez-vous continuer?</message>
+<message xml:lang="fy">Dit sil alle data op de USB ferwyderje, binne jo der wis fan?</message>
+<message xml:lang="gd">Sgriosaidh seo an dàta air fad air a' bhioran USB, a bheil thu cinnteach gu bheil thu airson leantainn air adhart?</message>
+<message xml:lang="gl">Isto destruirá todos os datos da memoria USB, confirma que quere continuar?</message>
+<message xml:lang="he">כל הנותנים בהתקן הנשלף יאבדו, האם אתה בטוח שברצונך להמשיך?</message>
+<message xml:lang="hi">यह USB स्टिक पर सारे डेटा को नष्ट करेगा, क्या आप प्रक्रिया जारी रखना चाहते हैं?</message>
+<message xml:lang="hr">Ovo će uništiti sve podatke na USB uređaju, sigurno želite nastaviti?</message>
+<message xml:lang="hu">Minden adat törlése a pendrive eszközről. Biztosan folytatni kívánja?</message>
+<message xml:lang="ia">Isto destruera tote le datos sur le clave USB, desira tu vermente proceder?</message>
+<message xml:lang="id">Ini akan menghapus semua data pada perangkat USB, apakah kamu yakin ingin melanjutkannya?</message>
+<message xml:lang="is">Þetta mun eyða öllum gögnum á USB-lyklinum, ertu viss um að þú viljir halda áfram?</message>
+<message xml:lang="it">Questo cancellerà tutti i dati nella penna USB, sei sicuro di voler continuare?</message>
+<message xml:lang="ja">この操作により USB メモリのデータが全て削除されます、本当にこの操作を続けますか?</message>
+<message xml:lang="kab">Ayagi ad yekkes akk isefka ɣef tsarutt USB, tebɣiḍ ad tkemleḍ?</message>
+<message xml:lang="kk">USB-флештағы барлық мәлімет өшіріледі. Жалғасыртыру?</message>
+<message xml:lang="ko">이 작업은 USB 스틱안의 모든 데이터를 삭제합니다. 정말로 진행하시겠습니까?</message>
+<message xml:lang="ku">Ev tişt wê hemu dane û pelên di darkê USB'ê de bi awayek mayînde jê bibe , gelo tu jixwe bawerkî ku dewam bikî?</message>
+<message xml:lang="lt">Tai sunaikins visus USB atmintinėje esančius duomenis, ar tikrai norite tęsti?</message>
+<message xml:lang="lv">Šī darbība iznīcinās visus datus uz USB zibatmiņas, vai vēlaties turpināt?</message>
+<message xml:lang="ml">ഇത് യു എസ് ബി ഡ്രൈവിലെ എല്ലാ വിവരങ്ങളും നശിപ്പിക്കും. ഇത് തുടരണോ?</message>
+<message xml:lang="mr">या USB  स्टिकवरील सर्व डाटा नष्ट होईल, आपण पुढे जाऊ इच्छित आहात का ?</message>
+<message xml:lang="ms">Ia akan musnahkan semua data dalam pena USB, anda pasti hendak meneruskannya?</message>
+<message xml:lang="nap">Stu fatt sta pe cancellà tutt cose dint 'o lappese USB. Si cunvint ca vuò fa?</message>
+<message xml:lang="nb">Dette vil slette alle data på minnepinnen, er du sikker på at du vil fortsette?</message>
+<message xml:lang="nds">Dies wird alle Daten auf den USB Stick vernichten, sind sie sicher das sie fortfahren wollen?</message>
+<message xml:lang="ne">यो USB मा सबै डेटा नष्ट हुर्नेछ, के तपाईं प्रक्रिया गर्न चाहनुहुन्छ?</message>
+<message xml:lang="nl">Dit zal alle gegevens op het USB-staafje vernietigen; weet u zeker dat u wilt doorgaan?</message>
+<message xml:lang="oc">Totas las donadas presentas sus la clau USB seràn suprimidas. Volètz contunhar ?</message>
+<message xml:lang="pap">E akshon aki lo destrui tur dokumento riba e USB stick, bo tin sigur ku bo ke sigi?</message>
+<message xml:lang="pl">To wymaże wszystkie dane znajdujące się na karcie USB. Czy na pewno kontynuować?</message>
+<message xml:lang="pt">Irá destruir todos os dados no dispositivo USB. Tem a certeza de que quer continuar?</message>
+<message xml:lang="pt_BR">Todos os dados do dispositivo USB serão apagados, tem certeza de que deseja continuar?</message>
+<message xml:lang="pt_PT">Irá destruir todos os dados no dispositivo USB. Tem a certeza de que quer continuar?</message>
+<message xml:lang="ro">Se vor distruge toate datele de pe stickul USB, sigur doriți să continuați?</message>
+<message xml:lang="ru">Вся информмация  на USB-флеш-накопителе будет уничтожена. Продолжить?</message>
+<message xml:lang="sk">Všetky dáta na USB flash disku budú zničené, chcete pokračovať?</message>
+<message xml:lang="sl">To bo uničilo vse podatke na ključu USB. Ali ste prepričani, da želite nadaljevati?</message>
+<message xml:lang="sq">Kjo do të shkatërrojë të gjitha të dhënat në pajisjen USB, a jeni të sigurt që doni të vazhdoni?</message>
+<message xml:lang="sr">Ово ће уништити све податке на УСБ диску. Да ли желите да наставите?</message>
+<message xml:lang="sr@latin">Ово ће уништити све податке на УСБ диску. Да ли желите да наставите?</message>
+<message xml:lang="sv">Detta kommer att radera allt som är lagrat på USB-minnet, är du säker på att du vill fortsätta?</message>
+<message xml:lang="ta">இது USB குச்சியிலுள்ள அனைத்து தரவுகளையும் அழித்துவிடும், இதனைத் தொடர விரும்புகிறீர்களா?</message>
+<message xml:lang="tg">Ин амал ҳамаи иттилоотро дар драйви USB хароб мекунад. Шумо мутмаин ҳастед, ки мехоҳед идома диҳед?</message>
+<message xml:lang="th">การกระทำนี้จะทำลายข้อมูลทุกอย่างบนสติ๊ก USB คุณต้องการทำต่อไปอีกหรือไม่?</message>
+<message xml:lang="tr">Bu işlem USB Bellek üzerindeki tüm verileri yok edecek, devam etmek istiyor musunuz?</message>
+<message xml:lang="uk">Це знищить всі дані на USB-накопичувачі, Ви впевнені, що бажаєте продовжити?</message>
+<message xml:lang="ur">یہ یو.ایس.بی پہ موجود تمام ڈیٹا حذف کردے گا۔ کیا آپ واقعی یہ کرنا چاہتے ہیں؟</message>
+<message xml:lang="uz">Ушбу амал USB хотира қурилмасидаги барча маълумотларни ўчриб ташлайди, давом эттиришга розимисиз?</message>
+<message xml:lang="vi">Thao tác này sẽ huỷ mọi dữ liệu trên thanh USB, bạn có chắc chắn muốn tiến hành không ?</message>
+<message xml:lang="zh_CN">这将破坏 U 盘上的所有数据，您确定要继续吗？</message>
+<message xml:lang="zh_HK">此舉將會銷毀USB 記憶棒上的所有資料，你確定要繼續？</message>
+<message xml:lang="zh_TW">這會銷毀 USB 隨身碟裡的所有資料，您是否確定要繼續?</message>
+
     <icon_name>usb-creator</icon_name>
     <defaults>
       <allow_any>no</allow_any>
