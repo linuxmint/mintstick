@@ -14,7 +14,7 @@ prefix = """[Desktop Entry]
 Version=1.0
 Type=Application
 Terminal=false
-Icon=usb-creator
+Icon=mintstick
 Exec=mintstick -m iso
 Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
@@ -38,7 +38,7 @@ prefix = """[Desktop Entry]
 Version=1.0
 Type=Application
 Terminal=false
-Icon=usb-creator
+Icon=mintstick
 Exec=mintstick -m format
 Categories=GNOME;GTK;Utility;
 NotShowIn=KDE;
@@ -92,7 +92,7 @@ prefix="""
 """
 
 suffix="""
-    <icon_name>usb-creator</icon_name>
+    <icon_name>mintstick</icon_name>
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>

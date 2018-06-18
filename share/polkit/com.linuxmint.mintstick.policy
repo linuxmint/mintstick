@@ -83,7 +83,7 @@
 <message xml:lang="zh_HK">此舉將會銷毀USB 記憶棒上的所有資料，你確定要繼續？</message>
 <message xml:lang="zh_TW">這會銷毀 USB 隨身碟裡的所有資料，您是否確定要繼續?</message>
 
-    <icon_name>usb-creator</icon_name>
+    <icon_name>mintstick</icon_name>
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
