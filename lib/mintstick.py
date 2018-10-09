@@ -157,6 +157,7 @@ class MintStick:
             self.fsmodel = Gtk.ListStore(str, str, int, bool, bool)
             #                     id       label    max-length force-upper-case   force-alpha-numeric
             self.fsmodel.append(["fat32", "FAT32",      11,        True,                True])
+            self.fsmodel.append(["exfat", "exFAT",      15,        False,               False])
             self.fsmodel.append(["ntfs",  "NTFS",       32,        False,               False])
             self.fsmodel.append(["ext4",  "EXT4",       16,        False,               False])
             self.filesystemlist.set_model(self.fsmodel)
