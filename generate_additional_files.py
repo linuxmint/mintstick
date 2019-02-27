@@ -1,11 +1,10 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 DOMAIN = "mintstick"
 PATH = "/usr/share/linuxmint/locale"
 
-import os, gettext, sys
-sys.path.append('/usr/lib/linuxmint/common')
-import additionalfiles
+import os, gettext
+from mintcommon import additionalfiles
 
 os.environ['LANGUAGE'] = "en_US.UTF-8"
 gettext.install(DOMAIN, PATH)

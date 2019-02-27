@@ -13,6 +13,7 @@
 <message>This will destroy all data on the USB stick, are you sure you want to proceed?</message>
 <message xml:lang="am">በ USB stick ላይ ያለው ዳታ በሙሉ ይጠፋል፡ በእርግጥ መቀጠል ይፈልጋሉ?</message>
 <message xml:lang="ar">سيؤدي ذلك إلى تدمير جميع البيانات الموجودة على قرص USB، ل تريد بالتأكيد المتابعة؟</message>
+<message xml:lang="az">Bu, USB yaddaşın bütün verilənini yox edəcək, bunu  sürdürmək istəyirsiniz mi?</message>
 <message xml:lang="be">Гэта знішчыць усе даныя на UBS-прыладзе. Працягваць?</message>
 <message xml:lang="bg">Това ще изтрие всички данни от картата, наистина ли искате да продължите?</message>
 <message xml:lang="bs">Ova operacija će uništiti sve postojeće podatke na vašem USB memorijskom uređaju, da li ste sigurni da želite nastaviti?</message>
@@ -69,7 +70,7 @@
 <message xml:lang="sl">To bo uničilo vse podatke na ključu USB. Ali ste prepričani, da želite nadaljevati?</message>
 <message xml:lang="sq">Kjo do të shkatërrojë të gjitha të dhënat në pajisjen USB, a jeni të sigurt që doni të vazhdoni?</message>
 <message xml:lang="sr">Ово ће уништити све податке на УСБ диску. Да ли желите да наставите?</message>
-<message xml:lang="sr@latin">Ово ће уништити све податке на УСБ диску. Да ли желите да наставите?</message>
+<message xml:lang="sr@latin">Ovo će uništiti sve podatke na USB uređaju, da li ste sigurni da želite da nastavite?</message>
 <message xml:lang="sv">Detta kommer att radera allt som är lagrat på USB-minnet, är du säker på att du vill fortsätta?</message>
 <message xml:lang="ta">இது USB குச்சியிலுள்ள அனைத்து தரவுகளையும் அழித்துவிடும், இதனைத் தொடர விரும்புகிறீர்களா?</message>
 <message xml:lang="tg">Ин амал ҳамаи иттилоотро дар драйви USB хароб мекунад. Шумо мутмаин ҳастед, ки мехоҳед идома диҳед?</message>
