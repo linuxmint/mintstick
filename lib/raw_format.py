@@ -1,6 +1,6 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
-import commands
+import subprocess
 from subprocess import Popen,PIPE,call,STDOUT
 import os, sys
 import getopt
@@ -58,26 +58,26 @@ def main():
     # parse command line options
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hd:f:l:u:g:", ["help", "device=","filesystem=","label=","uid=","gid="])
-    except getopt.error, msg:
-        print msg
-        print "for help use --help"
+    except getopt.error as msg:
+        print(msg)
+        print("for help use --help")
         sys.exit(2)
 
     for o, a in opts:
         if o in ("-h", "--help"):
-            print "Usage: %s -d device -f filesystem -l volume_label\n"  % sys.argv[0]
-            print "-d|--device          : device path"
-            print "-f|--filesystem      : filesystem\n"
-            print "-l|--label           : volume label\n"
-            print "-u|--uid             : uid of user\n"
-            print "-g|--gid             : gid of user\n"
-            print "Example : %s -d /dev/sdj -f fat32 -l \"USB Stick\" -u 1000 -g 1000" % sys.argv[0]
+            print("Usage: %s -d device -f filesystem -l volume_label\n"  % sys.argv[0])
+            print("-d|--device          : device path")
+            print("-f|--filesystem      : filesystem\n")
+            print("-l|--label           : volume label\n")
+            print("-u|--uid             : uid of user\n")
+            print("-g|--gid             : gid of user\n")
+            print("Example : %s -d /dev/sdj -f fat32 -l \"USB Stick\" -u 1000 -g 1000" % sys.argv[0])
             sys.exit(0)
         elif o in ("-d"):
             device = a
         elif o in ("-f"):
             if a not in [ "fat32", "exfat", "ntfs", "ext4" ]:
-                print "Specify fat32, exfat, ntfs or ext4"
+                print("Specify fat32, exfat, ntfs or ext4")
                 sys.exit(3)
             fstype = a
         elif o in ("-l"):
@@ -89,8 +89,8 @@ def main():
 
     argc = len(sys.argv)
     if argc < 11:
-      print "Too few arguments"
-      print "for help use --help"
+      print("Too few arguments")
+      print("for help use --help")
       exit(2)
 
     raw_format(device, fstype, label, uid, gid)

@@ -1,6 +1,5 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
-import commands
 from subprocess import Popen,PIPE,call,STDOUT
 import os
 import signal
@@ -45,7 +44,7 @@ def print_timing(func):
         t1 = time.time()
         res = func(*arg)
         t2 = time.time()
-        print '%s took %0.3f ms' % (func.func_name, (t2-t1)*1000.0)
+        print('%s took %0.3f ms' % (func.__name__, (t2-t1)*1000.0))
         return res
     return wrapper
 
@@ -299,7 +298,7 @@ class MintStick:
 
     def do_format(self, widget):
         if self.debug:
-            print "DEBUG: Format %s as %s" % (self.dev, self.filesystem)
+            print("DEBUG: Format %s as %s" % (self.dev, self.filesystem))
             return
 
         self.udisks_client.handler_block(self.udisk_listener_id)
@@ -334,9 +333,9 @@ class MintStick:
     def raw_format(self, usb_path, fstype, label):
         if os.geteuid() > 0:
             launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen([launcher,'/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen(['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
 
         self.progressbar.show()
         self.pulse_progress()
@@ -365,7 +364,7 @@ class MintStick:
 
     def do_write(self, widget):
         if self.debug:
-            print "DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev)
+            print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
             return
 
         self.go_button.set_sensitive(False)
@@ -438,9 +437,9 @@ class MintStick:
 
         if os.geteuid() > 0:
             launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+            self.process = Popen([launcher,'/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python2', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+            self.process = Popen(['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
         self.write_progress = 0
         self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN|GLib.IO_HUP, self.update_progress)
@@ -511,7 +510,7 @@ class MintStick:
     def write_logfile(self):
         start = self.log.get_start_iter()
         end = self.log.get_end_iter()
-        print self.log.get_text(start, end, False)
+        print(self.log.get_text(start, end, False))
 
     def logger(self, text):
         self.log.insert_at_cursor(text+"\n")
@@ -560,17 +559,17 @@ if __name__ == "__main__":
     mode=None
 
     def usage():
-        print "Usage: mintstick [--debug] -m [format|iso]              : mode (format usb stick or burn iso image)"
-        print "       mintstick [--debug] -m iso [-i|--iso] iso_path"
-        print "       mintstick [--debug] -m format [-u|--usb] usb_device "
-        print "                           [-f|--filesystem] filesystem"
+        print("Usage: mintstick [--debug] -m [format|iso]              : mode (format usb stick or burn iso image)")
+        print("       mintstick [--debug] -m iso [-i|--iso] iso_path")
+        print("       mintstick [--debug] -m format [-u|--usb] usb_device ")
+        print("                           [-f|--filesystem] filesystem")
         exit (0)
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=","usb=","filesystem="])
-    except getopt.error, msg:
-        print msg
-        print "for help use --help"
+    except getopt.error as msg:
+        print(msg)
+        print("for help use --help")
         sys.exit(2)
 
     debug = False
@@ -592,8 +591,8 @@ if __name__ == "__main__":
 
     argc = len(sys.argv)
     if argc > 8:
-        print "Too many arguments"
-        print "for help use --help"
+        print("Too many arguments")
+        print("for help use --help")
         exit(2)
 
     # Mandatory argument
