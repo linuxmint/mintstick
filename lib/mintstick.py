@@ -38,6 +38,8 @@ _ = gettext.gettext
 # https://technet.microsoft.com/en-us/library/bb490925.aspx
 FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
 
+GObject.threads_init()
+
 def print_timing(func):
     def wrapper(*arg):
         t1 = time.time()
@@ -326,7 +328,7 @@ class MintStick:
             self.pulse_progress()
             return True
         else:
-            GLib.idle_add(self.format_job_done, self.process.returncode)
+            GObject.idle_add(self.format_job_done, self.process.returncode)
             self.process = None
             return False
 
