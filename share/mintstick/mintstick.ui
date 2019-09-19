@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
+  <requires lib="gtk+" version="2.20"/>
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="GtkDialog" id="confirm_dialog">
     <property name="can_focus">False</property>
@@ -219,7 +220,6 @@
                   <object class="GtkHBox" id="hbox5">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="spacing">10</property>
                     <child>
                       <object class="GtkLabel" id="label2">
                         <property name="visible">True</property>
@@ -286,6 +286,13 @@ EXT4
   + Modern, stable, fast, journalized.
   + Supports Linux file permissions.
   -  Not compatible with Windows, Mac and most hardware devices.
+
+BTRFS+ZSTD 
+  + Modern, stable, fast, journalized.
+  + Supports Linux file permissions.
+  + Lossless data compression.
+  -  Not compatible with Windows, Mac and most hardware devices.
+
 </property>
                       </object>
                       <packing>
@@ -305,7 +312,6 @@ EXT4
                 <child>
                   <object class="GtkHBox" id="hbox1">
                     <property name="visible">True</property>
-                    <property name="spacing">10</property>
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkLabel" id="label15">
@@ -352,8 +358,9 @@ EXT4
                     <property name="text" translatable="yes"> </property>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">5</property>
                     <property name="position">2</property>
                   </packing>
                 </child>
