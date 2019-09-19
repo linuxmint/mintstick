@@ -158,6 +158,7 @@ class MintStick:
             self.fsmodel.append(["fat32", "FAT32",      11,        True,                True])
             self.fsmodel.append(["exfat", "exFAT",      15,        False,               False])
             self.fsmodel.append(["ntfs",  "NTFS",       32,        False,               False])
+            self.fsmodel.append(["btrfs",  "BTRFS+ZSTD",     32,      False,               False])
             self.fsmodel.append(["ext4",  "EXT4",       16,        False,               False])
             self.filesystemlist.set_model(self.fsmodel)
 
