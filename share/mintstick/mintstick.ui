@@ -286,12 +286,6 @@ EXT4
   + Modern, stable, fast, journalized.
   + Supports Linux file permissions.
   -  Not compatible with Windows, Mac and most hardware devices.
-
-BTRFS+ZSTD 
-  + Modern, stable, fast, journalized.
-  + Supports Linux file permissions.
-  + Lossless data compression.
-  -  Not compatible with Windows, Mac and most hardware devices.
 </property>
                       </object>
                       <packing>
