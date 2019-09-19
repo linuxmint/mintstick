@@ -15,6 +15,7 @@ gi.require_version('Polkit', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('UDisks', '2.0')
 gi.require_version('XApp', '1.0')
+gi.require_version('Unity', '7.0')
 
 from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks, XApp
 
@@ -36,8 +37,6 @@ _ = gettext.gettext
 
 # https://technet.microsoft.com/en-us/library/bb490925.aspx
 FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
-
-GObject.threads_init()
 
 def print_timing(func):
     def wrapper(*arg):
@@ -158,6 +157,7 @@ class MintStick:
             self.fsmodel.append(["fat32", "FAT32",      11,        True,                True])
             self.fsmodel.append(["exfat", "exFAT",      15,        False,               False])
             self.fsmodel.append(["ntfs",  "NTFS",       32,        False,               False])
+            self.fsmodel.append(["btrfs",  "BTRFS+ZSTD",     32,      False,               False])
             self.fsmodel.append(["ext4",  "EXT4",       16,        False,               False])
             self.filesystemlist.set_model(self.fsmodel)
 
@@ -326,7 +326,7 @@ class MintStick:
             self.pulse_progress()
             return True
         else:
-            GObject.idle_add(self.format_job_done, self.process.returncode)
+            GLib.idle_add(self.format_job_done, self.process.returncode)
             self.process = None
             return False
 
