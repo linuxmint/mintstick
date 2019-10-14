@@ -8,6 +8,7 @@ import parted
 sys.path.append('/usr/lib/mintstick')
 from mountutils import *
 import syslog
+import tempfile
 
 def execute(command):
     syslog.syslog(str(command))
@@ -27,6 +28,8 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
         partition_type = "ntfs"
     elif fstype == "ext4":
         partition_type = "ext4"
+    elif fstype == "btrfs":
+        partition_type = "btrfs"
 
     # First erase MBR and partition table , if any
     execute(["dd", "if=/dev/zero", "of=%s" % device_path, "bs=512", "count=1"])
@@ -50,6 +53,14 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
         execute(["mkntfs", "-f", "-L", volume_label, partition_path])
     elif fstype == "ext4":
         execute(["mkfs.ext4", "-E", "root_owner=%s:%s" % (uid, gid), "-L", volume_label, partition_path])
+    elif fstype == "btrfs":
+        execute(["mkfs.btrfs", "-L", volume_label, partition_path])
+        tmp = tempfile.mkdtemp()
+        execute(["mount", partition_path, tmp])
+        execute(["btrfs", "property", "set", tmp, "compression", "zstd"])
+        execute(["chmod", "777", tmp])
+        execute(["umount", tmp])
+        os.rmdir(tmp)
 
     # Exit
     sys.exit(0)
@@ -76,8 +87,8 @@ def main():
         elif o in ("-d"):
             device = a
         elif o in ("-f"):
-            if a not in [ "fat32", "exfat", "ntfs", "ext4" ]:
-                print("Specify fat32, exfat, ntfs or ext4")
+            if a not in [ "fat32", "exfat", "ntfs", "ext4", "btrfs" ]:
+                print("Specify fat32, exfat, ntfs, ext4 or btrfs")
                 sys.exit(3)
             fstype = a
         elif o in ("-l"):
