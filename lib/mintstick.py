@@ -15,6 +15,7 @@ gi.require_version('Polkit', '1.0')
 gi.require_version('Gtk', '3.0')
 gi.require_version('UDisks', '2.0')
 gi.require_version('XApp', '1.0')
+gi.require_version('Unity', '7.0')
 
 from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks, XApp
 
@@ -159,6 +160,7 @@ class MintStick:
             self.fsmodel.append(["exfat", "exFAT",      15,        False,               False])
             self.fsmodel.append(["ntfs",  "NTFS",       32,        False,               False])
             self.fsmodel.append(["ext4",  "EXT4",       16,        False,               False])
+            self.fsmodel.append(["btrfs", "BTRFS+ZSTD",   32,      False,               False])
             self.filesystemlist.set_model(self.fsmodel)
 
             # Renderer
