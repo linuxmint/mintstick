@@ -1,3 +1,15 @@
+mintstick (1.4.1) tricia; urgency=medium
+
+  [ Michael Webster ]
+  * mintstick.ui: fix some padding issues (hand-edited).
+  * all: port python2 to python3
+
+  [ Clement Lefebvre ]
+  * Fix polkit policy file
+  * Add dependency on python3-gi
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 13 Nov 2019 12:36:27 +0100
+
 mintstick (1.4.0) tina; urgency=medium
 
   * Fix generate_additional_files
