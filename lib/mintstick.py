@@ -52,10 +52,12 @@ def print_timing(func):
     return wrapper
 
 
+# noinspection PyUnusedLocal
 class MintStick:
-    def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None, debug=False):
+    def __init__(self, iso_path_arg=None, usb_path_arg=None, filesystem_arg=None, mode_arg=None, debug_arg=False):
 
-        self.debug = debug
+        self.debug = debug_arg
+        self.filesystem = filesystem_arg
 
         def devices_changed_callback(client):
             self.get_devices()
@@ -69,6 +71,8 @@ class MintStick:
 
         self.process = None
         self.source_id = None
+        self.dev = None
+        self.write_progress = None
 
         self.wTree.set_translation_domain(APP)
 
@@ -80,7 +84,7 @@ class MintStick:
         self.confirm_dialog = self.wTree.get_object("confirm_dialog")
         self.success_dialog = self.wTree.get_object("success_dialog")
 
-        if mode == "iso":
+        if mode_arg == "iso":
             self.mode = "normal"
             self.devicelist = self.wTree.get_object("device_combobox")
             self.label = self.wTree.get_object("to_label")
@@ -112,23 +116,23 @@ class MintStick:
 
             # set callbacks
 
-            dict = {
+            callbacks = {
                 "on_cancel_button_clicked": self.close,
                 "on_emergency_button_clicked": self.emergency_ok,
                 "on_success_button_clicked": self.success_ok,
                 "on_confirm_cancel_button_clicked": self.confirm_cancel}
-            self.wTree.connect_signals(dict)
+            self.wTree.connect_signals(callbacks)
 
             self.devicelist.connect("changed", self.device_selected)
             self.go_button.connect("clicked", self.do_write)
             self.chooser.connect("file-set", self.file_selected)
 
-            if iso_path:
-                if os.path.exists(iso_path):
-                    self.chooser.set_filename(iso_path)
+            if iso_path_arg:
+                if os.path.exists(iso_path_arg):
+                    self.chooser.set_filename(iso_path_arg)
                     self.file_selected(self.chooser)
 
-        if mode == "format":
+        if mode_arg == "format":
             self.mode = "format"
             self.devicelist = self.wTree.get_object("formatdevice_combobox")
             self.label = self.wTree.get_object("formatdevice_label")
@@ -145,12 +149,12 @@ class MintStick:
             self.progressbar = self.wTree.get_object("format_progressbar")
             self.filesystemlist = self.wTree.get_object("filesystem_combobox")
             # set callbacks
-            dict = {
+            callbacks = {
                 "on_cancel_button_clicked": self.close,
                 "on_emergency_button_clicked": self.emergency_ok,
                 "on_success_button_clicked": self.success_ok,
                 "on_confirm_cancel_button_clicked": self.confirm_cancel}
-            self.wTree.connect_signals(dict)
+            self.wTree.connect_signals(callbacks)
 
             self.go_button.connect("clicked", self.do_format)
             self.filesystemlist.connect("changed", self.filesystem_selected)
@@ -181,24 +185,24 @@ class MintStick:
             self.filesystemlist.set_sensitive(True)
             # Default's to fat32
             self.filesystemlist.set_active(0)
-            if filesystem is not None:
-                iter = self.fsmodel.get_iter_first()
-                while iter is not None:
-                    value = self.fsmodel.get_value(iter, 0)
-                    if value == filesystem:
-                        self.filesystemlist.set_active_iter(iter)
-                    iter = self.fsmodel.iter_next(iter)
+            if filesystem_arg is not None:
+                itererator = self.fsmodel.get_iter_first()
+                while itererator is not None:
+                    value = self.fsmodel.get_value(itererator, 0)
+                    if value == filesystem_arg:
+                        self.filesystemlist.set_active_iter(itererator)
+                    itererator = self.fsmodel.iter_next(itererator)
 
             self.filesystem_selected(self.filesystemlist)
             self.get_devices()
 
-            if usb_path is not None:
-                iter = self.devicemodel.get_iter_first()
-                while iter is not None:
-                    value = self.devicemodel.get_value(iter, 0)
-                    if usb_path in value:
-                        self.devicelist.set_active_iter(iter)
-                    iter = self.devicemodel.iter_next(iter)
+            if usb_path_arg is not None:
+                itererator = self.devicemodel.get_iter_first()
+                while itererator is not None:
+                    value = self.devicemodel.get_value(itererator, 0)
+                    if usb_path_arg in value:
+                        self.devicelist.set_active_iter(itererator)
+                    itererator = self.devicemodel.iter_next(itererator)
 
         self.window.show_all()
         if self.mode == "format":
@@ -232,11 +236,11 @@ class MintStick:
                                 name = block.get_property('device')
                                 name = ''.join([i for i in name if not i.isdigit()])
 
-                            driveVendor = str(drive.get_property('vendor'))
-                            driveModel = str(drive.get_property('model'))
+                            drive_vendor = str(drive.get_property('vendor'))
+                            drive_model = str(drive.get_property('model'))
 
-                            if driveVendor.strip() != "":
-                                driveModel = "%s %s" % (driveVendor, driveModel)
+                            if drive_vendor.strip() != "":
+                                drive_model = "%s %s" % (drive_vendor, drive_model)
 
                             if size >= 1000000000000:
                                 size = "%.0fTB" % round(size / 1000000000000)
@@ -249,7 +253,7 @@ class MintStick:
                             else:
                                 size = "%.0fB" % round(size)
 
-                            item = "%s (%s) - %s" % (driveModel, name, size)
+                            item = "%s (%s) - %s" % (drive_model, name, size)
 
                             if item not in dct:
                                 dct.append(item)
@@ -258,18 +262,18 @@ class MintStick:
         self.devicelist.set_model(self.devicemodel)
 
     def device_selected(self, widget):
-        iter = self.devicelist.get_active_iter()
-        if iter is not None:
-            self.dev = self.devicemodel.get_value(iter, 0)
+        iterator = self.devicelist.get_active_iter()
+        if iterator is not None:
+            self.dev = self.devicemodel.get_value(iterator, 0)
             self.go_button.set_sensitive(True)
 
     def filesystem_selected(self, widget):
-        iter = self.filesystemlist.get_active_iter()
-        if iter is not None:
-            self.filesystem = self.fsmodel.get_value(iter, 0)
+        itererator = self.filesystemlist.get_active_iter()
+        if itererator is not None:
+            self.filesystem = self.fsmodel.get_value(itererator, 0)
             self.activate_devicelist()
 
-            self.label_entry.set_max_length(self.fsmodel.get_value(iter, 2))
+            self.label_entry.set_max_length(self.fsmodel.get_value(itererator, 2))
             self.on_label_entry_text_changed(self, self.label_entry)
 
     def file_selected(self, widget):
@@ -334,16 +338,18 @@ class MintStick:
             self.process = None
             return False
 
-    def raw_format(self, usb_path, fstype, label):
+    def raw_format(self, usb_path_arg, fstype, label):
         if os.geteuid() > 0:
-            launcher = 'pkexec'
+            polkit_exec = 'pkexec'
             self.process = Popen(
-                [launcher, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py', '-d', usb_path, '-f', fstype,
+                [polkit_exec, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py',
+                 '-d', usb_path_arg, '-f', fstype,
                  '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,
                 preexec_fn=os.setsid)
         else:
             self.process = Popen(
-                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py', '-d', usb_path, '-f', fstype, '-l',
+                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py',
+                 '-d', usb_path_arg, '-f', fstype, '-l',
                  label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,
                 preexec_fn=os.setsid)
 
@@ -416,6 +422,7 @@ class MintStick:
             launcher.set_property("progress_visible", True)
         if condition is GLib.IO_IN:
             line = fd.readline()
+            # noinspection PyBroadException
             try:
                 size = float(line.strip())
                 progress = round(size * 100)
@@ -448,9 +455,9 @@ class MintStick:
             _('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE': source, 'VAR_TARGET': target})
 
         if os.geteuid() > 0:
-            launcher = 'pkexec'
+            polkit_exec = 'pkexec'
             self.process = Popen(
-                [launcher, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target],
+                [polkit_exec, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target],
                 shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
             self.process = Popen(
@@ -538,12 +545,15 @@ class MintStick:
 
     def confirm_cancel(self, widget):
         self.confirm_dialog.hide()
-        if self.mode == "normal": self.set_iso_sensitive()
-        if self.mode == "format": self.set_format_sensitive()
+        if self.mode == "normal":
+            self.set_iso_sensitive()
+        if self.mode == "format":
+            self.set_format_sensitive()
 
     def emergency_ok(self, widget):
         self.emergency_dialog.hide()
-        if self.mode == "normal": self.set_iso_sensitive()
+        if self.mode == "normal":
+            self.set_iso_sensitive()
         if self.mode == "format":
             self.set_format_sensitive()
             self.go_button.set_sensitive(False)
@@ -598,14 +608,15 @@ if __name__ == "__main__":
         elif o in ("-i", "--iso"):
             iso_path = a
         elif o in ("-u", "--usb"):
-            # hack. KDE Solid application gives partition name not device name. Need to remove extra digit from the string.
+            # hack. KDE Solid application gives partition name not device name.
+            # Need to remove extra digit from the string.
             # ie. /dev/sdj1 -> /dev/sdj
             usb_path = ''.join([i for i in a if not i.isdigit()])
         elif o in ("-f", "--filesystem"):
             filesystem = a
         elif o in ("-m", "--mode"):
             mode = a
-        elif o in ("--debug"):
+        elif o in "--debug":
             debug = True
 
     argc = len(sys.argv)
