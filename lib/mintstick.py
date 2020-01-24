@@ -461,8 +461,8 @@ class MintStick:
                 shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
             self.process = Popen(
-                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target], shell=False,
-                stdout=PIPE, preexec_fn=os.setsid)
+                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target],
+                shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
         self.write_progress = 0
         self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN | GLib.IO_HUP, self.update_progress)
