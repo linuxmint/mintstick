@@ -178,12 +178,12 @@ class MintStick:
             # Default's to fat32
             self.filesystemlist.set_active(0)
             if filesystem is not None:
-                iter = model.get_iter_first()
+                iter = self.fsmodel.get_iter_first()
                 while iter is not None:
-                    value = model.get_value(iter, 0)
+                    value = self.fsmodel.get_value(iter, 0)
                     if value == filesystem:
                         self.filesystemlist.set_active_iter(iter)
-                    iter = model.iter_next(iter)
+                    iter = self.fsmodel.iter_next(iter)
 
             self.filesystem_selected(self.filesystemlist)
             self.get_devices()
