@@ -38,6 +38,7 @@ _ = gettext.gettext
 # https://technet.microsoft.com/en-us/library/bb490925.aspx
 FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
 
+
 # https://wiki.gnome.org/PyGObject/Threading
 # GObject.threads_init()
 
