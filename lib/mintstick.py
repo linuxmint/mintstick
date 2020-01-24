@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from subprocess import Popen,PIPE,call,STDOUT
+from subprocess import Popen, PIPE, call, STDOUT
 import os
 import signal
 import re
@@ -20,12 +20,13 @@ from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks, XApp
 
 try:
     from gi.repository import Unity
+
     Using_Unity = True
 except ImportError:
     Using_Unity = False
 
 if Using_Unity:
-    launcher = Unity.LauncherEntry.get_for_desktop_id ("mintstick.desktop")
+    launcher = Unity.LauncherEntry.get_for_desktop_id("mintstick.desktop")
 
 APP = 'mintstick'
 LOCALE_DIR = "/usr/share/linuxmint/locale"
@@ -39,14 +40,17 @@ FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", 
 
 GObject.threads_init()
 
+
 def print_timing(func):
     def wrapper(*arg):
         t1 = time.time()
         res = func(*arg)
         t2 = time.time()
-        print('%s took %0.3f ms' % (func.__name__, (t2-t1)*1000.0))
+        print('%s took %0.3f ms' % (func.__name__, (t2 - t1) * 1000.0))
         return res
+
     return wrapper
+
 
 class MintStick:
     def __init__(self, iso_path=None, usb_path=None, filesystem=None, mode=None, debug=False):
@@ -73,7 +77,7 @@ class MintStick:
         self.ddpid = 0
 
         self.emergency_dialog = self.wTree.get_object("emergency_dialog")
-        self.confirm_dialog =  self.wTree.get_object("confirm_dialog")
+        self.confirm_dialog = self.wTree.get_object("confirm_dialog")
         self.success_dialog = self.wTree.get_object("success_dialog")
 
         if mode == "iso":
@@ -109,10 +113,10 @@ class MintStick:
             # set callbacks
 
             dict = {
-                    "on_cancel_button_clicked" : self.close,
-                    "on_emergency_button_clicked" : self.emergency_ok,
-                    "on_success_button_clicked" : self.success_ok,
-                    "on_confirm_cancel_button_clicked" : self.confirm_cancel}
+                "on_cancel_button_clicked": self.close,
+                "on_emergency_button_clicked": self.emergency_ok,
+                "on_success_button_clicked": self.success_ok,
+                "on_confirm_cancel_button_clicked": self.confirm_cancel}
             self.wTree.connect_signals(dict)
 
             self.devicelist.connect("changed", self.device_selected)
@@ -125,7 +129,7 @@ class MintStick:
                     self.file_selected(self.chooser)
 
         if mode == "format":
-            self.mode="format"
+            self.mode = "format"
             self.devicelist = self.wTree.get_object("formatdevice_combobox")
             self.label = self.wTree.get_object("formatdevice_label")
             self.expander = self.wTree.get_object("formatdetail_expander")
@@ -142,10 +146,10 @@ class MintStick:
             self.filesystemlist = self.wTree.get_object("filesystem_combobox")
             # set callbacks
             dict = {
-                    "on_cancel_button_clicked" : self.close,
-                    "on_emergency_button_clicked" : self.emergency_ok,
-                    "on_success_button_clicked" : self.success_ok,
-                    "on_confirm_cancel_button_clicked" : self.confirm_cancel}
+                "on_cancel_button_clicked": self.close,
+                "on_emergency_button_clicked": self.emergency_ok,
+                "on_success_button_clicked": self.success_ok,
+                "on_confirm_cancel_button_clicked": self.confirm_cancel}
             self.wTree.connect_signals(dict)
 
             self.go_button.connect("clicked", self.do_format)
@@ -155,10 +159,10 @@ class MintStick:
             # Filesystemlist
             self.fsmodel = Gtk.ListStore(str, str, int, bool, bool)
             #                     id       label    max-length force-upper-case   force-alpha-numeric
-            self.fsmodel.append(["fat32", "FAT32",      11,        True,                True])
-            self.fsmodel.append(["exfat", "exFAT",      15,        False,               False])
-            self.fsmodel.append(["ntfs",  "NTFS",       32,        False,               False])
-            self.fsmodel.append(["ext4",  "EXT4",       16,        False,               False])
+            self.fsmodel.append(["fat32", "FAT32", 11, True, True])
+            self.fsmodel.append(["exfat", "exFAT", 15, False, False])
+            self.fsmodel.append(["ntfs", "NTFS", 32, False, False])
+            self.fsmodel.append(["ext4", "EXT4", 16, False, False])
             self.filesystemlist.set_model(self.fsmodel)
 
             # Renderer
@@ -197,7 +201,7 @@ class MintStick:
                     iter = self.devicemodel.iter_next(iter)
 
         self.window.show_all()
-        if self.mode=="format":
+        if self.mode == "format":
             self.expander.hide()
         self.log = self.logview.get_buffer()
 
@@ -332,10 +336,16 @@ class MintStick:
 
     def raw_format(self, usb_path, fstype, label):
         if os.geteuid() > 0:
-            launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            launcher = 'pkexec'
+            self.process = Popen(
+                [launcher, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py', '-d', usb_path, '-f', fstype,
+                 '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,
+                preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py','-d',usb_path,'-f',fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,  preexec_fn=os.setsid)
+            self.process = Popen(
+                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py', '-d', usb_path, '-f', fstype, '-l',
+                 label, '-u', str(os.geteuid()), '-g', str(os.getgid())], shell=False, stdout=PIPE,
+                preexec_fn=os.setsid)
 
         self.progressbar.show()
         self.pulse_progress()
@@ -373,7 +383,7 @@ class MintStick:
         source = self.chooser.get_filename()
         target = self.dev
         self.logger(_('Image:') + ' ' + source)
-        self.logger(_('USB stick:')+ ' ' + self.dev)
+        self.logger(_('USB stick:') + ' ' + self.dev)
 
         if os.geteuid() > 0:
             self.raw_write(source, target)
@@ -389,8 +399,8 @@ class MintStick:
 
     def set_progress(self, size):
         self.progressbar.set_fraction(size)
-        str_progress = "%3.0f%%" % (float(size)*100)
-        int_progress = int(float(size)*100)
+        str_progress = "%3.0f%%" % (float(size) * 100)
+        int_progress = int(float(size) * 100)
         self.progressbar.set_text(str_progress)
         self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
         XApp.set_window_progress_pulse(self.window, False)
@@ -404,7 +414,7 @@ class MintStick:
     def update_progress(self, fd, condition):
         if Using_Unity:
             launcher.set_property("progress_visible", True)
-        if condition  is GLib.IO_IN:
+        if condition is GLib.IO_IN:
             line = fd.readline()
             try:
                 size = float(line.strip())
@@ -432,17 +442,23 @@ class MintStick:
 
     def raw_write(self, source, target):
         self.progressbar.set_sensitive(True)
-        self.progressbar.set_text(_('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
-        self.logger(_('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE':source, 'VAR_TARGET':target})
+        self.progressbar.set_text(
+            _('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
+        self.logger(
+            _('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE': source, 'VAR_TARGET': target})
 
         if os.geteuid() > 0:
-            launcher='pkexec'
-            self.process = Popen([launcher,'/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+            launcher = 'pkexec'
+            self.process = Popen(
+                [launcher, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target],
+                shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
-            self.process = Popen(['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py','-s',source,'-t',target], shell=False, stdout=PIPE, preexec_fn=os.setsid)
+            self.process = Popen(
+                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target], shell=False,
+                stdout=PIPE, preexec_fn=os.setsid)
 
         self.write_progress = 0
-        self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN|GLib.IO_HUP, self.update_progress)
+        self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN | GLib.IO_HUP, self.update_progress)
         GObject.timeout_add(500, self.check_write_job)
 
     def write_job_done(self, rc):
@@ -467,7 +483,7 @@ class MintStick:
         self.emergency(message)
         return False
 
-    def success(self,message):
+    def success(self, message):
         label = self.wTree.get_object("label5")
         label.set_text(message)
         if self.mode == "normal":
@@ -481,7 +497,7 @@ class MintStick:
             self.final_unsensitive()
         label = self.wTree.get_object("label6")
         label.set_text(message)
-        #self.expander.set_expanded(True)
+        # self.expander.set_expanded(True)
         mark = self.log.create_mark("end", self.log.get_end_iter(), False)
         self.logview.scroll_to_mark(mark, 0.05, True, 0.0, 1.0)
         resp = self.emergency_dialog.run()
@@ -513,26 +529,26 @@ class MintStick:
         print(self.log.get_text(start, end, False))
 
     def logger(self, text):
-        self.log.insert_at_cursor(text+"\n")
+        self.log.insert_at_cursor(text + "\n")
 
     def activate_devicelist(self):
         self.devicelist.set_sensitive(True)
         self.expander.set_sensitive(True)
         self.label.set_sensitive(True)
 
-    def confirm_cancel(self,widget):
+    def confirm_cancel(self, widget):
         self.confirm_dialog.hide()
         if self.mode == "normal": self.set_iso_sensitive()
         if self.mode == "format": self.set_format_sensitive()
 
-    def emergency_ok(self,widget):
+    def emergency_ok(self, widget):
         self.emergency_dialog.hide()
         if self.mode == "normal": self.set_iso_sensitive()
         if self.mode == "format":
             self.set_format_sensitive()
             self.go_button.set_sensitive(False)
 
-    def success_ok(self,widget):
+    def success_ok(self, widget):
         self.success_dialog.hide()
         if self.mode == "normal":
             self.set_iso_sensitive()
@@ -551,22 +567,25 @@ class MintStick:
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
 
+
 if __name__ == "__main__":
 
-    usb_path=None
-    iso_path=None
-    filesystem=None
-    mode=None
+    usb_path = None
+    iso_path = None
+    filesystem = None
+    mode = None
+
 
     def usage():
         print("Usage: mintstick [--debug] -m [format|iso]              : mode (format usb stick or burn iso image)")
         print("       mintstick [--debug] -m iso [-i|--iso] iso_path")
         print("       mintstick [--debug] -m format [-u|--usb] usb_device ")
         print("                           [-f|--filesystem] filesystem")
-        exit (0)
+        exit(0)
+
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=","usb=","filesystem="])
+        opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=", "usb=", "filesystem="])
     except getopt.error as msg:
         print(msg)
         print("for help use --help")
@@ -585,7 +604,7 @@ if __name__ == "__main__":
         elif o in ("-f", "--filesystem"):
             filesystem = a
         elif o in ("-m", "--mode"):
-            mode=a
+            mode = a
         elif o in ("--debug"):
             debug = True
 
@@ -601,7 +620,7 @@ if __name__ == "__main__":
 
     MintStick(iso_path, usb_path, filesystem, mode, debug)
 
-    #start the main loop
-    #mainloop = GObject.MainLoop()
-    #mainloop.run()
+    # start the main loop
+    # mainloop = GObject.MainLoop()
+    # mainloop.run()
     Gtk.main()
