@@ -38,7 +38,8 @@ _ = gettext.gettext
 # https://technet.microsoft.com/en-us/library/bb490925.aspx
 FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
 
-GObject.threads_init()
+# https://wiki.gnome.org/PyGObject/Threading
+# GObject.threads_init()
 
 
 def print_timing(func):
@@ -334,7 +335,7 @@ class MintStick:
             self.pulse_progress()
             return True
         else:
-            GObject.idle_add(self.format_job_done, self.process.returncode)
+            GLib.idle_add(self.format_job_done, self.process.returncode)
             self.process = None
             return False
 
@@ -356,7 +357,7 @@ class MintStick:
         self.progressbar.show()
         self.pulse_progress()
 
-        GObject.timeout_add(500, self.check_format_job)
+        GLib.timeout_add(500, self.check_format_job)
 
     def format_job_done(self, rc):
         self.set_progress(1.0)
@@ -428,7 +429,7 @@ class MintStick:
                 progress = round(size * 100)
                 if progress > self.write_progress:
                     self.write_progress = progress
-                    GObject.idle_add(self.set_progress, size)
+                    GLib.idle_add(self.set_progress, size)
                     if Using_Unity:
                         launcher.set_property("progress", size)
             except:
@@ -443,7 +444,7 @@ class MintStick:
         if self.process.returncode is None:
             return True
         else:
-            GObject.idle_add(self.write_job_done, self.process.returncode)
+            GLib.idle_add(self.write_job_done, self.process.returncode)
             self.process = None
             return False
 
@@ -466,7 +467,7 @@ class MintStick:
 
         self.write_progress = 0
         self.source_id = GLib.io_add_watch(self.process.stdout, GLib.IO_IN | GLib.IO_HUP, self.update_progress)
-        GObject.timeout_add(500, self.check_write_job)
+        GLib.timeout_add(500, self.check_write_job)
 
     def write_job_done(self, rc):
         if rc == 0:
