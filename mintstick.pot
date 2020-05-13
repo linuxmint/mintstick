@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-07 13:13+0100\n"
+"POT-Creation-Date: 2020-05-13 16:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,118 +17,114 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:86
+#: lib/mintstick.py:95
 msgid "Write"
 msgstr ""
 
-#: lib/mintstick.py:134 generate_additional_files.py:78
+#: lib/mintstick.py:143 generate_additional_files.py:77
 msgid "Format"
 msgstr ""
 
-#: lib/mintstick.py:224
+#: lib/mintstick.py:234
 msgid "unknown"
 msgstr ""
 
-#: lib/mintstick.py:348 lib/mintstick.py:350
+#: lib/mintstick.py:364 lib/mintstick.py:366
 msgid "The USB stick was formatted successfully."
 msgstr ""
 
-#: lib/mintstick.py:353
+#: lib/mintstick.py:369
 #, python-format
 msgid "An error occured while creating a partition on %s."
 msgstr ""
 
-#: lib/mintstick.py:355 lib/mintstick.py:463
+#: lib/mintstick.py:371 lib/mintstick.py:486
 msgid "Authentication Error."
 msgstr ""
 
-#: lib/mintstick.py:357 lib/mintstick.py:465
+#: lib/mintstick.py:373 lib/mintstick.py:488
 msgid "An error occurred."
 msgstr ""
 
-#: lib/mintstick.py:375
+#: lib/mintstick.py:391
 msgid "Image:"
 msgstr ""
 
-#: lib/mintstick.py:376
+#: lib/mintstick.py:392
 msgid "USB stick:"
 msgstr ""
 
-#: lib/mintstick.py:395 lib/mintstick.py:401 lib/mintstick.py:496
-#: generate_additional_files.py:23 generate_additional_files.py:35
-#: share/mintstick/mintstick.ui.h:31
+#: lib/mintstick.py:411 lib/mintstick.py:417 lib/mintstick.py:519
+#: generate_additional_files.py:22 generate_additional_files.py:34
+#: share/mintstick/mintstick.ui.h:30
 msgid "USB Image Writer"
 msgstr ""
 
-#: lib/mintstick.py:435
+#: lib/mintstick.py:453
 #, python-format
 msgid "Writing %(VAR_FILE)s to %(VAR_DEV)s"
 msgstr ""
 
-#: lib/mintstick.py:436
+#: lib/mintstick.py:455
 #, python-format
 msgid "Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s"
 msgstr ""
 
-#: lib/mintstick.py:453 lib/mintstick.py:456
+#: lib/mintstick.py:476 lib/mintstick.py:479
 msgid "The image was successfully written."
 msgstr ""
 
-#: lib/mintstick.py:459
+#: lib/mintstick.py:482
 msgid "Not enough space on the USB stick."
 msgstr ""
 
-#: lib/mintstick.py:461
+#: lib/mintstick.py:484
 msgid "An error occured while copying the image."
 msgstr ""
 
-#: generate_additional_files.py:23 generate_additional_files.py:35
-#: generate_additional_files.py:68
+#: generate_additional_files.py:22 generate_additional_files.py:34
+#: generate_additional_files.py:67
 msgid "Make a bootable USB stick"
 msgstr ""
 
-#: generate_additional_files.py:47 generate_additional_files.py:59
-#: share/mintstick/mintstick.ui.h:4
+#: generate_additional_files.py:46 generate_additional_files.py:58
+#: share/mintstick/mintstick.ui.h:3
 msgid "USB Stick Formatter"
 msgstr ""
 
-#: generate_additional_files.py:47 generate_additional_files.py:59
-#: generate_additional_files.py:78
+#: generate_additional_files.py:46 generate_additional_files.py:58
+#: generate_additional_files.py:77
 msgid "Format a USB stick"
 msgstr ""
 
-#: generate_additional_files.py:68
+#: generate_additional_files.py:67
 msgid "Make bootable USB stick"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:1
-msgid " "
-msgstr ""
-
-#: share/mintstick/mintstick.ui.h:2
+#: generate_additional_files.py:108 share/mintstick/mintstick.ui.h:1
 msgid ""
 "This will destroy all data on the USB stick, are you sure you want to "
 "proceed?"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:3
+#: share/mintstick/mintstick.ui.h:2
 msgid ""
 "Something went wrong, please see the details window for the exact error."
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:5
+#: share/mintstick/mintstick.ui.h:4
 msgid "Format:"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:6
+#: share/mintstick/mintstick.ui.h:5
 msgid "Select a USB stick"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:7
+#: share/mintstick/mintstick.ui.h:6
 msgid "as"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:8
+#: share/mintstick/mintstick.ui.h:7
 msgid ""
 "FAT32 \n"
 "  + Compatible everywhere.\n"
@@ -151,38 +147,38 @@ msgid ""
 "  -  Not compatible with Windows, Mac and most hardware devices.\n"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:27
+#: share/mintstick/mintstick.ui.h:26
 msgid "Volume label:"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:28
+#: share/mintstick/mintstick.ui.h:27
 msgid "Choose a name for your USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:29
+#: share/mintstick/mintstick.ui.h:28
 msgid "USB Stick"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:30
+#: share/mintstick/mintstick.ui.h:29
 msgid "Details"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:32
+#: share/mintstick/mintstick.ui.h:31
 msgid "Write image:"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:33
+#: share/mintstick/mintstick.ui.h:32
 msgid "Select an image"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:34
+#: share/mintstick/mintstick.ui.h:33
 msgid "Select Image"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:35
+#: share/mintstick/mintstick.ui.h:34
 msgid "to"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:36
+#: share/mintstick/mintstick.ui.h:35
 msgid "The image was written successfully."
 msgstr ""
