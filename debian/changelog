@@ -1,3 +1,18 @@
+mintstick (1.4.2) ulyana; urgency=medium
+
+  [ Michael Webster ]
+  * debian/control: Depend on python3.
+
+  [ Frede Hundewadt ]
+  * fix model reference
+  * pep code standard formatting
+
+  [ Clement Lefebvre ]
+  * l10n: Update POT
+  * l10n: Generate files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 13 May 2020 16:11:32 +0100
+
 mintstick (1.4.1) tricia; urgency=medium
 
   [ Michael Webster ]
