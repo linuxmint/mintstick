@@ -76,8 +76,7 @@ Conditions=removable;
 """
 additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-format.nemo_action", prefix, _("Format"), _("Format a USB stick"), "")
 
-prefix="""
-<?xml version="1.0" encoding="UTF-8"?>
+prefix="""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
@@ -95,11 +94,12 @@ suffix="""
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_self_keep</allow_active>
+      <allow_active>auth_admin_keep</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/python3</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_write.py</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_format.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/mintstick/raw_write.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/mintstick/raw_format.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
 
 </policyconfig>

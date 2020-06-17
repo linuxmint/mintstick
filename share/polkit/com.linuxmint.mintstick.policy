@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
@@ -46,6 +45,7 @@
 <message xml:lang="is">Þetta mun eyða öllum gögnum á USB-lyklinum, ertu viss um að þú viljir halda áfram?</message>
 <message xml:lang="it">Questo cancellerà tutti i dati nella penna USB, sei sicuro di voler continuare?</message>
 <message xml:lang="ja">この操作により USB メモリのデータが全て削除されます、本当にこの操作を続けますか?</message>
+<message xml:lang="ka">ეს გაანადგურებს ყველა მონაცემს USB ჯოხზე, გსურთ გაგრძელება?</message>
 <message xml:lang="kab">Ayagi ad yekkes akk isefka ɣef tsarutt USB, tebɣiḍ ad tkemleḍ?</message>
 <message xml:lang="kk">USB-флештағы барлық мәлімет өшіріледі. Жалғасыртыру?</message>
 <message xml:lang="ko">이 작업은 USB 스틱안의 모든 데이터를 삭제합니다. 정말로 진행하시겠습니까?</message>
@@ -89,11 +89,12 @@
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_self_keep</allow_active>
+      <allow_active>auth_admin_keep</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/python3</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_write.py</annotate>
-    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/linuxmint/mintstick/raw_format.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/mintstick/raw_write.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.argv1">/usr/lib/mintstick/raw_format.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
 
 </policyconfig>
