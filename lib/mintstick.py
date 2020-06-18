@@ -22,7 +22,7 @@ try:
     gi.require_version('Unity', '7.0')
     from gi.repository import Unity
     Using_Unity = True
-except ImportError:
+except Exception:
     Using_Unity = False
 
 if Using_Unity:
