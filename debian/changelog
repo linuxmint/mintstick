@@ -1,3 +1,9 @@
+mintstick (1.4.4) ulyana; urgency=medium
+
+  * Unity: catch all exceptions
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 18 Jun 2020 14:08:31 +0100
+
 mintstick (1.4.3) ulyana; urgency=medium
 
   * l10n: Fix generate_additional_files.py
