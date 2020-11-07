@@ -16,6 +16,8 @@ def execute(command):
 
 def raw_format(device_path, fstype, volume_label, uid, gid):
 
+    device = parted.getDevice(device_path)
+
     do_umount(device_path)
 
     partition_path = "%s1" % device_path
@@ -29,7 +31,9 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
         partition_type = "ext4"
 
     # First erase MBR and partition table , if any
-    execute(["dd", "if=/dev/zero", "of=%s" % device_path, "bs=512", "count=1"])
+    # execute(["dd", "if=/dev/zero", "of=%s" % device_path, "bs=512", "count=1"])
+
+    device.clobber()
 
     # Make the partition table
     execute(["parted", device_path, "mktable", "msdos"])
