@@ -1,5 +1,3 @@
-- drop dd call from code and reimplement a proper python handler
-  with progress reporting for this
 - actually write to target, currently we only write /tmp/test.img
   until everything works right
 - make the shell wrapper script go away (should be gone with
