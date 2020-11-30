@@ -7,7 +7,7 @@ def do_umount(target):
         if mounts:
             print('Unmounting all partitions of '+target+':')
         for mount in mounts:
-            print('Trying to unmount '+mount[0]+'...')       
+            print('Trying to unmount '+mount[0]+'...')
             try:
                 retcode = call('umount '+mount[0], shell=True)
                 if retcode < 0:
