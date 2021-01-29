@@ -286,6 +286,7 @@ class MintStick:
 
         active_iter = self.filesystemlist.get_active_iter()
         value = self.fsmodel.get_value(active_iter, 0)
+        cursor_pos = self.label_entry.props.cursor_position
 
         if self.fsmodel.get_value(active_iter, 3):
             old_text = self.label_entry.get_text()
@@ -303,6 +304,7 @@ class MintStick:
 
         length = self.label_entry.get_buffer().get_length()
         self.label_entry.select_region(length, -1)
+        self.label_entry.set_position(cursor_pos)
 
         self.label_entry.handler_unblock(self.label_entry_changed_id)
 
