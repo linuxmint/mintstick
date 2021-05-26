@@ -1,3 +1,16 @@
+mintstick (1.4.5) uma; urgency=medium
+
+  [ Erdem Ersoy ]
+  * mountutils.py: Remove trailing spaces (#81)
+
+  [ Eric ]
+  * Fixed volume label entry in format mode
+
+  [ Clement Lefebvre ]
+  * remove TODO file
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 26 May 2021 13:48:24 +0100
+
 mintstick (1.4.4) ulyana; urgency=medium
 
   * Unity: catch all exceptions
