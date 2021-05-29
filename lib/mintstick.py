@@ -97,6 +97,11 @@ class MintStick:
             self.progressbar = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
 
+            # Making file chooser accessible for users with screen reader
+            label = self.wTree.get_object("label_write_image")
+            button = self.chooser.get_children()[0]
+            label.set_mnemonic_widget(button)
+
             # Devicelist model
             self.devicemodel = Gtk.ListStore(str, str)
 
