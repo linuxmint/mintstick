@@ -17,4 +17,6 @@ Please use Launchpad to translate Mintstick: https://translations.launchpad.net/
 
 The PO files in this project are imported from there.
 
+## License
+- Code: GPLv2
 
