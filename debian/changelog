@@ -1,3 +1,10 @@
+mintstick (1.4.6) uma; urgency=medium
+
+  [ nalin.x.linux ]
+  * Made accessible for users with screen reader
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 25 Jun 2021 16:32:47 +0100
+
 mintstick (1.4.5) uma; urgency=medium
 
   [ Erdem Ersoy ]
