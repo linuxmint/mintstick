@@ -29,7 +29,7 @@ if Using_Unity:
     launcher = Unity.LauncherEntry.get_for_desktop_id("mintstick.desktop")
 
 APP = 'mintstick'
-LOCALE_DIR = "/usr/share/linuxmint/locale"
+LOCALE_DIR = "/usr/share/locale"
 locale.bindtextdomain(APP, LOCALE_DIR)
 gettext.bindtextdomain(APP, LOCALE_DIR)
 gettext.textdomain(APP)
