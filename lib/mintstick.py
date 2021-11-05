@@ -374,6 +374,11 @@ class MintStick:
             return False
         elif rc == 5:
             message = _("An error occured while creating a partition on %s.") % usb_path
+        elif rc == 126:
+            # Elevation was cancelled.
+            self.set_format_sensitive()
+            self.udisks_client.handler_unblock(self.udisk_listener_id)
+            return False
         elif rc == 127:
             message = _('Authentication Error.')
         else:
