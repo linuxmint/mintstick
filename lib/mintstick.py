@@ -420,19 +420,13 @@ class MintStick:
         str_progress = "%3.0f%%" % (float(size) * 100)
         int_progress = int(float(size) * 100)
         self.progressbar.set_text(str_progress)
-        if self.mode == "normal":
-          self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
-        else:
-          self.window.set_title("%s - %s" % (str_progress, _("USB Stick Formatter")))
+        self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
         XApp.set_window_progress_pulse(self.window, False)
         XApp.set_window_progress(self.window, int_progress)
 
     def pulse_progress(self):
         self.progressbar.pulse()
-        if self.mode == "normal":
-          self.window.set_title(_("USB Image Writer"))
-        else:
-           self.window.set_title(_("USB Stick Formatter"))
+        self.window.set_title(_("USB Image Writer"))
         XApp.set_window_progress_pulse(self.window, True)
 
     def update_progress(self, fd, condition):
@@ -534,10 +528,7 @@ class MintStick:
         self.devicelist.set_sensitive(False)
         self.go_button.set_sensitive(False)
         self.progressbar.set_sensitive(False)
-        if self.mode == "normal":
-          self.window.set_title(_("USB Image Writer"))
-        else:
-          self.window.set_title(_("USB Stick Formatter"))
+        self.window.set_title(_("USB Image Writer"))
 
     def close(self, widget):
         self.write_logfile()
