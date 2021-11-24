@@ -1,3 +1,13 @@
+mintstick (1.4.7) una; urgency=medium
+
+  [ Musa Ünal ]
+  * Update README (#88)
+
+  [ LinuxOnTheDesktop ]
+  * Fix window title during format operation (#97)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 24 Nov 2021 14:51:58 +0000
+
 mintstick (1.4.6) uma; urgency=medium
 
   [ nalin.x.linux ]
