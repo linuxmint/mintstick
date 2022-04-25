@@ -268,6 +268,10 @@ class MintStick:
 
         self.devicelist.set_model(self.devicemodel)
 
+        itererator = self.devicemodel.get_iter_first()
+        if itererator is not None:
+            self.devicelist.set_active_iter(itererator)
+
     def device_selected(self, widget):
         iterator = self.devicelist.get_active_iter()
         if iterator is not None:
