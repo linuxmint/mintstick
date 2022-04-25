@@ -24,7 +24,7 @@ Depends:
  gir1.2-udisks-2.0,
  gir1.2-xapp-1.0,
  util-linux,
- exfatprogs
+ exfatprogs | exfat-utils
 Conflicts: usb-imagewriter
 Replaces: usb-imagewriter
 Description: write .img and .iso files to USB sticks
