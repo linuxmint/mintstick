@@ -670,6 +670,20 @@ EXT4
               </packing>
             </child>
             <child>
+              <object class="GtkButton" id="check_sha256_button">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkButton" id="write_button">
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
@@ -680,7 +694,7 @@ EXT4
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>

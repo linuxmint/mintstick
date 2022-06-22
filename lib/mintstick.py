@@ -96,6 +96,9 @@ class MintStick:
             self.logview = self.wTree.get_object("detail_text")
             self.progressbar = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
+            self.hash_button = self.wTree.get_object("check_sha256_button")
+            self.hash_button.set_label("Check SHA256")
+            self.hash_button.set_sensitive(False)
 
             # Making file chooser accessible for users with screen reader
             label = self.wTree.get_object("label_write_image")
@@ -133,6 +136,7 @@ class MintStick:
             self.devicelist.connect("changed", self.device_selected)
             self.go_button.connect("clicked", self.do_write)
             self.chooser.connect("file-set", self.file_selected)
+            self.hash_button.connect("clicked", self.do_hash_check)
 
             if iso_path_arg:
                 if os.path.exists(iso_path_arg):
@@ -285,6 +289,7 @@ class MintStick:
 
     def file_selected(self, widget):
         self.activate_devicelist()
+        self.hash_button.set_sensitive(True)
 
     def on_label_entry_text_changed(self, widget, data=None):
         self.label_entry.handler_block(self.label_entry_changed_id)
@@ -385,6 +390,9 @@ class MintStick:
 
         return False
 
+    def do_hash_check(self, widget):
+        Popen(["mint-sha256sum", self.chooser.get_filename()])
+
     def do_write(self, widget):
         if self.debug:
             print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
@@ -393,6 +401,7 @@ class MintStick:
         self.go_button.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.chooser.set_sensitive(False)
+        self.hash_button.set_sensitive(False)
         source = self.chooser.get_filename()
         target = self.dev
         self.logger(_('Image:') + ' ' + source)
@@ -577,6 +586,7 @@ class MintStick:
         self.chooser.set_sensitive(True)
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
+        self.hash_button.set_sensitive(True)
 
     def set_format_sensitive(self):
         self.get_devices()
