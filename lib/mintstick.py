@@ -236,12 +236,8 @@ class MintStick:
                         removable = bool(drive.get_property('removable'))
 
                         if is_usb and size > 0 and removable and not optical:
-                            name = _("unknown")
-
-                            block = obj.get_block()
-                            if block is not None:
-                                name = block.get_property('device')
-                                name = ''.join([i for i in name if not i.isdigit()])
+                            name = block.get_property('device')
+                            name = ''.join([i for i in name if not i.isdigit()])
 
                             drive_vendor = str(drive.get_property('vendor'))
                             drive_model = str(drive.get_property('model'))
