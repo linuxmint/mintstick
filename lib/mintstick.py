@@ -334,7 +334,7 @@ class MintStick:
         filename = os.path.basename(source).lower()
         # Don't write Windows ISO
         for keyword in ["windows", "win7", "win8", "win10", "winxp"]:
-            if filename.startswith(keyword):
+            if keyword in filename:
                 self.wTree.get_object("stack").set_visible_child_name("windows_page")
                 return
 
