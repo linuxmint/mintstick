@@ -3,6 +3,7 @@ share/mintstick/* usr/share/mintstick
 share/applications/* usr/share/applications
 share/polkit/* usr/share/polkit-1/actions
 mintstick usr/bin
+mint-iso-verify usr/bin
 share/nemo/actions/* usr/share/nemo/actions
 share/kde4/* /usr/share/kde4/apps/solid/actions
 share/icons/* usr/share/icons

@@ -76,6 +76,16 @@ Conditions=removable;
 """
 additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-format.nemo_action", prefix, _("Format"), _("Format a USB stick"), "")
 
+prefix="""[Nemo Action]
+Active=true
+Exec=mint-iso-verify "%F"
+Icon-Name=edit-clear-all-symbolic
+Selection=S
+Extensions=any;
+Conditions=removable;
+"""
+additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-verify.nemo_action", prefix, _("Verify"), _("Check the authenticity and integrity of the image"), "")
+
 prefix="""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"

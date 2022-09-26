@@ -1,5 +1,7 @@
 #!/bin/bash
 
 intltool-extract --type=gettext/glade share/mintstick/mintstick.ui
-xgettext --language=Python --keyword=_ --keyword=N_ --output=mintstick.pot lib/mintstick.py generate_additional_files.py share/mintstick/mintstick.ui.h
+intltool-extract --type=gettext/glade share/mintstick/verify.ui
+xgettext --language=Python --keyword=_ --keyword=N_ --output=mintstick.pot lib/mintstick.py lib/verify.py generate_additional_files.py share/mintstick/mintstick.ui.h share/mintstick/verify.ui.h
 rm -f share/mintstick/mintstick.ui.h
+rm -f share/mintstick/verify.ui.h

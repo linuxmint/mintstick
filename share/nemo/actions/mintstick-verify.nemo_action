@@ -1,0 +1,9 @@
+[Nemo Action]
+Active=true
+Exec=mint-iso-verify "%F"
+Icon-Name=edit-clear-all-symbolic
+Selection=S
+Extensions=any;
+Conditions=removable;
+Name=Verify
+Comment=Check the authenticity and integrity of the image
