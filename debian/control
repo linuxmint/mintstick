@@ -10,7 +10,8 @@ Package: mintstick
 Architecture: all
 Depends:
  ${misc:Depends},
- coreutils (>= 6.10-3),
+ coreutils,
+ genisoimage,
  gir1.2-glib-2.0,
  gir1.2-gtk-3.0,
  gir1.2-polkit-1.0,
