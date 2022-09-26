@@ -79,10 +79,9 @@ additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-format.nemo
 prefix="""[Nemo Action]
 Active=true
 Exec=mint-iso-verify "%F"
-Icon-Name=edit-clear-all-symbolic
+Icon-Name=application-certificate-symbolic
 Selection=S
-Extensions=any;
-Conditions=removable;
+Extensions=iso;img;
 """
 additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-verify.nemo_action", prefix, _("Verify"), _("Check the authenticity and integrity of the image"), "")
 
