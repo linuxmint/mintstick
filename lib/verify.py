@@ -81,6 +81,7 @@ class App():
         self.builder.get_object("verify_files_button").connect("clicked", self.verify_files)
         self.builder.get_object("verify_checksum_button").connect("clicked", self.verify_checksum)
         self.builder.get_object("back_button").connect("clicked", self.go_back)
+        self.builder.get_object("stack_checksum").connect("notify::visible-child-name", self.update_verify_button)
 
         # filechooser filters
         file_filter = Gtk.FileFilter()
@@ -178,13 +179,29 @@ class App():
         self.set_label("checksum_label", checksum)
         self.sha256sum = checksum
 
+    def update_verify_button(self, *args):
+        self.builder.get_object("verify_files_button").set_sensitive(False)
+        self.builder.get_object("verify_checksum_button").set_sensitive(False)
+
+        if self.sha256sum == None:
+            return
+
+        current_page = self.builder.get_object("stack_checksum").get_visible_child_name()
+
+        if current_page == "page_url":
+            if self.builder.get_object("entry_url_sums").get_text() != "" and self.builder.get_object("entry_url_gpg").get_text() != "":
+                self.builder.get_object("verify_url_button").set_sensitive(True)
+        elif current_page == "page_files":
+            if self.builder.get_object("filechooser_sums").get_filename() is not None and self.builder.get_object("filechooser_gpg").get_filename() is not None:
+                self.builder.get_object("verify_files_button").set_sensitive(True)
+        elif current_page == "page_sum_manual":
+            if (self.builder.get_object("entry_sum").get_text() != ""):
+                self.builder.get_object("verify_checksum_button").set_sensitive(True)
+
     @idle_function
     def set_label(self, label, text):
         self.builder.get_object(label).set_text(text)
-        if self.sha256sum != None:
-            self.builder.get_object("verify_url_button").set_sensitive(True)
-            self.builder.get_object("verify_files_button").set_sensitive(True)
-            self.builder.get_object("verify_checksum_button").set_sensitive(True)
+        self.update_verify_button()
 
     def verify_checksum(self, button):
         if self.builder.get_object("entry_sum").get_text() == self.sha256sum:

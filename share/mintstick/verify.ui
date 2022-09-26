@@ -277,6 +277,7 @@
                                 </child>
                               </object>
                               <packing>
+                                <property name="name">page_url</property>
                                 <property name="title" translatable="yes">URLs</property>
                               </packing>
                             </child>
@@ -364,6 +365,7 @@
                                 </child>
                               </object>
                               <packing>
+                                <property name="name">page_files</property>
                                 <property name="title" translatable="yes">Local files</property>
                                 <property name="position">1</property>
                               </packing>
@@ -425,6 +427,7 @@
                                 </child>
                               </object>
                               <packing>
+                                <property name="name">page_sum_manual</property>
                                 <property name="title" translatable="yes">Checksum</property>
                                 <property name="position">2</property>
                               </packing>
