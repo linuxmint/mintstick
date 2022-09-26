@@ -8,6 +8,7 @@ import gettext
 import locale
 import sys
 import getopt
+import subprocess
 import time
 import gi
 
@@ -93,6 +94,7 @@ class MintStick:
             self.expander = self.wTree.get_object("detail_expander")
             self.go_button = self.wTree.get_object("write_button")
             self.go_button.set_label(_("Write"))
+            self.verify_button = self.wTree.get_object("verify_button")
             self.logview = self.wTree.get_object("detail_text")
             self.progressbar = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
@@ -125,6 +127,7 @@ class MintStick:
 
             callbacks = {
                 "on_cancel_button_clicked": self.close,
+                "on_verify_button_clicked": self.verify,
                 "on_emergency_button_clicked": self.emergency_ok,
                 "on_success_button_clicked": self.success_ok,
                 "on_confirm_cancel_button_clicked": self.confirm_cancel}
@@ -138,6 +141,7 @@ class MintStick:
                 if os.path.exists(iso_path_arg):
                     self.chooser.set_filename(iso_path_arg)
                     self.file_selected(self.chooser)
+                    self.verify_button.set_sensitive(True)
 
         if mode_arg == "format":
             self.mode = "format"
@@ -216,6 +220,9 @@ class MintStick:
             self.expander.hide()
         self.log = self.logview.get_buffer()
 
+    def verify(self, button):
+        subprocess.Popen(["mint-iso-verify", self.chooser.get_filename()])
+
     def get_devices(self):
         self.go_button.set_sensitive(False)
         self.devicemodel.clear()
@@ -285,6 +292,11 @@ class MintStick:
 
     def file_selected(self, widget):
         self.activate_devicelist()
+        filename = self.chooser.get_filename()
+        if filename != None and os.path.exists(filename):
+            self.verify_button.set_sensitive(True)
+        else:
+            self.verify_button.set_sensitive(False)
 
     def on_label_entry_text_changed(self, widget, data=None):
         self.label_entry.handler_block(self.label_entry_changed_id)
