@@ -397,6 +397,8 @@ class MintStick:
             print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
             return
 
+        self.udisks_client.handler_block(self.udisk_listener_id)
+
         self.go_button.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.chooser.set_sensitive(False)
