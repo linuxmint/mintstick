@@ -122,6 +122,8 @@ class App():
     def guess_urls(self):
         # guess the SUMS/GPG URL based on the ISO name
         try:
+            sums = ""
+            gpg = ""
             if self.filename.startswith("linuxmint-"):
                 if self.filename.endswith("-beta.iso"):
                     sums = f"{MINT_MIRROR}/testing/sha256sum.txt"
