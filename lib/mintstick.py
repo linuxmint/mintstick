@@ -1,16 +1,15 @@
 #!/usr/bin/python3
 
 from subprocess import Popen, PIPE, call, STDOUT
-import os
-import signal
-import re
-import gettext
-import locale
-import sys
 import getopt
-import subprocess
-import time
+import gettext
 import gi
+import locale
+import os
+import re
+import signal
+import subprocess
+import sys
 
 gi.require_version('Polkit', '1.0')
 gi.require_version('Gtk', '3.0')
@@ -39,22 +38,6 @@ _ = gettext.gettext
 # https://technet.microsoft.com/en-us/library/bb490925.aspx
 FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
 
-
-# https://wiki.gnome.org/PyGObject/Threading
-# GObject.threads_init()
-
-
-def print_timing(func):
-    def wrapper(*arg):
-        t1 = time.time()
-        res = func(*arg)
-        t2 = time.time()
-        print('%s took %0.3f ms' % (func.__name__, (t2 - t1) * 1000.0))
-        return res
-
-    return wrapper
-
-
 # noinspection PyUnusedLocal
 class MintStick:
     def __init__(self, iso_path_arg=None, usb_path_arg=None, filesystem_arg=None, mode_arg=None, debug_arg=False):
@@ -68,32 +51,19 @@ class MintStick:
         self.udisks_client = UDisks.Client.new_sync()
         self.udisk_listener_id = self.udisks_client.connect("changed", devices_changed_callback)
 
-        # get glade tree
-        self.gladefile = "/usr/share/mintstick/mintstick.ui"
         self.wTree = Gtk.Builder()
+        self.wTree.set_translation_domain(APP)
+        self.wTree.add_from_file("/usr/share/mintstick/mintstick.ui")
 
         self.process = None
         self.source_id = None
         self.dev = None
         self.write_progress = None
 
-        self.wTree.set_translation_domain(APP)
-
-        self.wTree.add_from_file(self.gladefile)
-
-        self.ddpid = 0
-
-        self.emergency_dialog = self.wTree.get_object("emergency_dialog")
-        self.confirm_dialog = self.wTree.get_object("confirm_dialog")
-        self.success_dialog = self.wTree.get_object("success_dialog")
-
         if mode_arg == "iso":
             self.mode = "normal"
             self.devicelist = self.wTree.get_object("device_combobox")
-            self.label = self.wTree.get_object("to_label")
-            self.expander = self.wTree.get_object("detail_expander")
             self.go_button = self.wTree.get_object("write_button")
-            self.go_button.set_label(_("Write"))
             self.verify_button = self.wTree.get_object("verify_button")
             self.progressbar = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
@@ -113,7 +83,7 @@ class MintStick:
 
             self.get_devices()
             # get globally needed widgets
-            self.window = self.wTree.get_object("main_dialog")
+            self.window = self.wTree.get_object("main_window")
             self.window.connect("destroy", self.close)
 
             # set default file filter to *.iso/*.img
@@ -122,18 +92,9 @@ class MintStick:
             filt.add_pattern("*.[iI][sS][oO]")
             self.chooser.set_filter(filt)
 
-            # set callbacks
-
-            callbacks = {
-                "on_cancel_button_clicked": self.close,
-                "on_verify_button_clicked": self.verify,
-                "on_emergency_button_clicked": self.emergency_ok,
-                "on_success_button_clicked": self.success_ok,
-                "on_confirm_cancel_button_clicked": self.confirm_cancel}
-            self.wTree.connect_signals(callbacks)
-
             self.devicelist.connect("changed", self.device_selected)
             self.go_button.connect("clicked", self.do_write)
+            self.verify_button.connect("clicked", self.verify)
             self.chooser.connect("file-set", self.file_selected)
 
             if iso_path_arg:
@@ -145,10 +106,7 @@ class MintStick:
         if mode_arg == "format":
             self.mode = "format"
             self.devicelist = self.wTree.get_object("formatdevice_combobox")
-            self.label = self.wTree.get_object("formatdevice_label")
-            self.expander = self.wTree.get_object("formatdetail_expander")
             self.go_button = self.wTree.get_object("format_formatbutton")
-            self.go_button.set_label(_("Format"))
             self.label_entry = self.wTree.get_object("volume_label_entry")
             self.label_entry_changed_id = self.label_entry.connect("changed", self.on_label_entry_text_changed)
 
@@ -157,13 +115,6 @@ class MintStick:
 
             self.progressbar = self.wTree.get_object("format_progressbar")
             self.filesystemlist = self.wTree.get_object("filesystem_combobox")
-            # set callbacks
-            callbacks = {
-                "on_cancel_button_clicked": self.close,
-                "on_emergency_button_clicked": self.emergency_ok,
-                "on_success_button_clicked": self.success_ok,
-                "on_confirm_cancel_button_clicked": self.confirm_cancel}
-            self.wTree.connect_signals(callbacks)
 
             self.go_button.connect("clicked", self.do_format)
             self.filesystemlist.connect("changed", self.filesystem_selected)
@@ -213,9 +164,7 @@ class MintStick:
                         self.devicelist.set_active_iter(itererator)
                     itererator = self.devicemodel.iter_next(itererator)
 
-        self.window.show_all()
-        if self.mode == "format":
-            self.expander.hide()
+        self.window.show()
 
     def verify(self, button):
         subprocess.Popen(["mint-iso-verify", self.chooser.get_filename()])
@@ -326,25 +275,14 @@ class MintStick:
         if self.debug:
             print("DEBUG: Format %s as %s" % (self.dev, self.filesystem))
             return
-
         self.udisks_client.handler_block(self.udisk_listener_id)
         self.devicelist.set_sensitive(False)
         self.filesystemlist.set_sensitive(False)
         self.go_button.set_sensitive(False)
+        self.label_entry.set_sensitive(False)
+        label = self.label_entry.get_text()
+        self.raw_format(self.dev, self.filesystem, label)
 
-        label = self.wTree.get_object("volume_label_entry").get_text()
-
-        if os.geteuid() > 0:
-            self.raw_format(self.dev, self.filesystem, label)
-        else:
-            # We are root, display confirmation dialog
-            resp = self.confirm_dialog.run()
-            if resp == Gtk.ResponseType.OK:
-                self.confirm_dialog.hide()
-                self.raw_format(self.dev, self.filesystem, label)
-            else:
-                self.confirm_dialog.hide()
-                self.set_format_sensitive()
 
     def check_format_job(self):
         self.process.poll()
@@ -377,8 +315,7 @@ class MintStick:
     def format_job_done(self, rc):
         self.set_progress(1.0)
         if rc == 0:
-            message = _('The USB stick was formatted successfully.')
-            self.success(_('The USB stick was formatted successfully.'))
+            self.show_format_result("dialog-info", _('The USB stick was formatted successfully.'))
             return False
         elif rc == 5:
             message = _("An error occured while creating a partition on %s.") % usb_path
@@ -386,10 +323,9 @@ class MintStick:
             message = _('Authentication Error.')
         else:
             message = _('An error occurred.')
-        self.emergency(message)
+        self.show_format_result("dialog-error", message)
         self.set_format_sensitive()
         self.udisks_client.handler_unblock(self.udisk_listener_id)
-
         return False
 
     def do_write(self, widget):
@@ -397,44 +333,32 @@ class MintStick:
             print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
             return
 
-        self.udisks_client.handler_block(self.udisk_listener_id)
+        source = self.chooser.get_filename()
+        target = self.dev
+        filename = os.path.basename(source).lower()
+        # Don't write Windows ISO
+        for keyword in ["windows", "win7", "win8", "win10", "winxp"]:
+            if filename.startswith(keyword):
+                self.wTree.get_object("stack").set_visible_child_name("windows_page")
+                return
 
+        self.udisks_client.handler_block(self.udisk_listener_id)
         self.go_button.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.chooser.set_sensitive(False)
-        source = self.chooser.get_filename()
-        target = self.dev
-
-        if os.geteuid() > 0:
-            self.raw_write(source, target)
-        else:
-            # We are root, display confirmation dialog
-            resp = self.confirm_dialog.run()
-            if resp == Gtk.ResponseType.OK:
-                self.confirm_dialog.hide()
-                self.raw_write(source, target)
-            else:
-                self.confirm_dialog.hide()
-                self.set_iso_sensitive()
+        self.progressbar.show()
+        self.raw_write(source, target)
 
     def set_progress(self, size):
         self.progressbar.set_fraction(size)
         str_progress = "%3.0f%%" % (float(size) * 100)
         int_progress = int(float(size) * 100)
         self.progressbar.set_text(str_progress)
-        if self.mode == "normal":
-            self.window.set_title("%s - %s" % (str_progress, _("USB Image Writer")))
-        else:
-            self.window.set_title("%s - %s" % (str_progress, _("USB Stick Formatter")))
         XApp.set_window_progress_pulse(self.window, False)
         XApp.set_window_progress(self.window, int_progress)
 
     def pulse_progress(self):
         self.progressbar.pulse()
-        if self.mode == "normal":
-            self.window.set_title( _("USB Image Writer"))
-        else:
-            self.window.set_title( _("USB Stick Formatter"))
         XApp.set_window_progress_pulse(self.window, True)
 
     def update_progress(self, fd, condition):
@@ -468,10 +392,6 @@ class MintStick:
             return False
 
     def raw_write(self, source, target):
-        self.progressbar.set_sensitive(True)
-        self.progressbar.set_text(
-            _('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
-
         if os.geteuid() > 0:
             polkit_exec = 'pkexec'
             self.process = Popen(
@@ -487,13 +407,13 @@ class MintStick:
         GLib.timeout_add(500, self.check_write_job)
 
     def write_job_done(self, rc):
+        self.udisks_client.handler_unblock(self.udisk_listener_id)
         if rc == 0:
             if Using_Unity:
                 launcher.set_property("progress_visible", False)
                 launcher.set_property("urgent", True)
-            message = _('The image was successfully written.')
             self.set_progress(1.0)
-            self.success(_('The image was successfully written.'))
+            self.show_result("dialog-info", _('The image was successfully written.'))
             return False
         elif rc == 3:
             message = _('Not enough space on the USB stick.')
@@ -503,36 +423,24 @@ class MintStick:
             message = _('Authentication Error.')
         else:
             message = _('An error occurred.')
-        self.emergency(message)
+        self.show_result("dialog-error", message)
         return False
 
-    def success(self, message):
-        label = self.wTree.get_object("label5")
-        label.set_text(message)
-        if self.mode == "normal":
-            self.final_unsensitive()
-        resp = self.success_dialog.run()
-        if resp == Gtk.ResponseType.OK:
-            self.success_dialog.hide()
+    def show_format_result(self, icon_name, text):
+        self.wTree.get_object("format_stack").set_visible_child_name("format_result_page")
+        self.wTree.get_object("format_result_image").set_from_icon_name(icon_name, Gtk.IconSize.DIALOG)
+        self.wTree.get_object("format_result_label").set_text(text)
 
-    def emergency(self, message):
-        if self.mode == "normal":
-            self.final_unsensitive()
-        label = self.wTree.get_object("label6")
-        label.set_text(message)
-        resp = self.emergency_dialog.run()
-        if resp == Gtk.ResponseType.OK:
-            self.emergency_dialog.hide()
+    def show_result(self, icon_name, text):
+        self.wTree.get_object("stack").set_visible_child_name("result_page")
+        self.wTree.get_object("result_image").set_from_icon_name(icon_name, Gtk.IconSize.DIALOG)
+        self.wTree.get_object("result_label").set_text(text)
 
     def final_unsensitive(self):
         self.chooser.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.go_button.set_sensitive(False)
         self.progressbar.set_sensitive(False)
-        if self.mode == "normal":
-            self.window.set_title(_("USB Image Writer"))
-        else:
-            self.window.set_title(_("USB Stick Formatter"))
 
     def close(self, widget):
         if self.process is not None:
@@ -547,31 +455,6 @@ class MintStick:
 
     def activate_devicelist(self):
         self.devicelist.set_sensitive(True)
-        self.expander.set_sensitive(True)
-        self.label.set_sensitive(True)
-
-    def confirm_cancel(self, widget):
-        self.confirm_dialog.hide()
-        if self.mode == "normal":
-            self.set_iso_sensitive()
-        if self.mode == "format":
-            self.set_format_sensitive()
-
-    def emergency_ok(self, widget):
-        self.emergency_dialog.hide()
-        if self.mode == "normal":
-            self.set_iso_sensitive()
-        if self.mode == "format":
-            self.set_format_sensitive()
-            self.go_button.set_sensitive(False)
-
-    def success_ok(self, widget):
-        self.success_dialog.hide()
-        if self.mode == "normal":
-            self.set_iso_sensitive()
-        if self.mode == "format":
-            self.set_format_sensitive()
-            self.go_button.set_sensitive(False)
 
     def set_iso_sensitive(self):
         self.chooser.set_sensitive(True)
@@ -584,14 +467,11 @@ class MintStick:
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
 
-
 if __name__ == "__main__":
-
     usb_path = None
     iso_path = None
     filesystem = None
     mode = None
-
 
     def usage():
         print("Usage: mintstick [--debug] -m [format|iso]              : mode (format usb stick or burn iso image)")
@@ -599,7 +479,6 @@ if __name__ == "__main__":
         print("       mintstick [--debug] -m format [-u|--usb] usb_device ")
         print("                           [-f|--filesystem] filesystem")
         exit(0)
-
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hm:i:u:f:", ["debug", "help", "mode=", "iso=", "usb=", "filesystem="])
@@ -637,8 +516,4 @@ if __name__ == "__main__":
         usage()
 
     MintStick(iso_path, usb_path, filesystem, mode, debug)
-
-    # start the main loop
-    # mainloop = GObject.MainLoop()
-    # mainloop.run()
     Gtk.main()
