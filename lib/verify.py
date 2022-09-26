@@ -82,6 +82,23 @@ class App():
         self.builder.get_object("verify_checksum_button").connect("clicked", self.verify_checksum)
         self.builder.get_object("back_button").connect("clicked", self.go_back)
 
+        # filechooser filters
+        file_filter = Gtk.FileFilter()
+        file_filter.set_name(_("ISO images"))
+        file_filter.add_mime_type("application/x-cd-image")
+        self.filechooser.add_filter(file_filter)
+        file_filter = Gtk.FileFilter()
+        file_filter.set_name(_("Checksum files"))
+        file_filter.add_mime_type("text/plain")
+        self.builder.get_object("filechooser_sums").add_filter(file_filter)
+        file_filter = Gtk.FileFilter()
+        file_filter.set_name(_("GPG signatures"))
+        file_filter.add_mime_type("application/pgp-encrypted")
+        file_filter.add_mime_type("application/pgp-signature")
+        file_filter.add_mime_type("application/pgp-keys")
+        self.builder.get_object("filechooser_gpg").add_filter(file_filter)
+
+
     def file_selected(self, widget=None):
         self.path = None
         self.filename = None
