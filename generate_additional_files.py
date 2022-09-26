@@ -83,7 +83,7 @@ Icon-Name=application-certificate-symbolic
 Selection=S
 Extensions=iso;img;
 """
-additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-verify.nemo_action", prefix, _("Verify"), _("Check the authenticity and integrity of the image"), "")
+additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-verify.nemo_action", prefix, _("Verify"), _("Verify the authenticity and integrity of the image"), "")
 
 prefix="""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC

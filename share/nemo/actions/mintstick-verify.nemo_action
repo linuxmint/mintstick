@@ -5,4 +5,4 @@ Icon-Name=application-certificate-symbolic
 Selection=S
 Extensions=iso;img;
 Name=Verify
-Comment=Check the authenticity and integrity of the image
+Comment=Verify the authenticity and integrity of the image
