@@ -95,7 +95,6 @@ class MintStick:
             self.go_button = self.wTree.get_object("write_button")
             self.go_button.set_label(_("Write"))
             self.verify_button = self.wTree.get_object("verify_button")
-            self.logview = self.wTree.get_object("detail_text")
             self.progressbar = self.wTree.get_object("progressbar")
             self.chooser = self.wTree.get_object("filechooserbutton")
 
@@ -150,7 +149,6 @@ class MintStick:
             self.expander = self.wTree.get_object("formatdetail_expander")
             self.go_button = self.wTree.get_object("format_formatbutton")
             self.go_button.set_label(_("Format"))
-            self.logview = self.wTree.get_object("format_detail_text")
             self.label_entry = self.wTree.get_object("volume_label_entry")
             self.label_entry_changed_id = self.label_entry.connect("changed", self.on_label_entry_text_changed)
 
@@ -218,7 +216,6 @@ class MintStick:
         self.window.show_all()
         if self.mode == "format":
             self.expander.hide()
-        self.log = self.logview.get_buffer()
 
     def verify(self, button):
         subprocess.Popen(["mint-iso-verify", self.chooser.get_filename()])
@@ -381,7 +378,6 @@ class MintStick:
         self.set_progress(1.0)
         if rc == 0:
             message = _('The USB stick was formatted successfully.')
-            self.logger(message)
             self.success(_('The USB stick was formatted successfully.'))
             return False
         elif rc == 5:
@@ -390,7 +386,6 @@ class MintStick:
             message = _('Authentication Error.')
         else:
             message = _('An error occurred.')
-        self.logger(message)
         self.emergency(message)
         self.set_format_sensitive()
         self.udisks_client.handler_unblock(self.udisk_listener_id)
@@ -407,8 +402,6 @@ class MintStick:
         self.chooser.set_sensitive(False)
         source = self.chooser.get_filename()
         target = self.dev
-        self.logger(_('Image:') + ' ' + source)
-        self.logger(_('USB stick:') + ' ' + self.dev)
 
         if os.geteuid() > 0:
             self.raw_write(source, target)
@@ -476,8 +469,6 @@ class MintStick:
         self.progressbar.set_sensitive(True)
         self.progressbar.set_text(
             _('Writing %(VAR_FILE)s to %(VAR_DEV)s') % {'VAR_FILE': source.split('/')[-1], 'VAR_DEV': self.dev})
-        self.logger(
-            _('Starting copy from %(VAR_SOURCE)s to %(VAR_TARGET)s') % {'VAR_SOURCE': source, 'VAR_TARGET': target})
 
         if os.geteuid() > 0:
             polkit_exec = 'pkexec'
@@ -500,7 +491,6 @@ class MintStick:
                 launcher.set_property("urgent", True)
             message = _('The image was successfully written.')
             self.set_progress(1.0)
-            self.logger(message)
             self.success(_('The image was successfully written.'))
             return False
         elif rc == 3:
@@ -511,7 +501,6 @@ class MintStick:
             message = _('Authentication Error.')
         else:
             message = _('An error occurred.')
-        self.logger(message)
         self.emergency(message)
         return False
 
@@ -529,9 +518,6 @@ class MintStick:
             self.final_unsensitive()
         label = self.wTree.get_object("label6")
         label.set_text(message)
-        # self.expander.set_expanded(True)
-        mark = self.log.create_mark("end", self.log.get_end_iter(), False)
-        self.logview.scroll_to_mark(mark, 0.05, True, 0.0, 1.0)
         resp = self.emergency_dialog.run()
         if resp == Gtk.ResponseType.OK:
             self.emergency_dialog.hide()
@@ -544,10 +530,9 @@ class MintStick:
         if self.mode == "normal":
             self.window.set_title(_("USB Image Writer"))
         else:
-            self.window.set_title(_("USB Stick Formatter"))     
+            self.window.set_title(_("USB Stick Formatter"))
 
     def close(self, widget):
-        self.write_logfile()
         if self.process is not None:
             try:
                 os.killpg(self.process.pid, signal.SIGTERM)
@@ -557,14 +542,6 @@ class MintStick:
                 Gtk.main_quit()
         else:
             Gtk.main_quit()
-
-    def write_logfile(self):
-        start = self.log.get_start_iter()
-        end = self.log.get_end_iter()
-        print(self.log.get_text(start, end, False))
-
-    def logger(self, text):
-        self.log.insert_at_cursor(text + "\n")
 
     def activate_devicelist(self):
         self.devicelist.set_sensitive(True)
