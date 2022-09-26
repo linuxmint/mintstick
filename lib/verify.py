@@ -113,6 +113,8 @@ class App():
         self.builder.get_object("verify_files_button").set_sensitive(False)
         self.builder.get_object("verify_checksum_button").set_sensitive(False)
         if path != None and os.path.isfile(path):
+            self.builder.get_object("result_stack").set_visible_child_name("page_verification")
+            self.builder.get_object("stack_checksum").set_visible_child_name("page_url")
             self.path = path
             self.filename = os.path.basename(path)
             self.guess_urls()
