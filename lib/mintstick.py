@@ -183,7 +183,7 @@ class MintStick:
                 if block is not None:
                     drive = self.udisks_client.get_drive_for_block(block)
                     if drive is not None:
-                        is_usb = str(drive.get_property("connection-bus")) == 'usb'
+                        is_usb = str(drive.get_property('connection-bus')) in ['usb', 'cpio']
                         size = int(drive.get_property('size'))
                         optical = bool(drive.get_property('optical'))
                         removable = bool(drive.get_property('removable'))
