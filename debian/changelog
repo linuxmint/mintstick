@@ -1,3 +1,33 @@
+mintstick (1.5.1) vera; urgency=medium
+
+  [ Clement Lefebvre ]
+  * Add a tool to verify ISO images
+  * mint-iso-verify: Add file filters
+  * Update dependencies
+  * l10n: Update POT
+  * l10n: Update files
+  * Fix nemo action
+  * Add verify button to image writer
+  * l10n: Reword an msgid
+  * Remove log/details
+  * ISO: Block udisk signal while writing to disk
+  * UI revamp
+  * l10n: Update POT
+
+  [ Cyril Danilevski ]
+  * Remove redundant block device check (#104)
+
+  [ Michael Webster ]
+  * Search for windows keywords anywhere in the filename.
+  * verify: Clear any existing checksum and gpg urls if valid ones aren't found for a new iso.
+  * verify: Make the verify buttons dependent upon having sufficient info for the selected method.
+  * verify: reset the stacks when a new iso is selected from the file chooser.
+
+  [ Cyril Danilevski ]
+  * Add support for cpio devices (#105)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 21 Nov 2022 12:57:48 +0000
+
 mintstick (1.5.0) vanessa; urgency=medium
 
   * Bump rebuild without ZST
