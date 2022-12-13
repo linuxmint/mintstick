@@ -132,7 +132,6 @@ EXT4
             </child>
             <child>
               <object class="GtkProgressBar" id="format_progressbar">
-                <property name="sensitive">False</property>
                 <property name="can-focus">False</property>
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>

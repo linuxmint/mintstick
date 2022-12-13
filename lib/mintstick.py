@@ -436,7 +436,6 @@ class MintStick:
         self.chooser.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.go_button.set_sensitive(False)
-        self.progressbar.set_sensitive(False)
 
     def close(self, widget):
         if self.process is not None:
