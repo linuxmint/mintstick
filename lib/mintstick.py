@@ -311,7 +311,7 @@ class MintStick:
     def format_job_done(self, rc):
         self.set_progress(1.0)
         if rc == 0:
-            self.show_format_result("dialog-info", _('The USB stick was formatted successfully.'))
+            self.show_format_result("dialog-information", _('The USB stick was formatted successfully.'))
             return False
         elif rc == 5:
             message = _("An error occured while creating a partition on %s.") % usb_path
@@ -409,7 +409,7 @@ class MintStick:
                 launcher.set_property("progress_visible", False)
                 launcher.set_property("urgent", True)
             self.set_progress(1.0)
-            self.show_result("dialog-info", _('The image was successfully written.'))
+            self.show_result("dialog-information", _('The image was successfully written.'))
             return False
         elif rc == 3:
             message = _('Not enough space on the USB stick.')
