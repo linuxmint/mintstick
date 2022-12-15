@@ -59,7 +59,7 @@ additionalfiles.generate(DOMAIN, PATH, "share/applications/mintstick-format-kde.
 
 prefix="""[Nemo Action]
 Active=true
-Exec=mintstick -m iso -i "%F"
+Exec=mintstick -m iso -i %F
 Icon-Name=media-removable-symbolic
 Selection=S
 Extensions=iso;img;
@@ -78,7 +78,7 @@ additionalfiles.generate(DOMAIN, PATH, "share/nemo/actions/mintstick-format.nemo
 
 prefix="""[Nemo Action]
 Active=true
-Exec=mint-iso-verify "%F"
+Exec=mint-iso-verify %F
 Icon-Name=application-certificate-symbolic
 Selection=S
 Extensions=iso;img;
