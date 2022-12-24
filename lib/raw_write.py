@@ -24,7 +24,7 @@ def raw_write(source, target):
         print("nospace")
         exit(3)
 
-    increment = total_size / 100;
+    increment = total_size / 100
 
     written = 0
     output = open(target, 'wb')
