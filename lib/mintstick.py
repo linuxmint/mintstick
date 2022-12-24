@@ -235,7 +235,7 @@ class MintStick:
     def file_selected(self, widget):
         self.activate_devicelist()
         filename = self.chooser.get_filename()
-        if filename != None and os.path.exists(filename):
+        if filename is not None and os.path.exists(filename):
             self.verify_button.set_sensitive(True)
         else:
             self.verify_button.set_sensitive(False)
