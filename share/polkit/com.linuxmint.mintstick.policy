@@ -36,7 +36,7 @@
 <message xml:lang="fy">Dit sil alle data op de USB ferwyderje, binne jo der wis fan?</message>
 <message xml:lang="gd">Sgriosaidh seo an dàta air fad air a' bhioran USB, a bheil thu cinnteach gu bheil thu airson leantainn air adhart?</message>
 <message xml:lang="gl">Isto destruirá todos os datos da memoria USB, confirma que quere continuar?</message>
-<message xml:lang="he">כל הנתונים בהחסן הנייד יימחקו, להמשיך?</message>
+<message xml:lang="he">כל הנתונים בהחסן הנייד יושמדו, להמשיך?</message>
 <message xml:lang="hi">इससे यूएसबी का सारा डाटा नष्ट हो जाएगा, क्या आप जारी रखना चाहते हैं?</message>
 <message xml:lang="hr">Ovo će uništiti sve podatke na USB uređaju, sigurno želite nastaviti?</message>
 <message xml:lang="hu">Minden adat törlése a pendrive eszközről. Biztosan folytatni kívánja?</message>
@@ -66,7 +66,7 @@
 <message xml:lang="oc">Totas las donadas presentas sus la clau USB seràn suprimidas. Volètz contunhar ?</message>
 <message xml:lang="pap">E akshon aki lo destrui tur dokumento riba e USB stick, bo tin sigur ku bo ke sigi?</message>
 <message xml:lang="pl">To działanie wymaże wszystkie dane znajdujące się na nośniku USB. Czy na pewno chcesz kontynuować?</message>
-<message xml:lang="pt">Irá destruir todos os dados no dispositivo USB. Tem a certeza de que deseja continuar?</message>
+<message xml:lang="pt">Irá destruir todos os dados no dispositivo USB. Quer continuar?</message>
 <message xml:lang="pt_BR">Todos os dados do dispositivo USB serão apagados, tem certeza de que deseja continuar?</message>
 <message xml:lang="ro">Se vor distruge toate datele de pe stickul USB, sigur doriți să continuați?</message>
 <message xml:lang="ru">Вся информмация  на USB-флеш-накопителе будет уничтожена. Продолжить?</message>
