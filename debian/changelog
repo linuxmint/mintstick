@@ -1,3 +1,10 @@
+mintstick (1.5.5) vera; urgency=medium
+
+  [ Michael Webster ]
+  * Run generate_additional_files for desktop/action translations.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 06 Jan 2023 16:48:09 +0000
+
 mintstick (1.5.4) vera; urgency=medium
 
   * Nemo actions: Remove quotes around %F
