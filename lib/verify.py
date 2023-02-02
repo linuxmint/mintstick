@@ -72,7 +72,7 @@ class App():
         self.window.set_position(Gtk.WindowPosition.CENTER)
         self.window.show()
         self.filechooser = self.builder.get_object("filechooser")
-        if iso_path_arg != None and os.path.isfile(iso_path_arg):
+        if iso_path_arg is not None and os.path.isfile(iso_path_arg):
             self.filechooser.set_filename(iso_path_arg)
             self.file_selected()
 
@@ -112,7 +112,7 @@ class App():
         self.builder.get_object("verify_url_button").set_sensitive(False)
         self.builder.get_object("verify_files_button").set_sensitive(False)
         self.builder.get_object("verify_checksum_button").set_sensitive(False)
-        if path != None and os.path.isfile(path):
+        if path is not None and os.path.isfile(path):
             self.builder.get_object("result_stack").set_visible_child_name("page_verification")
             self.builder.get_object("stack_checksum").set_visible_child_name("page_url")
             self.path = path
@@ -185,7 +185,7 @@ class App():
         self.builder.get_object("verify_files_button").set_sensitive(False)
         self.builder.get_object("verify_checksum_button").set_sensitive(False)
 
-        if self.sha256sum == None:
+        if self.sha256sum is None:
             return
 
         current_page = self.builder.get_object("stack_checksum").get_visible_child_name()
@@ -266,7 +266,7 @@ class App():
             # note: verify_file automatically closes the file handle
             verified = self.gpg.verify_file(open(PATH_GPG, "rb"), PATH_SUMS)
 
-            if verified.fingerprint == None:
+            if verified.fingerprint is None:
                 # The GPG file is not signed
                 self.show_result("dialog-error", _("The SHA256 sums file is not signed."))
                 return
@@ -291,7 +291,7 @@ class App():
                     details=details)
                 return
 
-            if verified.username != None:
+            if verified.username is not None:
                 details.append(verified.username)
 
             if verified.fingerprint in TRUSTED_SIGNATURES.keys():
@@ -303,7 +303,7 @@ class App():
                     details=details)
                 return
 
-            if verified.trust_level != None and verified.trust_level >= verified.TRUST_FULLY:
+            if verified.trust_level is not None and verified.trust_level >= verified.TRUST_FULLY:
                 self.show_result("application-certificate", _("Everything looks good!"),
                     summary=_("This ISO image is verified by a trusted signature."),
                     details=details)
@@ -333,9 +333,9 @@ class App():
     def show_result(self, icon_name, text, summary=None, details=None):
         self.builder.get_object("image_result").set_from_icon_name(icon_name, 64)
         self.builder.get_object("label_result").set_text(text)
-        if summary != None:
+        if summary is not None:
             self.builder.get_object("label_result_summary").set_text(summary)
-        if details != None:
+        if details is not None:
             self.builder.get_object("label_result_details").set_text("\n".join(details))
         self.builder.get_object("result_stack").set_visible_child_name("page_result")
         # Unselect the summary label
