@@ -68,9 +68,9 @@ def main():
             print("-t|--target          : target device path\n")
             print("Example : %s -s /foo/image.iso -t /dev/sdj" % sys.argv[0])
             sys.exit(0)
-        elif o in ("-s"):
+        elif o == "-s":
             source = a
-        elif o in ("-t"):
+        elif o == "-t":
             target = a
 
     argc = len(sys.argv)

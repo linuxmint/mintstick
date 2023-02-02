@@ -73,18 +73,18 @@ def main():
             print("-g|--gid             : gid of user\n")
             print("Example : %s -d /dev/sdj -f fat32 -l \"USB Stick\" -u 1000 -g 1000" % sys.argv[0])
             sys.exit(0)
-        elif o in ("-d"):
+        elif o == "-d":
             device = a
-        elif o in ("-f"):
+        elif o == "-f":
             if a not in [ "fat32", "exfat", "ntfs", "ext4" ]:
                 print("Specify fat32, exfat, ntfs or ext4")
                 sys.exit(3)
             fstype = a
-        elif o in ("-l"):
+        elif o == "-l":
             label = a
-        elif o in ("-u"):
+        elif o == "-u":
             uid = a
-        elif o in ("-g"):
+        elif o in "-g":
             gid = a
 
     argc = len(sys.argv)

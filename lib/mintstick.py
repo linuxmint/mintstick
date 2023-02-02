@@ -497,7 +497,7 @@ if __name__ == "__main__":
             filesystem = a
         elif o in ("-m", "--mode"):
             mode = a
-        elif o in "--debug":
+        elif o == "--debug":
             debug = True
 
     argc = len(sys.argv)
