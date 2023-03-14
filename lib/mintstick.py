@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 
-from subprocess import Popen, PIPE, call, STDOUT
+from subprocess import Popen, PIPE
 import getopt
 import gettext
 import gi
 import locale
 import os
-import re
 import signal
 import subprocess
 import sys
@@ -16,7 +15,7 @@ gi.require_version('Gtk', '3.0')
 gi.require_version('UDisks', '2.0')
 gi.require_version('XApp', '1.0')
 
-from gi.repository import GObject, Gio, Polkit, Gtk, GLib, UDisks, XApp
+from gi.repository import Polkit, Gtk, GLib, UDisks, XApp
 
 try:
     gi.require_version('Unity', '7.0')

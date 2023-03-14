@@ -1,6 +1,5 @@
-import os, sys
-import subprocess
-from subprocess import Popen,PIPE,call,STDOUT
+import sys
+from subprocess import call
 
 def do_umount(target):
         mounts = get_mounted(target)

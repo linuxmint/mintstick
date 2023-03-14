@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 
-import subprocess
-from subprocess import Popen,PIPE,call,STDOUT
-import os, sys
+from subprocess import call
+import sys
 import getopt
-import parted
 sys.path.append('/usr/lib/mintstick')
-from mountutils import *
+from mountutils import do_umount
 import syslog
 
 def execute(command):
