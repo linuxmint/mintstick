@@ -1,11 +1,9 @@
 #!/usr/bin/python3
 
-import subprocess
-from subprocess import Popen,PIPE,call,STDOUT
 import os, sys
 import getopt
 sys.path.append('/usr/lib/mintstick')
-from mountutils import *
+from mountutils import do_umount
 import parted
 
 def raw_write(source, target):
