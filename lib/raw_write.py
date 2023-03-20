@@ -12,12 +12,11 @@ def raw_write(source, target):
     size=0
     input = open(source, 'rb')
     total_size = float(os.path.getsize(source))
-    #print total_size
 
     # Check if the ISO can fit ... :)
     device = parted.getDevice(target)
     device_size = device.getLength() * device.sectorSize
-    if (device.getLength() * device.sectorSize) < float(os.path.getsize(source)):
+    if device_size < float(os.path.getsize(source)):
         input.close()
         print("nospace")
         exit(3)
