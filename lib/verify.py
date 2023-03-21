@@ -139,7 +139,6 @@ class App():
                     sums = f"{MINT_MIRROR}/testing/sha256sum.txt"
                 elif self.filename.endswith(".iso"):
                     # extract version number
-                    version = self.filename.split("-")[1]
                     sums = f"{MINT_MIRROR}/debian/sha256sum.txt"
                 gpg = sums + ".gpg"
             elif self.filename.startswith("ubuntu-"):
@@ -317,7 +316,6 @@ class App():
             self.show_result("dialog-error", _("An error occurred"), details=[str(e)])
 
     def check_integrity(self):
-        expected_line = f"{self.sha256sum} *{self.filename}"
         with open(PATH_SUMS) as sums_file:
             for line in sums_file:
                 line = line.strip()
