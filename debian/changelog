@@ -1,3 +1,19 @@
+mintstick (1.5.6) vera; urgency=medium
+
+  [ hduelme ]
+  * remove trailing semicolon (#108)
+  * replace equality None check with identity None check (#109)
+  * better option evaluation (#110)
+  * use dictionary literal for TRUSTED_SIGNATURES (#111)
+  * remove unused imports (#113)
+  * remove unused local variables (#114)
+
+  [ Michael Webster ]
+  * verify: Fix path variable.
+  * Add github workflow.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 28 Mar 2023 17:51:46 +0100
+
 mintstick (1.5.5) vera; urgency=medium
 
   [ Michael Webster ]
