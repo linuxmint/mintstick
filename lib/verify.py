@@ -277,7 +277,7 @@ class App():
                 print("Importing", fingerprint)
                 # re-verify
                 self.gpg.recv_keys('hkp://keyserver.ubuntu.com', fingerprint)
-                verified = self.gpg.verify_file(open(PATH_GPG, "rb"), sums_path)
+                verified = self.gpg.verify_file(open(PATH_GPG, "rb"), PATH_SUMS)
                 # Remove it from the keyring
                 print("Deleting", fingerprint)
                 self.gpg.delete_keys(fingerprint)
