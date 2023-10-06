@@ -308,7 +308,6 @@ class MintStick:
         GLib.timeout_add(500, self.check_format_job)
 
     def format_job_done(self, rc):
-        self.set_progress(1.0)
         if rc == 0:
             self.show_format_result("dialog-information", _('The USB stick was formatted successfully.'))
             return False
@@ -316,10 +315,15 @@ class MintStick:
             message = _("An error occured while creating a partition on %s.") % usb_path
         elif rc == 127:
             message = _('Authentication Error.')
+        elif rc == 126:  # Cancelled by the user.
+            self.clear_progress()
+            message = None
         else:
             message = _('An error occurred.')
-        self.show_format_result("dialog-error", message)
-        self.set_format_sensitive()
+
+        if message is not None:
+            self.show_format_result("dialog-error", message)
+        self.set_format_sensitive(False)
         self.udisks_client.handler_unblock(self.udisk_listener_id)
         return False
 
@@ -339,6 +343,7 @@ class MintStick:
 
         self.udisks_client.handler_block(self.udisk_listener_id)
         self.go_button.set_sensitive(False)
+        self.verify_button.set_sensitive(False)
         self.devicelist.set_sensitive(False)
         self.chooser.set_sensitive(False)
         self.progressbar.show()
@@ -351,6 +356,10 @@ class MintStick:
         self.progressbar.set_text(str_progress)
         XApp.set_window_progress_pulse(self.window, False)
         XApp.set_window_progress(self.window, int_progress)
+
+    def clear_progress(self):
+        self.progressbar.hide()
+        XApp.set_window_progress_pulse(self.window, False)
 
     def pulse_progress(self):
         self.progressbar.pulse()
@@ -416,9 +425,15 @@ class MintStick:
             message = _('An error occured while copying the image.')
         elif rc == 127:
             message = _('Authentication Error.')
+        elif rc == 126:  # Cancelled by the user.
+            self.clear_progress()
+            self.set_iso_sensitive()
+            message = None
         else:
             message = _('An error occurred.')
-        self.show_result("dialog-error", message)
+        if message is not None:
+            self.show_format_result("dialog-error", message)
+
         return False
 
     def show_format_result(self, icon_name, text):
@@ -430,11 +445,6 @@ class MintStick:
         self.wTree.get_object("stack").set_visible_child_name("result_page")
         self.wTree.get_object("result_image").set_from_icon_name(icon_name, Gtk.IconSize.DIALOG)
         self.wTree.get_object("result_label").set_text(text)
-
-    def final_unsensitive(self):
-        self.chooser.set_sensitive(False)
-        self.devicelist.set_sensitive(False)
-        self.go_button.set_sensitive(False)
 
     def close(self, widget):
         if self.process is not None:
@@ -454,9 +464,11 @@ class MintStick:
         self.chooser.set_sensitive(True)
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
+        self.verify_button.set_sensitive(True)
 
-    def set_format_sensitive(self):
-        self.get_devices()
+    def set_format_sensitive(self, reset=True):
+        if reset:
+            self.get_devices()
         self.filesystemlist.set_sensitive(True)
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
