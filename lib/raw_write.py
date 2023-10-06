@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import os, sys
-import getopt
+import argparse
 sys.path.append('/usr/lib/mintstick')
 from mountutils import do_umount
 import parted
@@ -52,31 +52,17 @@ def raw_write(source, target):
 def main():
     # parse command line options
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hs:t:", ["help", "source=","target="])
-    except getopt.error as msg:
-        print(msg)
-        print("for help use --help")
+        parser = argparse.ArgumentParser(description="Format USB",
+                                         prog="mint-stick-write",
+                                         epilog="Example : mint-stick-write -s /foo/image.iso -t /dev/sdj")
+        parser.add_argument("-s", "--source", help="Source iso path", type=str, required=True)
+        parser.add_argument("-t", "--target", help="Target device path", type=str, required=True)
+        args = parser.parse_args()
+    except Exception as e:
+        print(e)
         sys.exit(2)
 
-    for o, a in opts:
-        if o in ("-h", "--help"):
-            print("Usage: %s -s source -t target\n" % sys.argv[0])
-            print("-s|--source          : source iso path")
-            print("-t|--target          : target device path\n")
-            print("Example : %s -s /foo/image.iso -t /dev/sdj" % sys.argv[0])
-            sys.exit(0)
-        elif o == "-s":
-            source = a
-        elif o == "-t":
-            target = a
-
-    argc = len(sys.argv)
-    if argc < 5:
-        print("Too few arguments")
-        print("for help use --help")
-        exit(2)
-
-    raw_write(source, target)
+    raw_write(args.source, args.target)
 
 if __name__ == "__main__":
     main()

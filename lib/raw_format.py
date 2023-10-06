@@ -2,7 +2,7 @@
 
 from subprocess import call
 import sys
-import getopt
+import argparse
 sys.path.append('/usr/lib/mintstick')
 from mountutils import do_umount
 import syslog
@@ -55,43 +55,23 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
 def main():
     # parse command line options
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hd:f:l:u:g:", ["help", "device=","filesystem=","label=","uid=","gid="])
-    except getopt.error as msg:
-        print(msg)
-        print("for help use --help")
+        parser = argparse.ArgumentParser(description="Format USB",
+                                         prog="mint-stick-format",
+                                         epilog="Example : mint-stick-format -d /dev/sdj -f fat32 -l \"USB Stick\" -u 1000 -g 1000")
+        parser.add_argument("-d", "--device", help="Device path", type=str, required=True)
+        parser.add_argument("-f", "--filesystem", help="File system type", action="store",
+                            type=str, choices=("fat32", "exfat", "ntfs", "ext4"), required=True)
+        parser.add_argument("-u", "--uid", help="UID of the user", type=str, required=True)
+        parser.add_argument("-g", "--gid", help="GID of the user", type=str, required=True)
+        parser.add_argument("label", help="Volume label", type=str, nargs="*")
+        args = parser.parse_args()
+        print("Args", args)
+        args.label = " ".join(args.label)
+    except Exception as e:
+        print(e)
         sys.exit(2)
 
-    for o, a in opts:
-        if o in ("-h", "--help"):
-            print("Usage: %s -d device -f filesystem -l volume_label\n"  % sys.argv[0])
-            print("-d|--device          : device path")
-            print("-f|--filesystem      : filesystem\n")
-            print("-l|--label           : volume label\n")
-            print("-u|--uid             : uid of user\n")
-            print("-g|--gid             : gid of user\n")
-            print("Example : %s -d /dev/sdj -f fat32 -l \"USB Stick\" -u 1000 -g 1000" % sys.argv[0])
-            sys.exit(0)
-        elif o == "-d":
-            device = a
-        elif o == "-f":
-            if a not in [ "fat32", "exfat", "ntfs", "ext4" ]:
-                print("Specify fat32, exfat, ntfs or ext4")
-                sys.exit(3)
-            fstype = a
-        elif o == "-l":
-            label = a
-        elif o == "-u":
-            uid = a
-        elif o in "-g":
-            gid = a
-
-    argc = len(sys.argv)
-    if argc < 11:
-      print("Too few arguments")
-      print("for help use --help")
-      exit(2)
-
-    raw_format(device, fstype, label, uid, gid)
+    raw_format(args.device, args.filesystem, args.label, args.uid, args.gid)
 
 if __name__ == "__main__":
     main()

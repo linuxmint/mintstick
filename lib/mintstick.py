@@ -293,13 +293,13 @@ class MintStick:
         if os.geteuid() > 0:
             polkit_exec = 'pkexec'
             self.process = Popen(
-                [polkit_exec, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py', '-d', usb_path_arg,
-                 '-f', fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())],
+                [polkit_exec, '/usr/bin/mint-stick-format', '-d', usb_path_arg,
+                 '-f', fstype, '-u', str(os.geteuid()), '-g', str(os.getgid()), '--', label],
                 shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
             self.process = Popen(
-                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_format.py', '-d', usb_path_arg,
-                 '-f', fstype, '-l', label, '-u', str(os.geteuid()), '-g', str(os.getgid())],
+                ['/usr/bin/mint-stick-format', '-d', usb_path_arg,
+                 '-f', fstype, '-u', str(os.geteuid()), '-g', str(os.getgid()), "--", label],
                 shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
         self.progressbar.show()
@@ -390,11 +390,11 @@ class MintStick:
         if os.geteuid() > 0:
             polkit_exec = 'pkexec'
             self.process = Popen(
-                [polkit_exec, '/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target],
+                [polkit_exec, '/usr/bin/mint-stick-write', '-s', source, '-t', target],
                 shell=False, stdout=PIPE, preexec_fn=os.setsid)
         else:
             self.process = Popen(
-                ['/usr/bin/python3', '-u', '/usr/lib/mintstick/raw_write.py', '-s', source, '-t', target],
+                ['/usr/bin/mint-stick-write', '-s', source, '-t', target],
                 shell=False, stdout=PIPE, preexec_fn=os.setsid)
 
         self.write_progress = 0

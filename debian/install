@@ -7,3 +7,4 @@ mint-iso-verify usr/bin
 share/nemo/actions/* usr/share/nemo/actions
 share/kde4/* /usr/share/kde4/apps/solid/actions
 share/icons/* usr/share/icons
+bin/* /usr/bin
