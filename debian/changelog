@@ -1,3 +1,16 @@
+mintstick (1.5.7) virginia; urgency=medium
+
+  [ Michael Webster ]
+  * Fix policykit issue with applying the incorrect action.
+  * Make canceling from the pkexec dialog more robust.
+  * Fix generate_additional_files script for policykit changes.
+
+  [ Clement Lefebvre ]
+  * l10n: Update POT
+  * l10n: Update files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 27 Nov 2023 14:34:44 +0000
+
 mintstick (1.5.6) vera; urgency=medium
 
   [ hduelme ]
