@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-26 16:26+0100\n"
+"POT-Creation-Date: 2023-11-27 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,56 +17,52 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:192
-msgid "unknown"
-msgstr ""
-
-#: lib/mintstick.py:318
+#: lib/mintstick.py:312
 msgid "The USB stick was formatted successfully."
 msgstr ""
 
-#: lib/mintstick.py:321
+#: lib/mintstick.py:315
 #, python-format
 msgid "An error occured while creating a partition on %s."
 msgstr ""
 
-#: lib/mintstick.py:323 lib/mintstick.py:423
+#: lib/mintstick.py:317 lib/mintstick.py:427
 msgid "Authentication Error."
 msgstr ""
 
-#: lib/mintstick.py:325 lib/mintstick.py:425
+#: lib/mintstick.py:322 lib/mintstick.py:433
 msgid "An error occurred."
 msgstr ""
 
-#: lib/mintstick.py:416
+#: lib/mintstick.py:420
 msgid "The image was successfully written."
 msgstr ""
 
-#: lib/mintstick.py:419
+#: lib/mintstick.py:423
 msgid "Not enough space on the USB stick."
 msgstr ""
 
-#: lib/mintstick.py:421
+#: lib/mintstick.py:425
 msgid "An error occured while copying the image."
 msgstr ""
 
-#: lib/verify.py:55
+#: lib/verify.py:54
 msgid "bytes"
 msgstr ""
 
-#: lib/verify.py:55
+#: lib/verify.py:54
 msgid "KB"
 msgstr ""
 
-#: lib/verify.py:55
+#: lib/verify.py:54
 msgid "MB"
 msgstr ""
 
-#: lib/verify.py:55
+#: lib/verify.py:54
 msgid "GB"
 msgstr ""
 
-#: lib/verify.py:55
+#: lib/verify.py:54
 msgid "TB"
 msgstr ""
 
@@ -86,97 +82,97 @@ msgstr ""
 msgid "Calculating..."
 msgstr ""
 
-#: lib/verify.py:164
+#: lib/verify.py:167
 msgid "No volume ID found"
 msgstr ""
 
-#: lib/verify.py:189
+#: lib/verify.py:208
 msgid "The checksum is correct"
 msgstr ""
 
-#: lib/verify.py:190
+#: lib/verify.py:209
 msgid ""
 "The checksum is correct but the authenticity of the sum was not verified."
 msgstr ""
 
-#: lib/verify.py:192
+#: lib/verify.py:211
 msgid "Checksum mismatch"
 msgstr ""
 
-#: lib/verify.py:193
+#: lib/verify.py:212
 msgid "Download the ISO image again. Its checksum does not match."
 msgstr ""
 
-#: lib/verify.py:204
+#: lib/verify.py:223
 msgid "The sums file could not be downloaded. Check the URL."
 msgstr ""
 
-#: lib/verify.py:213
+#: lib/verify.py:232
 msgid "The gpg file could not be downloaded. Check the URL."
 msgstr ""
 
-#: lib/verify.py:224
+#: lib/verify.py:243
 msgid "The sums file could not be checked."
 msgstr ""
 
-#: lib/verify.py:231
+#: lib/verify.py:250
 msgid "The gpg file could not be checked."
 msgstr ""
 
-#: lib/verify.py:241
+#: lib/verify.py:260
 msgid "Integrity check failed"
 msgstr ""
 
-#: lib/verify.py:250
+#: lib/verify.py:269
 msgid "The SHA256 sums file is not signed."
 msgstr ""
 
-#: lib/verify.py:254
+#: lib/verify.py:273
 #, python-format
 msgid "Signed by: %s"
 msgstr ""
 
-#: lib/verify.py:268
+#: lib/verify.py:287
 msgid "Unknown signature"
 msgstr ""
 
-#: lib/verify.py:269
+#: lib/verify.py:288
 msgid "Key not found on keyserver."
 msgstr ""
 
-#: lib/verify.py:280 lib/verify.py:286
+#: lib/verify.py:299 lib/verify.py:305
 msgid "Everything looks good!"
 msgstr ""
 
-#: lib/verify.py:281
+#: lib/verify.py:300
 msgid "This is an official ISO image."
 msgstr ""
 
-#: lib/verify.py:287
+#: lib/verify.py:306
 msgid "This ISO image is verified by a trusted signature."
 msgstr ""
 
-#: lib/verify.py:290
+#: lib/verify.py:309
 msgid "If you trust the signature you can trust the ISO."
 msgstr ""
 
-#: lib/verify.py:291
+#: lib/verify.py:310
 msgid "Untrusted signature"
 msgstr ""
 
-#: lib/verify.py:292
+#: lib/verify.py:311
 msgid "This ISO image is verified by an untrusted signature."
 msgstr ""
 
-#: lib/verify.py:297
+#: lib/verify.py:316
 msgid "An error occurred"
 msgstr ""
 
-#: lib/verify.py:309
+#: lib/verify.py:327
 msgid "The SHA256 sum of the ISO image is incorrect."
 msgstr ""
 
-#: lib/verify.py:310
+#: lib/verify.py:328
 msgid "The SHA256 sums file does not contain sums for this ISO image."
 msgstr ""
 
@@ -217,7 +213,7 @@ msgstr ""
 msgid "Verify the authenticity and integrity of the image"
 msgstr ""
 
-#: generate_additional_files.py:117
+#: generate_additional_files.py:115 generate_additional_files.py:144
 msgid ""
 "This will destroy all data on the USB stick, are you sure you want to "
 "proceed?"
