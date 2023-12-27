@@ -86,7 +86,9 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
+                        <property name="wrap">True</property>
                         <property name="selectable">True</property>
+                        <property name="max-width-chars">70</property>
                         <attributes>
                           <attribute name="scale" value="0.90000000000000002"/>
                         </attributes>

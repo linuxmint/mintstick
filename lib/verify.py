@@ -165,17 +165,27 @@ class App():
     @async_function
     def calculate_volume(self):
         volume_id = _("No volume ID found")
-        stdout = subprocess.check_output(["isoinfo", "-d", "-i", self.path]).decode("UTF-8")
-        for line in stdout.split("\n"):
-            if "volume id:" in line.lower():
-                volume_id = line.split(":")[1].strip()
+
+        try:
+            stdout = subprocess.check_output(["isoinfo", "-d", "-i", self.path], text=True)
+            for line in stdout.split("\n"):
+                if "volume id:" in line.lower():
+                    volume_id = line.split(":")[1].strip()
+        except Exception as e:
+            print("Can't get volume id: %s" % str(e))
+
         self.set_label("volume_label", volume_id)
 
     @async_function
     def calculate_checksum(self):
         print("Checking ", self.path)
-        checksum = subprocess.getoutput(f"sha256sum -b '{self.path}'")
-        checksum = checksum.replace(self.path, "").replace("*", "").strip()
+
+        try:
+            checksum = subprocess.check_output(["sha256sum", "-b", self.path], text=True)
+            checksum = checksum.replace(self.path, "").replace("*", "").strip()
+        except Exception as e:
+            checksum = str(e)
+
         self.set_label("checksum_label", checksum)
         self.sha256sum = checksum
 
