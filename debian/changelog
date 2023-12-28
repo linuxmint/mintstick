@@ -1,3 +1,10 @@
+mintstick (1.5.8) virginia; urgency=medium
+
+  [ Michael Webster ]
+  * verify: Use subprocess.check_output for sha256sum call.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 28 Dec 2023 12:08:20 +0000
+
 mintstick (1.5.7) virginia; urgency=medium
 
   [ Michael Webster ]
