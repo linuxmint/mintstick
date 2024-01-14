@@ -1,2 +1,2 @@
 #!/bin/sh
-exec python3 -u /usr/lib/mintstick/raw_write.py $@
+exec python3 -u /usr/lib/mintstick/raw_write.py "$@"
