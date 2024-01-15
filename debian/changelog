@@ -1,3 +1,14 @@
+mintstick (1.5.9) virginia; urgency=medium
+
+  [ xenopeek ]
+  * Quote parameters in shell scripts (#121)
+
+  [ Clement Lefebvre ]
+  * Checksum verification: Activate button when a sum is entered
+  * Checksum verification: make checksum case-insensitive
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 15 Jan 2024 10:30:57 +0000
+
 mintstick (1.5.8) virginia; urgency=medium
 
   [ Michael Webster ]
