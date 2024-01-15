@@ -81,6 +81,7 @@ class App():
         self.builder.get_object("verify_checksum_button").connect("clicked", self.verify_checksum)
         self.builder.get_object("back_button").connect("clicked", self.go_back)
         self.builder.get_object("stack_checksum").connect("notify::visible-child-name", self.update_verify_button)
+        self.builder.get_object("entry_sum").connect("changed", self.update_checksum_button)
 
         # filechooser filters
         file_filter = Gtk.FileFilter()
@@ -188,6 +189,12 @@ class App():
 
         self.set_label("checksum_label", checksum)
         self.sha256sum = checksum
+
+    def update_checksum_button(self, *args):
+        if (self.builder.get_object("entry_sum").get_text() != ""):
+            self.builder.get_object("verify_checksum_button").set_sensitive(True)
+        else:
+            self.builder.get_object("verify_checksum_button").set_sensitive(False)
 
     def update_verify_button(self, *args):
         self.builder.get_object("verify_files_button").set_sensitive(False)
