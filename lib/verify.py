@@ -221,7 +221,7 @@ class App():
         self.update_verify_button()
 
     def verify_checksum(self, button):
-        if self.builder.get_object("entry_sum").get_text() == self.sha256sum:
+        if self.builder.get_object("entry_sum").get_text().lower() == self.sha256sum.lower():
             self.show_result("dialog-warning", _("The checksum is correct"),
                     summary=_("The checksum is correct but the authenticity of the sum was not verified."))
         else:
