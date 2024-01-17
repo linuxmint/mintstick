@@ -1,3 +1,18 @@
+mintstick (1.6.0) virginia; urgency=medium
+
+  * format: Fix label entry sensitivity when operation is cancelled
+  * format: Sanitize label
+  * format: Insensitive go button when label is empty
+  * mountutils: Debug with syslog rather than print
+  * iso: Add syslog debug calls and exception handling
+  * debug: print detected drives to stdout
+  * drives: Allow sdio devices
+  * drives: Only print drives once
+  * UI: Fix buttons sensitivity
+  * UI: Add an info image to make FS tooltip more discoverable
+
+ -- Clement Lefebvre <root@linuxmint.com>  Wed, 17 Jan 2024 14:42:00 +0000
+
 mintstick (1.5.9) virginia; urgency=medium
 
   [ xenopeek ]
