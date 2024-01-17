@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from unidecode import unidecode
 from subprocess import Popen, PIPE
 import getopt
 import gettext
@@ -107,6 +108,10 @@ class MintStick:
             self.devicelist = self.wTree.get_object("formatdevice_combobox")
             self.go_button = self.wTree.get_object("format_formatbutton")
             self.label_entry = self.wTree.get_object("volume_label_entry")
+            try:
+                self.label_entry.set_text(unidecode(self.label_entry.get_text()))
+            except:
+                self.label_entry.set_text("USB STICK")
             self.label_entry_changed_id = self.label_entry.connect("changed", self.on_label_entry_text_changed)
 
             self.window = self.wTree.get_object("format_window")
@@ -246,19 +251,22 @@ class MintStick:
         value = self.fsmodel.get_value(active_iter, 0)
         cursor_pos = self.label_entry.props.cursor_position
 
+        text = self.label_entry.get_text()
+
         if self.fsmodel.get_value(active_iter, 3):
-            old_text = self.label_entry.get_text()
-            new_text = old_text.upper()
-            self.label_entry.set_text(new_text)
+            text = text.upper()
 
         if self.fsmodel.get_value(active_iter, 4):
-            old_text = self.label_entry.get_text()
-
             for char in FORBIDDEN_CHARS:
-                old_text = old_text.replace(char, "")
+                text = text.replace(char, "")
+        try:
+            text = unidecode(text)
+        except Exception as e:
+            print(f"Exception in sanitizing the label {text}")
+            print(str(e))
+            text = "USB STICK"
 
-            new_text = old_text
-            self.label_entry.set_text(new_text)
+        self.label_entry.set_text(text)
 
         length = self.label_entry.get_buffer().get_length()
         self.label_entry.select_region(length, -1)
