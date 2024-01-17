@@ -471,6 +471,7 @@ class MintStick:
             self.get_devices()
         self.filesystemlist.set_sensitive(True)
         self.devicelist.set_sensitive(True)
+        self.label_entry.set_sensitive(True)
         self.go_button.set_sensitive(True)
 
 if __name__ == "__main__":
