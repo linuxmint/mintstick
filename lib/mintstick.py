@@ -192,7 +192,7 @@ class MintStick:
     def get_devices(self):
         self.go_button.set_sensitive(False)
         self.devicemodel.clear()
-        dct = []
+        detected_drives = []
         self.dev = None
 
         manager = self.udisks_client.get_object_manager()
@@ -203,6 +203,10 @@ class MintStick:
                 if block is not None:
                     drive = self.udisks_client.get_drive_for_block(block)
                     if drive is not None:
+                        drive_id = drive.get_property('id')
+                        if drive_id in detected_drives:
+                            continue
+                        detected_drives.append(drive_id)
                         self.print_drive(drive)
                         is_usb = str(drive.get_property('connection-bus')) in ['usb', 'cpio', 'sdio']
                         size = int(drive.get_property('size'))
@@ -232,9 +236,7 @@ class MintStick:
 
                             item = "%s (%s) - %s" % (drive_model, name, size)
 
-                            if item not in dct:
-                                dct.append(item)
-                                self.devicemodel.append([name, item])
+                            self.devicemodel.append([name, item])
 
         self.devicelist.set_model(self.devicemodel)
 
