@@ -267,6 +267,7 @@ class MintStick:
             text = "USB STICK"
 
         self.label_entry.set_text(text)
+        self.go_button.set_sensitive(len(text) > 0)
 
         length = self.label_entry.get_buffer().get_length()
         self.label_entry.select_region(length, -1)
