@@ -12,7 +12,7 @@
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>
-          <!-- n-columns=2 n-rows=5 -->
+          <!-- n-columns=3 n-rows=5 -->
           <object class="GtkGrid" id="format_page">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
@@ -63,6 +63,7 @@
               <packing>
                 <property name="left-attach">1</property>
                 <property name="top-attach">0</property>
+                <property name="width">2</property>
               </packing>
             </child>
             <child>
@@ -70,25 +71,6 @@
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can-focus">False</property>
-                <property name="tooltip-text" translatable="yes">FAT32 
-  + Compatible everywhere.
-  -  Cannot handle files larger than 4GB.
-
-exFAT
-  + Compatible almost everywhere.
-  + Can handle files larger than 4GB.
-  -  Not as compatible as FAT32.
-
-NTFS 
-  + Compatible with Windows.
-  -  Not compatible with Mac and most hardware devices.
-  -  Occasional compatibility problems with Linux (NTFS is proprietary and reverse engineered).
-
-EXT4 
-  + Modern, stable, fast, journalized.
-  + Supports Linux file permissions.
-  -  Not compatible with Windows, Mac and most hardware devices.
-</property>
                 <property name="hexpand">True</property>
               </object>
               <packing>
@@ -128,6 +110,7 @@ EXT4
               <packing>
                 <property name="left-attach">1</property>
                 <property name="top-attach">2</property>
+                <property name="width">2</property>
               </packing>
             </child>
             <child>
@@ -140,6 +123,7 @@ EXT4
               <packing>
                 <property name="left-attach">1</property>
                 <property name="top-attach">3</property>
+                <property name="width">2</property>
               </packing>
             </child>
             <child>
@@ -168,6 +152,7 @@ EXT4
               <packing>
                 <property name="left-attach">1</property>
                 <property name="top-attach">4</property>
+                <property name="width">2</property>
               </packing>
             </child>
             <child>
@@ -188,6 +173,36 @@ EXT4
               <packing>
                 <property name="left-attach">0</property>
                 <property name="top-attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="tooltip-text" translatable="yes">FAT32 
+  + Compatible everywhere.
+  -  Cannot handle files larger than 4GB.
+
+exFAT
+  + Compatible almost everywhere.
+  + Can handle files larger than 4GB.
+  -  Not as compatible as FAT32.
+
+NTFS 
+  + Compatible with Windows.
+  -  Not compatible with Mac and most hardware devices.
+  -  Occasional compatibility problems with Linux (NTFS is proprietary and reverse engineered).
+
+EXT4 
+  + Modern, stable, fast, journalized.
+  + Supports Linux file permissions.
+  -  Not compatible with Windows, Mac and most hardware devices.
+</property>
+                <property name="icon-name">mintstick-info-symbolic</property>
+              </object>
+              <packing>
+                <property name="left-attach">2</property>
+                <property name="top-attach">1</property>
               </packing>
             </child>
           </object>
