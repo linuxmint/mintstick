@@ -38,6 +38,10 @@ _ = gettext.gettext
 # https://technet.microsoft.com/en-us/library/bb490925.aspx
 FORBIDDEN_CHARS = ["*", "?", "/", "\\", "|", ".", ",", ";", ":", "+", "=", "[", "]", "<", ">", "\""]
 
+RELEVANT_UDISK_PROPERTIES = ['connection-bus', 'ejectable', 'id', \
+'media-available', 'media-compatibility', 'media-removable', \
+'model', 'vendor', 'optical', 'removable', 'size']
+
 # noinspection PyUnusedLocal
 class MintStick:
     def __init__(self, iso_path_arg=None, usb_path_arg=None, filesystem_arg=None, mode_arg=None, debug_arg=False):
@@ -173,6 +177,18 @@ class MintStick:
     def verify(self, button):
         subprocess.Popen(["mint-iso-verify", self.chooser.get_filename()])
 
+    def print_drive(self, drive):
+        # print drive info to stdout
+        # this is done for debugging purposes
+        try:
+            for prop in drive.list_properties():
+                name = prop.name
+                if name in RELEVANT_UDISK_PROPERTIES:
+                    print(f"    {prop.name}: {drive.get_property(prop.name)}")
+            print()
+        except Exception as e:
+            print(e)
+
     def get_devices(self):
         self.go_button.set_sensitive(False)
         self.devicemodel.clear()
@@ -187,6 +203,7 @@ class MintStick:
                 if block is not None:
                     drive = self.udisks_client.get_drive_for_block(block)
                     if drive is not None:
+                        self.print_drive(drive)
                         is_usb = str(drive.get_property('connection-bus')) in ['usb', 'cpio']
                         size = int(drive.get_property('size'))
                         optical = bool(drive.get_property('optical'))
