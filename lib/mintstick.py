@@ -128,6 +128,10 @@ class MintStick:
             self.filesystemlist.connect("changed", self.filesystem_selected)
             self.devicelist.connect("changed", self.device_selected)
 
+            self.label_entry.connect("changed", lambda *_: self.update_format_button())
+            self.filesystemlist.connect("changed", lambda *_: self.update_format_button())
+            self.devicelist.connect("changed", lambda *_: self.update_format_button())
+
             # Filesystemlist
             self.fsmodel = Gtk.ListStore(str, str, int, bool, bool)
             #                     id       label    max-length force-upper-case   force-alpha-numeric
@@ -161,7 +165,6 @@ class MintStick:
                         self.filesystemlist.set_active_iter(itererator)
                     itererator = self.fsmodel.iter_next(itererator)
 
-            self.filesystem_selected(self.filesystemlist)
             self.get_devices()
 
             if usb_path_arg is not None:
@@ -252,8 +255,8 @@ class MintStick:
             self.filesystem = self.fsmodel.get_value(itererator, 0)
             self.activate_devicelist()
 
+            self.fix_label_entry_text(True)
             self.label_entry.set_max_length(self.fsmodel.get_value(itererator, 2))
-            self.on_label_entry_text_changed(self, self.label_entry)
 
     def file_selected(self, widget):
         self.activate_devicelist()
@@ -263,13 +266,11 @@ class MintStick:
         else:
             self.verify_button.set_sensitive(False)
 
-    def on_label_entry_text_changed(self, widget, data=None):
-        self.label_entry.handler_block(self.label_entry_changed_id)
+    def fix_label_entry_text(self, should_block_handler):
+        if should_block_handler:
+            self.label_entry.handler_block(self.label_entry_changed_id)
 
         active_iter = self.filesystemlist.get_active_iter()
-        value = self.fsmodel.get_value(active_iter, 0)
-        cursor_pos = self.label_entry.props.cursor_position
-
         text = self.label_entry.get_text()
 
         if self.fsmodel.get_value(active_iter, 3):
@@ -278,6 +279,7 @@ class MintStick:
         if self.fsmodel.get_value(active_iter, 4):
             for char in FORBIDDEN_CHARS:
                 text = text.replace(char, "")
+
         try:
             text = unidecode(text)
         except Exception as e:
@@ -286,13 +288,23 @@ class MintStick:
             text = "USB STICK"
 
         self.label_entry.set_text(text)
-        self.go_button.set_sensitive(len(text) > 0)
 
-        length = self.label_entry.get_buffer().get_length()
-        self.label_entry.select_region(length, -1)
-        self.label_entry.set_position(cursor_pos)
+        if should_block_handler:
+            self.label_entry.handler_unblock(self.label_entry_changed_id)
 
-        self.label_entry.handler_unblock(self.label_entry_changed_id)
+    def on_label_entry_text_changed(self, widget, data=None):
+        self.fix_label_entry_text(True)
+
+    def update_format_button(self):
+        has_valid_device = self.devicelist.get_active_iter() is not None
+        has_valid_fs = self.filesystemlist.get_active_iter() is not None
+        is_enough_length = self.label_entry.get_buffer().get_length() > 0
+
+        if has_valid_device and has_valid_fs and is_enough_length:
+            self.go_button.set_sensitive(True)
+        else:
+            self.go_button.set_sensitive(False)
+
 
     def do_format(self, widget):
         if self.debug:
