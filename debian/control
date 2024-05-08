@@ -23,6 +23,7 @@ Depends:
  python3-gi,
  python3-parted,
  python3-gnupg,
+ python3-unidecode,
  gir1.2-udisks-2.0,
  gir1.2-xapp-1.0,
  util-linux,
