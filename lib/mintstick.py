@@ -206,7 +206,6 @@ class MintStick:
                         drive_id = drive.get_property('id')
                         if drive_id in detected_drives:
                             continue
-                        detected_drives.append(drive_id)
                         self.print_drive(drive)
                         is_usb = str(drive.get_property('connection-bus')) in ['usb', 'cpio', 'sdio']
                         size = int(drive.get_property('size'))
@@ -236,6 +235,7 @@ class MintStick:
 
                             item = "%s (%s) - %s" % (drive_model, name, size)
 
+                            detected_drives.append(drive_id)
                             self.devicemodel.append([name, item])
 
         self.devicelist.set_model(self.devicemodel)
