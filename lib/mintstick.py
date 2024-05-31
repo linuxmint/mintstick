@@ -158,24 +158,32 @@ class MintStick:
             # Default's to fat32
             self.filesystemlist.set_active(0)
             if filesystem_arg is not None:
-                itererator = self.fsmodel.get_iter_first()
-                while itererator is not None:
-                    value = self.fsmodel.get_value(itererator, 0)
+                fs_iter = self.fsmodel.get_iter_first()
+                while fs_iter is not None:
+                    value = self.fsmodel.get_value(fs_iter, 0)
                     if value == filesystem_arg:
-                        self.filesystemlist.set_active_iter(itererator)
-                    itererator = self.fsmodel.iter_next(itererator)
+                        self.filesystemlist.set_active_iter(fs_iter)
+                    fs_iter = self.fsmodel.iter_next(fs_iter)
 
             self.get_devices()
-
-            if usb_path_arg is not None:
-                itererator = self.devicemodel.get_iter_first()
-                while itererator is not None:
-                    value = self.devicemodel.get_value(itererator, 0)
-                    if usb_path_arg in value:
-                        self.devicelist.set_active_iter(itererator)
-                    itererator = self.devicemodel.iter_next(itererator)
+            self.select_device(usb_path_arg)
 
         self.window.show()
+
+    def select_device(self, usb_path=None):
+        if usb_path is not None:
+            device_iter = self.devicemodel.get_iter_first()
+            while device_iter is not None:
+                value = self.devicemodel.get_value(device_iter, 0)
+                if usb_path in value:
+                    self.devicelist.set_active_iter(device_iter)
+                    return
+                device_iter = self.devicemodel.iter_next(device_iter)
+            return
+
+        device_iter = self.devicemodel.get_iter_first()
+        if device_iter is not None:
+            self.devicelist.set_active_iter(device_iter)
 
     def verify(self, button):
         subprocess.Popen(["mint-iso-verify", self.chooser.get_filename()])
@@ -250,13 +258,13 @@ class MintStick:
             self.go_button.set_sensitive(True)
 
     def filesystem_selected(self, widget):
-        itererator = self.filesystemlist.get_active_iter()
-        if itererator is not None:
-            self.filesystem = self.fsmodel.get_value(itererator, 0)
+        fs_iter = self.filesystemlist.get_active_iter()
+        if fs_iter is not None:
+            self.filesystem = self.fsmodel.get_value(fs_iter, 0)
             self.activate_devicelist()
 
-            self.fix_label_entry_text(True)
-            self.label_entry.set_max_length(self.fsmodel.get_value(itererator, 2))
+            self.label_entry.set_max_length(self.fsmodel.get_value(fs_iter, 2))
+            self.on_label_entry_text_changed(self, self.label_entry)
 
     def file_selected(self, widget):
         self.activate_devicelist()
