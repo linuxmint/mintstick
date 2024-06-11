@@ -1,3 +1,15 @@
+mintstick (1.6.1) wilma; urgency=medium
+
+  [ Butterfly ]
+  * python3-unidecode: Added to depends (#130)
+
+  [ ColdSpirit0 ]
+  * Remember only appropriate drives (#126)
+  * Fixed: format button activated after invalid changes (#127)
+  * Select first device and fix typo (#128)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 11 Jun 2024 13:33:57 +0100
+
 mintstick (1.6.0) virginia; urgency=medium
 
   * format: Fix label entry sensitivity when operation is cancelled
