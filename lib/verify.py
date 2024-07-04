@@ -27,7 +27,7 @@ TRUSTED_SIGNATURES = {"27DEB15644C6B3CF3BD7D291300F846BA25BAE09": "Linux Mint",
                       "DF9B9C49EAA9298432589D76DA87E80D6294BE9B": "Debian",
                       "F41D30342F3546695F65C66942468F4009EA8AC3": "Debian"}
 
-MINT_MIRROR = "https://ftp.heanet.ie/mirrors/linuxmint.com/"
+MINT_MIRROR = "https://mirrors.kernel.org/linuxmint"
 
 CACHE_DIR = os.path.expanduser("~/.cache/mintstick")
 subprocess.call(["mkdir", "-p", CACHE_DIR])
