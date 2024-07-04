@@ -1,3 +1,9 @@
+mintstick (1.6.2) wilma; urgency=medium
+
+  * verify: Switch SHA256SUM host to kernel.org
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 04 Jul 2024 19:09:53 +0100
+
 mintstick (1.6.1) wilma; urgency=medium
 
   [ Butterfly ]
