@@ -1,3 +1,9 @@
+mintstick (1.6.3) xia; urgency=medium
+
+  * verify: Add a fallback keyserver
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 26 Dec 2024 11:04:49 +0000
+
 mintstick (1.6.2) wilma; urgency=medium
 
   * verify: Switch SHA256SUM host to kernel.org
