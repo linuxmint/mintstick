@@ -284,15 +284,18 @@ class App():
             fingerprint = verified.fingerprint
             details.append(_("Signed by: %s") % fingerprint)
 
-            if not verified.valid:
-                # The key isn't in the keyring, download it from the keyserver
-                print("Importing", fingerprint)
-                # re-verify
-                self.gpg.recv_keys('hkp://keyserver.ubuntu.com', fingerprint)
-                verified = self.gpg.verify_file(open(PATH_GPG, "rb"), PATH_SUMS)
-                # Remove it from the keyring
-                print("Deleting", fingerprint)
-                self.gpg.delete_keys(fingerprint)
+            for keyserver in ['hkp://keyserver.ubuntu.com', 'hkp://keys.openpgp.org']:
+                if not verified.valid:
+                    # The key isn't in the keyring, download it from the keyserver
+                    # Note: keyserver.ubuntu.com is fast but unreliable, start with that one
+                    # keys.opengpg.org is reliable but slower, it's a good fallback
+                    print(f"Importing {fingerprint} from {keyserver}")
+                    # re-verify
+                    self.gpg.recv_keys(keyserver, fingerprint)
+                    verified = self.gpg.verify_file(open(PATH_GPG, "rb"), PATH_SUMS)
+                    # Remove it from the keyring
+                    print("Deleting", fingerprint)
+                    self.gpg.delete_keys(fingerprint)
 
             if not verified.valid:
                 # The key still isn't in the keyring
