@@ -2,6 +2,7 @@
 
 from unidecode import unidecode
 from subprocess import Popen, PIPE
+import dbus
 import getopt
 import gettext
 import gi
@@ -313,8 +314,56 @@ class MintStick:
         else:
             self.go_button.set_sensitive(False)
 
+    def has_polkit_rule_format(self):
+        return self.check_polkit_permission('com.linuxmint.mintstick-format')
+
+    def has_polkit_rule_write(self):
+        return self.check_polkit_permission('com.linuxmint.mintstick-write')
+
+    def check_polkit_permission(self, action_id):
+        try:
+            bus = dbus.SystemBus()
+            polkit = bus.get_object('org.freedesktop.PolicyKit1',
+                                '/org/freedesktop/PolicyKit1/Authority')
+            authority = dbus.Interface(polkit, 'org.freedesktop.PolicyKit1.Authority')
+
+            subject = ('unix-process', {
+                'pid': dbus.UInt32(os.getpid()),
+                'start-time': dbus.UInt64(0)
+            })
+
+            granted, _, _ = authority.CheckAuthorization(
+                subject,
+                action_id,
+                {},
+                0,
+                ''
+            )
+            return granted
+        except:
+            return False
+
+    def confirm_action(self, title, question):
+        dialog = Gtk.MessageDialog(
+            parent=self.window,
+            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            type=Gtk.MessageType.QUESTION,
+            buttons=Gtk.ButtonsType.YES_NO,
+            message_format=f"{title}\n\n{question}"
+        )
+
+        response = dialog.run()
+        dialog.destroy()
+        return response == Gtk.ResponseType.YES
+
 
     def do_format(self, widget):
+        if self.has_polkit_rule_format():
+            if not self.confirm_action(
+                "Confirm formatting",
+                "Do you really want to format the device?"
+            ):
+                return
         if self.debug:
             print("DEBUG: Format %s as %s" % (self.dev, self.filesystem))
             return
@@ -376,6 +425,12 @@ class MintStick:
         return False
 
     def do_write(self, widget):
+        if self.has_polkit_rule_write():
+            if not self.confirm_action(
+                "Confirm ISO-writing",
+                "Do you really want to write the ISO to the device?"
+            ):
+                return
         if self.debug:
             print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
             return
