@@ -1,3 +1,9 @@
+mintstick (1.6.6) zena; urgency=medium
+
+  * l10n: Generate files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 05 Jan 2026 22:28:35 +0200
+
 mintstick (1.6.5) zena; urgency=medium
 
   * Switch to XApp symbolic icons
