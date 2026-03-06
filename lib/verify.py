@@ -225,10 +225,11 @@ class App():
 
     def verify_url(self, button):
         # Download files
+        timeout = (3.05, 27)
         try:
             with open(PATH_SUMS, "wb") as file:
                 url = self.builder.get_object("entry_url_sums").get_text()
-                response = requests.get(url)
+                response = requests.get(url, timeout=timeout)
                 response.raise_for_status()
                 file.write(response.content)
         except:
@@ -237,7 +238,7 @@ class App():
         try:
             with open(PATH_GPG, "wb") as file:
                 url = self.builder.get_object("entry_url_gpg").get_text()
-                response = requests.get(url)
+                response = requests.get(url, timeout=timeout)
                 response.raise_for_status()
                 file.write(response.content)
         except:
