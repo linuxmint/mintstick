@@ -1,3 +1,11 @@
+mintstick (1.6.7) alfa; urgency=medium
+
+  [ Michael Webster ]
+  * .github/workflows: Add generate-test-packages trigger.
+  * mintstick-format.nemo_action: Use new 'sidebar-allow' Condition to allow action to display in Nemo's sidebar.
+
+ -- Clement Lefebvre <root@linuxmint.com>  Mon, 18 May 2026 17:37:03 +0100
+
 mintstick (1.6.6) zena; urgency=medium
 
   * l10n: Generate files
