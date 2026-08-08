@@ -34,7 +34,7 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
 
     # Make a partition (primary, with FS ID ext3, starting at 1MB & using 100% of space).
     # If it starts at 0% or 0MB, it's not aligned to MB's and complains
-    execute(["parted", device_path, "mkpart", "primary", partition_type, "1", "100%"])
+    execute(["parted", device_path, "mkpart", "primary", partition_type, "1MiB", "100%"])
 
     # Call wipefs on the new partitions to avoid problems with old filesystem signatures
     execute(["wipefs", "-a", partition_path, "--force"])
