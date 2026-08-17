@@ -165,6 +165,9 @@ class MintStick:
                         self.filesystemlist.set_active_iter(fs_iter)
                     fs_iter = self.fsmodel.iter_next(fs_iter)
 
+            self.format_back_button = self.wTree.get_object("format_back_button")
+            self.format_back_button.connect("clicked", self.on_format_back)
+
             self.get_devices()
             self.select_device(usb_path_arg)
 
@@ -513,6 +516,11 @@ class MintStick:
         self.devicelist.set_sensitive(True)
         self.go_button.set_sensitive(True)
         self.verify_button.set_sensitive(True)
+
+    def on_format_back(self, widget):
+        self.clear_progress()
+        self.wTree.get_object("format_stack").set_visible_child_name("format_page")
+        self.set_format_sensitive(True)
 
     def set_format_sensitive(self, reset=True):
         if reset:
