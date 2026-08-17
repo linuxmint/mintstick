@@ -480,7 +480,7 @@ class MintStick:
         else:
             message = _('An error occurred.')
         if message is not None:
-            self.show_format_result("dialog-error", message)
+            self.show_result("dialog-error", message)
 
         return False
 
