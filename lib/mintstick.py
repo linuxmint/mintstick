@@ -2,7 +2,6 @@
 
 from unidecode import unidecode
 from subprocess import Popen, PIPE
-import dbus
 import getopt
 import gettext
 import gi
@@ -322,24 +321,11 @@ class MintStick:
 
     def check_polkit_permission(self, action_id):
         try:
-            bus = dbus.SystemBus()
-            polkit = bus.get_object('org.freedesktop.PolicyKit1',
-                                '/org/freedesktop/PolicyKit1/Authority')
-            authority = dbus.Interface(polkit, 'org.freedesktop.PolicyKit1.Authority')
-
-            subject = ('unix-process', {
-                'pid': dbus.UInt32(os.getpid()),
-                'start-time': dbus.UInt64(0)
-            })
-
-            granted, _, _ = authority.CheckAuthorization(
-                subject,
-                action_id,
-                {},
-                0,
-                ''
-            )
-            return granted
+            authority = Polkit.Authority.get_sync()
+            subject = Polkit.UnixProcess.new_for_owner(os.getpid(), 0, os.getuid())
+            result = authority.check_authorization_sync(
+                subject, action_id, None, Polkit.CheckAuthorizationFlags.NONE, None)
+            return result.get_is_authorized()
         except:
             return False
 
