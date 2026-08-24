@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from subprocess import call
+from subprocess import check_call
 import sys
 import argparse
 sys.path.append('/usr/lib/mintstick')
@@ -9,8 +9,8 @@ import syslog
 
 def execute(command):
     syslog.syslog(str(command))
-    call(command)
-    call(["sync"])
+    check_call(command)
+    check_call(["sync"])
 
 def raw_format(device_path, fstype, volume_label, uid, gid):
 
@@ -35,6 +35,10 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     # Make a partition (primary, with FS ID ext3, starting at 1MB & using 100% of space).
     # If it starts at 0% or 0MB, it's not aligned to MB's and complains
     execute(["parted", device_path, "mkpart", "primary", partition_type, "1MiB", "100%"])
+
+    # Make sure the kernel and udev see the new partition geometry before formatting it.
+    execute(["partprobe", device_path])
+    execute(["udevadm", "settle", "--timeout=10", "--exit-if-exists=%s" % partition_path])
 
     # Call wipefs on the new partitions to avoid problems with old filesystem signatures
     execute(["wipefs", "-a", partition_path, "--force"])
