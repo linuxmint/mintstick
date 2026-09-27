@@ -6,8 +6,10 @@ import gnupg
 import locale
 import os
 import requests
+import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 
 gi.require_version('Gtk', '3.0')
@@ -27,7 +29,7 @@ TRUSTED_SIGNATURES = {"27DEB15644C6B3CF3BD7D291300F846BA25BAE09": "Linux Mint",
                       "DF9B9C49EAA9298432589D76DA87E80D6294BE9B": "Debian",
                       "F41D30342F3546695F65C66942468F4009EA8AC3": "Debian"}
 
-MINT_MIRROR = "https://mirrors.kernel.org/linuxmint"
+MINT_MIRROR = "https://mirrors.edge.kernel.org/linuxmint"
 
 CACHE_DIR = os.path.expanduser("~/.cache/mintstick")
 subprocess.call(["mkdir", "-p", CACHE_DIR])
@@ -45,8 +47,8 @@ def async_function(func):
 
 # Used as a decorator to run things in the main loop, from another thread
 def idle_function(func):
-    def wrapper(*args):
-        GLib.idle_add(func, *args)
+    def wrapper(*args, **kwargs):
+        GLib.idle_add(lambda: func(*args, **kwargs))
     return wrapper
 
 # Converts bytes to readable size
@@ -59,7 +61,7 @@ def convert_bytes(num):
 class App():
 
     def __init__(self, iso_path_arg=None):
-        self.gpg = gnupg.GPG()
+        self.verifying = False
         self.sha256sum = None # the sum of the ISO
         self.path = None # path of the ISO
         self.filename = None # filename of the ISO
@@ -133,6 +135,8 @@ class App():
             if self.filename.startswith("linuxmint-"):
                 if self.filename.endswith("-beta.iso"):
                     sums = f"{MINT_MIRROR}/testing/sha256sum.txt"
+                elif "-hwe" in self.filename:
+                    sums = f"{MINT_MIRROR}/hwe/sha256sum.txt"
                 elif self.filename.endswith(".iso"):
                     # extract version number
                     version = self.filename.split("-")[1]
@@ -193,12 +197,17 @@ class App():
         self.set_label("checksum_label", checksum)
         self.sha256sum = checksum
 
+    @idle_function
+    def set_verifying(self, verifying):
+        self.verifying = verifying
+        self.update_verify_button()
+
     def update_verify_button(self, *args):
         self.builder.get_object("verify_url_button").set_sensitive(False)
         self.builder.get_object("verify_files_button").set_sensitive(False)
         self.builder.get_object("verify_checksum_button").set_sensitive(False)
 
-        if self.sha256sum is None:
+        if self.verifying or self.sha256sum is None:
             return
 
         if self.builder.get_object("entry_url_sums").get_text() != "" and self.builder.get_object("entry_url_gpg").get_text() != "":
@@ -224,58 +233,88 @@ class App():
                     summary=_("Download the ISO image again. Its checksum does not match."))
 
     def verify_url(self, button):
-        # Download files
+        if self.verifying:
+            return
+        sums_url = self.builder.get_object("entry_url_sums").get_text()
+        gpg_url = self.builder.get_object("entry_url_gpg").get_text()
+        self.set_verifying(True)
+        self._async_verify_url(sums_url, gpg_url)
+
+    @async_function
+    def _async_verify_url(self, sums_url, gpg_url):
         timeout = (3.05, 27)
-        try:
-            with open(PATH_SUMS, "wb") as file:
-                url = self.builder.get_object("entry_url_sums").get_text()
-                response = requests.get(url, timeout=timeout)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path_sums = os.path.join(tmpdir, "sha256sum.txt")
+            path_gpg = os.path.join(tmpdir, "sha256sum.txt.gpg")
+            try:
+                response = requests.get(sums_url, timeout=timeout)
                 response.raise_for_status()
-                file.write(response.content)
-        except:
-            self.dialog(_("The sums file could not be downloaded. Check the URL."))
-            return
-        try:
-            with open(PATH_GPG, "wb") as file:
-                url = self.builder.get_object("entry_url_gpg").get_text()
-                response = requests.get(url, timeout=timeout)
+                with open(path_sums, "wb") as file:
+                    file.write(response.content)
+            except:
+                self.dialog(_("The sums file could not be downloaded. Check the URL."))
+                self.set_verifying(False)
+                return
+            try:
+                response = requests.get(gpg_url, timeout=timeout)
                 response.raise_for_status()
-                file.write(response.content)
-        except:
-            self.dialog(_("The gpg file could not be downloaded. Check the URL."))
-            return
-        self.verify()
+                with open(path_gpg, "wb") as file:
+                    file.write(response.content)
+            except:
+                self.dialog(_("The gpg file could not be downloaded. Check the URL."))
+                self.set_verifying(False)
+                return
+            try:
+                self.verify(path_sums, path_gpg, tmpdir)
+            finally:
+                self.set_verifying(False)
 
     def verify_files(self, button):
-        # Copy files
-        try:
-            with open(PATH_SUMS, "wb") as file:
-                path = self.builder.get_object("filechooser_sums").get_filename()
-                subprocess.call(["cp", path, PATH_SUMS])
-        except:
-            self.dialog(_("The sums file could not be checked."))
+        if self.verifying:
             return
-        try:
-            with open(PATH_GPG, "wb") as file:
-                path = self.builder.get_object("filechooser_gpg").get_filename()
-                subprocess.call(["cp", path, PATH_GPG])
-        except:
-            self.dialog(_("The gpg file could not be checked."))
+        sums_file = self.builder.get_object("filechooser_sums").get_filename()
+        gpg_file = self.builder.get_object("filechooser_gpg").get_filename()
+        if not sums_file or not gpg_file:
             return
-        self.verify()
+        self.set_verifying(True)
+        self._async_verify_files(sums_file, gpg_file)
 
-    def verify(self):
+    @async_function
+    def _async_verify_files(self, sums_file, gpg_file):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path_sums = os.path.join(tmpdir, "sha256sum.txt")
+            path_gpg = os.path.join(tmpdir, "sha256sum.txt.gpg")
+            try:
+                shutil.copyfile(sums_file, path_sums)
+            except:
+                self.dialog(_("The sums file could not be checked."))
+                self.set_verifying(False)
+                return
+            try:
+                shutil.copyfile(gpg_file, path_gpg)
+            except:
+                self.dialog(_("The gpg file could not be checked."))
+                self.set_verifying(False)
+                return
+            try:
+                self.verify(path_sums, path_gpg, tmpdir)
+            finally:
+                self.set_verifying(False)
+
+    def verify(self, path_sums, path_gpg, tmpdir):
         details = []
         try:
-            integrity_ok, explanation = self.check_integrity()
+            integrity_ok, explanation = self.check_integrity(path_sums)
             if not integrity_ok:
                 # Incorrect SUM
                 self.show_result("dialog-error", _("Integrity check failed"),
                     summary=explanation)
                 return
 
+            gpg = gnupg.GPG(gnupghome=tmpdir)
             # note: verify_file automatically closes the file handle
-            verified = self.gpg.verify_file(open(PATH_GPG, "rb"), PATH_SUMS)
+            with open(path_gpg, "rb") as gpg_f:
+                verified = gpg.verify_file(gpg_f, path_sums)
 
             if verified.fingerprint is None:
                 # The GPG file is not signed
@@ -285,18 +324,19 @@ class App():
             fingerprint = verified.fingerprint
             details.append(_("Signed by: %s") % fingerprint)
 
-            for keyserver in ['hkp://keyserver.ubuntu.com', 'hkp://keys.openpgp.org']:
+            for keyserver in ['hkps://keyserver.ubuntu.com', 'hkps://keys.openpgp.org', 'hkp://keyserver.ubuntu.com', 'hkp://keys.openpgp.org']:
                 if not verified.valid:
                     # The key isn't in the keyring, download it from the keyserver
                     # Note: keyserver.ubuntu.com is fast but unreliable, start with that one
                     # keys.opengpg.org is reliable but slower, it's a good fallback
                     print(f"Importing {fingerprint} from {keyserver}")
                     # re-verify
-                    self.gpg.recv_keys(keyserver, fingerprint)
-                    verified = self.gpg.verify_file(open(PATH_GPG, "rb"), PATH_SUMS)
+                    gpg.recv_keys(keyserver, fingerprint)
+                    with open(path_gpg, "rb") as gpg_f:
+                        verified = gpg.verify_file(gpg_f, path_sums)
                     # Remove it from the keyring
                     print("Deleting", fingerprint)
-                    self.gpg.delete_keys(fingerprint)
+                    gpg.delete_keys(fingerprint)
 
             if not verified.valid:
                 # The key still isn't in the keyring
@@ -331,8 +371,8 @@ class App():
         except Exception as e:
             self.show_result("dialog-error", _("An error occurred"), details=[str(e)])
 
-    def check_integrity(self):
-        with open(PATH_SUMS) as sums_file:
+    def check_integrity(self, path_sums):
+        with open(path_sums) as sums_file:
             for line in sums_file:
                 line = line.strip()
                 if line.endswith(f" *{self.filename}") or line.endswith(f" {self.filename}"):
@@ -343,6 +383,7 @@ class App():
                         return (False, _("The SHA256 sum of the ISO image is incorrect."))
         return (False, _("The SHA256 sums file does not contain sums for this ISO image."))
 
+    @idle_function
     def show_result(self, icon_name, text, summary=None, details=None):
         self.builder.get_object("image_result").set_from_icon_name(icon_name, 64)
         self.builder.get_object("label_result").set_text(text)
@@ -355,6 +396,7 @@ class App():
         self.builder.get_object("label_result_summary").select_region(0, 0)
         self.builder.get_object("back_button").grab_focus()
 
+    @idle_function
     def dialog(self, text):
         dialog = Gtk.MessageDialog(parent=self.window,
             modal=True,
