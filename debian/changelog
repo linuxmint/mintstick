@@ -1,3 +1,19 @@
+mintstick (1.6.8) adrien; urgency=medium
+
+  [ Timothy Feierabend ]
+  * adds timeout to requests.get() calls (#145)
+
+  [ jrmwgr ]
+  * Limit exFAT volume label length to 11 characters (#147)
+
+  [ zimon-cocos ]
+  * fixes #136, error message not showing due to calling wrong method to show result (#152)
+
+  [ Breeze ]
+  * Fix USB partition alignment (#154)
+
+ -- Clement Lefebvre <root@linuxmint.com>  Tue, 13 Oct 2026 15:00:36 +0100
+
 mintstick (1.6.7) alfa; urgency=medium
 
   [ Michael Webster ]
