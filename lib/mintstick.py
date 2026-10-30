@@ -313,43 +313,41 @@ class MintStick:
         else:
             self.go_button.set_sensitive(False)
 
-    def has_polkit_rule_format(self):
-        return self.check_polkit_permission('com.linuxmint.mintstick-format')
-
-    def has_polkit_rule_write(self):
-        return self.check_polkit_permission('com.linuxmint.mintstick-write')
-
-    def check_polkit_permission(self, action_id):
+    def is_preauthorized(self, action_id):
         try:
             authority = Polkit.Authority.get_sync()
             subject = Polkit.UnixProcess.new_for_owner(os.getpid(), 0, os.getuid())
             result = authority.check_authorization_sync(
                 subject, action_id, None, Polkit.CheckAuthorizationFlags.NONE, None)
             return result.get_is_authorized()
-        except:
-            return False
+        except GLib.Error as e:
+            print(f"Could not check polkit authorization for {action_id}: {e.message}")
+            return True
 
-    def confirm_action(self, title, question):
+    def confirm_destructive_action(self, action_id, button_label):
+        # If pkexec is going to prompt for a password, that prompt is the confirmation.
+        if not self.is_preauthorized(action_id):
+            return True
+
         dialog = Gtk.MessageDialog(
-            parent=self.window,
-            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            type=Gtk.MessageType.QUESTION,
-            buttons=Gtk.ButtonsType.YES_NO,
-            message_format=f"{title}\n\n{question}"
+            transient_for=self.window,
+            modal=True,
+            destroy_with_parent=True,
+            message_type=Gtk.MessageType.WARNING,
+            buttons=Gtk.ButtonsType.CANCEL,
+            text=_("This will destroy all data on the USB stick, are you sure you want to proceed?")
         )
+        button = dialog.add_button(button_label, Gtk.ResponseType.OK)
+        button.get_style_context().add_class("destructive-action")
+        dialog.set_default_response(Gtk.ResponseType.CANCEL)
 
         response = dialog.run()
         dialog.destroy()
-        return response == Gtk.ResponseType.YES
-
+        return response == Gtk.ResponseType.OK
 
     def do_format(self, widget):
-        if self.has_polkit_rule_format():
-            if not self.confirm_action(
-                "Confirm formatting",
-                "Do you really want to format the device?"
-            ):
-                return
+        if not self.confirm_destructive_action("com.linuxmint.mintstick-format", _("Format")):
+            return
         if self.debug:
             print("DEBUG: Format %s as %s" % (self.dev, self.filesystem))
             return
@@ -411,16 +409,6 @@ class MintStick:
         return False
 
     def do_write(self, widget):
-        if self.has_polkit_rule_write():
-            if not self.confirm_action(
-                "Confirm ISO-writing",
-                "Do you really want to write the ISO to the device?"
-            ):
-                return
-        if self.debug:
-            print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
-            return
-
         source = self.chooser.get_filename()
         target = self.dev
         filename = os.path.basename(source).lower()
@@ -429,6 +417,12 @@ class MintStick:
             if keyword in filename:
                 self.wTree.get_object("stack").set_visible_child_name("windows_page")
                 return
+
+        if not self.confirm_destructive_action("com.linuxmint.mintstick-write", _("Write")):
+            return
+        if self.debug:
+            print("DEBUG: Write %s to %s" % (source, target))
+            return
 
         self.udisks_client.handler_block(self.udisk_listener_id)
         self.go_button.set_sensitive(False)
