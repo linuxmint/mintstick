@@ -313,8 +313,43 @@ class MintStick:
         else:
             self.go_button.set_sensitive(False)
 
+    def has_polkit_rule_format(self):
+        return self.check_polkit_permission('com.linuxmint.mintstick-format')
+
+    def has_polkit_rule_write(self):
+        return self.check_polkit_permission('com.linuxmint.mintstick-write')
+
+    def check_polkit_permission(self, action_id):
+        try:
+            authority = Polkit.Authority.get_sync()
+            subject = Polkit.UnixProcess.new_for_owner(os.getpid(), 0, os.getuid())
+            result = authority.check_authorization_sync(
+                subject, action_id, None, Polkit.CheckAuthorizationFlags.NONE, None)
+            return result.get_is_authorized()
+        except:
+            return False
+
+    def confirm_action(self, title, question):
+        dialog = Gtk.MessageDialog(
+            parent=self.window,
+            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            type=Gtk.MessageType.QUESTION,
+            buttons=Gtk.ButtonsType.YES_NO,
+            message_format=f"{title}\n\n{question}"
+        )
+
+        response = dialog.run()
+        dialog.destroy()
+        return response == Gtk.ResponseType.YES
+
 
     def do_format(self, widget):
+        if self.has_polkit_rule_format():
+            if not self.confirm_action(
+                "Confirm formatting",
+                "Do you really want to format the device?"
+            ):
+                return
         if self.debug:
             print("DEBUG: Format %s as %s" % (self.dev, self.filesystem))
             return
@@ -376,6 +411,12 @@ class MintStick:
         return False
 
     def do_write(self, widget):
+        if self.has_polkit_rule_write():
+            if not self.confirm_action(
+                "Confirm ISO-writing",
+                "Do you really want to write the ISO to the device?"
+            ):
+                return
         if self.debug:
             print("DEBUG: Write %s to %s" % (self.chooser.get_filename(), self.dev))
             return
