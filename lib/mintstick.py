@@ -207,47 +207,58 @@ class MintStick:
         self.dev = None
 
         manager = self.udisks_client.get_object_manager()
+        blocks = [obj.get_block() for obj in manager.get_objects() if obj is not None]
+        blocks = [block for block in blocks if block is not None]
 
-        for obj in manager.get_objects():
-            if obj is not None:
-                block = obj.get_block()
-                if block is not None:
-                    drive = self.udisks_client.get_drive_for_block(block)
-                    if drive is not None:
-                        drive_id = drive.get_property('id')
-                        if drive_id in detected_drives:
-                            continue
-                        self.print_drive(drive)
-                        is_usb = str(drive.get_property('connection-bus')) in ['usb', 'cpio', 'sdio']
-                        size = int(drive.get_property('size'))
-                        optical = bool(drive.get_property('optical'))
-                        removable = bool(drive.get_property('removable'))
+        # Drives with any block (disk or partition) listed in fstab or crypttab
+        # have been deliberately set up as part of this system.
+        configured_drives = set()
+        for block in blocks:
+            configuration = block.get_property('configuration')
+            if configuration is not None and configuration.n_children() > 0:
+                configured_drives.add(block.get_property('drive'))
 
-                        if is_usb and size > 0 and removable and not optical:
-                            name = block.get_property('device')
-                            name = ''.join([i for i in name if not i.isdigit()])
+        for block in blocks:
+            drive = self.udisks_client.get_drive_for_block(block)
+            if drive is not None:
+                drive_id = drive.get_property('id')
+                if drive_id in detected_drives:
+                    continue
+                self.print_drive(drive)
+                if block.get_property('drive') in configured_drives:
+                    print(f"    skipping {drive_id}: configured in fstab/crypttab\n")
+                    detected_drives.append(drive_id)
+                    continue
+                is_usb = str(drive.get_property('connection-bus')) in ['usb', 'cpio', 'sdio']
+                size = int(drive.get_property('size'))
+                optical = bool(drive.get_property('optical'))
+                removable = bool(drive.get_property('removable'))
 
-                            drive_vendor = str(drive.get_property('vendor'))
-                            drive_model = str(drive.get_property('model'))
+                if is_usb and size > 0 and removable and not optical:
+                    name = block.get_property('device')
+                    name = ''.join([i for i in name if not i.isdigit()])
 
-                            if drive_vendor.strip() != "":
-                                drive_model = "%s %s" % (drive_vendor, drive_model)
+                    drive_vendor = str(drive.get_property('vendor'))
+                    drive_model = str(drive.get_property('model'))
 
-                            if size >= 1000000000000:
-                                size = "%.0fTB" % round(size / 1000000000000)
-                            elif size >= 1000000000:
-                                size = "%.0fGB" % round(size / 1000000000)
-                            elif size >= 1000000:
-                                size = "%.0fMB" % round(size / 1000000)
-                            elif size >= 1000:
-                                size = "%.0fkB" % round(size / 1000)
-                            else:
-                                size = "%.0fB" % round(size)
+                    if drive_vendor.strip() != "":
+                        drive_model = "%s %s" % (drive_vendor, drive_model)
 
-                            item = "%s (%s) - %s" % (drive_model, name, size)
+                    if size >= 1000000000000:
+                        size = "%.0fTB" % round(size / 1000000000000)
+                    elif size >= 1000000000:
+                        size = "%.0fGB" % round(size / 1000000000)
+                    elif size >= 1000000:
+                        size = "%.0fMB" % round(size / 1000000)
+                    elif size >= 1000:
+                        size = "%.0fkB" % round(size / 1000)
+                    else:
+                        size = "%.0fB" % round(size)
 
-                            detected_drives.append(drive_id)
-                            self.devicemodel.append([name, item])
+                    item = "%s (%s) - %s" % (drive_model, name, size)
+
+                    detected_drives.append(drive_id)
+                    self.devicemodel.append([name, item])
 
         self.devicelist.set_model(self.devicemodel)
 
