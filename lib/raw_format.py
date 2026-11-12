@@ -36,9 +36,8 @@ def raw_format(device_path, fstype, volume_label, uid, gid):
     # If it starts at 0% or 0MB, it's not aligned to MB's and complains
     execute(["parted", device_path, "mkpart", "primary", partition_type, "1MiB", "100%"])
 
-    # Make sure the kernel and udev see the new partition geometry before formatting it.
+    # Reload the new partition table before formatting.
     execute(["partprobe", device_path])
-    execute(["udevadm", "settle", "--timeout=10", "--exit-if-exists=%s" % partition_path])
 
     # Call wipefs on the new partitions to avoid problems with old filesystem signatures
     execute(["wipefs", "-a", partition_path, "--force"])
