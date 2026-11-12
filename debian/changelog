@@ -1,3 +1,19 @@
+mintstick (1.6.9) adrien; urgency=medium
+
+  [ drsgon13-boop ]
+  * The check of polkit rules has been added (#151)
+
+  [ Michael Webster ]
+  * mintstick.py: Clean up confirmation dialog/polkit check.
+  * makepot: Use xgettext for everything
+  * mintstick.py: Don't show drives that have a configuration
+
+  [ Clement Lefebvre ]
+  * Add .gitignore
+  * l10n: Update POT
+
+ -- Clement Lefebvre <root@linuxmint.com>  Thu, 12 Nov 2026 13:39:41 +0000
+
 mintstick (1.6.8) adrien; urgency=medium
 
   [ Timothy Feierabend ]
