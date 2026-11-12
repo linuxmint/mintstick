@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-27 14:33+0000\n"
+"POT-Creation-Date: 2026-11-12 13:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,32 +17,48 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/mintstick.py:312
+#: lib/mintstick.py:349 generate_additional_files.py:115
+#: generate_additional_files.py:144
+msgid ""
+"This will destroy all data on the USB stick, are you sure you want to "
+"proceed?"
+msgstr ""
+
+#: lib/mintstick.py:360 generate_additional_files.py:77
+#: share/mintstick/mintstick.ui:138
+msgid "Format"
+msgstr ""
+
+#: lib/mintstick.py:404
 msgid "The USB stick was formatted successfully."
 msgstr ""
 
-#: lib/mintstick.py:315
+#: lib/mintstick.py:407
 #, python-format
 msgid "An error occured while creating a partition on %s."
 msgstr ""
 
-#: lib/mintstick.py:317 lib/mintstick.py:427
+#: lib/mintstick.py:409 lib/mintstick.py:521
 msgid "Authentication Error."
 msgstr ""
 
-#: lib/mintstick.py:322 lib/mintstick.py:433
+#: lib/mintstick.py:414 lib/mintstick.py:527
 msgid "An error occurred."
 msgstr ""
 
-#: lib/mintstick.py:420
+#: lib/mintstick.py:432 share/mintstick/mintstick.ui:384
+msgid "Write"
+msgstr ""
+
+#: lib/mintstick.py:514
 msgid "The image was successfully written."
 msgstr ""
 
-#: lib/mintstick.py:423
+#: lib/mintstick.py:517
 msgid "Not enough space on the USB stick."
 msgstr ""
 
-#: lib/mintstick.py:425
+#: lib/mintstick.py:519
 msgid "An error occured while copying the image."
 msgstr ""
 
@@ -66,133 +82,133 @@ msgstr ""
 msgid "TB"
 msgstr ""
 
-#: lib/verify.py:87
+#: lib/verify.py:88
 msgid "ISO images"
 msgstr ""
 
-#: lib/verify.py:91
+#: lib/verify.py:92
 msgid "Checksum files"
 msgstr ""
 
-#: lib/verify.py:95
+#: lib/verify.py:96
 msgid "GPG signatures"
 msgstr ""
 
-#: lib/verify.py:107 lib/verify.py:108 lib/verify.py:109
+#: lib/verify.py:111 lib/verify.py:112 lib/verify.py:113
 msgid "Calculating..."
 msgstr ""
 
-#: lib/verify.py:167
+#: lib/verify.py:171
 msgid "No volume ID found"
 msgstr ""
 
-#: lib/verify.py:208
+#: lib/verify.py:220
 msgid "The checksum is correct"
 msgstr ""
 
-#: lib/verify.py:209
+#: lib/verify.py:221
 msgid ""
 "The checksum is correct but the authenticity of the sum was not verified."
 msgstr ""
 
-#: lib/verify.py:211
+#: lib/verify.py:223
 msgid "Checksum mismatch"
 msgstr ""
 
-#: lib/verify.py:212
+#: lib/verify.py:224
 msgid "Download the ISO image again. Its checksum does not match."
 msgstr ""
 
-#: lib/verify.py:223
+#: lib/verify.py:236
 msgid "The sums file could not be downloaded. Check the URL."
 msgstr ""
 
-#: lib/verify.py:232
+#: lib/verify.py:245
 msgid "The gpg file could not be downloaded. Check the URL."
 msgstr ""
 
-#: lib/verify.py:243
+#: lib/verify.py:256
 msgid "The sums file could not be checked."
 msgstr ""
 
-#: lib/verify.py:250
+#: lib/verify.py:263
 msgid "The gpg file could not be checked."
 msgstr ""
 
-#: lib/verify.py:260
+#: lib/verify.py:273
 msgid "Integrity check failed"
 msgstr ""
 
-#: lib/verify.py:269
+#: lib/verify.py:282
 msgid "The SHA256 sums file is not signed."
 msgstr ""
 
-#: lib/verify.py:273
+#: lib/verify.py:286
 #, python-format
 msgid "Signed by: %s"
 msgstr ""
 
-#: lib/verify.py:287
+#: lib/verify.py:303
 msgid "Unknown signature"
 msgstr ""
 
-#: lib/verify.py:288
+#: lib/verify.py:304
 msgid "Key not found on keyserver."
 msgstr ""
 
-#: lib/verify.py:299 lib/verify.py:305
+#: lib/verify.py:315 lib/verify.py:321
 msgid "Everything looks good!"
 msgstr ""
 
-#: lib/verify.py:300
+#: lib/verify.py:316
 msgid "This is an official ISO image."
 msgstr ""
 
-#: lib/verify.py:306
+#: lib/verify.py:322
 msgid "This ISO image is verified by a trusted signature."
 msgstr ""
 
-#: lib/verify.py:309
+#: lib/verify.py:325
 msgid "If you trust the signature you can trust the ISO."
 msgstr ""
 
-#: lib/verify.py:310
+#: lib/verify.py:326
 msgid "Untrusted signature"
 msgstr ""
 
-#: lib/verify.py:311
+#: lib/verify.py:327
 msgid "This ISO image is verified by an untrusted signature."
 msgstr ""
 
-#: lib/verify.py:316
+#: lib/verify.py:332
 msgid "An error occurred"
 msgstr ""
 
-#: lib/verify.py:327
+#: lib/verify.py:343
 msgid "The SHA256 sum of the ISO image is incorrect."
 msgstr ""
 
-#: lib/verify.py:328
+#: lib/verify.py:344
 msgid "The SHA256 sums file does not contain sums for this ISO image."
 msgstr ""
 
 #: generate_additional_files.py:22 generate_additional_files.py:34
-#: share/mintstick/mintstick.ui.h:38
+#: share/mintstick/mintstick.ui:558
 msgid "USB Image Writer"
 msgstr ""
 
 #: generate_additional_files.py:22 generate_additional_files.py:34
-#: generate_additional_files.py:67 share/mintstick/mintstick.ui.h:39
+#: generate_additional_files.py:67 share/mintstick/mintstick.ui:559
 msgid "Make a bootable USB stick"
 msgstr ""
 
 #: generate_additional_files.py:46 generate_additional_files.py:58
-#: share/mintstick/mintstick.ui.h:27
+#: share/mintstick/mintstick.ui:265
 msgid "USB Stick Formatter"
 msgstr ""
 
 #: generate_additional_files.py:46 generate_additional_files.py:58
-#: generate_additional_files.py:77 share/mintstick/mintstick.ui.h:28
+#: generate_additional_files.py:77 share/mintstick/mintstick.ui:266
 msgid "Format a USB stick"
 msgstr ""
 
@@ -200,38 +216,40 @@ msgstr ""
 msgid "Make bootable USB stick"
 msgstr ""
 
-#: generate_additional_files.py:77 share/mintstick/mintstick.ui.h:26
-msgid "Format"
-msgstr ""
-
-#: generate_additional_files.py:86 share/mintstick/mintstick.ui.h:32
-#: share/mintstick/verify.ui.h:7
+#: generate_additional_files.py:86 share/mintstick/mintstick.ui:368
+#: share/mintstick/verify.ui:258 share/mintstick/verify.ui:346
 msgid "Verify"
 msgstr ""
 
-#: generate_additional_files.py:86 share/mintstick/mintstick.ui.h:33
+#: generate_additional_files.py:86 share/mintstick/mintstick.ui:374
 msgid "Verify the authenticity and integrity of the image"
 msgstr ""
 
-#: generate_additional_files.py:115 generate_additional_files.py:144
-msgid ""
-"This will destroy all data on the USB stick, are you sure you want to "
-"proceed?"
-msgstr ""
-
-#: share/mintstick/mintstick.ui.h:1
+#: share/mintstick/mintstick.ui:28 share/mintstick/mintstick.ui:326
 msgid "USB stick:"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:2
+#: share/mintstick/mintstick.ui:44
 msgid "Filesystem:"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:3
+#: share/mintstick/mintstick.ui:60 share/mintstick/mintstick.ui:341
 msgid "Select a USB stick"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:4
+#: share/mintstick/mintstick.ui:87
+msgid "Volume label:"
+msgstr ""
+
+#: share/mintstick/mintstick.ui:101
+msgid "Choose a name for your USB Stick"
+msgstr ""
+
+#: share/mintstick/mintstick.ui:106
+msgid "USB Stick"
+msgstr ""
+
+#: share/mintstick/mintstick.ui:182
 msgid ""
 "FAT32 \n"
 "  + Compatible everywhere.\n"
@@ -254,102 +272,86 @@ msgid ""
 "  -  Not compatible with Windows, Mac and most hardware devices.\n"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:23
-msgid "Volume label:"
-msgstr ""
-
-#: share/mintstick/mintstick.ui.h:24
-msgid "Choose a name for your USB Stick"
-msgstr ""
-
-#: share/mintstick/mintstick.ui.h:25
-msgid "USB Stick"
-msgstr ""
-
-#: share/mintstick/mintstick.ui.h:29
+#: share/mintstick/mintstick.ui:297
 msgid "ISO image:"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:30
+#: share/mintstick/mintstick.ui:311
 msgid "Select an image"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:31
+#: share/mintstick/mintstick.ui:313
 msgid "Select Image"
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:34
-msgid "Write"
-msgstr ""
-
-#: share/mintstick/mintstick.ui.h:35
+#: share/mintstick/mintstick.ui:506
 msgid "This ISO looks like a Windows image."
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:36
+#: share/mintstick/mintstick.ui:521
 msgid "Windows images require special processing."
 msgstr ""
 
-#: share/mintstick/mintstick.ui.h:37
+#: share/mintstick/mintstick.ui:534
 msgid "More information"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:1
+#: share/mintstick/verify.ui:40
 msgid "ISO:"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:2
+#: share/mintstick/verify.ui:106
 msgid "Volume:"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:3
+#: share/mintstick/verify.ui:118
 msgid "SHA256sum:"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:4
+#: share/mintstick/verify.ui:130
 msgid "Size:"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:5
+#: share/mintstick/verify.ui:213
 msgid "SHA256 sums file:"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:6
+#: share/mintstick/verify.ui:237
 msgid "GPG signed file:"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:8
+#: share/mintstick/verify.ui:283
 msgid "URLs"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:9
+#: share/mintstick/verify.ui:299
 msgid "SHA256 sums file"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:10
+#: share/mintstick/verify.ui:311
 msgid "GPG signed file"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:11
+#: share/mintstick/verify.ui:371
 msgid "Local files"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:12
+#: share/mintstick/verify.ui:388
 msgid "SHA256 sum"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:13
+#: share/mintstick/verify.ui:409
 msgid "Check"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:14
+#: share/mintstick/verify.ui:433
 msgid "Checksum"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:15
+#: share/mintstick/verify.ui:535
 msgid "Go back"
 msgstr ""
 
-#: share/mintstick/verify.ui.h:16
+#: share/mintstick/verify.ui:584
 msgid "ISO Verification"
 msgstr ""
