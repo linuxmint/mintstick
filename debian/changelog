@@ -1,3 +1,10 @@
+mintstick (1.7.0) adrien; urgency=medium
+
+  [ Michael Webster ]
+  * Run generate_additional_files
+
+ -- Clement Lefebvre <root@linuxmint.com>  Fri, 20 Nov 2026 17:50:54 +0000
+
 mintstick (1.6.9) adrien; urgency=medium
 
   [ drsgon13-boop ]
