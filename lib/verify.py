@@ -133,6 +133,8 @@ class App():
             if self.filename.startswith("linuxmint-"):
                 if self.filename.endswith("-beta.iso"):
                     sums = f"{MINT_MIRROR}/testing/sha256sum.txt"
+                elif "-hwe-" in self.filename and self.filename.endswith(".iso"):
+                    sums = f"{MINT_MIRROR}/hwe/sha256sum.txt"
                 elif self.filename.endswith(".iso"):
                     # extract version number
                     version = self.filename.split("-")[1]
